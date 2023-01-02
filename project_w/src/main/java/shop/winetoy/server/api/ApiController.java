@@ -4,12 +4,14 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 @RequestMapping("/api")
+@CrossOrigin(origins = "http://localhost:8080")
 public class ApiController {
 	
 	@RequestMapping(value = "/time", method = RequestMethod.GET)
