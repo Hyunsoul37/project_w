@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 @RequestMapping("/api")
-@CrossOrigin(origins = "http://localhost:8080")
+@CrossOrigin("*")
 public class ApiController {
 	
 	@RequestMapping(value = "/time", method = RequestMethod.GET)
