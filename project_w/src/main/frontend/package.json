@@ -21,7 +21,7 @@
     "server": "nodemon server/server.js",
     "dev": "concurrently \"nodemon server/server.js\" \"node scripts/start.js\""
   },
-  "proxy": "http://192.168.50.224:8080",
+  "proxy": "http://winetoy.shop",
   "eslintConfig": {
     "extends": [
       "react-app",

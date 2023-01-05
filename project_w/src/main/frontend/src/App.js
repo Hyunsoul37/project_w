@@ -5,7 +5,7 @@ function App() {
    const [hello, setHello] = useState('')
 
     useEffect(() => {
-        axios.get('http://192.168.50.224:8080/api/time')
+        axios.get('api/time')
         .then(response => setHello(response.data))
         .catch(error => console.log(error))
     }, []);
