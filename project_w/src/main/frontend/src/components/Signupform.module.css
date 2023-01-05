@@ -1,0 +1,21 @@
+.signupform{
+    background-color: lightgray;
+    padding: 1rem;
+    border-radius: 0.7rem;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: center;
+}
+.signupform label{
+    padding: 0.5rem;
+}
+.signupform input{
+    margin-left: 0.5rem;
+}
+.btn{
+    width: 100%;
+    margin-top: 2rem;
+    display: flex;
+    justify-content: center;
+}
