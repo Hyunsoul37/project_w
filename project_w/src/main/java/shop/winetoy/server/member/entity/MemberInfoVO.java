@@ -1,6 +1,8 @@
-package shop.winetoy.server.member;
+package shop.winetoy.server.member.entity;
 
-public class MemberInfo {
+import java.util.Date;
+
+public class MemberInfoVO {
 	private Long pid;
 	private String id;
 	private String password;
@@ -8,6 +10,7 @@ public class MemberInfo {
 	private String email;
 	private String address;
 	private String phone;
+	private Date regiDate;
 	
 	public Long getPid() {
 		return pid;
@@ -50,6 +53,18 @@ public class MemberInfo {
 	}
 	public void setPhone(String phone) {
 		this.phone = phone;
+	}
+	public Date getRegiDate() {
+		return regiDate;
+	}
+	public void setRegiDate(Date regiDate) {
+		this.regiDate = regiDate;
+	}
+	
+	@Override
+	public String toString() {
+		return "MemberInfoVO [pid=" + pid + ", id=" + id + ", password=" + password + ", name=" + name + ", email="
+				+ email + ", address=" + address + ", phone=" + phone + ", regiDate=" + regiDate + "]";
 	}
 
 	
