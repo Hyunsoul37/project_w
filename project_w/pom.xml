@@ -9,9 +9,9 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>shop.winetoy</groupId>
-	<artifactId>demo</artifactId>
+	<artifactId>project_w</artifactId>
 	<version>0.0.1</version>
-	<name>demo</name>
+	<name>project_w</name>
 	<description>winetoy for Spring Boot</description>
 	<properties>
 		<java.version>11</java.version>
