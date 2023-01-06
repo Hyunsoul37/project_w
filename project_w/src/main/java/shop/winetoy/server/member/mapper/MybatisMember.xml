@@ -3,7 +3,7 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="shop.winetoy.server.member.dao.MemberInfoDao">
-	<insert id="join" parameterType="shop.winetoy.server.member.entity.MemberInfoVO">
+	<insert id="join" parameterType="shop.winetoy.server.member.entity.MemberInfoDto">
 		INSERT INTO `winetoy`.`memberInfo`
 		(
 			`id`,
@@ -23,4 +23,9 @@
 			#{phone}
 		);
 	</insert>
+	
+	<select id="memberList" resultType="shop.winetoy.server.member.entity.MemberInfoDto">
+		select * from memberInfo
+	</select>
+	
 </mapper>

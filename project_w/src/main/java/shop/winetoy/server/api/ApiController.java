@@ -3,6 +3,7 @@ package shop.winetoy.server.api;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import shop.winetoy.server.member.entity.MemberInfoVO;
+import shop.winetoy.server.member.entity.MemberInfoDto;
 import shop.winetoy.server.member.service.MemberInfoService;
 
 
@@ -58,10 +59,18 @@ public class ApiController {
 	
 	@RequestMapping(value = "/join", method = RequestMethod.POST)
 	@ResponseBody
-	public int join(@RequestBody MemberInfoVO info) {
+	public int join(@RequestBody MemberInfoDto info) {
 		System.out.println(info.toString());
 		int result = memberInfoService.join(info);
 		System.out.println(result);
 		return result;
 	}
+	
+	@RequestMapping(value = "/memberList", method = RequestMethod.GET)
+	@ResponseBody
+	public List<MemberInfoDto> getMemberList() {
+		List<MemberInfoDto> result = memberInfoService.memberList();
+		return result;
+	}
+	
 }

@@ -2,7 +2,7 @@ package shop.winetoy.server.member.entity;
 
 import java.util.Date;
 
-public class MemberInfoVO {
+public class MemberInfoDto {
 	private Long pid;
 	private String id;
 	private String password;
