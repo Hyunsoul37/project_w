@@ -12,4 +12,6 @@ public interface MemberInfoDao {
 	int join(MemberInfoDto memberInfo);
 	// 회원 리스트 가져오기
 	List<MemberInfoDto> memberList();
+	// 회원 확인
+	MemberInfoDto memberCheck(String id);
 }
