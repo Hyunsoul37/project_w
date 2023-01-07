@@ -1,0 +1,23 @@
+.form{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: center;
+}
+.form label{
+    padding: 0.5rem;
+}
+.form input{
+    margin-left: 0.5rem;
+}
+.form div{
+    width: 100%;
+    margin-top: 1rem;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+.form div button{
+    height: 2.5rem;
+    margin-bottom: 0.5rem;
+}

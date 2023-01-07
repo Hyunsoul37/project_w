@@ -1,40 +1,44 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import useFetch from '../../customHooks/useFetch';
+import Form from '../ui/Form';
 import styled from './Signupform.module.css';
 
 const Signupform = () => {
+  const { sendRequestData: postData } = useFetch();
   const [id, setId] = useState('');
   const [password, setPassword] = useState('');
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [address, setAddress] = useState('');
   const [phone, setPhone] = useState('');
+  const [isduplicate, setDuplicate] = useState(false);
 
-  const postData = async () => {
-    try {
-      const res = await fetch('/api/join', {
-        method: 'POST',
-        body: JSON.stringify({
-          id: id,
-          password: password,
-          name: name,
-          email: email,
-          address: address,
-          phone: phone,
-        }),
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      });
-      const responseData = await res.json();
-      console.log('sucess!!', responseData);
-    } catch (err) {
-      console.log(err);
-    }
-  };
-  const submitHandler = (e) => {
+  const url = '/api/join';
+  const type = 'POST';
+  const header = { 'Content-Type': 'application/json' };
+  const movepath = '/login';
+
+  const submitHandler = e => {
     e.preventDefault();
+    if (isduplicate) {
+      alert('아이디 중복임 다시하셈');
+      return;
+    }
     console.log('data전송 시작!!');
-    postData();
+    postData({
+      url: url,
+      type: type,
+      header: header,
+      data: {
+        id: id,
+        password: password,
+        name: name,
+        email: email,
+        address: address,
+        phone: phone,
+      },
+      movepath: movepath,
+    });
     setId('');
     setPassword('');
     setName('');
@@ -42,57 +46,110 @@ const Signupform = () => {
     setAddress('');
     setPhone('');
   };
+  const DuplicateResponseMessage = data => {
+    if (data === true) {
+      setDuplicate(true);
+    } else {
+      setDuplicate(false);
+    }
+  };
 
-  const ChangeIdHandler = (e) => {
+  const OnCheckduplicateID = () => {
+    postData({
+      url: `api/id-check?id=${id}`,
+      type: 'GET',
+      data: null,
+      header: { 'Content-Type': 'text/plain' },
+      AfterGetData: DuplicateResponseMessage,
+    });
+  };
+
+  const ChangeIdHandler = e => {
     setId(e.target.value);
   };
-  const ChangePasswordHandler = (e) => {
+  const ChangePasswordHandler = e => {
     setPassword(e.target.value);
   };
-  const ChangeNameHandler = (e) => {
+  const ChangeNameHandler = e => {
     setName(e.target.value);
   };
-  const ChangeEmailHandler = (e) => {
+  const ChangeEmailHandler = e => {
     setEmail(e.target.value);
   };
-  const ChangeAddressHandler = (e) => {
+  const ChangeAddressHandler = e => {
     setAddress(e.target.value);
   };
-  const ChangePhoneHandler = (e) => {
+  const ChangePhoneHandler = e => {
     setPhone(e.target.value);
   };
   return (
-    <form onSubmit={submitHandler} className={styled.signupform}>
-      <label htmlFor="id">
-        ID
-        <input id="id" type="text" onChange={ChangeIdHandler} />
-      </label>
+    <div className={styled.formWrapper}>
+      <Form onsubmit={submitHandler}>
+        <label htmlFor="id">
+          ID
+          <input
+            id="id"
+            type="text"
+            value={id ? id : ''}
+            onChange={ChangeIdHandler}
+            onBlur={OnCheckduplicateID}
+          />
+          {isduplicate ? (
+            <p className={styled.errormsg}>아이디 중복입니다.</p>
+          ) : null}
+        </label>
 
-      <label htmlFor="password">
-        PASSWORD
-        <input id="password" type="password" onChange={ChangePasswordHandler} />
-      </label>
+        <label htmlFor="password">
+          PASSWORD
+          <input
+            id="password"
+            type="password"
+            value={password ? password : ''}
+            onChange={ChangePasswordHandler}
+          />
+        </label>
 
-      <label htmlFor="name">
-        NAME
-        <input id="name" type="text" onChange={ChangeNameHandler} />
-      </label>
-      <label htmlFor="email">
-        EMAIL
-        <input id="email" type="email" onChange={ChangeEmailHandler} />
-      </label>
-      <label htmlFor="address">
-        ADDRESS
-        <input id="address" type="text" onChange={ChangeAddressHandler} />
-      </label>
-      <label htmlFor="phone">
-        PHONE
-        <input id="phone" type="tel" onChange={ChangePhoneHandler} />
-      </label>
-      <div className={styled.btn}>
-        <button>제출</button>
-      </div>
-    </form>
+        <label htmlFor="name">
+          NAME
+          <input
+            id="name"
+            type="text"
+            value={name ? name : ''}
+            onChange={ChangeNameHandler}
+          />
+        </label>
+        <label htmlFor="email">
+          EMAIL
+          <input
+            id="email"
+            type="email"
+            value={email ? email : ''}
+            onChange={ChangeEmailHandler}
+          />
+        </label>
+        <label htmlFor="address">
+          ADDRESS
+          <input
+            id="address"
+            type="text"
+            value={address ? address : ''}
+            onChange={ChangeAddressHandler}
+          />
+        </label>
+        <label htmlFor="phone">
+          PHONE
+          <input
+            id="phone"
+            type="tel"
+            value={phone ? phone : ''}
+            onChange={ChangePhoneHandler}
+          />
+        </label>
+        <div>
+          <button>제출</button>
+        </div>
+      </Form>
+    </div>
   );
 };
 
