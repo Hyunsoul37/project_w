@@ -32,4 +32,13 @@ public class MemberInfoServiceImp implements MemberInfoService{
 		return result;
 	}
 
+	/**
+	 * 로그인시 id로 정보 가져오기
+	 */
+	@Override
+	public MemberInfoDto memberCheck(String id) {
+		MemberInfoDto result = memberInfoDao.memberCheck(id);
+		return result;
+	}
+
 }

@@ -1,4 +1,4 @@
-package shop.winetoy.server;
+package shop.winetoy.server.tools;
 
 //cross domain 설정 
 import java.io.IOException;
