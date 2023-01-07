@@ -7,4 +7,5 @@ import shop.winetoy.server.member.entity.MemberInfoDto;
 public interface MemberInfoService {
 	int join(MemberInfoDto memberInfo);
 	List<MemberInfoDto> memberList();
+	MemberInfoDto memberCheck(String id);
 }

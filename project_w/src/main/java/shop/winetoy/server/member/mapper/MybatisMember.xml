@@ -3,29 +3,36 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="shop.winetoy.server.member.dao.MemberInfoDao">
-	<insert id="join" parameterType="shop.winetoy.server.member.entity.MemberInfoDto">
+	<insert id="join"
+		parameterType="shop.winetoy.server.member.entity.MemberInfoDto">
 		INSERT INTO `winetoy`.`memberInfo`
 		(
-			`id`,
-			`password`,
-			`name`,
-			`email`,
-			`address`,
-			`phone`
+		`id`,
+		`password`,
+		`name`,
+		`email`,
+		`address`,
+		`phone`
 		)
 		VALUES
 		(
-			#{id},
-			#{password},
-			#{name},
-			#{email},
-			#{address},
-			#{phone}
+		#{id},
+		#{password},
+		#{name},
+		#{email},
+		#{address},
+		#{phone}
 		);
 	</insert>
-	
-	<select id="memberList" resultType="shop.winetoy.server.member.entity.MemberInfoDto">
+
+	<select id="memberList"
+		resultType="shop.winetoy.server.member.entity.MemberInfoDto">
 		select * from memberInfo
 	</select>
-	
+
+	<select id="memberCheck"
+		resultType="shop.winetoy.server.member.entity.MemberInfoDto">
+		select * from memberInfo where id = #{id};
+	</select>
+
 </mapper>
