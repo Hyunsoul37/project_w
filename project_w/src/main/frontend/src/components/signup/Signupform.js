@@ -12,10 +12,11 @@ const Signupform = () => {
   const [address, setAddress] = useState('');
   const [phone, setPhone] = useState('');
   const [isduplicate, setDuplicate] = useState(false);
+  const [iseditedId, setIseditedId] = useState(false);
 
   const url = '/api/join';
   const type = 'POST';
-  const header = { 'Content-Type': 'application/json' };
+  const header = { 'Content-Type': 'application/json;charset=UTF-8' };
   const movepath = '/login';
 
   const submitHandler = e => {
@@ -52,6 +53,7 @@ const Signupform = () => {
     } else {
       setDuplicate(false);
     }
+    setIseditedId(true);
   };
 
   const OnCheckduplicateID = () => {
@@ -65,6 +67,7 @@ const Signupform = () => {
   };
 
   const ChangeIdHandler = e => {
+    setIseditedId(false);
     setId(e.target.value);
   };
   const ChangePasswordHandler = e => {
@@ -94,8 +97,12 @@ const Signupform = () => {
             onChange={ChangeIdHandler}
             onBlur={OnCheckduplicateID}
           />
-          {isduplicate ? (
-            <p className={styled.errormsg}>아이디 중복입니다.</p>
+          {id !== '' && iseditedId ? (
+            isduplicate ? (
+              <p className={styled.errormsg}>아이디 중복입니다.</p>
+            ) : (
+              <p>사용가능한 아이디입니다.</p>
+            )
           ) : null}
         </label>
 
