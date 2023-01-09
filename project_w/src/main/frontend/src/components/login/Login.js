@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import useFetch from '../../customHooks/useFetch';
+import { LogIn } from '../../slice/userSlice';
 import Form from '../ui/Form';
 import styled from './Login.module.css';
 
@@ -8,11 +9,14 @@ const Login = () => {
   const navigate = useNavigate();
   const [id, setId] = useState('');
   const [password, setPassword] = useState('');
-  const { sendRequestData: postData } = useFetch();
+  const user = useSelector(state => state.user);
+  const dispatch = useDispatch();
 
-  const url = '/api/auth';
-  const type = 'POST';
-  const header = { 'Content-Type': 'application/json' };
+  useEffect(() => {
+    if (user.isLoggedIn) {
+      navigate('/');
+    }
+  }, [user.isLoggedIn, navigate]);
 
   const ChangeIdHandler = e => {
     setId(e.target.value);
@@ -21,24 +25,14 @@ const Login = () => {
     setPassword(e.target.value);
   };
 
-  const Test = data => {
-    if (data.token === null) {
-      console.log(data.message);
-    } else {
-      console.log(data.token);
-    }
-  };
-
   const submitHandler = e => {
     e.preventDefault();
-    postData({
-      url: url,
-      type: type,
-      data: { id: id, password: password },
-      header: header,
-      movepath: '/',
-      AfterGetData: Test,
-    });
+    dispatch(
+      LogIn({
+        id: id,
+        password: password,
+      })
+    );
     setId('');
     setPassword('');
   };

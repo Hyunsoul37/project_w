@@ -18,6 +18,7 @@ const useFetch = () => {
       data: ${data}
       header Content-Type:${header['Content-Type']}
       movepath:${movepath}`);
+
       try {
         const response = await fetch(url, {
           method: type,
