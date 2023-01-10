@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import shop.winetoy.server.member.entity.AuthResult;
 import shop.winetoy.server.member.entity.MemberInfoDto;
 import shop.winetoy.server.member.service.MemberInfoService;
 import shop.winetoy.server.tools.JwtManager;
@@ -26,7 +27,9 @@ public class ApiController {
 	@Autowired
 	JwtManager jwtManager;
 
-	// 서버 시간 조회
+	/**
+	 * 서버 시간 조회
+	 */
 	@RequestMapping(value = "/time", method = RequestMethod.GET)
 	@ResponseBody
 	public Map<String, String> time() {
@@ -40,12 +43,18 @@ public class ApiController {
 		return map;
 	}
 
+	/**
+	 * POST 테스트
+	 */
 	@RequestMapping(value = "/test", method = RequestMethod.POST)
 	@ResponseBody
 	public Map<String, String> postData(@RequestBody Map<String, String> data) {
 		return data;
 	}
 
+	/**
+	 * GET 테스트
+	 */
 	@RequestMapping(value = "/test", method = RequestMethod.GET)
 	@ResponseBody
 	public Map<String, String> getData() {
@@ -56,18 +65,27 @@ public class ApiController {
 		return data;
 	}
 
+	/**
+	 * ID 중복 체크 (POST)
+	 */
 	@RequestMapping(value = "/id-check", method = RequestMethod.POST)
 	@ResponseBody
 	public boolean duplicateIdCheck(@RequestBody Map<String, String> res) {
 		return memberDuplicateCheck(res.get("id"));
 	}
 
+	/**
+	 * ID 중복 체크 (GET + Query String)
+	 */
 	@RequestMapping(value = "/id-check", method = RequestMethod.GET)
 	@ResponseBody
 	public boolean duplicateIdCheck(String id) {
 		return memberDuplicateCheck(id);
 	}
 
+	/**
+	 * 회원가입
+	 */
 	@RequestMapping(value = "/join", method = RequestMethod.POST)
 	@ResponseBody
 	public int join(@RequestBody MemberInfoDto info) {
@@ -82,6 +100,9 @@ public class ApiController {
 		return result;
 	}
 
+	/**
+	 * 회원 리스트 조회
+	 */
 	@RequestMapping(value = "/memberList", method = RequestMethod.GET)
 	@ResponseBody
 	public List<MemberInfoDto> getMemberList() {
@@ -89,29 +110,45 @@ public class ApiController {
 		return result;
 	}
 
+	/**
+	 * Login
+	 */
 	@RequestMapping(value = "/auth", method = RequestMethod.POST)
 	@ResponseBody
-	public Map<String, String> login(@RequestBody MemberInfoDto info) {
+	public AuthResult login(@RequestBody MemberInfoDto info) {
 		MemberInfoDto result = memberInfoService.memberCheck(info.getId());
-		Map<String, String> data = new HashMap<String, String>();
+		AuthResult authResult = new AuthResult();
 
 		// id가 DB에 없을 경우
 		if (result == null) {
-			data.put("token", null);
-			data.put("message", "id error!");
-			return data;
+			
+			authResult.setToken(null);
+			authResult.setMessage("id error!");
+			
+//			data.put("token", null);
+//			data.put("message", "id error!");
+			return authResult;
 		}
 
 		// id는 DB에 있는데 password가 맞지 않는 경우
 		if (result.getPassword().equals(info.getPassword()) == false) {
-			data.put("token", null);
-			data.put("message", "password error!");
-			return data;
+			authResult.setToken(null);
+			authResult.setMessage("password error!");
+			
+//			data.put("token", null);
+//			data.put("message", "password error!");
+			return authResult;
 		}
 
-		data.put("token", jwtManager.generateJwtToken(result));
-		data.put("message", "success");
-		return data;
+		
+		authResult.setToken(jwtManager.generateJwtToken(result));
+		authResult.setMessage("success");
+		authResult.setData(result);
+		
+//		data.put("token", jwtManager.generateJwtToken(result));
+//		data.put("message", "success");
+		
+		return authResult;
 	}
 
 	@RequestMapping(value = "/member", method = RequestMethod.DELETE)
