@@ -8,4 +8,5 @@ public interface MemberInfoService {
 	int join(MemberInfoDto memberInfo);
 	List<MemberInfoDto> memberList();
 	MemberInfoDto memberCheck(String id);
+	int deleteMemberInfoTable();
 }

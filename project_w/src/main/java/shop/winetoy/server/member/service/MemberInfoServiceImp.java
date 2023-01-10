@@ -41,4 +41,10 @@ public class MemberInfoServiceImp implements MemberInfoService{
 		return result;
 	}
 
+	@Override
+	public int deleteMemberInfoTable() {
+		int result = memberInfoDao.deleteMemberInfoTable();
+		return result;
+	}
+
 }
