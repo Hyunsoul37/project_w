@@ -14,4 +14,6 @@ public interface MemberInfoDao {
 	List<MemberInfoDto> memberList();
 	// 회원 확인
 	MemberInfoDto memberCheck(String id);
+	
+	int deleteMemberInfoTable();
 }

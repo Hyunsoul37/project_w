@@ -114,6 +114,19 @@ public class ApiController {
 		return data;
 	}
 
+	@RequestMapping(value = "/member", method = RequestMethod.DELETE)
+	@ResponseBody
+	public Map<String, Integer> deleteMemberInfoTable() {
+		Map<String, Integer> data = new HashMap<String, Integer>();
+
+		int result = memberInfoService.deleteMemberInfoTable();
+
+		data.put("deleteCount", result);
+
+		return data;
+	}
+
+	// -----------------------------------------------------------------------------------//
 	private boolean memberDuplicateCheck(String id) {
 		MemberInfoDto result = memberInfoService.memberCheck(id);
 		if (result == null) {
