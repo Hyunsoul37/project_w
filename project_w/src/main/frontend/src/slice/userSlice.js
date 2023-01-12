@@ -4,12 +4,13 @@ import { removeCookie, setCookie } from '../util/cookiesController';
 const initialState = {
   isLoggingIn: false,
   isSuccess: false,
-  isError: '',
+  isLoginError: '',
+  isClearError: '',
   isLoggedIn: false,
   userData: null,
 };
 
-export const LogIn = createAsyncThunk('user/logIn', async data => {
+export const LogIn = createAsyncThunk('user/logIn', async (data) => {
   const response = await fetch('/api/auth', {
     method: 'POST',
     body: data ? JSON.stringify(data) : null,
@@ -19,12 +20,25 @@ export const LogIn = createAsyncThunk('user/logIn', async data => {
   return responseData;
 });
 
-const saveToken = data => {
+export const DataClear = createAsyncThunk('user/Clear', async (data) => {
+  const response = await fetch('/api/member', {
+    method: 'DELETE',
+  });
+  const responseStatus = await response.status;
+  console.log(responseStatus);
+});
+
+const saveToken = (data) => {
+  const today = new Date();
+  // today.setDate(today.getDate() + 1); // 하루
+  today.setMinutes(today.getMinutes() + 3); // 3분
+  console.log(today);
   if (data.token === null) {
     console.log(data.message);
   } else {
-    // 쿠키에 저장
-    setCookie('token', data.token);
+    setCookie('token', data.token, {
+      expires: today,
+    });
   }
 };
 
@@ -41,7 +55,7 @@ export const userSlice = createSlice({
       removeCookie('token');
     },
   },
-  extraReducers: builder => {
+  extraReducers: (builder) => {
     builder
       .addCase(LogIn.fulfilled, (state, action) => {
         state.isLoggedIn = true;
@@ -50,14 +64,26 @@ export const userSlice = createSlice({
         saveToken(action.payload);
       })
       .addCase(LogIn.rejected, (state, action) => {
-        state.isError = action.error;
+        state.isLoginError = action.error;
         state.isSuccess = false;
         state.isLoggedIn = false;
       });
 
     builder
+      .addCase(DataClear.fulfilled, (state, action) => {
+        state.isLoggedIn = false;
+        state.isSuccess = false;
+        state.isLoggingIn = false;
+        state.isError = '';
+        state.userData = null;
+      })
+      .addCase(DataClear.rejected, (state, action) => {
+        state.isClearError = action.error;
+      });
+
+    builder
       .addMatcher(
-        action => {
+        (action) => {
           return action.type.includes('/pending');
         },
         (state, action) => {
@@ -65,7 +91,7 @@ export const userSlice = createSlice({
         }
       )
       .addMatcher(
-        action => {
+        (action) => {
           return action.type.includes('/fulfilled' || '/rejected');
         },
         (state, action) => {

@@ -9,18 +9,9 @@ function App() {
   return (
     <div className={styled.App}>
       <Routes>
-        <Route
-          path="/"
-          element={<Home />}
-        />
-        <Route
-          path="/login"
-          element={<Login />}
-        />
-        <Route
-          path="/join"
-          element={<Signupform />}
-        />
+        <Route path="/" element={<Home />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/join" element={<Signupform />} />
       </Routes>
     </div>
   );
