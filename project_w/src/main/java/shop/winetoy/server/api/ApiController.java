@@ -125,8 +125,6 @@ public class ApiController {
 			authResult.setToken(null);
 			authResult.setMessage("id error!");
 			
-//			data.put("token", null);
-//			data.put("message", "id error!");
 			return authResult;
 		}
 
@@ -135,18 +133,12 @@ public class ApiController {
 			authResult.setToken(null);
 			authResult.setMessage("password error!");
 			
-//			data.put("token", null);
-//			data.put("message", "password error!");
 			return authResult;
 		}
-
 		
 		authResult.setToken(jwtManager.generateJwtToken(result));
 		authResult.setMessage("success");
 		authResult.setData(result);
-		
-//		data.put("token", jwtManager.generateJwtToken(result));
-//		data.put("message", "success");
 		
 		return authResult;
 	}
@@ -164,6 +156,7 @@ public class ApiController {
 	}
 
 	// -----------------------------------------------------------------------------------//
+	
 	private boolean memberDuplicateCheck(String id) {
 		MemberInfoDto result = memberInfoService.memberCheck(id);
 		if (result == null) {

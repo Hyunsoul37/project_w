@@ -108,18 +108,5 @@ public class JwtManager {
 
 	public boolean matcher(String match) {
 		return match.equals(BEARER);
-	}
-
-	public boolean isTokenExpired(String token) throws ExpiredJwtException {
-		Date expiration = new Date();
-		try {
-			expiration = getClaims(token).getExpiration();
-		} catch (ExpiredJwtException e) {
-			e.printStackTrace();
-		}
-
-		return expiration.before(new Date());
-	}
-	
-	
+	}	
 }
