@@ -3,6 +3,7 @@ package shop.winetoy.server.member.entity;
 public class AuthResult {
 	private String message;
 	private String token;
+	private String refreshToken;
 	private MemberInfoDto data;
 	
 	public String getMessage() {
@@ -23,9 +24,16 @@ public class AuthResult {
 	public void setData(MemberInfoDto data) {
 		this.data = data;
 	}
-	
+	public String getRefreshToken() {
+		return refreshToken;
+	}
+	public void setRefreshToken(String refreshToken) {
+		this.refreshToken = refreshToken;
+	}
 	@Override
 	public String toString() {
-		return "AuthResult [message=" + message + ", token=" + token + ", data=" + data + "]";
+		return "AuthResult [message=" + message + ", token=" + token + ", refreshToken=" + refreshToken + ", data="
+				+ data + "]";
 	}
+
 }

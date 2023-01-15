@@ -119,6 +119,8 @@ public class ApiController {
 		MemberInfoDto result = memberInfoService.memberCheck(info.getId());
 		AuthResult authResult = new AuthResult();
 
+		System.out.println("/api/auth");
+		
 		// id가 DB에 없을 경우
 		if (result == null) {
 			
@@ -143,6 +145,10 @@ public class ApiController {
 		return authResult;
 	}
 
+	/**
+	 * DB memberInfo Table 초기화 API
+	 * @return
+	 */
 	@RequestMapping(value = "/member", method = RequestMethod.DELETE)
 	@ResponseBody
 	public Map<String, Integer> deleteMemberInfoTable() {
