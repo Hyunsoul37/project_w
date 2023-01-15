@@ -25,6 +25,8 @@ public class CORSFilter implements Filter {
 			throws IOException, ServletException {
 		HttpServletResponse response = (HttpServletResponse) res;
 
+		System.out.println("CORSFilter");
+		
 //		response.setHeader("Access-Control-Allow-Origin", "http://localhost:8080");
 		response.setHeader("Access-Control-Allow-Origin", "http://winetoy.shop");
 
