@@ -9,19 +9,27 @@ import org.springframework.stereotype.Component;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.ExpiredJwtException;
+import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.MalformedJwtException;
 import io.jsonwebtoken.SignatureAlgorithm;
+import io.jsonwebtoken.SignatureException;
 import shop.winetoy.server.member.entity.MemberInfoDto;
 
 @Component
 public class JwtManager {
 	// TODO 민감정보는 따로 분리하는 것이 좋다
 	private final String securityKey = "helloworld";
-	// 유효시간 1시간
-//	private final Long expiredTime = 1000 * 60L * 60L * 1L;
 	// 유효시간 3분
 	private final Long expiredTime = Duration.ofMinutes(3).toMillis();
+	// 리프레쉬 토큰 유효시간 1시간
+	private final Long refreshExpiredTime = Duration.ofHours(1).toMillis();
 	private final String BEARER = "bearer";
+
+	// 유효시간 1시간
+//	private final Long expiredTime = 1000 * 60L * 60L * 1L;
+	// 리프레쉬 토큰 유효시간 30일
+//	private final Long refreshExpiredTime = Duration.ofDays(30).toMillis();
 
 	/**
 	 * Member 정보를 담은 JWT 토큰을 생성한다.
@@ -34,6 +42,14 @@ public class JwtManager {
 		return Jwts.builder().setSubject(member.getName()) // 보통 username
 				.setHeader(createHeader()).setClaims(createClaims(member)) // 클레임, 토큰에 포함될 정보
 				.setExpiration(new Date(now.getTime() + expiredTime)) // 만료일
+				.signWith(SignatureAlgorithm.HS256, securityKey).compact();
+	}
+
+	public String generateRefreshToken(MemberInfoDto member) {
+		Date now = new Date();
+		return Jwts.builder().setSubject(member.getName()) // 보통 username
+				.setHeader(createHeader()).setClaims(createClaims(member)) // 클레임, 토큰에 포함될 정보
+				.setExpiration(new Date(now.getTime() + refreshExpiredTime)) // 만료일
 				.signWith(SignatureAlgorithm.HS256, securityKey).compact();
 	}
 
@@ -68,8 +84,52 @@ public class JwtManager {
 	 * @param token JWT 토큰
 	 * @return Claims 클레임
 	 */
-	private Claims getClaims(String token) {
+	Claims getClaims(String token) {
 		return Jwts.parser().setSigningKey(securityKey).parseClaimsJws(token).getBody();
+	}
+
+	public Claims parseJwtToken(String authorizationHeader) {
+		validationAuthorizationHeader(authorizationHeader);
+		String token = extractionToken(authorizationHeader);
+		Claims claims = null;
+
+		try {
+			claims = getClaims(token);
+		} catch (SignatureException e) {
+			// JWT의 securityKey가 맞지 않는 경우
+			throw new JwtException("signature does not match");
+		} catch (ExpiredJwtException e) {
+			// JWT의 유효기간이 초과되었을 경우
+			throw new JwtException("JWT expired");
+		} catch (MalformedJwtException e) {
+			// JWT의 구성이 올바르지 않을 경우
+			throw new JwtException("Incorrectly formed token");
+		}
+
+		return claims;
+	}
+
+	/**
+	 * Authorization Header에 실려온 토큰 검증
+	 * 
+	 * @param accessToken
+	 */
+	private void validationAuthorizationHeader(String accessToken) {
+		if (accessToken == null || !accessToken.startsWith(BEARER)) {
+			// 헤더가 bearer로 시작하지 않는 경우
+			throw new IllegalArgumentException("invalid token");
+		}
+	}
+
+	/**
+	 * Authorization Header에서 token 추출
+	 * 
+	 * @param authorizationHeader
+	 * @return
+	 */
+	private String extractionToken(String authorizationHeader) {
+		String[] parts = authorizationHeader.split(" ");
+		return parts[1];
 	}
 
 	/**
@@ -105,8 +165,4 @@ public class JwtManager {
 	public String geValueFromToken(String token, String key) {
 		return (String) getClaims(token).get(key);
 	}
-
-	public boolean matcher(String match) {
-		return match.equals(BEARER);
-	}	
 }
