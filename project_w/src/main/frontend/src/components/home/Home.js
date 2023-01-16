@@ -1,13 +1,16 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { logout, DataClear } from '../slice/userSlice';
+import { logout, DataClear } from '../../slice/userSlice';
+import Banner from './Banner';
+import styled from './Home.module.css';
 
 const Home = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const user = useSelector((state) => state.user);
+  const user = useSelector(state => state.user);
   const userData = user.userData ? user.userData.data : null;
+
   const LoginBtnHandler = () => {
     navigate('/login');
   };
@@ -15,17 +18,17 @@ const Home = () => {
     dispatch(logout());
   };
 
-  const DataCleatHandler = () => {
+  const DataClearHandler = () => {
     dispatch(DataClear());
   };
 
   useEffect(() => {
-    console.log('랜더!');
+    // 로그인 유지 로직 작성
   }, []);
 
   return (
-    <div>
-      <p>Home Page</p>
+    <div className={styled.Home}>
+      <Banner />
       {user.isLoggedIn ? (
         <>
           <div> Hi!! {userData.name}</div>
@@ -34,7 +37,7 @@ const Home = () => {
       ) : (
         <button onClick={LoginBtnHandler}>Login</button>
       )}
-      <button onClick={DataCleatHandler}>Data All Clear</button>
+      <button onClick={DataClearHandler}>Data All Clear</button>
     </div>
   );
 };
