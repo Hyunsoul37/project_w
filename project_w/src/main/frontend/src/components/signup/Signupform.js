@@ -56,8 +56,8 @@ const Signupform = () => {
     setIseditedId(true);
   };
 
-  const OnCheckduplicateID = () => {
-    postData({
+  const OnCheckduplicateID = async () => {
+    await postData({
       url: `api/id-check?id=${id}`,
       type: 'GET',
       data: null,
