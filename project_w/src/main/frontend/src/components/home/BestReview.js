@@ -4,6 +4,7 @@ import Card from '../ui/Card';
 import img from '../../image/banner_1.png';
 import img2 from '../../image/banner_2.png';
 import img3 from '../../image/banner_3.png';
+import { useState } from 'react';
 
 const dummyreview = [
   {
@@ -36,22 +37,53 @@ const dummyreview = [
 ];
 
 const BestReview = () => {
+  const [ShowModal, setShowModal] = useState(false);
+  const [curModalNum, setcurModalNum] = useState(-1);
+
+  const OnModal = e => {
+    setShowModal(true);
+    setcurModalNum(e.target.id);
+  };
+  const OffModal = () => {
+    setShowModal(false);
+    setcurModalNum(-1);
+  };
   return (
-    <div className={styled.BestReview}>
-      {dummyreview.map((data, idx) => (
-        <Card key={`review_${idx}`}>
+    <>
+      <div className={styled.BestReview}>
+        {dummyreview.map((data, idx) => (
+          <Card
+            id={idx}
+            key={`review_${idx}`}
+            onClick={e => OnModal(e)}
+          >
+            <img
+              id={idx}
+              className={styled.reviewimg}
+              alt={`${data.winename}_review_img`}
+              src={data.reviewImage}
+            />
+            <h1 id={idx}>{data.title}</h1>
+            <div id={idx}>{data.contents}</div>
+            <div id={idx}>{data.id}</div>
+            <div id={idx}>{data.star}</div>
+          </Card>
+        ))}
+      </div>
+      {ShowModal && (
+        <Modal offModal={OffModal}>
           <img
             className={styled.reviewimg}
-            alt={`${data.winename}_review_img`}
-            src={data.reviewImage}
+            alt={`${dummyreview[curModalNum].winename}_review_img`}
+            src={dummyreview[curModalNum].reviewImage}
           />
-          <h1>{data.title}</h1>
-          <div>{data.contents}</div>
-          <div>{data.id}</div>
-          <div>{data.star}</div>
-        </Card>
-      ))}
-    </div>
+          <h1>{dummyreview[curModalNum].title}</h1>
+          <div>{dummyreview[curModalNum].contents}</div>
+          <div>{dummyreview[curModalNum].id}</div>
+          <div>{dummyreview[curModalNum].star}</div>
+        </Modal>
+      )}
+    </>
   );
 };
 
