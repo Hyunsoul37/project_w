@@ -2,3 +2,7 @@
     width: 100%;
     height: 140px;
 }
+.Header button{
+    width: 3rem;
+    height: 1.5rem;
+}
