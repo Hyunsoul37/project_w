@@ -20,8 +20,9 @@ const Banner = () => {
   return (
     <div>
       <Slider {...Settings}>
-        {bannerimg.map(bannerimg => (
+        {bannerimg.map((bannerimg, idx) => (
           <img
+            key={`banner_${idx}`}
             alt="bannerimg"
             src={bannerimg}
             //   style={{ width: '100%' }}
