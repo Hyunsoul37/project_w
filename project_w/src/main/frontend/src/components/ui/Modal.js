@@ -1,5 +1,4 @@
 import ReactDOM from 'react-dom';
-import Card from './Card';
 import styled from './Modal.module.css';
 
 const Backdrop = props => {
@@ -11,7 +10,11 @@ const Backdrop = props => {
   );
 };
 const ModalOverlay = props => {
-  return <Card>{props.children}</Card>;
+  return (
+    <div>
+      <div className={styled.Modal}>{props.children}</div>
+    </div>
+  );
 };
 const Modal = props => {
   return (
