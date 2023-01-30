@@ -2,7 +2,7 @@ package shop.winetoy.server.member.entity;
 
 import java.util.Date;
 
-public class MemberInfoDto {
+public class MemberDto {
 	private Long pid;
 	private String id;
 	private String password;
@@ -11,6 +11,7 @@ public class MemberInfoDto {
 	private String address;
 	private String phone;
 	private Date regiDate;
+	private String role;
 	
 	public Long getPid() {
 		return pid;
@@ -61,10 +62,17 @@ public class MemberInfoDto {
 		this.regiDate = regiDate;
 	}
 	
+	public String getRole() {
+		return role;
+	}
+	public void setRole(String role) {
+		this.role = role;
+	}
+	
 	@Override
 	public String toString() {
-		return "MemberInfoVO [pid=" + pid + ", id=" + id + ", password=" + password + ", name=" + name + ", email="
-				+ email + ", address=" + address + ", phone=" + phone + ", regiDate=" + regiDate + "]";
+		return "MemberDto [pid=" + pid + ", id=" + id + ", password=" + password + ", name=" + name + ", email=" + email
+				+ ", address=" + address + ", phone=" + phone + ", regiDate=" + regiDate + ", role=" + role + "]";
 	}
 
 	

@@ -4,32 +4,40 @@ public class AuthResult {
 	private String message;
 	private String token;
 	private String refreshToken;
-	private MemberInfoDto data;
-	
+	private MemberDto data;
+
 	public String getMessage() {
 		return message;
 	}
+
 	public void setMessage(String message) {
 		this.message = message;
 	}
+
 	public String getToken() {
 		return token;
 	}
+
 	public void setToken(String token) {
 		this.token = token;
 	}
-	public MemberInfoDto getData() {
+
+	public MemberDto getData() {
 		return data;
 	}
-	public void setData(MemberInfoDto data) {
+
+	public void setData(MemberDto data) {
 		this.data = data;
 	}
+
 	public String getRefreshToken() {
 		return refreshToken;
 	}
+
 	public void setRefreshToken(String refreshToken) {
 		this.refreshToken = refreshToken;
 	}
+
 	@Override
 	public String toString() {
 		return "AuthResult [message=" + message + ", token=" + token + ", refreshToken=" + refreshToken + ", data="
