@@ -1,11 +1,12 @@
 package shop.winetoy.server.tools;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import shop.winetoy.server.member.entity.MemberInfoDto;
+import shop.winetoy.server.member.entity.MemberDto;
 
 @DisplayName("JwtManger 테스트")
 public class JwtManagerTest {
@@ -21,7 +22,7 @@ public class JwtManagerTest {
 	    // given
 		  System.out.println("test1");  
 		  
-	    MemberInfoDto member = new MemberInfoDto();
+	    MemberDto member = new MemberDto();
 	    member.setName("홍길동");
 	    member.setPassword("aaa123");
 	    member.setId("tester12");

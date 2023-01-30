@@ -2,10 +2,10 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="shop.winetoy.server.member.dao.MemberInfoDao">
+<mapper namespace="shop.winetoy.server.member.dao.MemberDao">
 	<insert id="join"
-		parameterType="shop.winetoy.server.member.entity.MemberInfoDto">
-		INSERT INTO `winetoy`.`memberInfo`
+		parameterType="shop.winetoy.server.member.entity.MemberDto">
+		INSERT INTO `member`
 		(
 		`id`,
 		`password`,
@@ -26,17 +26,17 @@
 	</insert>
 
 	<select id="memberList"
-		resultType="shop.winetoy.server.member.entity.MemberInfoDto">
-		select * from memberInfo
+		resultType="shop.winetoy.server.member.entity.MemberDto">
+		select * from member
 	</select>
 
 	<select id="memberCheck"
-		resultType="shop.winetoy.server.member.entity.MemberInfoDto">
-		select * from memberInfo where id = #{id};
+		resultType="shop.winetoy.server.member.entity.MemberDto">
+		select * from member where id = #{id};
 	</select>
 
 	<delete id="deleteMemberInfoTable">
-		delete from memberInfo
+		delete from member
 	</delete>
 
 </mapper>

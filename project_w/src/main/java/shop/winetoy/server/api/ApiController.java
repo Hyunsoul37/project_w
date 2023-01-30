@@ -14,8 +14,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import shop.winetoy.server.member.entity.AuthResult;
-import shop.winetoy.server.member.entity.MemberInfoDto;
-import shop.winetoy.server.member.service.MemberInfoService;
+import shop.winetoy.server.member.entity.MemberDto;
+import shop.winetoy.server.member.service.MemberService;
 import shop.winetoy.server.tools.JwtManager;
 
 @Controller
@@ -23,7 +23,7 @@ import shop.winetoy.server.tools.JwtManager;
 public class ApiController {
 
 	@Autowired
-	MemberInfoService memberInfoService;
+	MemberService memberInfoService;
 	@Autowired
 	JwtManager jwtManager;
 
@@ -37,7 +37,7 @@ public class ApiController {
 		String format = now.format(DateTimeFormatter.ofPattern("yyyy년 MM월 dd일 HH시 mm분 ss초"));
 
 		HashMap<String, String> map = new HashMap<String, String>();
-
+		System.out.println("/api/time");
 		map.put("time", format);
 
 		return map;
@@ -88,7 +88,7 @@ public class ApiController {
 	 */
 	@RequestMapping(value = "/join", method = RequestMethod.POST)
 	@ResponseBody
-	public int join(@RequestBody MemberInfoDto info) {
+	public int join(@RequestBody MemberDto info) {
 		boolean isDuplicate = memberDuplicateCheck(info.getId());
 
 		if (isDuplicate == true) {
@@ -105,22 +105,20 @@ public class ApiController {
 	 */
 	@RequestMapping(value = "/memberList", method = RequestMethod.GET)
 	@ResponseBody
-	public List<MemberInfoDto> getMemberList() {
-		List<MemberInfoDto> result = memberInfoService.memberList();
+	public List<MemberDto> getMemberList() {
+		List<MemberDto> result = memberInfoService.memberList();
 		return result;
 	}
 
 	/**
 	 * Login
 	 */
-	@RequestMapping(value = "/auth", method = RequestMethod.POST)
+	@RequestMapping(value = "/auth/login", method = RequestMethod.POST)
 	@ResponseBody
-	public AuthResult login(@RequestBody MemberInfoDto info) {
-		MemberInfoDto result = memberInfoService.memberCheck(info.getId());
+	public AuthResult login(@RequestBody MemberDto info) {
+		MemberDto result = memberInfoService.memberCheck(info.getId());
 		AuthResult authResult = new AuthResult();
 
-		System.out.println("/api/auth");
-		
 		// id가 DB에 없을 경우
 		if (result == null) {
 			
@@ -139,12 +137,26 @@ public class ApiController {
 		}
 		
 		authResult.setToken(jwtManager.generateJwtToken(result));
+		authResult.setRefreshToken(jwtManager.generateRefreshToken(result));
 		authResult.setMessage("success");
 		authResult.setData(result);
 		
 		return authResult;
 	}
 
+	@RequestMapping(value = "/auth/refresh", method = RequestMethod.POST)
+	@ResponseBody
+	public Map<String,String> refreshToken(@RequestBody Map<String,String> tokens)
+	{
+		System.out.println("/refresh");
+		String accessToken = tokens.get("accessToken");
+//		String email = jwtManager.getEmailFromToken(accessToken);
+		
+//		System.out.println(email);
+		
+		return null;
+	}
+	
 	/**
 	 * DB memberInfo Table 초기화 API
 	 * @return
@@ -164,7 +176,7 @@ public class ApiController {
 	// -----------------------------------------------------------------------------------//
 	
 	private boolean memberDuplicateCheck(String id) {
-		MemberInfoDto result = memberInfoService.memberCheck(id);
+		MemberDto result = memberInfoService.memberCheck(id);
 		if (result == null) {
 			return false;
 		}
