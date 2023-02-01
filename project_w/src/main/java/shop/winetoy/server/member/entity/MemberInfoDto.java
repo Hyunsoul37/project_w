@@ -2,7 +2,7 @@ package shop.winetoy.server.member.entity;
 
 import java.util.Date;
 
-public class MemberDto {
+public class MemberInfoDto {
 	private Long pid;
 	private String id;
 	private String password;
@@ -12,8 +12,19 @@ public class MemberDto {
 	private String phone;
 	private Date regiDate;
 	private String role;
-	private String refreshToken;
 
+	public MemberInfoDto(MemberDto memberDto) {
+		this.pid = memberDto.getPid();
+		this.id = memberDto.getId();
+		this.password = memberDto.getPassword();
+		this.name = memberDto.getName();
+		this.email = memberDto.getEmail();
+		this.address = memberDto.getAddress();
+		this.phone = memberDto.getPhone();
+		this.regiDate = memberDto.getRegiDate();
+		this.role = memberDto.getRole();
+	}
+	
 	public Long getPid() {
 		return pid;
 	}
@@ -86,19 +97,11 @@ public class MemberDto {
 		this.role = role;
 	}
 
-	public String getRefreshToken() {
-		return refreshToken;
-	}
-
-	public void setRefreshToken(String refreshToken) {
-		this.refreshToken = refreshToken;
-	}
-
 	@Override
 	public String toString() {
-		return "MemberDto [pid=" + pid + ", id=" + id + ", password=" + password + ", name=" + name + ", email=" + email
-				+ ", address=" + address + ", phone=" + phone + ", regiDate=" + regiDate + ", role=" + role
-				+ ", refreshToken=" + refreshToken + "]";
+		return "MemberInfoDto [pid=" + pid + ", id=" + id + ", password=" + password + ", name=" + name + ", email="
+				+ email + ", address=" + address + ", phone=" + phone + ", regiDate=" + regiDate + ", role=" + role
+				+ "]";
 	}
 
 }

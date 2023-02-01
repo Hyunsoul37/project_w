@@ -1,30 +1,38 @@
 package shop.winetoy.server.tools;
 
 import java.time.Duration;
+import java.util.Base64;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.ExpiredJwtException;
-import io.jsonwebtoken.JwtException;
+import io.jsonwebtoken.Jws;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.MalformedJwtException;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.SignatureException;
+import jakarta.annotation.PostConstruct;
 import jakarta.servlet.http.HttpServletRequest;
 import shop.winetoy.server.member.entity.MemberDto;
 
 @Component
 public class JwtManager {
-	// TODO 민감정보는 따로 분리하는 것이 좋다
-	private final String securityKey = "helloworld";
+	// 민감정보는 따로 분리하는 것이 좋다
+	@Value("${custom.access-key}")
+	private String secretAccessKey;
+	@Value("${custom.refresh-key}")
+	private String secretRefreshKey;
+	
 	// 유효시간 3분
-	private final Long expiredTime = Duration.ofMinutes(10).toMillis();
+	private final Long expiredTime = Duration.ofMinutes(3).toMillis();
 	// 리프레쉬 토큰 유효시간 1시간
-	private final Long refreshExpiredTime = Duration.ofHours(1).toMillis();
+//	private final Long refreshExpiredTime = Duration.ofHours(1).toMillis();
+	private final Long refreshExpiredTime = Duration.ofMinutes(5).toMillis();
 	private final String BEARER = "bearer";
 
 	// 유효시간 1시간
@@ -32,29 +40,35 @@ public class JwtManager {
 	// 리프레쉬 토큰 유효시간 30일
 //	private final Long refreshExpiredTime = Duration.ofDays(30).toMillis();
 
+	@PostConstruct
+    protected void init() {
+		secretAccessKey = Base64.getEncoder().encodeToString(secretAccessKey.getBytes());
+		secretRefreshKey = Base64.getEncoder().encodeToString(secretRefreshKey.getBytes());
+    }
+	
 	/**
 	 * Member 정보를 담은 JWT 토큰을 생성한다.
 	 *
 	 * @param member Member 정보를 담은 객체
 	 * @return String JWT 토큰
 	 */
-	public String generateJwtToken(MemberDto member) {
+	public String generateAccessToken(MemberDto member) {
 		Date now = new Date();
 		
 		System.out.println("generateJwtToken : " + member.toString());
 		
 		return Jwts.builder().setSubject(member.getName()) // 보통 username
-				.setHeader(createHeader()).setClaims(createClaims(member)) // 클레임, 토큰에 포함될 정보
+				.setHeader(createHeader()).setClaims(createAccessClaims(member)) // 클레임, 토큰에 포함될 정보
 				.setExpiration(new Date(now.getTime() + expiredTime)) // 만료일
-				.signWith(SignatureAlgorithm.HS256, securityKey).compact();
+				.signWith(SignatureAlgorithm.HS256, secretAccessKey).compact();
 	}
 
 	public String generateRefreshToken(MemberDto member) {
 		Date now = new Date();
 		return Jwts.builder().setSubject(member.getName()) // 보통 username
-				.setHeader(createHeader()).setClaims(createClaims(member)) // 클레임, 토큰에 포함될 정보
+				.setHeader(createHeader()).setClaims(createRefreshClaims(member)) // 클레임, 토큰에 포함될 정보
 				.setExpiration(new Date(now.getTime() + refreshExpiredTime)) // 만료일
-				.signWith(SignatureAlgorithm.HS256, securityKey).compact();
+				.signWith(SignatureAlgorithm.HS256, secretRefreshKey).compact();
 	}
 
 	private Map<String, Object> createHeader() {
@@ -66,12 +80,12 @@ public class JwtManager {
 	}
 
 	/**
-	 * 클레임(Claim)을 생성한다.
+	 * AccessToken 클레임(Claim)을 생성한다.
 	 *
 	 * @param member 토큰을 생성하기 위한 계정 정보를 담은 객체
 	 * @return Map<String, Object> 클레임(Claim)
 	 */
-	private Map<String, Object> createClaims(MemberDto member) {
+	private Map<String, Object> createAccessClaims(MemberDto member) {
 		Map<String, Object> claims = new HashMap<>();
 		claims.put("pid", member.getPid()); // member의 pid
 		claims.put("id", member.getId()); // member의 id
@@ -82,7 +96,21 @@ public class JwtManager {
 		claims.put("regiDate", member.getRegiDate()); // 가입일
 		claims.put("role", member.getRole()); // 역할
 		
-		System.out.println("createClaims : " + claims.toString());
+		return claims;
+	}
+	
+	/**
+	 * RefreshToken 클레임(Claim)을 생성한다.
+	 *
+	 * @param member 토큰을 생성하기 위한 계정 정보를 담은 객체
+	 * @return Map<String, Object> 클레임(Claim)
+	 */
+	private Map<String, Object> createRefreshClaims(MemberDto member) {
+		Map<String, Object> claims = new HashMap<>();
+		claims.put("pid", member.getPid()); // member의 pid
+		claims.put("email", member.getEmail()); // email
+		claims.put("role", member.getRole()); // 역할
+		
 		return claims;
 	}
 
@@ -93,7 +121,7 @@ public class JwtManager {
 	 * @return Claims 클레임
 	 */
 	Claims getClaims(String token) {
-		return Jwts.parser().setSigningKey(securityKey).parseClaimsJws(token).getBody();
+		return Jwts.parser().setSigningKey(secretAccessKey).parseClaimsJws(token).getBody();
 	}
 
 	public Claims parseJwtToken(String authorizationHeader, HttpServletRequest request) {
@@ -110,19 +138,13 @@ public class JwtManager {
 			claims = getClaims(token);
 		} catch (SignatureException e) {
 			// JWT의 securityKey가 맞지 않는 경우
-			System.out.println("signature does not match" + e.getMessage());
 			request.setAttribute("exception", ExceptionCode.SIGNATURE_DOES_NOT_MATCH);
-//			throw new JwtException("signature does not match");
 		} catch (ExpiredJwtException e) {
 			// JWT의 유효기간이 초과되었을 경우 EXPIRED_TOKEN
-			System.out.println("JWT expired" + e.getMessage());
 			request.setAttribute("exception", ExceptionCode.EXPIRED_TOKEN);
-//			throw new JwtException("JWT expired");
 		} catch (MalformedJwtException e) {
 			// JWT의 구성이 올바르지 않을 경우 UNSUPPORTED_TOKEN
-			System.out.println("Incorrectly formed token" + e.getMessage());
 			request.setAttribute("exception", ExceptionCode.UNSUPPORTED_TOKEN);
-//			throw new JwtException("Incorrectly formed token");
 		}
 
 		return claims;
@@ -136,10 +158,8 @@ public class JwtManager {
 	private boolean validationAuthorizationHeader(String accessToken, HttpServletRequest request) {
 		if (accessToken == null || !accessToken.startsWith(BEARER)) {
 			// 헤더가 bearer로 시작하지 않는 경우 INVALID_TOKEN
-			System.out.println("invalid token");
 			request.setAttribute("exception", ExceptionCode.INVALID_TOKEN);
 			return false;
-//			throw new IllegalArgumentException("invalid token");
 		}
 		
 		return true;
@@ -156,47 +176,44 @@ public class JwtManager {
 		return parts[1];
 	}
 
-	/**
-	 * 토큰으로 부터 name 을 가져온다.
-	 *
-	 * @param token JWT 토큰
-	 * @return String Member 의 name
-	 */
-	
-	public String getIdFromToken(String token) {
-		return (String) getClaims(token).get("id");
+	public boolean validationRefreshToken(String refreshToken) {
+		 try {
+	            Jws<Claims> claims = Jwts.parser().setSigningKey(secretRefreshKey).parseClaimsJws(refreshToken);
+	            return !claims.getBody().getExpiration().before(new Date());
+	        } catch (Exception e) {
+	            return false;
+	        }
 	}
 	
-	public String getNameFromToken(String token) {
-		return (String) getClaims(token).get("name");
-	}
-
-	public String getPidFromToken(String token) {
-		return (String) getClaims(token).get("pid");
-	}
-
-	public String getEmailFromToken(String token) {
-		return (String) getClaims(token).get("email");
-	}
-
-	public String getAddressFromToken(String token) {
-		return (String) getClaims(token).get("address");
-	}
-
-	public String getPhoneFromToken(String token) {
-		return (String) getClaims(token).get("phone");
-	}
-
-	public String getRegiDateFromToken(String token) {
-		return (String) getClaims(token).get("regiDate");
-	}
-
-	public String geValueFromToken(String token, String key) {
-		return (String) getClaims(token).get(key);
-	}
-	
-//	public String getIdFromClaims(Claims claims) {
-//		
-//		return (String) claims.get("id");
+//	public String getIdFromToken(String token) {
+//		return (String) getClaims(token).get("id");
+//	}
+//	
+//	public String getNameFromToken(String token) {
+//		return (String) getClaims(token).get("name");
+//	}
+//
+//	public String getPidFromToken(String token) {
+//		return (String) getClaims(token).get("pid");
+//	}
+//
+//	public String getEmailFromToken(String token) {
+//		return (String) getClaims(token).get("email");
+//	}
+//
+//	public String getAddressFromToken(String token) {
+//		return (String) getClaims(token).get("address");
+//	}
+//
+//	public String getPhoneFromToken(String token) {
+//		return (String) getClaims(token).get("phone");
+//	}
+//
+//	public String getRegiDateFromToken(String token) {
+//		return (String) getClaims(token).get("regiDate");
+//	}
+//
+//	public String geValueFromToken(String token, String key) {
+//		return (String) getClaims(token).get(key);
 //	}
 }

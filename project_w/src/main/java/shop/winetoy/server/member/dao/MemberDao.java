@@ -18,4 +18,6 @@ public interface MemberDao {
 	MemberDto memberCheck(String id);
 
 	int deleteMemberInfoTable();
+	
+	int updateRefreshToken(int pid, String refreshToken);
 }
