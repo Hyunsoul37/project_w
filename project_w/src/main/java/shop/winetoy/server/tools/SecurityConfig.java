@@ -13,7 +13,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 import shop.winetoy.server.auth.MemberDetailsService;
 
 @Configuration
-@EnableWebSecurity(debug = true)
+@EnableWebSecurity//(debug = true)
 public class SecurityConfig {
 
 	JwtManager jwtManager;
@@ -49,7 +49,7 @@ public class SecurityConfig {
             .formLogin().disable()  // jwt를 사용하므로 생략
             .httpBasic().disable()
 			.authorizeHttpRequests()
-			.requestMatchers("/api/auth/*").permitAll()
+			.requestMatchers("/api/auth/**").permitAll()
 			.requestMatchers("/api/join").permitAll()
 			.requestMatchers("/api/time").hasRole("ADMIN")
 			.anyRequest().authenticated()
