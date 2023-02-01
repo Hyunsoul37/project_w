@@ -39,4 +39,18 @@
 		delete from member
 	</delete>
 
+	<update id="updateRefreshToken">
+		UPDATE 
+			member
+		SET
+			refresh_token = #{refreshToken}
+		WHERE
+			pid = #{pid};
+	</update>
+
+	<select id="getRefreshToken"
+		resultType="shop.winetoy.server.member.entity.MemberDto">
+		select * from member where pid = #{pid};
+	</select>
+
 </mapper>
