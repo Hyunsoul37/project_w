@@ -8,6 +8,7 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import shop.winetoy.server.member.entity.AuthResult;
 import shop.winetoy.server.member.entity.MemberDto;
+import shop.winetoy.server.member.entity.MemberInfoDto;
 import shop.winetoy.server.member.service.MemberService;
 import shop.winetoy.server.tools.JwtManager;
 
@@ -23,7 +25,7 @@ import shop.winetoy.server.tools.JwtManager;
 public class ApiController {
 
 	@Autowired
-	MemberService memberInfoService;
+	MemberService memberService;
 	@Autowired
 	JwtManager jwtManager;
 
@@ -95,7 +97,7 @@ public class ApiController {
 			return 0;
 		}
 
-		int result = memberInfoService.join(info);
+		int result = memberService.join(info);
 
 		return result;
 	}
@@ -106,7 +108,7 @@ public class ApiController {
 	@RequestMapping(value = "/memberList", method = RequestMethod.GET)
 	@ResponseBody
 	public List<MemberDto> getMemberList() {
-		List<MemberDto> result = memberInfoService.memberList();
+		List<MemberDto> result = memberService.memberList();
 		return result;
 	}
 
@@ -115,10 +117,11 @@ public class ApiController {
 	 */
 	@RequestMapping(value = "/auth/login", method = RequestMethod.POST)
 	@ResponseBody
+	@Transactional
 	public AuthResult login(@RequestBody MemberDto info) {
-		MemberDto result = memberInfoService.memberCheck(info.getId());
+		MemberDto result = memberService.memberCheck(info.getId());
 		AuthResult authResult = new AuthResult();
-
+		
 		// id가 DB에 없을 경우
 		if (result == null) {
 			
@@ -136,26 +139,16 @@ public class ApiController {
 			return authResult;
 		}
 		
-		authResult.setToken(jwtManager.generateJwtToken(result));
+		MemberInfoDto memberInfo = new MemberInfoDto(result);
+		authResult.setToken(jwtManager.generateAccessToken(result));
 		authResult.setRefreshToken(jwtManager.generateRefreshToken(result));
 		authResult.setMessage("success");
-		authResult.setData(result);
+		authResult.setData(memberInfo);
 		
 		return authResult;
 	}
-
-	@RequestMapping(value = "/auth/refresh", method = RequestMethod.POST)
-	@ResponseBody
-	public Map<String,String> refreshToken(@RequestBody Map<String,String> tokens)
-	{
-		System.out.println("/refresh");
-		String accessToken = tokens.get("accessToken");
-//		String email = jwtManager.getEmailFromToken(accessToken);
-		
-//		System.out.println(email);
-		
-		return null;
-	}
+	
+	
 	
 	/**
 	 * DB memberInfo Table 초기화 API
@@ -166,7 +159,7 @@ public class ApiController {
 	public Map<String, Integer> deleteMemberInfoTable() {
 		Map<String, Integer> data = new HashMap<String, Integer>();
 
-		int result = memberInfoService.deleteMemberInfoTable();
+		int result = memberService.deleteMemberInfoTable();
 
 		data.put("deleteCount", result);
 
@@ -176,7 +169,7 @@ public class ApiController {
 	// -----------------------------------------------------------------------------------//
 	
 	private boolean memberDuplicateCheck(String id) {
-		MemberDto result = memberInfoService.memberCheck(id);
+		MemberDto result = memberService.memberCheck(id);
 		if (result == null) {
 			return false;
 		}
