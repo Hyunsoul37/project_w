@@ -8,16 +8,19 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.amazonaws.HttpMethod;
+
 import shop.winetoy.server.member.entity.AuthResult;
 import shop.winetoy.server.member.entity.MemberDto;
 import shop.winetoy.server.member.entity.MemberInfoDto;
+import shop.winetoy.server.member.entity.RefreshDto;
 import shop.winetoy.server.member.service.MemberService;
+import shop.winetoy.server.tools.ExceptionCode;
 import shop.winetoy.server.tools.JwtManager;
 
 @Controller
@@ -117,17 +120,16 @@ public class ApiController {
 	 */
 	@RequestMapping(value = "/auth/login", method = RequestMethod.POST)
 	@ResponseBody
-	@Transactional
 	public AuthResult login(@RequestBody MemberDto info) {
 		MemberDto result = memberService.memberCheck(info.getId());
 		AuthResult authResult = new AuthResult();
-		
+
 		// id가 DB에 없을 경우
 		if (result == null) {
-			
+
 			authResult.setToken(null);
 			authResult.setMessage("id error!");
-			
+
 			return authResult;
 		}
 
@@ -135,23 +137,52 @@ public class ApiController {
 		if (result.getPassword().equals(info.getPassword()) == false) {
 			authResult.setToken(null);
 			authResult.setMessage("password error!");
-			
+
 			return authResult;
 		}
-		
+
 		MemberInfoDto memberInfo = new MemberInfoDto(result);
-		authResult.setToken(jwtManager.generateAccessToken(result));
-		authResult.setRefreshToken(jwtManager.generateRefreshToken(result));
+		String accessToken = jwtManager.generateAccessToken(result);
+		String refreshToken = jwtManager.generateRefreshToken(result);
+
+		authResult.setToken(accessToken);
+		authResult.setRefreshToken(refreshToken);
 		authResult.setMessage("success");
 		authResult.setData(memberInfo);
-		
+
+		memberService.updateRefreshToken(result.getPid(), refreshToken);
+
 		return authResult;
 	}
-	
-	
-	
+
+	@RequestMapping(value = "/auth/refresh", method = RequestMethod.POST)
+	@ResponseBody
+	public String reissueAccessToken(@RequestBody RefreshDto requestRefreshToken) {
+
+		MemberDto result = memberService.getRefreshToken(requestRefreshToken.getPid());
+
+		if (jwtManager.validationRefreshToken(requestRefreshToken.getRefreshToken())) {
+			System.out.println("validate RefreshToken!!");
+		} 
+		else {
+			return ExceptionCode.EXPIRED_TOKEN;
+		}
+		
+		if(result.getRefreshToken().equals(requestRefreshToken.getRefreshToken())) {
+			System.out.println("equals RefreshToken!!");
+		}
+		else {
+			return ExceptionCode.INVALID_TOKEN;
+		}
+
+		String accessToken = jwtManager.generateAccessToken(result);
+		
+		return accessToken;
+	}
+
 	/**
 	 * DB memberInfo Table 초기화 API
+	 * 
 	 * @return
 	 */
 	@RequestMapping(value = "/member", method = RequestMethod.DELETE)
@@ -167,7 +198,7 @@ public class ApiController {
 	}
 
 	// -----------------------------------------------------------------------------------//
-	
+
 	private boolean memberDuplicateCheck(String id) {
 		MemberDto result = memberService.memberCheck(id);
 		if (result == null) {

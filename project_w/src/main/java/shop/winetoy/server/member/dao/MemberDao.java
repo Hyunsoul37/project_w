@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 
 import shop.winetoy.server.member.entity.MemberDto;
+import shop.winetoy.server.member.entity.RefreshDto;
 
 @Mapper
 public interface MemberDao {
@@ -19,5 +20,7 @@ public interface MemberDao {
 
 	int deleteMemberInfoTable();
 	
-	int updateRefreshToken(int pid, String refreshToken);
+	int updateRefreshToken(Long pid, String refreshToken);
+	
+	MemberDto getRefreshToken(Long pid);
 }

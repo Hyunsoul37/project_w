@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import shop.winetoy.server.member.dao.MemberDao;
 import shop.winetoy.server.member.entity.MemberDto;
+import shop.winetoy.server.member.entity.RefreshDto;
 
 @Service
 public class MemberServiceImp implements MemberService{
@@ -44,6 +45,18 @@ public class MemberServiceImp implements MemberService{
 	@Override
 	public int deleteMemberInfoTable() {
 		int result = memberDao.deleteMemberInfoTable();
+		return result;
+	}
+
+	@Override
+	public int updateRefreshToken(Long pid, String refreshToken) {
+		int result = memberDao.updateRefreshToken(pid, refreshToken);
+		return result;
+	}
+
+	@Override
+	public MemberDto getRefreshToken(Long pid) {
+		MemberDto result = memberDao.getRefreshToken(pid);
 		return result;
 	}
 
