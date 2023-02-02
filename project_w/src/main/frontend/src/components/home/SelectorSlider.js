@@ -1,32 +1,35 @@
 import Slider from 'react-slick';
-import 'slick-carousel/slick/slick.css';
-import 'slick-carousel/slick/slick-theme.css';
-import dummy01 from '../../image/dummy01.png';
-import dummy02 from '../../image/dummy02.png';
-import dummy03 from '../../image/dummy03.png';
+import styled from './Selector.module.css';
 
 const SelectorSlider = () => {
-   const settings ={
-      rows:1,
+   const settings = {
       infinite: true,
       slidesToShow: 1,
-      slidesToScroll: 1,
       variableWidth: true,
+      pauseOnFocus: false,
+      pauseOnHover: false,
+      centerMode: true,
+      touchRatio: 0,
       autoplay: true,
-      speed: 2000,
+      autoplaySpeed: 500,
    };
-   return(
-      <Slider {...settings}>
-         <div>
-            <img src={dummy01} alt=""/>
-         </div>
-         <div>
-            <img src={dummy02} alt=""/>
-         </div>
-         <div>
-            <img src={dummy03} alt=""/>
-         </div>
-      </Slider>
+   const flowImgs = []
+   for (let idx = 0; idx <= 14; idx++) {
+      flowImgs.push(`/images/main_flow${idx}.png`);
+   }
+
+   return (
+      <div className={styled.h25}>
+         <Slider {...settings}>
+            {flowImgs.map((flowImgs, idx) => (
+               <img
+                  src={flowImgs}
+                  alt={`flowimg${idx}`}
+                  className={styled.h25}
+               />
+            ))}
+         </Slider>
+      </div>
    );
 }
 
