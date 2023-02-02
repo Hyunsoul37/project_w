@@ -35,32 +35,25 @@ public class JwtFilter extends OncePerRequestFilter{
 	@Override
 	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		HttpServletRequest res = (HttpServletRequest)request;
 		
-		System.out.println("doFilterInternal  1 ");
-		
+		HttpServletRequest res = (HttpServletRequest) request;
+
 		String authorizationHeader = res.getHeader(HEADER_STRING);
 		Claims claims = jwtManager.parseJwtToken(authorizationHeader, request);
-		
-		if(claims != null) {
-			String id = (String)claims.get("id");
-						
+
+		if (claims != null) {
+			String id = (String) claims.get("id");
+
 			MemberDetails memberDetails = (MemberDetails) memberDetailsService.loadUserByUsername(id);
-			
-			System.out.println("!!memberDetails!! " + memberDetails.toString());
-			System.out.println("!!memberDetails.getAuthorities()!! " + memberDetails.getAuthorities());
-			
-			UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(
-					memberDetails, null, memberDetails.getAuthorities());
-			
-            authentication.setDetails(memberDetails); //new WebAuthenticationDetailsSource().buildDetails(request)
-            
-            System.out.println("authentication : " + authentication.toString());
-            
-            SecurityContextHolder.getContext().setAuthentication(authentication);
+
+			UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(memberDetails,
+					null, memberDetails.getAuthorities());
+
+			authentication.setDetails(memberDetails); // new WebAuthenticationDetailsSource().buildDetails(request)
+
+			SecurityContextHolder.getContext().setAuthentication(authentication);
 		}
-		
+
 		filterChain.doFilter(request, response);
 	}
 	
