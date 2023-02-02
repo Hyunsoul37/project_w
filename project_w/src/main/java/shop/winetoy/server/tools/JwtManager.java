@@ -49,9 +49,6 @@ public class JwtManager {
 	 */
 	public String generateAccessToken(MemberDto member) {
 		Date now = new Date();
-		
-		System.out.println("generateJwtToken : " + member.toString());
-		
 		return Jwts.builder().setSubject(member.getName()) // 보통 username
 				.setHeader(createHeader()).setClaims(createAccessClaims(member)) // 클레임, 토큰에 포함될 정보
 				.setExpiration(new Date(now.getTime() + expiredTime)) // 만료일
@@ -172,43 +169,12 @@ public class JwtManager {
 	}
 
 	public boolean validationRefreshToken(String refreshToken) {
-		 try {
-	            Jws<Claims> claims = Jwts.parser().setSigningKey(secretRefreshKey).parseClaimsJws(refreshToken);
-	            return !claims.getBody().getExpiration().before(new Date());
-	        } catch (Exception e) {
-	            return false;
-	        }
+		try {
+			Jws<Claims> claims = Jwts.parser().setSigningKey(secretRefreshKey).parseClaimsJws(refreshToken);
+			return !claims.getBody().getExpiration().before(new Date());
+		} catch (Exception e) {
+			return false;
+		}
 	}
-	
-//	public String getIdFromToken(String token) {
-//		return (String) getClaims(token).get("id");
-//	}
-//	
-//	public String getNameFromToken(String token) {
-//		return (String) getClaims(token).get("name");
-//	}
-//
-//	public String getPidFromToken(String token) {
-//		return (String) getClaims(token).get("pid");
-//	}
-//
-//	public String getEmailFromToken(String token) {
-//		return (String) getClaims(token).get("email");
-//	}
-//
-//	public String getAddressFromToken(String token) {
-//		return (String) getClaims(token).get("address");
-//	}
-//
-//	public String getPhoneFromToken(String token) {
-//		return (String) getClaims(token).get("phone");
-//	}
-//
-//	public String getRegiDateFromToken(String token) {
-//		return (String) getClaims(token).get("regiDate");
-//	}
-//
-//	public String geValueFromToken(String token, String key) {
-//		return (String) getClaims(token).get(key);
-//	}
+
 }

@@ -20,8 +20,6 @@ public class MemberDetailsService implements UserDetailsService{
 		
 		MemberDto memberDto = memberService.memberCheck(username);
         if(memberDto != null){
-        	
-        	System.out.println(memberDto.toString());
             return new MemberDetails(memberDto);
         }
         return null;

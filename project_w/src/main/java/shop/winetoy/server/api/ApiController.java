@@ -42,7 +42,6 @@ public class ApiController {
 		String format = now.format(DateTimeFormatter.ofPattern("yyyy년 MM월 dd일 HH시 mm분 ss초"));
 
 		HashMap<String, String> map = new HashMap<String, String>();
-		System.out.println("/api/time");
 		map.put("time", format);
 
 		return map;
@@ -64,7 +63,6 @@ public class ApiController {
 	@ResponseBody
 	public Map<String, String> getData() {
 		Map<String, String> data = new HashMap<String, String>();
-		System.out.println("/test ,  RequestMethod.GET");
 		data.put("data", "RequestMethod.GET");
 
 		return data;
@@ -161,17 +159,11 @@ public class ApiController {
 
 		MemberDto result = memberService.getRefreshToken(requestRefreshToken.getPid());
 
-		if (jwtManager.validationRefreshToken(requestRefreshToken.getRefreshToken())) {
-			System.out.println("validate RefreshToken!!");
-		} 
-		else {
+		if (!jwtManager.validationRefreshToken(requestRefreshToken.getRefreshToken())) {
 			return ExceptionCode.EXPIRED_TOKEN;
-		}
+		} 
 		
-		if(result.getRefreshToken().equals(requestRefreshToken.getRefreshToken())) {
-			System.out.println("equals RefreshToken!!");
-		}
-		else {
+		if(!result.getRefreshToken().equals(requestRefreshToken.getRefreshToken())) {
 			return ExceptionCode.INVALID_TOKEN;
 		}
 
