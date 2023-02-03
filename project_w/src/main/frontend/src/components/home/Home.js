@@ -1,6 +1,7 @@
 import Banner from './Banner';
 import SelectorArea from './SelectorArea';
 import BestReview from './BestReview';
+import RankProd from './RankProd';
 import styled from './Home.module.css';
 
 const Home = () => {
@@ -9,6 +10,7 @@ const Home = () => {
       <Banner />
       <SelectorArea />
       <BestReview />
+      <RankProd />
     </div>
   );
 };
