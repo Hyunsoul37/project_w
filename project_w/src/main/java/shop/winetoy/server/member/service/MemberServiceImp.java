@@ -48,12 +48,18 @@ public class MemberServiceImp implements MemberService{
 		return result;
 	}
 
+	/**
+	 * refresh token DB 저장
+	 */
 	@Override
 	public int updateRefreshToken(Long pid, String refreshToken) {
 		int result = memberDao.updateRefreshToken(pid, refreshToken);
 		return result;
 	}
 
+	/**
+	 * DB에 저장된 refresh token pid로 가져오기
+	 */
 	@Override
 	public MemberDto getRefreshToken(Long pid) {
 		MemberDto result = memberDao.getRefreshToken(pid);
