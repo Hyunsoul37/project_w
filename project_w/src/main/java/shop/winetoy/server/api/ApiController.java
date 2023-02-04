@@ -148,11 +148,18 @@ public class ApiController {
 		authResult.setMessage("success");
 		authResult.setData(memberInfo);
 
+		// 발급된 refresh토큰 DB저장
 		memberService.updateRefreshToken(result.getPid(), refreshToken);
 
 		return authResult;
 	}
 
+	/**
+	 * refreshToken으로 Access토큰 재발급
+	 * 
+	 * @param requestRefreshToken
+	 * @return
+	 */
 	@RequestMapping(value = "/auth/refresh", method = RequestMethod.POST)
 	@ResponseBody
 	public String reissueAccessToken(@RequestBody RefreshDto requestRefreshToken) {

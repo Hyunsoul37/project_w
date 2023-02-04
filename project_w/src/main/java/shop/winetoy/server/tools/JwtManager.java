@@ -29,9 +29,9 @@ public class JwtManager {
 	private String secretRefreshKey;
 	
 	// 유효시간 3분
-	private final Long expiredTime = Duration.ofMinutes(3).toMillis();
+	private final Long expiredTime = Duration.ofMinutes(30).toMillis();
 	// 리프레쉬 토큰 유효시간 1시간
-	private final Long refreshExpiredTime = Duration.ofHours(1).toMillis();
+	private final Long refreshExpiredTime = Duration.ofHours(6).toMillis();
 	
 	private final String BEARER = "bearer";
 
