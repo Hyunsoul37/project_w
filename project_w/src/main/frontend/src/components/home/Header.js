@@ -1,17 +1,17 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { useRouter } from 'next/router';
 import { logout, DataClear } from '../../slice/userSlice';
 import styled from './Header.module.css';
 
 const Header = () => {
-  const navigate = useNavigate();
+  const router = useRouter();
   const dispatch = useDispatch();
-  const user = useSelector(state => state.user);
+  const user = useSelector((state) => state.user);
   const userData = user.userData ? user.userData.data : null;
 
   const LoginBtnHandler = () => {
-    navigate('/login');
+    router.push('/login');
   };
   const LogOutHandler = () => {
     dispatch(logout());

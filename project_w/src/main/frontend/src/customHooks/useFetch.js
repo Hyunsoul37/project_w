@@ -1,8 +1,11 @@
 import { useCallback } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useRouter } from 'next/router';
+
+// import { useNavigate } from 'react-router-dom';
 
 const useFetch = () => {
-  const navigate = useNavigate();
+  const router = useRouter();
+  // const navigate = useNavigate();
   const sendRequestData = useCallback(
     async ({
       url,
@@ -30,7 +33,7 @@ const useFetch = () => {
         // }
         const responseData = await response.json();
         if (movepath) {
-          navigate(movepath);
+          router.push(movepath);
         }
         if (AfterGetData !== null) {
           AfterGetData(responseData);
