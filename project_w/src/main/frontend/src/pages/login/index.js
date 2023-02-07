@@ -1,31 +1,32 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { useRouter } from 'next/router';
 import { LogIn } from '../../slice/userSlice';
-import Form from '../ui/Form';
+import Form from '../../components/ui/Form';
 import styled from './Login.module.css';
+import Seo from '../../util/Seo';
 
 const Login = () => {
-  const navigate = useNavigate();
+  const router = useRouter();
   const [id, setId] = useState('');
   const [password, setPassword] = useState('');
-  const user = useSelector(state => state.user);
+  const user = useSelector((state) => state.user);
   const dispatch = useDispatch();
 
   useEffect(() => {
     if (user.isLoggedIn) {
-      navigate('/');
+      router.push('/');
     }
-  }, [user.isLoggedIn, navigate]);
+  }, [user.isLoggedIn]);
 
-  const ChangeIdHandler = e => {
+  const ChangeIdHandler = (e) => {
     setId(e.target.value);
   };
-  const ChangePasswordHandler = e => {
+  const ChangePasswordHandler = (e) => {
     setPassword(e.target.value);
   };
 
-  const submitHandler = e => {
+  const submitHandler = (e) => {
     e.preventDefault();
     dispatch(
       LogIn({
@@ -39,6 +40,7 @@ const Login = () => {
 
   return (
     <div className={styled.formWrapper}>
+      <Seo title="login" />
       <Form onsubmit={submitHandler}>
         <label htmlFor="id">
           ID
@@ -62,7 +64,7 @@ const Login = () => {
           <button>Login</button>
         </div>
       </Form>
-      <button onClick={() => navigate('/join')}>SignUp</button>
+      <button onClick={() => router.push('/login/Join')}>SignUp</button>
     </div>
   );
 };
