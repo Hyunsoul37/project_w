@@ -11,7 +11,7 @@ const initialState = {
 };
 
 export const LogIn = createAsyncThunk('user/logIn', async (data) => {
-  const response = await fetch('/api/auth', {
+  const response = await fetch('/api/auth/login', {
     method: 'POST',
     body: data ? JSON.stringify(data) : null,
     headers: { 'Content-Type': 'application/json;charset=UTF-8' },
@@ -39,6 +39,7 @@ const saveToken = (data) => {
     setCookie('token', data.token, {
       expires: today,
     });
+    localStorage.setItem('refresh', data.refreshToken);
   }
 };
 
@@ -53,6 +54,7 @@ export const userSlice = createSlice({
       state.isError = '';
       state.userData = null;
       removeCookie('token');
+      localStorage.removeItem('refresh');
     },
   },
   extraReducers: (builder) => {

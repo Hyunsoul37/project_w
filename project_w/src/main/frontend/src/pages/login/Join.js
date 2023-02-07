@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import useFetch from '../../customHooks/useFetch';
-import Form from '../ui/Form';
+import Form from '../../components/ui/Form';
 import styled from './Signupform.module.css';
+import Seo from '../../util/Seo';
 
 const Signupform = () => {
   const { sendRequestData: postData } = useFetch();
@@ -19,7 +20,7 @@ const Signupform = () => {
   const header = { 'Content-Type': 'application/json;charset=UTF-8' };
   const movepath = '/login';
 
-  const submitHandler = e => {
+  const submitHandler = (e) => {
     e.preventDefault();
     if (isduplicate) {
       alert('아이디 중복임 다시하셈');
@@ -47,7 +48,7 @@ const Signupform = () => {
     setAddress('');
     setPhone('');
   };
-  const DuplicateResponseMessage = data => {
+  const DuplicateResponseMessage = (data) => {
     if (data === true) {
       setDuplicate(true);
     } else {
@@ -66,27 +67,28 @@ const Signupform = () => {
     });
   };
 
-  const ChangeIdHandler = e => {
+  const ChangeIdHandler = (e) => {
     setIseditedId(false);
     setId(e.target.value);
   };
-  const ChangePasswordHandler = e => {
+  const ChangePasswordHandler = (e) => {
     setPassword(e.target.value);
   };
-  const ChangeNameHandler = e => {
+  const ChangeNameHandler = (e) => {
     setName(e.target.value);
   };
-  const ChangeEmailHandler = e => {
+  const ChangeEmailHandler = (e) => {
     setEmail(e.target.value);
   };
-  const ChangeAddressHandler = e => {
+  const ChangeAddressHandler = (e) => {
     setAddress(e.target.value);
   };
-  const ChangePhoneHandler = e => {
+  const ChangePhoneHandler = (e) => {
     setPhone(e.target.value);
   };
   return (
     <div className={styled.formWrapper}>
+      <Seo title="Sign In" />
       <Form onsubmit={submitHandler}>
         <label htmlFor="id">
           ID
@@ -95,15 +97,15 @@ const Signupform = () => {
             type="text"
             value={id ? id : ''}
             onChange={ChangeIdHandler}
-            onBlur={OnCheckduplicateID}
+            // onBlur={OnCheckduplicateID}
           />
-          {id !== '' && iseditedId ? (
+          {/* {id !== '' && iseditedId ? (
             isduplicate ? (
               <p className={styled.errormsg}>아이디 중복입니다.</p>
             ) : (
               <p>사용가능한 아이디입니다.</p>
             )
-          ) : null}
+          ) : null} */}
         </label>
 
         <label htmlFor="password">
