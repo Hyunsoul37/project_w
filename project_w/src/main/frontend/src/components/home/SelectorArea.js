@@ -3,10 +3,12 @@ import SelectorSlider from "./SelectorSlider";
 
 const SelectorArea = () => {
    return (
-      <div>
-         <Selector />
+      <section>
+         <div className="maxframe">
+            <Selector />
+         </div>
          <SelectorSlider />
-      </div>
+      </section>
    );
 };
 

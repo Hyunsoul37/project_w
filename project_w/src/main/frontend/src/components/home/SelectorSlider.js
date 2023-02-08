@@ -23,6 +23,7 @@ const SelectorSlider = () => {
          <Slider {...settings}>
             {flowImgs.map((flowImgs, idx) => (
                <img
+                  key={`flowimg${idx}`}
                   src={flowImgs}
                   alt={`flowimg${idx}`}
                   className={styled.h25}

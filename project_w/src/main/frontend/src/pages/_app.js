@@ -1,6 +1,7 @@
 import Layout from '../util/Layout';
 import { Provider } from 'react-redux';
 import { store } from '../store';
+import './Layout.css';
 
 const App = ({ Component, pageProps }) => {
   return (

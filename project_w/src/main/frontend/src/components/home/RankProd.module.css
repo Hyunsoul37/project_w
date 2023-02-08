@@ -1,0 +1,51 @@
+.tablist>ul {
+   padding-bottom: 30px;
+   display: flex;
+   justify-content: center;
+}
+
+.tablist ul li {
+   width: 150px;
+   padding: 10px 0;
+   margin: 0 5px;
+   cursor: pointer;
+   text-align: center;
+   font-size: 18px;
+   /* font-weight: 700; */
+   color: var(--primary);
+   border: 1px solid var(--primary);
+   border-radius: 50em;
+}
+
+.tablist ul li:hover {
+   color: #fff;
+   background-color: var(--primary);
+}
+
+.tablist .focused {
+   color: #fff;
+   background-color: var(--primary);
+}
+
+.tabmenu_wrap {
+   display: flex;
+   flex-wrap: wrap;
+}
+
+.tabmenu_wrap .rank01 {
+   width: 600px;
+   height: 600px;
+   background-color: pink;
+}
+
+.tabmenu_wrap .diffrank {
+   width: 600px;
+   display: flex;
+   flex-wrap: wrap;
+}
+
+.tabmenu_wrap .diffrank>li {
+   width: 300px;
+   height: 300px;
+   background-color: tomato;
+}
