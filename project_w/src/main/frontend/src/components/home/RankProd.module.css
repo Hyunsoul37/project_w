@@ -30,22 +30,111 @@
 .tabmenu_wrap {
    display: flex;
    flex-wrap: wrap;
+   justify-content: space-between;
 }
 
 .tabmenu_wrap .rank01 {
-   width: 600px;
-   height: 600px;
-   background-color: pink;
+   width: 595px;
+   height: 595px;
+   background-color: #efefef;
+   position: relative;
 }
 
 .tabmenu_wrap .diffrank {
-   width: 600px;
+   width: 595px;
    display: flex;
+   justify-content: space-between;
    flex-wrap: wrap;
 }
 
+.tabmenu_wrap .rank01 {
+   position: relative;
+   overflow: hidden;
+}
+
+.tabmenu_wrap .rank01 p img {
+   position: absolute;
+   right: -60px;
+   top: 50%;
+   transform: translateY(-50%);
+   width: 90%;
+}
+
+.tabmenu_wrap .diffrank li>p img {
+   width: 100%;
+}
+
+.tabmenu_wrap .diffrank li>p {
+   position: absolute;
+   right: -30px;
+   top: 50%;
+   transform: translateY(-50%);
+   width: 80%;
+}
+
+.tabmenu_wrap .diffrank li>p img {
+   width: 100%;
+}
+
 .tabmenu_wrap .diffrank>li {
-   width: 300px;
-   height: 300px;
-   background-color: tomato;
+   width: 293px;
+   height: 293px;
+   margin-bottom: 10px;
+   background-color: #efefef;
+   position: relative;
+}
+
+.tabmenu_wrap .txt_area {
+   position: absolute;
+   top: 2em;
+   left: 1em;
+}
+
+.tabmenu_wrap .txt_area .rank_txt {
+   color: var(--primary);
+   font-size: 18px;
+}
+
+.tabmenu_wrap .txt_area .rank_txt p {
+   font-size: 36px;
+   font-weight: 700;
+}
+
+.tabmenu_wrap .tasty_area {
+   position: absolute;
+   left: 1em;
+   bottom: 2em;
+}
+
+.tabmenu_wrap .tasty_area .inner {
+   margin-top: 0.5em;
+   display: flex;
+}
+
+.tabmenu_wrap .tasty_area .inner p {
+   font-size: 12px;
+   padding-right: 0.5em;
+}
+
+.tabmenu_wrap .rank01 .tasty_area .inner p {
+   font-size: 15px;
+}
+
+.tabmenu_wrap .tasty_area .inner>ul {
+   display: flex;
+   align-items: center;
+}
+
+.tabmenu_wrap .tasty_area .inner>ul li {
+   font-size: 12px;
+   margin: 0 1px;
+}
+
+.tabmenu_wrap .rank01 .tasty_area .inner>ul li {
+   font-size: 15px;
+   margin: 0 2px;
+}
+
+.tabmenu_wrap .tasty_area .inner>ul li path {
+   color: var(--primary);
 }
