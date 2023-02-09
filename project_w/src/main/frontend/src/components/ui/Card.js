@@ -1,11 +1,13 @@
 import styled from './Card.module.css';
 
-const Card = props => {
+const Card = (props) => {
   return (
     <div
       id={props.id}
-      className={styled.Card}
-      onClick={e => props.onClick(e)}
+      className={[styled.Card, props.className ? props.className : ''].join(
+        ' '
+      )}
+      onClick={(e) => props.onClick(e)}
     >
       {props.children}
     </div>
