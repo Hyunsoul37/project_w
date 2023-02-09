@@ -1,13 +1,18 @@
 import React, { useState } from 'react';
 import styled from './RankProd.module.css'
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { faDroplet } from "@fortawesome/free-solid-svg-icons";
+
+
 const menuArr = [
   {
     name: '레드',
-    content1: '레드 랭킹1 사진 넣기',
-    content2: '레드 랭킹2 사진 넣기',
-    content3: '레드 랭킹3 사진 넣기',
-    content4: '레드 랭킹4 사진 넣기',
-    content5: '레드 랭킹5 사진 넣기',
+    content1: '/images/main_flow6.png',
+    content2: '/images/main_flow5.png',
+    content3: '/images/main_flow4.png',
+    content4: '/images/main_flow3.png',
+    content5: '/images/main_flow2.png'
   },
   {
     name: '화이트',
@@ -62,37 +67,202 @@ const RankProd = () => {
           </div>
           <div className={styled.tabmenu_wrap}>
             <div className={styled.rank01}>
-              <p>{menuArr[currentTab].content1}</p>
-              <div className="text_area">
-                <span>Rank01</span>
+              <p>
+                <img src={menuArr[currentTab].content1} alt="" />
+              </p>
+              <div className={styled.txt_area}>
+                <div className={styled.rank_txt}>
+                  <span>RANK</span>
+                  <p>01</p>
+                </div>
                 <p>블라블라숑 레드01</p>
                 <p className="price">12,900</p>
+              </div>
+              <div className={styled.tasty_area}>
+                <div className={styled.inner}>
+                  <p>당도</p>
+                  <ul>
+                    <li><FontAwesomeIcon icon={faDroplet} /></li>
+                    <li><FontAwesomeIcon icon={faDroplet} /></li>
+                    <li><FontAwesomeIcon icon={faDroplet} /></li>
+                    <li><FontAwesomeIcon icon={faDroplet} /></li>
+                    <li><FontAwesomeIcon icon={faDroplet} /></li>
+                  </ul>
+                </div>
+                <div className={styled.inner}>
+                  <p>산미</p>
+                  <ul>
+                    <li><FontAwesomeIcon icon={faDroplet} /></li>
+                    <li><FontAwesomeIcon icon={faDroplet} /></li>
+                    <li><FontAwesomeIcon icon={faDroplet} /></li>
+                    <li><FontAwesomeIcon icon={faDroplet} /></li>
+                    <li><FontAwesomeIcon icon={faDroplet} /></li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <div className={styled.tasty_area}>
+              <div className={styled.inner}>
+                <p>당도</p>
+                <ul>
+                  <li><FontAwesomeIcon icon={faDroplet} /></li>
+                  <li><FontAwesomeIcon icon={faDroplet} /></li>
+                  <li><FontAwesomeIcon icon={faDroplet} /></li>
+                  <li><FontAwesomeIcon icon={faDroplet} /></li>
+                  <li><FontAwesomeIcon icon={faDroplet} /></li>
+                </ul>
+              </div>
+              <div className={styled.inner}>
+                <p>산미</p>
+                <ul>
+                  <li><FontAwesomeIcon icon={faDroplet} /></li>
+                  <li><FontAwesomeIcon icon={faDroplet} /></li>
+                  <li><FontAwesomeIcon icon={faDroplet} /></li>
+                  <li><FontAwesomeIcon icon={faDroplet} /></li>
+                  <li><FontAwesomeIcon icon={faDroplet} /></li>
+                </ul>
               </div>
             </div>
             <ul className={styled.diffrank}>
               <li>
-                <p>{menuArr[currentTab].content2}</p>
-                <span>Ranking 02</span>
-                <p>블라블라숑 레드02</p>
-                <p className="price">12,900</p>
+                <p>
+                  <img src={menuArr[currentTab].content2} alt="" />
+                </p>
+                <div className={styled.txt_area}>
+                  <div className={styled.rank_txt}>
+                    <span>RANK</span>
+                    <p>02</p>
+                  </div>
+                  <p>블라블라숑 레드02</p>
+                  <p className="price">12,900</p>
+                </div>
+                <div className={styled.tasty_area}>
+                  <div className={styled.inner}>
+                    <p>당도</p>
+                    <ul>
+                      <li><FontAwesomeIcon icon={faDroplet} /></li>
+                      <li><FontAwesomeIcon icon={faDroplet} /></li>
+                      <li><FontAwesomeIcon icon={faDroplet} /></li>
+                      <li><FontAwesomeIcon icon={faDroplet} /></li>
+                      <li><FontAwesomeIcon icon={faDroplet} /></li>
+                    </ul>
+                  </div>
+                  <div className={styled.inner}>
+                    <p>산미</p>
+                    <ul>
+                      <li><FontAwesomeIcon icon={faDroplet} /></li>
+                      <li><FontAwesomeIcon icon={faDroplet} /></li>
+                      <li><FontAwesomeIcon icon={faDroplet} /></li>
+                      <li><FontAwesomeIcon icon={faDroplet} /></li>
+                      <li><FontAwesomeIcon icon={faDroplet} /></li>
+                    </ul>
+                  </div>
+                </div>
               </li>
               <li>
-                <p>{menuArr[currentTab].content3}</p>
-                <span>Ranking 03</span>
-                <p>블라블라숑 레드03</p>
-                <p className="price">12,900</p>
+                <p>
+                  <img src={menuArr[currentTab].content3} alt="" />
+                </p>
+                <div className={styled.txt_area}>
+                  <div className={styled.rank_txt}>
+                    <span>RANK</span>
+                    <p>03</p>
+                  </div>
+                  <p>블라블라숑 레드03</p>
+                  <p className="price">12,900</p>
+                </div>
+                <div className={styled.tasty_area}>
+                  <div className={styled.inner}>
+                    <p>당도</p>
+                    <ul>
+                      <li><FontAwesomeIcon icon={faDroplet} /></li>
+                      <li><FontAwesomeIcon icon={faDroplet} /></li>
+                      <li><FontAwesomeIcon icon={faDroplet} /></li>
+                      <li><FontAwesomeIcon icon={faDroplet} /></li>
+                      <li><FontAwesomeIcon icon={faDroplet} /></li>
+                    </ul>
+                  </div>
+                  <div className={styled.inner}>
+                    <p>산미</p>
+                    <ul>
+                      <li><FontAwesomeIcon icon={faDroplet} /></li>
+                      <li><FontAwesomeIcon icon={faDroplet} /></li>
+                      <li><FontAwesomeIcon icon={faDroplet} /></li>
+                      <li><FontAwesomeIcon icon={faDroplet} /></li>
+                      <li><FontAwesomeIcon icon={faDroplet} /></li>
+                    </ul>
+                  </div>
+                </div>
               </li>
               <li>
-                <p>{menuArr[currentTab].content4}</p>
-                <span>Ranking 04</span>
-                <p>블라블라숑 레드04</p>
-                <p className="price">12,900</p>
+                <p>
+                  <img src={menuArr[currentTab].content4} alt="" />
+                </p>
+                <div className={styled.txt_area}>
+                  <div className={styled.rank_txt}>
+                    <span>RANK</span>
+                    <p>04</p>
+                  </div>
+                  <p>블라블라숑 레드04</p>
+                  <p className="price">12,900</p>
+                </div>
+                <div className={styled.tasty_area}>
+                  <div className={styled.inner}>
+                    <p>당도</p>
+                    <ul>
+                      <li><FontAwesomeIcon icon={faDroplet} /></li>
+                      <li><FontAwesomeIcon icon={faDroplet} /></li>
+                      <li><FontAwesomeIcon icon={faDroplet} /></li>
+                      <li><FontAwesomeIcon icon={faDroplet} /></li>
+                      <li><FontAwesomeIcon icon={faDroplet} /></li>
+                    </ul>
+                  </div>
+                  <div className={styled.inner}>
+                    <p>산미</p>
+                    <ul>
+                      <li><FontAwesomeIcon icon={faDroplet} /></li>
+                      <li><FontAwesomeIcon icon={faDroplet} /></li>
+                      <li><FontAwesomeIcon icon={faDroplet} /></li>
+                      <li><FontAwesomeIcon icon={faDroplet} /></li>
+                      <li><FontAwesomeIcon icon={faDroplet} /></li>
+                    </ul>
+                  </div>
+                </div>
               </li>
               <li>
-                <p>{menuArr[currentTab].content5}</p>
-                <span>Ranking 05</span>
-                <p>블라블라숑 레드05</p>
-                <p className="price">12,900</p>
+                <p>
+                  <img src={menuArr[currentTab].content5} alt="" />
+                </p>
+                <div className={styled.txt_area}>
+                  <div className={styled.rank_txt}>
+                    <span>RANK</span>
+                    <p>05</p>
+                  </div>
+                  <p>블라블라숑 레드05</p>
+                  <p className="price">12,900</p>
+                </div>
+                <div className={styled.tasty_area}>
+                  <div className={styled.inner}>
+                    <p>당도</p>
+                    <ul>
+                      <li><FontAwesomeIcon icon={faDroplet} /></li>
+                      <li><FontAwesomeIcon icon={faDroplet} /></li>
+                      <li><FontAwesomeIcon icon={faDroplet} /></li>
+                      <li><FontAwesomeIcon icon={faDroplet} /></li>
+                      <li><FontAwesomeIcon icon={faDroplet} /></li>
+                    </ul>
+                  </div>
+                  <div className={styled.inner}>
+                    <p>산미</p>
+                    <ul>
+                      <li><FontAwesomeIcon icon={faDroplet} /></li>
+                      <li><FontAwesomeIcon icon={faDroplet} /></li>
+                      <li><FontAwesomeIcon icon={faDroplet} /></li>
+                      <li><FontAwesomeIcon icon={faDroplet} /></li>
+                      <li><FontAwesomeIcon icon={faDroplet} /></li>
+                    </ul>
+                  </div>
+                </div>
               </li>
             </ul>
           </div>
