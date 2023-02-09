@@ -51,10 +51,19 @@ const BestReview = () => {
     setcurModalNum(-1);
   };
   return (
-    <>
-      <div className={styled.BestReview}>
+    <div className={styled.BestReviewwrapper}>
+      <div className="sub_tit__">
+        <h4>BestReview</h4>
+        <span>와구 베스트 리뷰</span>
+      </div>
+      <div className={['maxframe', styled.BestReview].join(' ')}>
         {dummyreview.map((data, idx) => (
-          <Card id={idx} key={`review_${idx}`} onClick={(e) => OnModal(e)}>
+          <Card
+            id={idx}
+            key={`review_${idx}`}
+            onClick={(e) => OnModal(e)}
+            className={styled.card}
+          >
             <img
               id={idx}
               className={styled.reviewimg}
@@ -81,7 +90,7 @@ const BestReview = () => {
           <div>{dummyreview[curModalNum].star}</div>
         </Modal>
       )}
-    </>
+    </div>
   );
 };
 

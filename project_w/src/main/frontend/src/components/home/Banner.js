@@ -1,3 +1,4 @@
+import styled from './Banner.module.css';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
@@ -20,14 +21,9 @@ const Settings = {
 const Banner = () => {
   return (
     <div>
-      <Slider {...Settings}>
+      <Slider {...Settings} className={styled.Banner}>
         {bannerimg.map((bannerimg, idx) => (
-          <img
-            key={`banner_${idx}`}
-            alt="bannerimg"
-            src={bannerimg}
-            //   style={{ width: '100%' }}
-          />
+          <img key={`banner_${idx}`} alt="bannerimg" src={bannerimg} />
         ))}
       </Slider>
     </div>
