@@ -1,12 +1,13 @@
 import styled from './BestReview.module.css';
 import Modal from '../ui/Modal';
 import Card from '../ui/Card';
+import { AiFillStar, AiOutlineStar } from 'react-icons/ai';
 
 import { useState } from 'react';
 const img = [
-  '/images/banner_1.png',
-  '/images/banner_2.png',
-  '/images/banner_3.png',
+  '/images/review_0.jpg',
+  '/images/review_1.jpg',
+  '/images/review_2.jpg',
 ];
 const dummyreview = [
   {
@@ -15,8 +16,9 @@ const dummyreview = [
     contents: `여기서 리뷰 보고 달달하다고 해서 주문해봤는데 역시 리뷰대로 너무 맛잇네요!!
        추천합니당`,
     winename: 'GANCIA',
-    id: 'dlatjsals123',
-    star: 5,
+    name: '임선민',
+    date: '2020.01.02',
+    star: 3.2,
   },
   {
     reviewImage: img[1],
@@ -24,8 +26,9 @@ const dummyreview = [
     contents: `여기서 리뷰 보고 달달하다고 해서 주문해봤는데 역시 리뷰대로 너무 맛잇네요!!
        추천합니당`,
     winename: 'GANCIA',
-    id: 'dlatjsals123',
-    star: 5,
+    name: '임선민',
+    date: '2020.01.02',
+    star: 4.7,
   },
   {
     reviewImage: img[2],
@@ -33,8 +36,9 @@ const dummyreview = [
     contents: `여기서 리뷰 보고 달달하다고 해서 주문해봤는데 역시 리뷰대로 너무 맛잇네요!!
        추천합니당`,
     winename: 'GANCIA',
-    id: 'dlatjsals123',
-    star: 5,
+    name: '임선민',
+    date: '2020.01.02',
+    star: 2.4,
   },
 ];
 
@@ -42,26 +46,40 @@ const BestReview = () => {
   const [ShowModal, setShowModal] = useState(false);
   const [curModalNum, setcurModalNum] = useState(-1);
 
-  const OnModal = (e) => {
+  const OnModal = (idx) => () => {
     setShowModal(true);
-    setcurModalNum(e.target.id);
+    setcurModalNum(idx);
   };
   const OffModal = () => {
     setShowModal(false);
     setcurModalNum(-1);
   };
+  const drawStar = (score) => {
+    let i = 0;
+    let star = [];
+    let num = Math.round(score);
+    for (i = 0; i < num; i++) {
+      star.push(<AiFillStar />);
+    }
+    for (i = 0; i < 5 - num; i++) {
+      star.push(<AiOutlineStar />);
+    }
+    return star;
+  };
   return (
-    <div className={styled.BestReviewwrapper}>
-      <div className="sub_tit__">
-        <h4>BestReview</h4>
-        <span>와구 베스트 리뷰</span>
+    <section className={styled.BestReviewwrapper}>
+      <div className="maxframe">
+        <div className="sub_tit__">
+          <h4>와구 베스트 리뷰</h4>
+          <span>BestReview</span>
+        </div>
       </div>
       <div className={['maxframe', styled.BestReview].join(' ')}>
         {dummyreview.map((data, idx) => (
           <Card
             id={idx}
             key={`review_${idx}`}
-            onClick={(e) => OnModal(e)}
+            onClick={OnModal(idx)}
             className={styled.card}
           >
             <img
@@ -71,9 +89,10 @@ const BestReview = () => {
               src={data.reviewImage}
             />
             <h1 id={idx}>{data.title}</h1>
-            <div id={idx}>{data.contents}</div>
-            <div id={idx}>{data.id}</div>
-            <div id={idx}>{data.star}</div>
+            <div id={'contents'}>{data.contents}</div>
+            <div id={'text'}>{data.name}</div>
+            <div id={'text'}>{data.date}</div>
+            <div id={'star'}>{drawStar(data.star).map((star) => star)}</div>
           </Card>
         ))}
       </div>
@@ -90,7 +109,7 @@ const BestReview = () => {
           <div>{dummyreview[curModalNum].star}</div>
         </Modal>
       )}
-    </div>
+    </section>
   );
 };
 
