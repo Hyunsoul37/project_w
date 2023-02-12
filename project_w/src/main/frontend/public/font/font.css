@@ -1,0 +1,71 @@
+@charset "UTF-8";
+
+/* ******* 영문폰트 ******* */
+@font-face {
+   font-family: 'campton';
+   font-style: normal;
+   font-weight: 400;
+   src: local(''),
+      url('./Campton-BoldDEMO.woff2') format('woff2'),
+      /* Super Modern Browsers */
+      url('./Campton-BoldDEMO.woff') format('woff'),
+      /* Modern Browsers */
+}
+
+@font-face {
+   font-family: 'campton';
+   font-style: normal;
+   font-weight: 700;
+   src: local(''),
+      url('./Campton-LightDEMO.woff2') format('woff2'),
+      url('./Campton-LightDEMO.woff') format('woff')
+}
+
+/* ******* 한글폰트 ******* */
+@font-face {
+   font-family: 'Noto Sans';
+   font-style: normal;
+   font-weight: 100;
+   src: local(''),
+      url('./NotoSansCJKkr-Thin.otf') format('otf')
+}
+
+@font-face {
+   font-family: 'Noto Sans';
+   font-style: normal;
+   font-weight: 300;
+   src: local(''),
+      url('./NotoSansCJKkr-Light.otf') format('otf')
+}
+
+@font-face {
+   font-family: 'Noto Sans';
+   font-style: normal;
+   font-weight: 400;
+   src: local(''),
+      url('./NotoSansCJKkr-Regular.otf') format('otf')
+}
+
+@font-face {
+   font-family: 'Noto Sans';
+   font-style: normal;
+   font-weight: 500;
+   src: local(''),
+      url('./NotoSansCJKkr-Medium.otf') format('otf')
+}
+
+@font-face {
+   font-family: 'Noto Sans';
+   font-style: normal;
+   font-weight: 700;
+   src: local(''),
+      url('./NotoSansCJKkr-Bold.otf') format('otf')
+}
+
+@font-face {
+   font-family: 'Noto Sans';
+   font-style: normal;
+   font-weight: 900;
+   src: local(''),
+      url('./NotoSansCJKkr-Black.otf') format('otf')
+}
