@@ -3,7 +3,7 @@ import Head from 'next/head';
 const Seo = ({ title }) => {
   return (
     <Head>
-      <title>wineToy | {title}</title>
+      <title>WAGU | {title}</title>
     </Head>
   );
 };
