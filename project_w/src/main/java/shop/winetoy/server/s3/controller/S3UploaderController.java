@@ -40,7 +40,7 @@ public class S3UploaderController {
 		return s3UpladerService.upload(file, "winetoy", "image");
 	}
 
-	@RequestMapping(value = "video-upload", method = RequestMethod.POST)
+	@RequestMapping(value = "/video-upload", method = RequestMethod.POST)
 	@ResponseBody
 	public String videoUpload(@RequestParam(value = "file", required = false) MultipartFile file)
 			throws IOException {
