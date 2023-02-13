@@ -26,16 +26,35 @@ const Header = () => {
   }, []);
 
   return (
-    <div className={styled.Header}>
-      {user.isLoggedIn ? (
-        <>
-          <div> Hi!! {userData.name}</div>
-          <button onClick={LogOutHandler}>Logout</button>
-        </>
-      ) : (
-        <button onClick={LoginBtnHandler}>Login</button>
-      )}
-      {/* <button onClick={DataClearHandler}>Data Clear</button> */}
+    <div className="maxframe">
+      <div className={styled.Header}>
+        <span
+          className={styled.logo}
+          onClick={() => router.push('/')}
+        >
+          WAGU
+        </span>
+        <div className={styled.btnWrapper}>
+          <span onClick={() => router.push('/product')}>PRODUCT</span>
+          <span onClick={() => router.push('/community')}>COMMUNITY</span>
+          <span onClick={() => router.push('/QnA')}>QnA</span>
+          <span onClick={() => router.push('/notice')}>NOTICE</span>
+        </div>
+        <div className={styled.btnWrapper}>
+          {user.isLoggedIn ? (
+            <>
+              <div> Hi!! {userData.name}</div>
+              <span onClick={LogOutHandler}>LOGOUT</span>
+            </>
+          ) : (
+            <>
+              <span onClick={() => router.push('/login/Join')}>SIGN IN</span>
+              <span onClick={LoginBtnHandler}>LOGIN</span>
+            </>
+          )}
+          {/* <button onClick={DataClearHandler}>Data Clear</button> */}
+        </div>
+      </div>
     </div>
   );
 };
