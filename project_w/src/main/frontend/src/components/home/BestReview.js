@@ -99,14 +99,27 @@ const BestReview = () => {
       {ShowModal && (
         <Modal offModal={OffModal}>
           <img
-            className={styled.reviewimg}
+            className={styled.reviewimg_Modal}
             alt={`${dummyreview[curModalNum].winename}_review_img`}
             src={dummyreview[curModalNum].reviewImage}
           />
-          <h1>{dummyreview[curModalNum].title}</h1>
-          <div>{dummyreview[curModalNum].contents}</div>
-          <div>{dummyreview[curModalNum].id}</div>
-          <div>{dummyreview[curModalNum].star}</div>
+          <div className={styled.modalText}>
+            <h1>{dummyreview[curModalNum].title}</h1>
+            <div
+              style={{
+                width: '100%',
+                display: 'flex',
+              }}
+            >
+              <div id="winename">{dummyreview[curModalNum].winename}</div>
+              <div id="modal_star">
+                {drawStar(dummyreview[curModalNum].star).map((star) => star)}
+              </div>
+            </div>
+            <div>{dummyreview[curModalNum].contents}</div>
+            <div id="modal_name">{dummyreview[curModalNum].name}</div>
+            <div id="modal_date">{dummyreview[curModalNum].date}</div>
+          </div>
         </Modal>
       )}
     </section>

@@ -1,7 +1,7 @@
 import ReactDOM from 'react-dom';
 import styled from './Modal.module.css';
 
-const Backdrop = props => {
+const Backdrop = (props) => {
   return (
     <div
       className={styled.Backdrop}
@@ -9,14 +9,14 @@ const Backdrop = props => {
     ></div>
   );
 };
-const ModalOverlay = props => {
+const ModalOverlay = (props) => {
   return (
-    <div>
+    <div className={styled.ModalWrap}>
       <div className={styled.Modal}>{props.children}</div>
     </div>
   );
 };
-const Modal = props => {
+const Modal = (props) => {
   return (
     <>
       {ReactDOM.createPortal(
