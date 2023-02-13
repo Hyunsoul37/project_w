@@ -25,6 +25,13 @@
   border-top-left-radius: 10px;
   margin-bottom: 17px;
 }
+.reviewimg_Modal {
+  width: 432px;
+  height: 432px;
+  border-top-right-radius: 10px;
+  border-top-left-radius: 10px;
+  margin-bottom: 17px;
+}
 .card h1{
   font-size: 18px;
   margin-bottom: 14px;
@@ -49,4 +56,38 @@
   color: var(--primary-txt);
 }
 
-
+.modalText{
+  padding: 9px 17px;
+}
+.modalText h1{
+  font-size: 18px;
+  margin-bottom: 8px;
+}
+.modalText div{
+  font-size: 15px;
+  margin-bottom: 8px;
+}
+.modalText div[id="modal_star"]{
+  color: var(--primary-txt);
+  margin-bottom: 8px;
+  display: block;
+  margin-right: 20px;
+}
+.modalText div[id="winename"]{
+  color: #CCCC;
+  font-size: 12px;
+  font-family: 'campton';
+  margin-right: 10px;
+}
+.modalText div[id="modal_name"]{
+  color: #CCCC;
+  font-size: 12px;
+  margin-right: 10px;
+  margin-top: 10px;
+  margin-bottom: 5px;
+}
+.modalText div[id="modal_date"]{
+  color: #CCCC;
+  font-size: 12px;
+  margin-right: 10px;
+}
