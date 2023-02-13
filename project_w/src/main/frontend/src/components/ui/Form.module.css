@@ -1,8 +1,14 @@
+.formWrapper{
+    background-color: lightgray;
+    border-radius: 1.5rem;
+    padding: 1.5rem;
+}
 .form{
     display: flex;
     flex-direction: column;
     align-items: flex-end;
     justify-content: center;
+
 }
 .form label{
     padding: 0.5rem;

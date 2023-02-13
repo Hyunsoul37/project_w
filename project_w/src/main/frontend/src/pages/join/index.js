@@ -4,7 +4,7 @@ import Form from '../../components/ui/Form';
 import styled from './Signupform.module.css';
 import Seo from '../../util/Seo';
 
-const Signupform = () => {
+const Join = () => {
   const { sendRequestData: postData } = useFetch();
   const [id, setId] = useState('');
   const [password, setPassword] = useState('');
@@ -59,7 +59,7 @@ const Signupform = () => {
 
   const OnCheckduplicateID = async () => {
     await postData({
-      url: `api/id-check?id=${id}`,
+      url: `api/auth/id-check?id=${id}`,
       type: 'GET',
       data: null,
       header: { 'Content-Type': 'text/plain' },
@@ -97,15 +97,15 @@ const Signupform = () => {
             type="text"
             value={id ? id : ''}
             onChange={ChangeIdHandler}
-            // onBlur={OnCheckduplicateID}
+            onBlur={OnCheckduplicateID}
           />
-          {/* {id !== '' && iseditedId ? (
+          {id !== '' && iseditedId ? (
             isduplicate ? (
               <p className={styled.errormsg}>아이디 중복입니다.</p>
             ) : (
               <p>사용가능한 아이디입니다.</p>
             )
-          ) : null} */}
+          ) : null}
         </label>
 
         <label htmlFor="password">
@@ -162,4 +162,4 @@ const Signupform = () => {
   );
 };
 
-export default Signupform;
+export default Join;
