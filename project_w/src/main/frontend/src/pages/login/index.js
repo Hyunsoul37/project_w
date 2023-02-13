@@ -64,7 +64,6 @@ const Login = () => {
           <button>Login</button>
         </div>
       </Form>
-      <button onClick={() => router.push('/login/Join')}>SignUp</button>
     </div>
   );
 };
