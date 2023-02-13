@@ -71,16 +71,17 @@ public class ApiController {
 	/**
 	 * ID 중복 체크 (POST)
 	 */
-	@RequestMapping(value = "/id-check", method = RequestMethod.POST)
+	@RequestMapping(value = "/auth/id-check", method = RequestMethod.POST)
 	@ResponseBody
 	public boolean duplicateIdCheck(@RequestBody Map<String, String> res) {
+		System.out.println(res);
 		return memberDuplicateCheck(res.get("id"));
 	}
 
 	/**
 	 * ID 중복 체크 (GET + Query String)
 	 */
-	@RequestMapping(value = "/id-check", method = RequestMethod.GET)
+	@RequestMapping(value = "/auth/id-check", method = RequestMethod.GET)
 	@ResponseBody
 	public boolean duplicateIdCheck(String id) {
 		return memberDuplicateCheck(id);
