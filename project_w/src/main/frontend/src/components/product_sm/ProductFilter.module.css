@@ -1,0 +1,41 @@
+.FilterWrapper{
+    background-color: #CCCC;
+    height: max-content;
+}
+.filter{
+    padding: 60px 0px;
+}
+.inputbox{
+    margin-bottom: 30px;
+}
+.inputbox label input{
+    margin-right: 6px;
+}
+.inputbox label{
+    margin-right: 32px;
+}
+.inputbox input[type='range']{
+    width: 450px;
+}
+.inputbox p{
+    font-size: 15px;
+    font-weight: 600;
+    margin-bottom: 15px;
+}
+.buttonWrap{
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+}
+.buttonWrap button{
+    width: 150px;
+    height: 50px;
+    background-color: var(--secondary);
+    color: white;
+    font-weight: 600;
+    border-radius: 25px;
+}
+.buttonWrap button:last-child{
+    margin-left: 30px;
+    background-color: var(--primary);
+}
