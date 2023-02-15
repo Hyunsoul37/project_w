@@ -3,6 +3,10 @@
 
 const nextConfig = {
   reactStrictMode: true,
+  images: {
+    loader: 'custom',
+    formats: ['image/avif', 'image/webp'],
+  },
   async rewrites() {
     return [
       {
