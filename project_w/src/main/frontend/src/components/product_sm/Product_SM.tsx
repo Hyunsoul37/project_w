@@ -2,7 +2,8 @@ import ProductFilter from './ProductFilter';
 import { MdFilterAlt } from 'react-icons/md';
 import styled from './Product_SM.module.css';
 import { useState } from 'react';
-
+import ProductCard from './ProductCard';
+import data from '../util/wine_add_sweet.json';
 const Product_SM = () => {
   const [showFilter, setshowFilter] = useState(false);
   return (
@@ -14,6 +15,13 @@ const Product_SM = () => {
         </div>
       </div>
       {showFilter && <ProductFilter />}
+      <div style={{ display: 'flex', justifyContent: 'center' }}>
+        <div className={styled.ProductCardWrapper}>
+          {data.map((list) => (
+            <ProductCard {...list} islike={false} />
+          ))}
+        </div>
+      </div>
     </div>
   );
 };
