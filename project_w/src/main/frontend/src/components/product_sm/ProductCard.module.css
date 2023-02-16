@@ -1,0 +1,23 @@
+.ProductCard {
+  height: 341px;
+  width: 230px;
+}
+.imageWrapper {
+  height: 230px;
+  width: 230px;
+  background-color: #f3ecf4;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  position: relative;
+}
+.ProductCard img {
+  height: 200px;
+  width: 200px;
+}
+.heart {
+  position: absolute;
+  bottom: 0px;
+  right: 0px;
+}
