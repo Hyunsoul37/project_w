@@ -38,6 +38,7 @@
   text-overflow: ellipsis;
   white-space: nowrap;
   text-align: center;
+  line-height: 15px;
 }
 .ProductCard h4 {
   font-size: 15px;
@@ -56,6 +57,7 @@
   text-overflow: ellipsis;
   white-space: nowrap;
   text-align: center;
+  line-height: 15px;
 }
 .ProductCard p[id='desc'] {
   color: #cccc;
@@ -64,6 +66,7 @@
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+  line-height: 15px;
 }
 .wineInfoBox {
   width: 100%;

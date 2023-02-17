@@ -56,7 +56,7 @@ const Product_SM = () => {
           <h4>PRODUCT</h4>
           <MdFilterAlt onClick={FilterActiveHandler} />
         </div>
-        <div className={styled.winetypetab}>
+        {/* <div className={styled.winetypetab}>
           {winetypeTab.map((data, index) => (
             <span
               key={`winetype_${index}`}
@@ -66,7 +66,7 @@ const Product_SM = () => {
               {data}
             </span>
           ))}
-        </div>
+        </div> */}
       </div>
 
       {showFilter && <ProductFilter isshow={clickOff} />}
