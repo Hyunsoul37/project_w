@@ -4,7 +4,7 @@ import Form from '../../components/ui/Form';
 import styled from './Signupform.module.css';
 import Seo from '../../util/Seo';
 
-const Join = () => {
+const join = () => {
   const { sendRequestData: postData } = useFetch();
   const [id, setId] = useState('');
   const [password, setPassword] = useState('');
@@ -162,4 +162,4 @@ const Join = () => {
   );
 };
 
-export default Join;
+export default join;
