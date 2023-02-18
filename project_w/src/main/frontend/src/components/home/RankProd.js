@@ -2,41 +2,162 @@ import React, { useState } from 'react';
 import styled from './RankProd.module.css'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { library } from '@fortawesome/fontawesome-svg-core';
+import { IoWater, IoWaterOutline } from 'react-icons/io5';
 import { faDroplet } from "@fortawesome/free-solid-svg-icons";
 
 
 const menuArr = [
   {
     name: '레드',
-    content1: '/images/main_flow6.png',
-    content2: '/images/main_flow5.png',
-    content3: '/images/main_flow4.png',
-    content4: '/images/main_flow3.png',
-    content5: '/images/main_flow2.png'
+    content1: {
+      pdimg: '/images/main_flow6.png',
+      pdname: '블라블라숑 레드01',
+      pdprice: '12,900',
+      pdtsweet: '',
+      pdacid: '',
+    },
+    content2: {
+      pdimg: '/images/main_flow5.png',
+      pdname: '블라블라숑 레드02',
+      pdprice: '33,900',
+      pdtsweet: '',
+      pdacid: '',
+    },
+    content3: {
+      pdimg: '/images/main_flow4.png',
+      pdname: '블라블라숑 레드03',
+      pdprice: '12,900',
+      pdtsweet: '',
+      pdacid: '',
+    },
+    content4: {
+      pdimg: '/images/main_flow3.png',
+      pdname: '블라블라숑 레드04',
+      pdprice: '12,900',
+      pdtsweet: '',
+      pdacid: '',
+    },
+    content5: {
+      pdimg: '/images/main_flow2.png',
+      pdname: '블라블라숑 레드05',
+      pdprice: '12,900',
+      pdtsweet: '',
+      pdacid: '',
+    },
   },
   {
     name: '화이트',
-    content1: '화이트 랭킹1 사진 넣기',
-    content2: '화이트 랭킹2 사진 넣기',
-    content3: '화이트 랭킹3 사진 넣기',
-    content4: '화이트 랭킹4 사진 넣기',
-    content5: '화이트 랭킹5 사진 넣기',
+    content1: {
+      pdimg: '/images/main_flow1.png',
+      pdname: '블라블라숑 화이트01',
+      pdprice: '42,900',
+      pdtsweet: '',
+      pdacid: '',
+    },
+    content2: {
+      pdimg: '/images/main_flow2.png',
+      pdname: '블라블라숑 화이트02',
+      pdprice: '42,900',
+      pdtsweet: '',
+      pdacid: '',
+    },
+    content3: {
+      pdimg: '/images/main_flow3.png',
+      pdname: '블라블라숑 화이트03',
+      pdprice: '42,900',
+      pdtsweet: '',
+      pdacid: '',
+    },
+    content4: {
+      pdimg: '/images/main_flow4.png',
+      pdname: '블라블라숑 화이트04',
+      pdprice: '42,900',
+      pdtsweet: '',
+      pdacid: '',
+    },
+    content5: {
+      pdimg: '/images/main_flow5.png',
+      pdname: '블라블라숑 화이트05',
+      pdprice: '42,900',
+      pdtsweet: '',
+      pdacid: '',
+    },
   },
   {
     name: '스파클링',
-    content1: '스파클링 랭킹1 사진 넣기',
-    content2: '스파클링 랭킹2 사진 넣기',
-    content3: '스파클링 랭킹3 사진 넣기',
-    content4: '스파클링 랭킹4 사진 넣기',
-    content5: '스파클링 랭킹5 사진 넣기',
+    content1: {
+      pdimg: '/images/main_flow5.png',
+      pdname: '블라블라숑 스파클링1',
+      pdprice: '32,900',
+      pdtsweet: '',
+      pdacid: '',
+    },
+    content2: {
+      pdimg: '/images/main_flow4.png',
+      pdname: '블라블라숑 스파클링2',
+      pdprice: '32,900',
+      pdtsweet: '',
+      pdacid: '',
+    },
+    content3: {
+      pdimg: '/images/main_flow3.png',
+      pdname: '블라블라숑 스파클링3',
+      pdprice: '32,900',
+      pdtsweet: '',
+      pdacid: '',
+    },
+    content4: {
+      pdimg: '/images/main_flow2.png',
+      pdname: '블라블라숑 스파클링4',
+      pdprice: '32,900',
+      pdtsweet: '',
+      pdacid: '',
+    },
+    content5: {
+      pdimg: '/images/main_flow1.png',
+      pdname: '블라블라숑 스파클링5',
+      pdprice: '32,900',
+      pdtsweet: '',
+      pdacid: '',
+    },
   },
   {
     name: '주정강화',
-    content1: '주정강화 랭킹1 사진 넣기',
-    content2: '주정강화 랭킹2 사진 넣기',
-    content3: '주정강화 랭킹3 사진 넣기',
-    content4: '주정강화 랭킹4 사진 넣기',
-    content5: '주정강화 랭킹5 사진 넣기',
+    content1: {
+      pdimg: '/images/main_flow1.png',
+      pdname: '블라블라숑 주정강화1',
+      pdprice: '32,900',
+      pdtsweet: '',
+      pdacid: '',
+    },
+    content2: {
+      pdimg: '/images/main_flow2.png',
+      pdname: '블라블라숑 주정강화2',
+      pdprice: '32,900',
+      pdtsweet: '',
+      pdacid: '',
+    },
+    content3: {
+      pdimg: '/images/main_flow3.png',
+      pdname: '블라블라숑 주정강화3',
+      pdprice: '32,900',
+      pdtsweet: '',
+      pdacid: '',
+    },
+    content4: {
+      pdimg: '/images/main_flow4.png',
+      pdname: '블라블라숑 주정강화4',
+      pdprice: '32,900',
+      pdtsweet: '',
+      pdacid: '',
+    },
+    content5: {
+      pdimg: '/images/main_flow5.png',
+      pdname: '블라블라숑 주정강화5',
+      pdprice: '32,900',
+      pdtsweet: '',
+      pdacid: '',
+    },
   },
 ];
 
@@ -68,21 +189,21 @@ const RankProd = () => {
           <div className={styled.tabmenu_wrap}>
             <div className={styled.rank01}>
               <p>
-                <img src={menuArr[currentTab].content1} alt="" />
+                <img src={menuArr[currentTab].content1.pdimg} alt="" />
               </p>
               <div className={styled.txt_area}>
                 <div className={styled.rank_txt}>
                   <span>RANK</span>
                   <p>01</p>
                 </div>
-                <p>블라블라숑 레드01</p>
-                <p className="price">12,900</p>
+                <p>{menuArr[currentTab].content1.pdname}</p>
+                <p className="price">{menuArr[currentTab].content1.pdprice} won</p>
               </div>
               <div className={styled.tasty_area}>
                 <div className={styled.inner}>
                   <p>당도</p>
                   <ul>
-                    <li><FontAwesomeIcon icon={faDroplet} /></li>
+                    <li><IoWater /></li>
                     <li><FontAwesomeIcon icon={faDroplet} /></li>
                     <li><FontAwesomeIcon icon={faDroplet} /></li>
                     <li><FontAwesomeIcon icon={faDroplet} /></li>
@@ -104,15 +225,15 @@ const RankProd = () => {
             <ul className={styled.diffrank}>
               <li>
                 <p>
-                  <img src={menuArr[currentTab].content2} alt="" />
+                  <img src={menuArr[currentTab].content2.pdimg} alt="" />
                 </p>
                 <div className={styled.txt_area}>
                   <div className={styled.rank_txt}>
                     <span>RANK</span>
                     <p>02</p>
                   </div>
-                  <p>블라블라숑 레드02</p>
-                  <p className="price">12,900</p>
+                  <p>{menuArr[currentTab].content2.pdname}</p>
+                  <p className="price">{menuArr[currentTab].content2.pdprice} won</p>
                 </div>
                 <div className={styled.tasty_area}>
                   <div className={styled.inner}>
@@ -139,15 +260,15 @@ const RankProd = () => {
               </li>
               <li>
                 <p>
-                  <img src={menuArr[currentTab].content3} alt="" />
+                  <img src={menuArr[currentTab].content3.pdimg} alt="" />
                 </p>
                 <div className={styled.txt_area}>
                   <div className={styled.rank_txt}>
                     <span>RANK</span>
                     <p>03</p>
                   </div>
-                  <p>블라블라숑 레드03</p>
-                  <p className="price">12,900</p>
+                  <p>{menuArr[currentTab].content3.pdname}</p>
+                  <p className="price">{menuArr[currentTab].content3.pdprice} won</p>
                 </div>
                 <div className={styled.tasty_area}>
                   <div className={styled.inner}>
@@ -174,15 +295,15 @@ const RankProd = () => {
               </li>
               <li>
                 <p>
-                  <img src={menuArr[currentTab].content4} alt="" />
+                  <img src={menuArr[currentTab].content4.pdimg} alt="" />
                 </p>
                 <div className={styled.txt_area}>
                   <div className={styled.rank_txt}>
                     <span>RANK</span>
                     <p>04</p>
                   </div>
-                  <p>블라블라숑 레드04</p>
-                  <p className="price">12,900</p>
+                  <p>{menuArr[currentTab].content4.pdname}</p>
+                  <p className="price">{menuArr[currentTab].content4.pdprice} won</p>
                 </div>
                 <div className={styled.tasty_area}>
                   <div className={styled.inner}>
@@ -209,15 +330,15 @@ const RankProd = () => {
               </li>
               <li>
                 <p>
-                  <img src={menuArr[currentTab].content5} alt="" />
+                  <img src={menuArr[currentTab].content5.pdimg} alt="" />
                 </p>
                 <div className={styled.txt_area}>
                   <div className={styled.rank_txt}>
                     <span>RANK</span>
                     <p>05</p>
                   </div>
-                  <p>블라블라숑 레드05</p>
-                  <p className="price">12,900</p>
+                  <p>{menuArr[currentTab].content5.pdname}</p>
+                  <p className="price">{menuArr[currentTab].content5.pdprice} won</p>
                 </div>
                 <div className={styled.tasty_area}>
                   <div className={styled.inner}>
