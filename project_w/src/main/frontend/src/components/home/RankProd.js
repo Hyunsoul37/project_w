@@ -101,28 +101,6 @@ const RankProd = () => {
                 </div>
               </div>
             </div>
-            <div className={styled.tasty_area}>
-              <div className={styled.inner}>
-                <p>당도</p>
-                <ul>
-                  <li><FontAwesomeIcon icon={faDroplet} /></li>
-                  <li><FontAwesomeIcon icon={faDroplet} /></li>
-                  <li><FontAwesomeIcon icon={faDroplet} /></li>
-                  <li><FontAwesomeIcon icon={faDroplet} /></li>
-                  <li><FontAwesomeIcon icon={faDroplet} /></li>
-                </ul>
-              </div>
-              <div className={styled.inner}>
-                <p>산미</p>
-                <ul>
-                  <li><FontAwesomeIcon icon={faDroplet} /></li>
-                  <li><FontAwesomeIcon icon={faDroplet} /></li>
-                  <li><FontAwesomeIcon icon={faDroplet} /></li>
-                  <li><FontAwesomeIcon icon={faDroplet} /></li>
-                  <li><FontAwesomeIcon icon={faDroplet} /></li>
-                </ul>
-              </div>
-            </div>
             <ul className={styled.diffrank}>
               <li>
                 <p>
