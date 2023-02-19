@@ -1,41 +1,68 @@
-.FilterWrapper{
-    background-color: #CCCC;
-    height: max-content;
+@keyframes Ani {
+  from {
+    transform: scaleY(0);
+    opacity: 0;
+  }
+  to {
+    transform: scaleY(1);
+    opacity: 1;
+  }
 }
-.filter{
-    padding: 60px 0px;
+@keyframes ReverseAni {
+  from {
+    transform: scaleY(1);
+    opacity: 1;
+  }
+  to {
+    transform: scaleY(0);
+    opacity: 0;
+  }
 }
-.inputbox{
-    margin-bottom: 30px;
+.FilterWrapper {
+  background-color: #cccc;
+  height: max-content;
+  margin-bottom: 150px;
+  transform-origin: top center;
+  animation: Ani 0.5s;
 }
-.inputbox label input{
-    margin-right: 6px;
+.offfilter {
+  animation: ReverseAni 0.5s;
 }
-.inputbox label{
-    margin-right: 32px;
+
+.filter {
+  padding: 60px 0px;
 }
-.inputbox input[type='range']{
-    width: 450px;
+.inputbox {
+  margin-bottom: 30px;
 }
-.inputbox p{
-    font-size: 15px;
-    font-weight: 600;
-    margin-bottom: 15px;
+.inputbox label input {
+  margin-right: 6px;
 }
-.buttonWrap{
-    width: 100%;
-    display: flex;
-    justify-content: flex-end;
+.inputbox label {
+  margin-right: 32px;
 }
-.buttonWrap button{
-    width: 150px;
-    height: 50px;
-    background-color: var(--secondary);
-    color: white;
-    font-weight: 600;
-    border-radius: 25px;
+.inputbox input[type='range'] {
+  width: 600px;
 }
-.buttonWrap button:last-child{
-    margin-left: 30px;
-    background-color: var(--primary);
+.inputbox p {
+  font-size: 15px;
+  font-weight: 600;
+  margin-bottom: 15px;
+}
+.buttonWrap {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+}
+.buttonWrap button {
+  width: 150px;
+  height: 50px;
+  background-color: var(--secondary);
+  color: white;
+  font-weight: 600;
+  border-radius: 25px;
+}
+.buttonWrap button:last-child {
+  margin-left: 30px;
+  background-color: var(--primary);
 }
