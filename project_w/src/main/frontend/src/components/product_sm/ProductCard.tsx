@@ -3,30 +3,30 @@ import { AiFillHeart, AiOutlineHeart } from 'react-icons/ai';
 import { useState } from 'react';
 
 export interface ProductCardState {
-  ID: number;
-  winename_ko: string;
-  winename_en?: string;
-  price: string;
-  winetype: string;
-  body?: number;
-  acidity?: number;
-  sweet?: number;
-  alcohol?: string;
-  tannins?: number;
-  country: string;
-  region: string;
-  description?: string;
-  star?: number;
-  food?: string;
-  grapeVariety?: string;
-  islike: boolean;
+  winePid: number;
+  wineKorName: string;
+  wineEngName?: string;
+  winePrice: string;
+  wineType: string;
+  winebody?: number;
+  wineAcidity?: number;
+  wineSweet?: number;
+  wineAlcohol?: string;
+  wineTannin?: number;
+  wineCountry: string;
+  wineRegion: string;
+  wineDesc?: string;
+  wineStarPoint?: number;
+  wineRecommendedSnack?: string;
+  wineGrapeVariety?: string;
+  userLike?: boolean;
 }
 const ProductCard: React.FC<ProductCardState> = (props) => {
-  const [like, setLike] = useState(props.islike);
+  const [like, setLike] = useState(props.userLike);
   return (
     <div className={styled.ProductCard}>
       <div className={styled.imageWrapper}>
-        <img src={`/images/wine/${props.ID - 1}.png`} />
+        <img src={`/images/wine/${props.winePid - 1}.png`} />
         <div className={styled.heart}>
           {like ? (
             <AiFillHeart onClick={() => setLike(false)} />
@@ -35,15 +35,15 @@ const ProductCard: React.FC<ProductCardState> = (props) => {
           )}
         </div>
       </div>
-      <h4>{props.winename_ko}</h4>
-      <p>{props.winename_en}</p>
-      <p>{props.description}</p>
-      <div>
-        <span>{props.winetype}</span>
-        <span>{props.country}</span>
-        <span>{props.grapeVariety}</span>
+      <p id="name_ko">{props.wineKorName}</p>
+      <p id="name_en">{props.wineEngName}</p>
+      <p id="desc">{props.wineDesc}</p>
+      <div className={styled.wineInfoBox}>
+        <span>{props.wineType}</span>
+        <span>{props.wineCountry}</span>
+        <span>{props.wineGrapeVariety}</span>
       </div>
-      <h4>{props.price}won</h4>
+      <h4>{props.winePrice.replace('원', 'won')}</h4>
     </div>
   );
 };

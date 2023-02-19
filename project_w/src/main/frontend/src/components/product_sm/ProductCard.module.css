@@ -1,6 +1,9 @@
 .ProductCard {
   height: 341px;
   width: 230px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 .imageWrapper {
   height: 230px;
@@ -12,6 +15,7 @@
   flex-direction: column;
   position: relative;
 }
+
 .ProductCard img {
   height: 200px;
   width: 200px;
@@ -20,4 +24,61 @@
   position: absolute;
   bottom: 0px;
   right: 0px;
+  color: var(--primary-txt);
+  padding: 8px;
+  font-size: 18px;
+}
+.ProductCard p[id='name_ko'] {
+  width: 90%;
+  font-size: 15px;
+  margin: 10px 0px;
+  font-weight: 800;
+  height: 15px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  text-align: center;
+  line-height: 15px;
+}
+.ProductCard h4 {
+  font-size: 15px;
+  margin: 10px 0px;
+  font-weight: 800;
+}
+.ProductCard p {
+  font-size: 10px;
+  margin-bottom: 10px;
+}
+.ProductCard p[id='name_en'] {
+  width: 90%;
+  color: var(--primary-txt);
+  height: 15px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  text-align: center;
+  line-height: 15px;
+}
+.ProductCard p[id='desc'] {
+  color: #cccc;
+  width: 137px;
+  height: 15px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  line-height: 15px;
+}
+.wineInfoBox {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+.wineInfoBox span {
+  font-size: 7px;
+  color: var(--primary-txt);
+  font-weight: 700;
+  background-color: #f3ecf4;
+  padding: 5px;
+  border-radius: 15px;
+  margin-right: 10px;
 }

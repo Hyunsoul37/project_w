@@ -20,3 +20,27 @@
   grid-template-columns: repeat(5, 1fr);
   gap: 13px;
 }
+.winetypetab {
+  height: 30px;
+  margin-bottom: 15px;
+}
+.winetypetab span {
+  font-size: 18px;
+  background-color: white;
+  border-radius: 18px;
+  border: 2px solid var(--primary-txt);
+  padding: 5px 20px;
+  margin: 5px;
+  cursor: pointer;
+}
+.winetypetab span:hover,
+.activetab {
+  background-color: var(--primary-txt) !important;
+  color: white;
+  font-weight: 600;
+}
+/* .activetab {
+  background-color: var(--primary-txt);
+  color: white;
+  font-weight: 600;
+} */
