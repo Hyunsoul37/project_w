@@ -1,45 +1,45 @@
-.headerWrapper{
-    width: 100vw;
-    height: 100px;
-    border-bottom: 2px solid lightgray;
-    position: fixed;
-    /* background-color: white; */
-    z-index: 10;
+.headerWrapper {
+  width: 100vw;
+  height: 100px;
+  border-bottom: 2px solid lightgray;
+  position: fixed;
+  background-color: white;
+  z-index: 10;
 }
-.Header{
-    width: 1200px;
-    height: 100px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    position: fixed;
-    z-index: 10;
+.Header {
+  width: 1200px;
+  height: 100px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: fixed;
+  z-index: 10;
 }
-.btnWrapper:last-child{
-    flex-grow: 1;
-    display: flex;
-    justify-content: flex-end;
+.btnWrapper:last-child {
+  flex-grow: 1;
+  display: flex;
+  justify-content: flex-end;
 }
-.btnWrapper span{
-    font-family: 'campton';
-    font-size: 15px;
-    font-weight: 700;
-    color: var(--primary-txt);
-    cursor: pointer;
-    padding: 0px 10px;
-    /* padding-bottom: 5px; */
+.btnWrapper span {
+  font-family: 'campton';
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--primary-txt);
+  cursor: pointer;
+  padding: 0px 10px;
+  /* padding-bottom: 5px; */
 }
 
-.Header button{
-    width: 3rem;
-    height: 1.5rem;
+.Header button {
+  width: 3rem;
+  height: 1.5rem;
 }
-.logo{
-    display: block;
-    font-size: 35px;
-    font-family: 'campton';
-    font-weight: 700;
-    color: var(--primary-txt);
-    cursor: pointer;
-    margin-right: 25px;
+.logo {
+  display: block;
+  font-size: 35px;
+  font-family: 'campton';
+  font-weight: 700;
+  color: var(--primary-txt);
+  cursor: pointer;
+  margin-right: 25px;
 }

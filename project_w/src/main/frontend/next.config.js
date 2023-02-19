@@ -13,6 +13,10 @@ const nextConfig = {
         source: '/api/:path*',
         destination: `http://winetoy.shop/api/:path*`,
       },
+      {
+        source: '/:first/api/:path*',
+        destination: `http://winetoy.shop/api/:path*`,
+      },
     ];
   },
 };

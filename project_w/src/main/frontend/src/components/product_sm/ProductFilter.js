@@ -1,14 +1,21 @@
+import { useState } from 'react';
 import styled from './ProductFilter.module.css';
 import { winetype, country, grape } from './filterindex';
 const score = [1, 2, 3, 4, 5];
-const ProductFilter = () => {
+const pricearr = [0, 30000, 40000, 50000, 60000, 70000, 80000, 90000, 100000];
+const ProductFilter = (props) => {
   return (
-    <div className={styled.FilterWrapper}>
+    <div
+      className={[
+        styled.FilterWrapper,
+        props.isshow ? styled.offfilter : '',
+      ].join(' ')}
+    >
       <div className={['maxframe', styled.filter].join(' ')}>
         <div className={styled.inputbox}>
           <p>와인종류</p>
-          {winetype.map((data) => (
-            <label>
+          {winetype.map((data, idx) => (
+            <label key={`F_winetype_${idx}`}>
               <input
                 type="checkbox"
                 name="winetype"
@@ -20,8 +27,8 @@ const ProductFilter = () => {
         </div>
         <div className={styled.inputbox}>
           <p>바디</p>
-          {score.map((num) => (
-            <label>
+          {score.map((num, idx) => (
+            <label key={`F_body_${idx}`}>
               <input
                 type="checkbox"
                 name="body"
@@ -33,8 +40,8 @@ const ProductFilter = () => {
         </div>
         <div className={styled.inputbox}>
           <p>당도</p>
-          {score.map((num) => (
-            <label>
+          {score.map((num, idx) => (
+            <label key={`F_sweet_${idx}`}>
               <input
                 type="checkbox"
                 name="sweet"
@@ -46,8 +53,8 @@ const ProductFilter = () => {
         </div>
         <div className={styled.inputbox}>
           <p>산미</p>
-          {score.map((num) => (
-            <label>
+          {score.map((num, idx) => (
+            <label key={`F_acidity_${idx}`}>
               <input
                 type="checkbox"
                 name="acidity"
@@ -59,8 +66,8 @@ const ProductFilter = () => {
         </div>
         <div className={styled.inputbox}>
           <p>탄닌</p>
-          {score.map((num) => (
-            <label>
+          {score.map((num, idx) => (
+            <label key={`F_acidity_${idx}`}>
               <input
                 type="checkbox"
                 name="tannins"
@@ -72,52 +79,26 @@ const ProductFilter = () => {
         </div>
         <div className={styled.inputbox}>
           <p>가격</p>
-          <input
-            type="range"
-            min={30000}
-            max={100000}
-            step={10000}
-            list="tickmarks"
-          />
-          <datalist id="tickmarks">
-            <option
-              value="30000"
-              label="30,000"
-            ></option>
-            <option
-              value="40000"
-              label="40,000"
-            ></option>
-            <option
-              value="50000"
-              label="50,000"
-            ></option>
-            <option
-              value="60000"
-              label="60,000"
-            ></option>
-            <option
-              value="70000"
-              label="70,000"
-            ></option>
-            <option
-              value="80000"
-              label="80,000"
-            ></option>
-            <option
-              value="90000"
-              label="90,000"
-            ></option>
-            <option
-              value="100000"
-              label="100,000"
-            ></option>
-          </datalist>
+          {pricearr.map((p, idx) => (
+            <label key={`Price${idx}`}>
+              <input
+                key={p}
+                type="checkbox"
+                name="price"
+                value={p}
+              />
+              {idx === 0
+                ? `${pricearr[idx + 1].toLocaleString('ko-KR')}원이하`
+                : idx === pricearr.length - 1
+                ? `${pricearr[idx - 1].toLocaleString('ko-KR')}원이상`
+                : `${p.toLocaleString('ko-KR')}원`}
+            </label>
+          ))}
         </div>
         <div className={styled.inputbox}>
           <p>생산국가</p>
-          {country.map((data) => (
-            <label>
+          {country.map((data, idx) => (
+            <label key={`F_country${idx}`}>
               <input
                 type="checkbox"
                 name="country"
