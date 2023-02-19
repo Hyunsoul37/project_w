@@ -24,10 +24,19 @@ public class S3UpladerService {
 
 	@Autowired
 	public S3UpladerService(AmazonS3Client amazonS3Client) {
-		this.amazonS3Client = amazonS3Client;
+		this.amazonS3Client = amazonS3Client;	
 	}
 
 	public String upload(MultipartFile multipartFile, String bucket, String dirName) throws IOException {
+		
+		File folder = new File(fileDir);
+		if(!folder.exists()) {
+			try {
+				folder.mkdir();
+			} catch (Exception e) {
+			}
+		}
+		String originalName = multipartFile.getOriginalFilename();
 		File uploadFile = convert(multipartFile)
 				.orElseThrow(() -> new IllegalArgumentException("error : MultipartFile -> File convert fail"));
 
@@ -74,12 +83,17 @@ public class S3UpladerService {
 
 	private String createStoreFileName(String originalFilename) {
 		String ext = extractExt(originalFilename);
-		String uuid = UUID.randomUUID().toString();
+		String uuid = getOriginalFileName(originalFilename);
 		return uuid + "." + ext;
 	}
 
 	private String extractExt(String originalFilename) {
 		int pos = originalFilename.lastIndexOf(".");
 		return originalFilename.substring(pos + 1);
+	}
+	
+	private String getOriginalFileName(String originalFilename) {
+		int pos = originalFilename.lastIndexOf(".");
+		return originalFilename.substring(0, pos);
 	}
 }

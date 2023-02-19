@@ -1,15 +1,16 @@
 package shop.winetoy.server.wine.entity;
 
 public class WineDto {
-	private int pid;
+	int pid;
 	private int type;
 	private String korName;
 	private String engName;
 	private float starPoint;
 	private int price;
+	private int acidity;
 	private int sweet;
 	private int body;
-	private int tanninl;
+	private int tannin;
 	private String alcohol;
 	private String country;
 	private String region;
@@ -66,6 +67,14 @@ public class WineDto {
 		this.price = price;
 	}
 
+	public int getAcidity() {
+		return acidity;
+	}
+
+	public void setAcidity(int acidity) {
+		this.acidity = acidity;
+	}
+
 	public int getSweet() {
 		return sweet;
 	}
@@ -82,12 +91,12 @@ public class WineDto {
 		this.body = body;
 	}
 
-	public int getTanninl() {
-		return tanninl;
+	public int setTannin() {
+		return tannin;
 	}
 
-	public void setTanninl(int tanninl) {
-		this.tanninl = tanninl;
+	public void setTannin(int tannin) {
+		this.tannin = tannin;
 	}
 
 	public String getAlcohol() {
@@ -149,9 +158,10 @@ public class WineDto {
 	@Override
 	public String toString() {
 		return "WineDto [pid=" + pid + ", type=" + type + ", korName=" + korName + ", engName=" + engName
-				+ ", starPoint=" + starPoint + ", price=" + price + ", sweet=" + sweet + ", body=" + body + ", tanninl="
-				+ tanninl + ", alcohol=" + alcohol + ", country=" + country + ", region=" + region + ", grapeVariety="
-				+ grapeVariety + ", recommendedSnack=" + recommendedSnack + ", desc=" + desc + ", imageUrl=" + imageUrl
-				+ "]";
-	}	
+				+ ", starPoint=" + starPoint + ", price=" + price + ", acidity=" + acidity + ", sweet=" + sweet
+				+ ", body=" + body + ", tannin=" + tannin + ", alcohol=" + alcohol + ", country=" + country
+				+ ", region=" + region + ", grapeVariety=" + grapeVariety + ", recommendedSnack=" + recommendedSnack
+				+ ", desc=" + desc + ", imageUrl=" + imageUrl + "]";
+	}
+
 }
