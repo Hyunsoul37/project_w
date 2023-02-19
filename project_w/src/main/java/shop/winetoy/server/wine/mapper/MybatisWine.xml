@@ -3,5 +3,55 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="shop.winetoy.server.wine.dao.WineDao">
-	
+	<insert id="registerWine"
+		parameterType="shop.winetoy.server.wine.entity.WineDto">
+		INSERT INTO `wineToy`.`wine`
+		(
+		`type`,
+		`kor_name`,
+		`eng_name`,
+		`star_point`,
+		`price`,
+		`sweet`,
+		`body`,
+		`acidity`,
+		`tannin`,
+		`alcohol`,
+		`country`,
+		`region`,
+		`grape_variety`,
+		`recommended_snack`,
+		`desc`,
+		`image_url`
+		)
+		VALUES
+		(
+		#{type},
+		#{korName},
+		#{engName},
+		#{starPoint},
+		#{price},
+		#{sweet},
+		#{body},
+		#{acidity},
+		#{tannin},
+		#{alcohol},
+		#{country},
+		#{region},
+		#{grapeVariety},
+		#{recommendedSnack},
+		#{desc},
+		#{imageUrl}
+		);
+	</insert>
+
+	<select id="getWineDetail"
+		resultType="shop.winetoy.server.wine.entity.WineDto">
+		select * from wine where pid = #{pid};
+	</select>
+
+	<select id="searchWine"
+		resultType="shop.winetoy.server.wine.entity.WineInfoDto">
+		select * from wine where type = #{type} order by pid asc limit #{listCount} offset #{offset};
+	</select>
 </mapper>
