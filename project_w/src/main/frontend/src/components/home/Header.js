@@ -49,7 +49,7 @@ const Header = () => {
               </>
             ) : (
               <>
-                <span onClick={() => router.push('/login/Join')}>SIGN IN</span>
+                <span onClick={() => router.push('/login/join')}>SIGN IN</span>
                 <span onClick={LoginBtnHandler}>LOGIN</span>
               </>
             )}

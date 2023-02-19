@@ -11,7 +11,7 @@ const Form = (props) => {
       >
         {props.children}
       </form>
-      <button onClick={() => router.push('/join')}>SignUp</button>
+      <button onClick={() => router.push('/login/join')}>SignUp</button>
     </div>
   );
 };
