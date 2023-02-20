@@ -92,7 +92,11 @@ const BestReview = () => {
             <div id={'contents'}>{data.contents}</div>
             <div id={'text'}>{data.name}</div>
             <div id={'text'}>{data.date}</div>
-            <div id={'star'}>{drawStar(data.star).map((star) => star)}</div>
+            <div id={'star'}>
+              {drawStar(data.star).map((star, idx) => (
+                <span key={`star_${idx}`}>{star}</span>
+              ))}
+            </div>
           </Card>
         ))}
       </div>
@@ -113,7 +117,9 @@ const BestReview = () => {
             >
               <div id="winename">{dummyreview[curModalNum].winename}</div>
               <div id="modal_star">
-                {drawStar(dummyreview[curModalNum].star).map((star) => star)}
+                {drawStar(dummyreview[curModalNum].star).map((star, idx) => (
+                  <span key={`star_${idx}`}>{star}</span>
+                ))}
               </div>
             </div>
             <div>{dummyreview[curModalNum].contents}</div>
