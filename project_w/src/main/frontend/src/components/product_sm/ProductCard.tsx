@@ -1,27 +1,9 @@
 import styled from './ProductCard.module.css';
 import { AiFillHeart, AiOutlineHeart } from 'react-icons/ai';
 import { useState } from 'react';
+import { wineState } from './productTypes';
 
-export interface ProductCardState {
-  winePid: number;
-  wineKorName: string;
-  wineEngName?: string;
-  winePrice: string;
-  wineType: string;
-  winebody?: number;
-  wineAcidity?: number;
-  wineSweet?: number;
-  wineAlcohol?: string;
-  wineTannin?: number;
-  wineCountry: string;
-  wineRegion: string;
-  wineDesc?: string;
-  wineStarPoint?: number;
-  wineRecommendedSnack?: string;
-  wineGrapeVariety?: string;
-  userLike?: boolean;
-}
-const ProductCard: React.FC<ProductCardState> = (props) => {
+const ProductCard: React.FC<wineState> = (props) => {
   const [like, setLike] = useState(props.userLike);
   return (
     <div className={styled.ProductCard}>
@@ -43,7 +25,7 @@ const ProductCard: React.FC<ProductCardState> = (props) => {
         <span>{props.wineCountry}</span>
         <span>{props.wineGrapeVariety}</span>
       </div>
-      <h4>{props.winePrice.replace('원', 'won')}</h4>
+      <h4>{props.winePrice?.replace('원', 'won')}</h4>
     </div>
   );
 };

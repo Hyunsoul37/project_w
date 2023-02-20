@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@500&display=swap');
+
 .ProductWrapper {
   padding-top: 200px;
 }
@@ -44,3 +46,38 @@
   color: white;
   font-weight: 600;
 } */
+.pagebtnWrapper{
+  margin: 50px 0px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.pagebtn span{
+  font-family: 'Noto Sans KR', sans-serif;
+  font-style: normal;
+  display: block;
+  text-align: center;
+  width: 40px;
+  height: 40px; 
+  padding: 8px;
+  line-height: 20px;
+}
+.pagebtn{
+  margin: 0px 5px;
+  cursor: pointer;
+}
+.activebtn{
+  font-weight: 800;
+  font-size: 20px;
+  color: var(--primary-txt);
+  border: 1px solid var(--secondary-txt);
+  border-radius: 5px;
+}
+.prevNextBtn{
+  margin: 0px 10px;
+  display:  flex;
+  align-items: center;
+}
+.prevNextBtn svg{
+  font-size: 35px;
+}
