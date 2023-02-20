@@ -1,10 +1,13 @@
 .headerWrapper {
   width: 100vw;
-  height: 100px;
-  border-bottom: 2px solid lightgray;
+  height: 100px;  
   position: fixed;
-  background-color: white;
   z-index: 10;
+  transition: all 0.3s ease;
+}
+.activebg{
+  background-color: white;
+  border-bottom: 2px solid lightgray;
 }
 .Header {
   width: 1200px;
