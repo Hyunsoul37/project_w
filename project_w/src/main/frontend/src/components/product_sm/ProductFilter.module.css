@@ -23,10 +23,12 @@
   height: max-content;
   margin-bottom: 150px;
   transform-origin: top center;
-  animation: Ani 0.5s;
+}
+.showfilter{
+  animation: Ani 0.5s forwards;
 }
 .offfilter {
-  animation: ReverseAni 0.5s;
+  animation: ReverseAni 0.5s forwards;
 }
 
 .filter {
