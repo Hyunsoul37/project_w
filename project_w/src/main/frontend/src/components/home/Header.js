@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useRouter } from 'next/router';
 import { logout, DataClear } from '../../slice/userSlice';
@@ -9,6 +9,7 @@ const Header = () => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
   const userData = user.userData ? user.userData.data : null;
+  const [headerBG, setHeaderBg] = useState(false);
 
   const LoginBtnHandler = () => {
     router.push('/login');
@@ -21,12 +22,22 @@ const Header = () => {
     dispatch(DataClear());
   };
 
-  useEffect(() => {
-    // 로그인 유지 로직 작성
-  }, []);
+  const HeaderFadeHandler = () => {
+    if (window.scrollY === 0) {
+      setHeaderBg(false);
+    } else {
+      setHeaderBg(true);
+    }
+  };
+
+  window.addEventListener('scroll', HeaderFadeHandler);
 
   return (
-    <div className={styled.headerWrapper}>
+    <div
+      className={[styled.headerWrapper, headerBG ? styled.activebg : ''].join(
+        ' '
+      )}
+    >
       <div className="maxframe">
         <div className={styled.Header}>
           <span
@@ -36,7 +47,13 @@ const Header = () => {
             WAGU
           </span>
           <div className={styled.btnWrapper}>
-            <span onClick={() => router.push('/product')}>PRODUCT</span>
+            <span
+              onClick={() =>
+                router.push({ pathname: '/product', query: { page: 1 } })
+              }
+            >
+              PRODUCT
+            </span>
             <span onClick={() => router.push('/community')}>COMMUNITY</span>
             <span onClick={() => router.push('/QnA')}>QnA</span>
             <span onClick={() => router.push('/notice')}>NOTICE</span>
