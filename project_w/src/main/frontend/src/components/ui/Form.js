@@ -11,7 +11,18 @@ const Form = (props) => {
       >
         {props.children}
       </form>
-      <button onClick={() => router.push('/login/join')}>SignUp</button>
+      {props.isLogin && (
+        <>
+          <input
+            id="idsave"
+            type="checkbox"
+          />
+          <label htmlFor="idsave">
+            <span>아이디저장</span>
+          </label>
+          <span onClick={() => router.push('/login/join')}>SignUp</span>
+        </>
+      )}
     </div>
   );
 };

@@ -41,25 +41,25 @@ const Login = () => {
   return (
     <div className={styled.formWrapper}>
       <Seo title="login" />
-      <Form onsubmit={submitHandler}>
-        <label htmlFor="id">
-          ID
-          <input
-            id="id"
-            type="text"
-            value={id ? id : ''}
-            onChange={ChangeIdHandler}
-          />
-        </label>
-        <label htmlFor="password">
-          PASSWORD
-          <input
-            id="password"
-            type="password"
-            value={password ? password : ''}
-            onChange={ChangePasswordHandler}
-          />
-        </label>
+      <h4>LOGIN</h4>
+      <Form
+        onsubmit={submitHandler}
+        isLogin={true}
+      >
+        <input
+          id="id"
+          type="text"
+          value={id ? id : ''}
+          onChange={ChangeIdHandler}
+          placeholder="사용자 아이디"
+        />
+        <input
+          id="password"
+          type="password"
+          value={password ? password : ''}
+          onChange={ChangePasswordHandler}
+          placeholder="비밀번호"
+        />
         <div>
           <button>Login</button>
         </div>
