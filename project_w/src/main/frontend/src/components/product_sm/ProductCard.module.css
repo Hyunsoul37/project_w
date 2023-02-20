@@ -33,12 +33,12 @@
   font-size: 15px;
   margin: 10px 0px;
   font-weight: 800;
-  height: 15px;
+  height: 23px;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
   text-align: center;
-  line-height: 15px;
+  line-height: 23px;
 }
 .ProductCard h4 {
   font-size: 15px;
