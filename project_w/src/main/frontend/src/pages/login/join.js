@@ -89,15 +89,31 @@ const join = () => {
   return (
     <div className={styled.formWrapper}>
       <Seo title="Sign In" />
-      <Form onsubmit={submitHandler}>
+      <h1>SIGN IN</h1>
+      <h4>회원정보 입력</h4>
+      <Form
+        onsubmit={submitHandler}
+        isLogin={false}
+      >
+        <label htmlFor="name">
+          이름
+          <input
+            id="name"
+            type="text"
+            value={name ? name : ''}
+            onChange={ChangeNameHandler}
+            placeholder="사용자 이름"
+          />
+        </label>
         <label htmlFor="id">
-          ID
+          아이디
           <input
             id="id"
             type="text"
             value={id ? id : ''}
             onChange={ChangeIdHandler}
             onBlur={OnCheckduplicateID}
+            placeholder="사용자 아이디"
           />
           {id !== '' && iseditedId ? (
             isduplicate ? (
@@ -109,26 +125,18 @@ const join = () => {
         </label>
 
         <label htmlFor="password">
-          PASSWORD
+          비밀번호
           <input
             id="password"
             type="password"
             value={password ? password : ''}
             onChange={ChangePasswordHandler}
+            placeholder="비밀번호"
           />
         </label>
 
-        <label htmlFor="name">
-          NAME
-          <input
-            id="name"
-            type="text"
-            value={name ? name : ''}
-            onChange={ChangeNameHandler}
-          />
-        </label>
         <label htmlFor="email">
-          EMAIL
+          이메일
           <input
             id="email"
             type="email"
@@ -136,17 +144,17 @@ const join = () => {
             onChange={ChangeEmailHandler}
           />
         </label>
-        <label htmlFor="address">
-          ADDRESS
+        {/* <label htmlFor="address">
+          주소
           <input
             id="address"
             type="text"
             value={address ? address : ''}
             onChange={ChangeAddressHandler}
           />
-        </label>
+        </label> */}
         <label htmlFor="phone">
-          PHONE
+          휴대폰
           <input
             id="phone"
             type="tel"
@@ -155,7 +163,7 @@ const join = () => {
           />
         </label>
         <div>
-          <button>제출</button>
+          <button>회원가입</button>
         </div>
       </Form>
     </div>
