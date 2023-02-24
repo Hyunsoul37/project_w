@@ -100,6 +100,10 @@
    font-weight: 700;
 }
 
+.tabmenu_wrap .txt_area>p:nth-child(2) {
+   padding: 5px 0;
+}
+
 .tabmenu_wrap .tasty_area {
    position: absolute;
    left: 1em;
@@ -109,6 +113,7 @@
 .tabmenu_wrap .tasty_area .inner {
    margin-top: 0.5em;
    display: flex;
+   align-items: center;
 }
 
 .tabmenu_wrap .tasty_area .inner p {
@@ -120,19 +125,19 @@
    font-size: 15px;
 }
 
-.tabmenu_wrap .tasty_area .inner>ul {
+.tabmenu_wrap .rank01 .tasty_area .inner>div svg {
+   height: 1.2em;
+   width: 1.2em;
+}
+
+.tabmenu_wrap .tasty_area .inner>div {
    display: flex;
    align-items: center;
 }
 
-.tabmenu_wrap .tasty_area .inner>ul li {
-   font-size: 12px;
-   margin: 0 1px;
-}
-
-.tabmenu_wrap .rank01 .tasty_area .inner>ul li {
-   font-size: 15px;
-   margin: 0 2px;
+.tabmenu_wrap .tasty_area .inner>div svg {
+   fill: var(--primary);
+   stroke: var(--primary);
 }
 
 .tabmenu_wrap .tasty_area .inner>ul li path {
