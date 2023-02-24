@@ -1,9 +1,6 @@
 import React, { useState } from 'react';
 import styled from './RankProd.module.css'
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { library } from '@fortawesome/fontawesome-svg-core';
 import { IoWater, IoWaterOutline } from 'react-icons/io5';
-import { faDroplet } from "@fortawesome/free-solid-svg-icons";
 
 
 const menuArr = [
@@ -228,7 +225,6 @@ const RankProd = () => {
                 <p>{menuArr[currentTab].content1.pdname}</p>
                 <p className="price">{menuArr[currentTab].content1.pdprice} won</p>
               </div>
-
               <div className={styled.tasty_area}>
                 <div className={styled.inner}>
                   <p>당도</p>
@@ -243,7 +239,6 @@ const RankProd = () => {
                   </div>
                 </div>
               </div>
-
             </div>
             <ul className={styled.diffrank}>
               <li>
