@@ -17,12 +17,12 @@
    border-radius: 50em;
 }
 
-.tablist ul li:hover {
+.tablistinner li:hover {
    color: #fff;
    background-color: var(--primary);
 }
 
-.tablist .focused {
+.tablistinner li.active {
    color: #fff;
    background-color: var(--primary);
 }

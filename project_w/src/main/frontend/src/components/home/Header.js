@@ -30,7 +30,7 @@ const Header = () => {
     }
   };
 
-  window.addEventListener('scroll', HeaderFadeHandler);
+  // window.addEventListener('scroll', HeaderFadeHandler);
 
   return (
     <div
