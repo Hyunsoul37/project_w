@@ -175,10 +175,10 @@ const RankProd = () => {
         </div>
         <div>
           <div className={styled.tablist}>
-            <ul>
+            <ul class={styled.tablistinner}>
               {menuArr.map((el, index) => (
                 <li
-                  className={index === currentTab ? 'submenu focused' : 'submenu'}
+                  className={index === currentTab ? styled.active : ''}
                   onClick={() => selectMenuHandler(index)}
                 >
                   {el.name}
