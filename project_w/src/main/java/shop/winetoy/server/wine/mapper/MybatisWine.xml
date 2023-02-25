@@ -52,6 +52,33 @@
 
 	<select id="searchWine"
 		resultType="shop.winetoy.server.wine.entity.WineInfoDto">
-		select * from wine where type = #{type} order by pid asc limit #{listCount} offset #{offset};
+		select * from wine
+		<where>
+			<if test="type != null"> and type = #{type}</if>
+			<if test="body != null"> and body = #{body}</if>
+			<if test="sweet != null"> and sweet = #{sweet}</if>
+			<if test="acidity != null"> and acidity = #{acidity}</if>
+			<if test="tannin != null"> and tannin = #{tannin}</if>
+			<if test="price != null"> and price > #{price}</if>
+			<if test="country != null"> and country = #{country}</if>
+		</where>
+		order by pid asc limit #{listCount} offset #{offset};
+	</select>
+
+	<select id="searchWineWithPid"
+		resultType="shop.winetoy.server.wine.entity.WineInfoDto">
+		select wine.*, bookmark_id as 'like' from wine
+		left join bookmark ON
+		(bookmark.wine_pid = wine.pid and bookmark.member_pid = #{pid})
+		<where>
+			<if test="type != null"> and type = #{type}</if>
+			<if test="body != null"> and body = #{body}</if>
+			<if test="sweet != null"> and sweet = #{sweet}</if>
+			<if test="acidity != null"> and acidity = #{acidity}</if>
+			<if test="tannin != null"> and tannin = #{tannin}</if>
+			<if test="price != null"> and price > #{price}</if>
+			<if test="country != null"> and country = #{country}</if>
+		</where>
+		order by pid asc limit 20 offset 0;
 	</select>
 </mapper>
