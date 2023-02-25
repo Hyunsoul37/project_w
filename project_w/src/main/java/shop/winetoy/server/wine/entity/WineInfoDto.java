@@ -88,8 +88,13 @@ public class WineInfoDto {
 		return like;
 	}
 
-	public void setLike(boolean like) {
-		this.like = like;
+	public void setLike(int like) {
+		
+		if(like != 0)
+			this.like = true;
+		else
+			this.like = false;
+		
 	}
 
 	@Override
