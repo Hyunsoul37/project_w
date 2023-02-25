@@ -91,7 +91,7 @@ public class WineDto {
 		this.body = body;
 	}
 
-	public int setTannin() {
+	public int getTannin() {
 		return tannin;
 	}
 

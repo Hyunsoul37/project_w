@@ -14,5 +14,11 @@ public interface WineDao {
 
 	WineDto getWineDetail(int pid);
 
-	List<WineInfoDto> searchWine(int type, int listCount, int offset);
+	List<WineInfoDto> searchWine(Integer type, Integer body, Integer sweet, Integer acidity, Integer tannin,
+			Integer price, String country, int page, int listCount, int offset);
+	
+	List<WineInfoDto> searchWineWithPid(int pid, Integer type, Integer body, Integer sweet, Integer acidity, Integer tannin,
+			Integer price, String country, int page, int listCount, int offset);
+
+	int getWineCount(int type);
 }

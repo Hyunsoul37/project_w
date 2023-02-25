@@ -4,10 +4,14 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -16,18 +20,26 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.Jws;
+import io.jsonwebtoken.Jwts;
+import jakarta.servlet.http.HttpServletRequest;
 import shop.winetoy.server.s3.service.S3UpladerService;
+import shop.winetoy.server.tools.JwtManager;
 import shop.winetoy.server.tools.WineDataUpload;
 import shop.winetoy.server.wine.entity.WineDto;
 import shop.winetoy.server.wine.entity.WineInfoDto;
 import shop.winetoy.server.wine.service.WineService;
 
 @Controller
-@RequestMapping("/api/auth")
+@RequestMapping("/api/product")
 public class WineController {
 
 	WineService wineService;
 	S3UpladerService s3UpladerService;
+	
+	@Value("${custom.access-key}")
+	private String secretAccessKey;
 	final String s3Bucket = "winetoy";
 
 	@Autowired
@@ -63,6 +75,9 @@ public class WineController {
 		}
 	}
 
+	/**
+	 * 와인 상세 정보
+	 */
 	@RequestMapping(value = "/wine/detail", method = RequestMethod.GET)
 	@ResponseBody
 	public WineDto detailWineList(int pid) {
@@ -70,23 +85,36 @@ public class WineController {
 		return wineService.getWineDetail(pid);
 	}
 
-	@RequestMapping(value = "/wine/search", method = RequestMethod.GET)
+	/**
+	 * 와인 검색
+	 */
+	@RequestMapping(value = "/wine/{userId}/search", method = RequestMethod.GET)
 	@ResponseBody
-	public List<WineInfoDto> searchWine(int type, int page){
-		System.out.println("type : " + type + " page : " + page);
-		List<WineInfoDto> result = wineService.searchWine(type, page);
+	public List<WineInfoDto> searchWine(@PathVariable int userId,Integer type, Integer body, Integer sweet, Integer acidity, Integer tannin, Integer price,
+			String country, int page) {
+		
+		List<WineInfoDto> result = null;
+
+		System.out.println(userId);
+		
+		if(userId != 0) {
+			result = wineService.searchWineWithPid(userId, type, body, sweet, acidity, tannin, price, country, page);
+		}
+		else {
+			result = wineService.searchWine(type, body, sweet, acidity, tannin, price, country, page);
+		}
+		
 		return result;
 	}
-	
-	//--------------------------------------------------------------------------------------------------------//
-	
+
+	// --------------------------------------------------------------------------------------------------------//
 
 	public void tmp() throws IOException {
 		WineDataUpload goCSV = new WineDataUpload("C:\\Users\\USER\\Desktop\\wine_add_sweet.csv");
 		String[] line = null;
-		
+
 		int index = 0;
-		
+
 		while ((line = goCSV.nextRead()) != null) {
 			WineDto wine = new WineDto();
 			int wineType = 0;
@@ -144,16 +172,15 @@ public class WineController {
 
 				MultipartFile multipartFile = new MockMultipartFile(
 						String.format("%03d_", Integer.parseInt(line[0])) + line[2] + ".png",
-						String.format("%03d_", Integer.parseInt(line[0])) + line[2] + ".png",
-						"image/png",
+						String.format("%03d_", Integer.parseInt(line[0])) + line[2] + ".png", "image/png",
 						new FileInputStream(file));
 
-				ObjectMapper mapper = new ObjectMapper(); 
+				ObjectMapper mapper = new ObjectMapper();
 				String jsonString = mapper.writeValueAsString(wine);
 				index += registerWine(multipartFile, jsonString);
-//				System.out.println(jsonString);
+//				System.out.println(wine.getT);
 				System.out.println(index);
-				
+
 			} catch (Exception e) {
 				e.printStackTrace();
 			}

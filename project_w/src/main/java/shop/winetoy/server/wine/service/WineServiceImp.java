@@ -16,7 +16,7 @@ public class WineServiceImp implements WineService {
 	@Autowired
 	WineDao wineDao;
 	S3UpladerService s3Uploader;
-	
+
 	@Override
 	public int registerWine(WineDto registerWine) {
 		return wineDao.registerWine(registerWine);
@@ -28,11 +28,26 @@ public class WineServiceImp implements WineService {
 	}
 
 	@Override
-	public List<WineInfoDto> searchWine(int type, int page) {
+	public List<WineInfoDto> searchWine(Integer type, Integer body, Integer sweet, Integer acidity, Integer tannin,
+			Integer price, String country, int page) {
+
 		int listCount = 20;
-		int offset = (page - 1) * listCount; 
-		List<WineInfoDto> result = wineDao.searchWine(type, listCount, offset);
+		int offset = (page - 1) * listCount;
+
+		List<WineInfoDto> result = wineDao.searchWine(type, body, sweet, acidity, tannin, price, country, page,
+				listCount, offset);
 		return result;
 	}
 
+	@Override
+	public List<WineInfoDto> searchWineWithPid(int pid, Integer type, Integer body, Integer sweet, Integer acidity,
+			Integer tannin, Integer price, String country, int page) {
+		int listCount = 20;
+		int offset = (page - 1) * listCount;
+
+		List<WineInfoDto> result = wineDao.searchWineWithPid(pid, type, body, sweet, acidity, tannin, price, country, page,
+				listCount, offset);
+		
+		return result;
+	}
 }
