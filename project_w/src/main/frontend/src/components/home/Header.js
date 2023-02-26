@@ -30,7 +30,9 @@ const Header = () => {
     }
   };
 
-  // window.addEventListener('scroll', HeaderFadeHandler);
+  useEffect(() => {
+    window.addEventListener('scroll', HeaderFadeHandler);
+  }, []);
 
   return (
     <div
