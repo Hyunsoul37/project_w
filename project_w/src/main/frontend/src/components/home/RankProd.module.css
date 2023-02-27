@@ -26,48 +26,54 @@
    color: #fff;
    background-color: var(--primary);
 }
-.active{
+
+.active {
    color: #fff;
    background-color: var(--primary);
 }
-.tabmenu_wrap {
-   display: flex;
-   flex-wrap: wrap;
-   justify-content: space-between;
+
+.rank_wrap {
+   display: grid;
+   grid-template-columns: 1fr 1fr 1fr 1fr;
+   height: 600px;
 }
 
-.tabmenu_wrap .rank01 {
-   width: 595px;
-   height: 595px;
+.rank_wrap .rankcard {
+   width: 100%;
+   height: 100%;
+   border: 2px solid #fff;
    background-color: #efefef;
    position: relative;
+   grid-column: 1 / 1;
+   grid-row: 2 / 1;
 }
 
-.tabmenu_wrap .diffrank {
-   width: 595px;
-   display: flex;
-   justify-content: space-between;
-   flex-wrap: wrap;
+.rank_wrap .rankcard:nth-child(1) {
+   grid-column: 1 / span 2;
+   grid-row: 1 / span 2;
 }
 
-.tabmenu_wrap .rank01 {
-   position: relative;
-   overflow: hidden;
+.rank_wrap .rankcard:nth-child(2) {
+   grid-column: 3 / span 1;
+   grid-row: 1 / span 1;
 }
 
-.tabmenu_wrap .rank01 p img {
-   position: absolute;
-   right: -60px;
-   top: 50%;
-   transform: translateY(-50%);
-   width: 90%;
+.rank_wrap .rankcard:nth-child(3) {
+   grid-column: 4 / span 1;
+   grid-row: 1 / span 1;
 }
 
-.tabmenu_wrap .diffrank li>p img {
-   width: 100%;
+.rank_wrap .rankcard:nth-child(4) {
+   grid-column: 3 / span 1;
+   grid-row: 2 / span 1;
 }
 
-.tabmenu_wrap .diffrank li>p {
+.rank_wrap .rankcard:nth-child(5) {
+   grid-column: 4 / span 1;
+   grid-row: 2 / span 1;
+}
+
+.rank_wrap .rankcard figure {
    position: absolute;
    right: -30px;
    top: 50%;
@@ -75,74 +81,106 @@
    width: 80%;
 }
 
-.tabmenu_wrap .diffrank li>p img {
+.rank_wrap .rankcard figure img {
    width: 100%;
 }
 
-.tabmenu_wrap .diffrank>li {
-   width: 293px;
-   height: 293px;
-   margin-bottom: 10px;
-   background-color: #efefef;
-   position: relative;
-}
-
-.tabmenu_wrap .txt_area {
+.rankcard .txt_area {
    position: absolute;
-   top: 2em;
-   left: 1em;
+   top: 3em;
+   left: 1.5em;
 }
 
-.tabmenu_wrap .txt_area .rank_txt {
+.rank_wrap .txt_area .rank_txt {
    color: var(--primary);
-   font-size: 18px;
+   font-size: 14px;
+   font-family: 'campton';
 }
 
-.tabmenu_wrap .txt_area .rank_txt p {
-   font-size: 36px;
+.rank_wrap .txt_area .rank_txt p {
+   font-size: 30px;
    font-weight: 700;
+   font-family: 'campton';
 }
 
-.tabmenu_wrap .txt_area>p:nth-child(2) {
+.rank_wrap .txt_area .winename {
    padding: 5px 0;
+   font-size: 0.8em;
+   color: #333;
 }
 
-.tabmenu_wrap .tasty_area {
+.rank_wrap .txt_area .price {
+   color: var(--secondary);
+   font-size: 1.2em;
+}
+
+.rank_wrap .tasty_area {
    position: absolute;
-   left: 1em;
+   left: 1.5em;
    bottom: 2em;
 }
 
-.tabmenu_wrap .tasty_area .inner {
+.rank_wrap .tasty_area .inner {
    margin-top: 0.5em;
    display: flex;
    align-items: center;
 }
 
-.tabmenu_wrap .tasty_area .inner p {
+.rank_wrap .tasty_area .inner p {
    font-size: 12px;
    padding-right: 0.5em;
 }
 
-.tabmenu_wrap .rank01 .tasty_area .inner p {
-   font-size: 15px;
-}
 
-.tabmenu_wrap .rank01 .tasty_area .inner>div svg {
-   height: 1.2em;
-   width: 1.2em;
-}
 
-.tabmenu_wrap .tasty_area .inner>div {
+.rank_wrap .tasty_area .inner>div {
    display: flex;
    align-items: center;
 }
 
-.tabmenu_wrap .tasty_area .inner>div svg {
+.rank_wrap .tasty_area .inner>div svg {
    fill: var(--primary);
    stroke: var(--primary);
 }
 
-.tabmenu_wrap .tasty_area .inner>ul li path {
+.rank_wrap .tasty_area .inner>ul li path {
    color: var(--primary);
+}
+
+/* 랭크 1 영역 */
+.rankcard:first-child .txt_area {
+   position: absolute;
+   top: 5em;
+   left: 3em;
+}
+
+.rankcard:first-child .txt_area .rank_txt {
+   font-size: 20px;
+}
+
+.rankcard:first-child .txt_area .rank_txt p {
+   font-size: 45px;
+}
+
+.rankcard:first-child .txt_area .winename {
+   padding: 10px 0;
+   font-size: 1.2em;
+}
+
+.rankcard:first-child .txt_area .price {
+   font-size: 1.8em;
+}
+
+.rankcard:first-child .tasty_area {
+   left: 3em;
+   bottom: 5em;
+}
+
+.rankcard:first-child .tasty_area .inner p {
+   font-size: 15px;
+}
+
+.rankcard:first-child .tasty_area .inner>div svg {
+   height: 1.2em;
+   width: 1.2em;
 }
