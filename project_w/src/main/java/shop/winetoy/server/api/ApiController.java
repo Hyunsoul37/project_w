@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.http.protocol.ResponseServer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -16,10 +17,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.amazonaws.HttpMethod;
 
 import shop.winetoy.server.member.entity.AuthResult;
+import shop.winetoy.server.member.entity.IdDuplicateCheckDto;
 import shop.winetoy.server.member.entity.MemberDto;
 import shop.winetoy.server.member.entity.MemberInfoDto;
 import shop.winetoy.server.member.entity.RefreshDto;
 import shop.winetoy.server.member.service.MemberService;
+import shop.winetoy.server.response.entity.ListResponse;
+import shop.winetoy.server.response.service.ResponseService;
 import shop.winetoy.server.tools.ExceptionCode;
 import shop.winetoy.server.tools.JwtManager;
 
@@ -31,11 +35,13 @@ public class ApiController {
 	MemberService memberService;
 	@Autowired
 	JwtManager jwtManager;
-
+	@Autowired
+	ResponseService responseService;
+	
 	/**
 	 * 서버 시간 조회
 	 */
-	@RequestMapping(value = "/time", method = RequestMethod.GET)
+	@RequestMapping(value = "/admin/time", method = RequestMethod.GET)
 	@ResponseBody
 	public Map<String, String> time() {
 		LocalDateTime now = LocalDateTime.now();
@@ -50,7 +56,7 @@ public class ApiController {
 	/**
 	 * POST 테스트
 	 */
-	@RequestMapping(value = "/test", method = RequestMethod.POST)
+	@RequestMapping(value = "/admin/test", method = RequestMethod.POST)
 	@ResponseBody
 	public Map<String, String> postData(@RequestBody Map<String, String> data) {
 		return data;
@@ -59,7 +65,7 @@ public class ApiController {
 	/**
 	 * GET 테스트
 	 */
-	@RequestMapping(value = "/test", method = RequestMethod.GET)
+	@RequestMapping(value = "/admin/test", method = RequestMethod.GET)
 	@ResponseBody
 	public Map<String, String> getData() {
 		Map<String, String> data = new HashMap<String, String>();
@@ -73,22 +79,27 @@ public class ApiController {
 	 */
 	@RequestMapping(value = "/auth/id-check", method = RequestMethod.POST)
 	@ResponseBody
-	public boolean duplicateIdCheck(@RequestBody Map<String, String> res) {
-		System.out.println(res);
-		return memberDuplicateCheck(res.get("id"));
+	public IdDuplicateCheckDto duplicateIdCheck(@RequestBody Map<String, String> res) {
+		IdDuplicateCheckDto result = new IdDuplicateCheckDto();
+		result.setDuplicate(memberDuplicateCheck(res.get("id")));
+		return result;
 	}
 
 	/**
 	 * ID 중복 체크 (GET + Query String)
+	 * https://www.notion.so/ID-d778d565471546eeae4748acdb3a93de?pvs=4
 	 */
 	@RequestMapping(value = "/auth/id-check", method = RequestMethod.GET)
 	@ResponseBody
-	public boolean duplicateIdCheck(String id) {
-		return memberDuplicateCheck(id);
+	public IdDuplicateCheckDto duplicateIdCheck(String id) {
+		IdDuplicateCheckDto result = new IdDuplicateCheckDto();
+		result.setDuplicate(memberDuplicateCheck(id));
+		return result;
 	}
 
 	/**
 	 * 회원가입
+	 * https://www.notion.so/37801f24ecd3431bb0a7aad2f08fb546?pvs=4
 	 */
 	@RequestMapping(value = "/join", method = RequestMethod.POST)
 	@ResponseBody
@@ -106,16 +117,19 @@ public class ApiController {
 
 	/**
 	 * 회원 리스트 조회
+	 * https://www.notion.so/9e5a6611a0b043819647b909061a7e7c?pvs=4
 	 */
-	@RequestMapping(value = "/memberList", method = RequestMethod.GET)
+	@RequestMapping(value = "/admin/memberList", method = RequestMethod.GET)
 	@ResponseBody
-	public List<MemberDto> getMemberList() {
+	public ListResponse<MemberDto> getMemberList() {
 		List<MemberDto> result = memberService.memberList();
-		return result;
+		
+		return responseService.getListResponse(result);
 	}
 
 	/**
 	 * Login
+	 * https://www.notion.so/c526acbfee4a43ae9cc203f9c00862af?pvs=4
 	 */
 	@RequestMapping(value = "/auth/login", method = RequestMethod.POST)
 	@ResponseBody
@@ -163,21 +177,26 @@ public class ApiController {
 	 */
 	@RequestMapping(value = "/auth/refresh", method = RequestMethod.POST)
 	@ResponseBody
-	public String reissueAccessToken(@RequestBody RefreshDto requestRefreshToken) {
+	public Map<String, String> reissueAccessToken(@RequestBody RefreshDto requestRefreshToken) {
 
+		Map<String, String> response = new HashMap<String, String>();
+		String responseString = "response Message";
+		
 		MemberDto result = memberService.getRefreshToken(requestRefreshToken.getPid());
-
 		if (!jwtManager.validationRefreshToken(requestRefreshToken.getRefreshToken())) {
-			return ExceptionCode.EXPIRED_TOKEN;
+			response.put(responseString , ExceptionCode.EXPIRED_TOKEN);
+			return response;
 		} 
 		
 		if(!result.getRefreshToken().equals(requestRefreshToken.getRefreshToken())) {
-			return ExceptionCode.INVALID_TOKEN;
+			System.out.println(!result.getRefreshToken().equals(requestRefreshToken.getRefreshToken()));
+			response.put(responseString , ExceptionCode.INVALID_TOKEN);
+			return response;
 		}
 
 		String accessToken = jwtManager.generateAccessToken(result);
-		
-		return accessToken;
+		response.put(responseString , accessToken);
+		return response;
 	}
 
 	/**

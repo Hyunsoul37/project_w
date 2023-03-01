@@ -21,11 +21,11 @@ public class CustomAuthenticationEntryPoint implements AuthenticationEntryPoint 
 
 		System.out.println(authException);
 		System.out.println("commence : " + exception);
-		if (exception == null) {
-			setResponse(response, ExceptionCode.UNKNOWN_ERROR);
-		}
+//		if (exception == null) {
+//			setResponse(response, ExceptionCode.UNKNOWN_ERROR);
+//		}
 		// 시그니처 오류
-		else if (exception.equals(ExceptionCode.SIGNATURE_DOES_NOT_MATCH)) {
+		if (exception.equals(ExceptionCode.SIGNATURE_DOES_NOT_MATCH)) {
 			setResponse(response, ExceptionCode.SIGNATURE_DOES_NOT_MATCH);
 		}
 		// 토큰 만료된 경우
