@@ -6,10 +6,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-<<<<<<< HEAD
-import org.apache.http.protocol.ResponseServer;
-=======
->>>>>>> 09c844791dacbd0dcda7bd3305c7fc0f1ff6906c
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -17,22 +13,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.amazonaws.HttpMethod;
-
 import shop.winetoy.server.member.entity.AuthResult;
-<<<<<<< HEAD
 import shop.winetoy.server.member.entity.IdDuplicateCheckDto;
-=======
->>>>>>> 09c844791dacbd0dcda7bd3305c7fc0f1ff6906c
 import shop.winetoy.server.member.entity.MemberDto;
 import shop.winetoy.server.member.entity.MemberInfoDto;
 import shop.winetoy.server.member.entity.RefreshDto;
 import shop.winetoy.server.member.service.MemberService;
-<<<<<<< HEAD
 import shop.winetoy.server.response.entity.ListResponse;
 import shop.winetoy.server.response.service.ResponseService;
-=======
->>>>>>> 09c844791dacbd0dcda7bd3305c7fc0f1ff6906c
 import shop.winetoy.server.tools.ExceptionCode;
 import shop.winetoy.server.tools.JwtManager;
 
@@ -44,7 +32,6 @@ public class ApiController {
 	MemberService memberService;
 	@Autowired
 	JwtManager jwtManager;
-<<<<<<< HEAD
 	@Autowired
 	ResponseService responseService;
 	
@@ -52,13 +39,6 @@ public class ApiController {
 	 * 서버 시간 조회
 	 */
 	@RequestMapping(value = "/admin/time", method = RequestMethod.GET)
-=======
-
-	/**
-	 * 서버 시간 조회
-	 */
-	@RequestMapping(value = "/time", method = RequestMethod.GET)
->>>>>>> 09c844791dacbd0dcda7bd3305c7fc0f1ff6906c
 	@ResponseBody
 	public Map<String, String> time() {
 		LocalDateTime now = LocalDateTime.now();
@@ -73,11 +53,7 @@ public class ApiController {
 	/**
 	 * POST 테스트
 	 */
-<<<<<<< HEAD
 	@RequestMapping(value = "/admin/test", method = RequestMethod.POST)
-=======
-	@RequestMapping(value = "/test", method = RequestMethod.POST)
->>>>>>> 09c844791dacbd0dcda7bd3305c7fc0f1ff6906c
 	@ResponseBody
 	public Map<String, String> postData(@RequestBody Map<String, String> data) {
 		return data;
@@ -86,11 +62,7 @@ public class ApiController {
 	/**
 	 * GET 테스트
 	 */
-<<<<<<< HEAD
 	@RequestMapping(value = "/admin/test", method = RequestMethod.GET)
-=======
-	@RequestMapping(value = "/test", method = RequestMethod.GET)
->>>>>>> 09c844791dacbd0dcda7bd3305c7fc0f1ff6906c
 	@ResponseBody
 	public Map<String, String> getData() {
 		Map<String, String> data = new HashMap<String, String>();
@@ -104,21 +76,14 @@ public class ApiController {
 	 */
 	@RequestMapping(value = "/auth/id-check", method = RequestMethod.POST)
 	@ResponseBody
-<<<<<<< HEAD
 	public IdDuplicateCheckDto duplicateIdCheck(@RequestBody Map<String, String> res) {
 		IdDuplicateCheckDto result = new IdDuplicateCheckDto();
 		result.setDuplicate(memberDuplicateCheck(res.get("id")));
 		return result;
-=======
-	public boolean duplicateIdCheck(@RequestBody Map<String, String> res) {
-		System.out.println(res);
-		return memberDuplicateCheck(res.get("id"));
->>>>>>> 09c844791dacbd0dcda7bd3305c7fc0f1ff6906c
 	}
 
 	/**
 	 * ID 중복 체크 (GET + Query String)
-<<<<<<< HEAD
 	 * https://www.notion.so/ID-d778d565471546eeae4748acdb3a93de?pvs=4
 	 */
 	@RequestMapping(value = "/auth/id-check", method = RequestMethod.GET)
@@ -127,21 +92,11 @@ public class ApiController {
 		IdDuplicateCheckDto result = new IdDuplicateCheckDto();
 		result.setDuplicate(memberDuplicateCheck(id));
 		return result;
-=======
-	 */
-	@RequestMapping(value = "/auth/id-check", method = RequestMethod.GET)
-	@ResponseBody
-	public boolean duplicateIdCheck(String id) {
-		return memberDuplicateCheck(id);
->>>>>>> 09c844791dacbd0dcda7bd3305c7fc0f1ff6906c
 	}
 
 	/**
 	 * 회원가입
-<<<<<<< HEAD
 	 * https://www.notion.so/37801f24ecd3431bb0a7aad2f08fb546?pvs=4
-=======
->>>>>>> 09c844791dacbd0dcda7bd3305c7fc0f1ff6906c
 	 */
 	@RequestMapping(value = "/join", method = RequestMethod.POST)
 	@ResponseBody
@@ -159,7 +114,6 @@ public class ApiController {
 
 	/**
 	 * 회원 리스트 조회
-<<<<<<< HEAD
 	 * https://www.notion.so/9e5a6611a0b043819647b909061a7e7c?pvs=4
 	 */
 	@RequestMapping(value = "/admin/memberList", method = RequestMethod.GET)
@@ -168,22 +122,11 @@ public class ApiController {
 		List<MemberDto> result = memberService.memberList();
 		
 		return responseService.getListResponse(result);
-=======
-	 */
-	@RequestMapping(value = "/memberList", method = RequestMethod.GET)
-	@ResponseBody
-	public List<MemberDto> getMemberList() {
-		List<MemberDto> result = memberService.memberList();
-		return result;
->>>>>>> 09c844791dacbd0dcda7bd3305c7fc0f1ff6906c
 	}
 
 	/**
 	 * Login
-<<<<<<< HEAD
 	 * https://www.notion.so/c526acbfee4a43ae9cc203f9c00862af?pvs=4
-=======
->>>>>>> 09c844791dacbd0dcda7bd3305c7fc0f1ff6906c
 	 */
 	@RequestMapping(value = "/auth/login", method = RequestMethod.POST)
 	@ResponseBody
@@ -231,7 +174,6 @@ public class ApiController {
 	 */
 	@RequestMapping(value = "/auth/refresh", method = RequestMethod.POST)
 	@ResponseBody
-<<<<<<< HEAD
 	public Map<String, String> reissueAccessToken(@RequestBody RefreshDto requestRefreshToken) {
 
 		Map<String, String> response = new HashMap<String, String>();
@@ -252,23 +194,6 @@ public class ApiController {
 		String accessToken = jwtManager.generateAccessToken(result);
 		response.put(responseString , accessToken);
 		return response;
-=======
-	public String reissueAccessToken(@RequestBody RefreshDto requestRefreshToken) {
-
-		MemberDto result = memberService.getRefreshToken(requestRefreshToken.getPid());
-
-		if (!jwtManager.validationRefreshToken(requestRefreshToken.getRefreshToken())) {
-			return ExceptionCode.EXPIRED_TOKEN;
-		} 
-		
-		if(!result.getRefreshToken().equals(requestRefreshToken.getRefreshToken())) {
-			return ExceptionCode.INVALID_TOKEN;
-		}
-
-		String accessToken = jwtManager.generateAccessToken(result);
-		
-		return accessToken;
->>>>>>> 09c844791dacbd0dcda7bd3305c7fc0f1ff6906c
 	}
 
 	/**

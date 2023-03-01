@@ -106,7 +106,6 @@ public class WineController {
 		
 		return result;
 	}
-<<<<<<< HEAD
 	
 	@RequestMapping(value = "/wine/count", method = RequestMethod.GET)
 	@ResponseBody
@@ -115,8 +114,6 @@ public class WineController {
 		
 		return wineService.getWineCount(type, body, sweet, acidity, tannin, price, country);
 	}
-=======
->>>>>>> 09c844791dacbd0dcda7bd3305c7fc0f1ff6906c
 
 	// --------------------------------------------------------------------------------------------------------//
 

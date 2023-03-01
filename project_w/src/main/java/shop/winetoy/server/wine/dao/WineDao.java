@@ -16,18 +16,10 @@ public interface WineDao {
 
 	List<WineInfoDto> searchWine(Integer type, Integer body, Integer sweet, Integer acidity, Integer tannin,
 			Integer price, String country, int page, int listCount, int offset);
-<<<<<<< HEAD
 
 	List<WineInfoDto> searchWineWithPid(int pid, Integer type, Integer body, Integer sweet, Integer acidity,
 			Integer tannin, Integer price, String country, int page, int listCount, int offset);
 
 	int getWineCount(Integer type, Integer body, Integer sweet, Integer acidity, Integer tannin, Integer price,
 			String country);
-=======
-	
-	List<WineInfoDto> searchWineWithPid(int pid, Integer type, Integer body, Integer sweet, Integer acidity, Integer tannin,
-			Integer price, String country, int page, int listCount, int offset);
-
-	int getWineCount(int type);
->>>>>>> 09c844791dacbd0dcda7bd3305c7fc0f1ff6906c
 }

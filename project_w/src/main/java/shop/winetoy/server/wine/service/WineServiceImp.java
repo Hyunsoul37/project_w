@@ -50,14 +50,11 @@ public class WineServiceImp implements WineService {
 		
 		return result;
 	}
-<<<<<<< HEAD
-
+	
 	@Override
 	public int getWineCount(Integer type, Integer body, Integer sweet, Integer acidity, Integer tannin, Integer price,
 			String country) {
 		
 		return wineDao.getWineCount(type, body, sweet, acidity, tannin, price, country);
 	}
-=======
->>>>>>> 09c844791dacbd0dcda7bd3305c7fc0f1ff6906c
 }
