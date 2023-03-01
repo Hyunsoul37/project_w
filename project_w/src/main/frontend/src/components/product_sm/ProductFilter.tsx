@@ -3,6 +3,7 @@ import styled from './ProductFilter.module.css';
 import { winetype, country, grape } from './filterindex';
 import { filterdataState } from './Product_SM';
 import FilterInput from './FilterInput';
+import Button from '../ui/Button';
 const score = [1, 2, 3, 4, 5];
 const pricearr = [0, 30000, 40000, 50000, 60000, 70000, 80000, 90000, 100000];
 
@@ -140,8 +141,8 @@ const ProductFilter:React.FC<FilterPropsState> = (props) => {
         </div>
 
         <div className={styled.buttonWrap}>
-          <button onClick={Reset}>초기화</button>
-          <button onClick={FilterSubmitHandler}>적용</button>
+          <Button buttontext={'초기화'} buttonColor={'second'} onClick={Reset}/>
+          <Button buttontext={'적용'} buttonColor={'main'} onClick={FilterSubmitHandler}/>
         </div>
       </div>
     </div>
