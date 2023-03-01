@@ -81,6 +81,7 @@
 		</where>
 		order by pid asc limit 20 offset 0;
 	</select>
+<<<<<<< HEAD
 
 	<select id="getWineCount" resultType="int">
 		select count(*) as num from wine
@@ -95,4 +96,6 @@
 		</where>
 	</select>
 	
+=======
+>>>>>>> 09c844791dacbd0dcda7bd3305c7fc0f1ff6906c
 </mapper>
