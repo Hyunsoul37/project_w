@@ -10,4 +10,10 @@ public interface WineService {
 	WineDto getWineDetail(int pid);
 	List<WineInfoDto> searchWine(Integer type, Integer body, Integer sweet, Integer acidity, Integer tannin, Integer price, String country, int page);
 	List<WineInfoDto> searchWineWithPid(int pid, Integer type, Integer body, Integer sweet, Integer acidity, Integer tannin, Integer price, String country, int page);
+	List<WineInfoDto> searchWine(Integer type, Integer body, Integer sweet, Integer acidity, Integer tannin,
+			Integer price, String country, int page);
+	List<WineInfoDto> searchWineWithPid(int pid, Integer type, Integer body, Integer sweet, Integer acidity,
+			Integer tannin, Integer price, String country, int page);
+	int getWineCount(Integer type, Integer body, Integer sweet, Integer acidity, Integer tannin, Integer price,
+			String country);
 }

@@ -106,6 +106,14 @@ public class WineController {
 		
 		return result;
 	}
+	
+	@RequestMapping(value = "/wine/count", method = RequestMethod.GET)
+	@ResponseBody
+	public int searchWine(Integer type, Integer body, Integer sweet, Integer acidity, Integer tannin, Integer price,
+			String country) {
+		
+		return wineService.getWineCount(type, body, sweet, acidity, tannin, price, country);
+	}
 
 	// --------------------------------------------------------------------------------------------------------//
 
