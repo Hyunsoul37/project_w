@@ -4,6 +4,7 @@ import data from '../../components/util/wine_add_sweet.json';
 
 const product = ({ list }) => {
   // return <></>;
+  console.log(list);
   return <Product_SM list={list} />;
 };
 export default product;

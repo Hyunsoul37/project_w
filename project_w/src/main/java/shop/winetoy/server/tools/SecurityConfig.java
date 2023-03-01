@@ -53,6 +53,7 @@ public class SecurityConfig {
 			.requestMatchers("/api/join").permitAll()
 			.requestMatchers("/api/product/**").permitAll()
 			.requestMatchers("/api/time").hasRole("ADMIN")
+			.requestMatchers("/api/admin/**").hasRole("ADMIN")
 			.anyRequest().authenticated()
 
 			.and()

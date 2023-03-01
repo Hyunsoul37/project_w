@@ -1,3 +1,4 @@
+import { type } from "os";
 import { Dispatch, SetStateAction, useState } from "react";
 
 interface inputState{
