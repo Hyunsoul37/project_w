@@ -20,6 +20,7 @@ import shop.winetoy.server.member.entity.MemberInfoDto;
 import shop.winetoy.server.member.entity.RefreshDto;
 import shop.winetoy.server.member.service.MemberService;
 import shop.winetoy.server.response.entity.ListResponse;
+import shop.winetoy.server.response.entity.Response;
 import shop.winetoy.server.response.service.ResponseService;
 import shop.winetoy.server.tools.ExceptionCode;
 import shop.winetoy.server.tools.JwtManager;
@@ -76,10 +77,10 @@ public class ApiController {
 	 */
 	@RequestMapping(value = "/auth/id-check", method = RequestMethod.POST)
 	@ResponseBody
-	public IdDuplicateCheckDto duplicateIdCheck(@RequestBody Map<String, String> res) {
+	public Response<IdDuplicateCheckDto> duplicateIdCheck(@RequestBody Map<String, String> res) {
 		IdDuplicateCheckDto result = new IdDuplicateCheckDto();
 		result.setDuplicate(memberDuplicateCheck(res.get("id")));
-		return result;
+		return responseService.getResponse(result);
 	}
 
 	/**
@@ -88,10 +89,10 @@ public class ApiController {
 	 */
 	@RequestMapping(value = "/auth/id-check", method = RequestMethod.GET)
 	@ResponseBody
-	public IdDuplicateCheckDto duplicateIdCheck(String id) {
+	public Response<IdDuplicateCheckDto> duplicateIdCheck(String id) {
 		IdDuplicateCheckDto result = new IdDuplicateCheckDto();
 		result.setDuplicate(memberDuplicateCheck(id));
-		return result;
+		return responseService.getResponse(result);
 	}
 
 	/**
@@ -118,10 +119,10 @@ public class ApiController {
 	 */
 	@RequestMapping(value = "/admin/memberList", method = RequestMethod.GET)
 	@ResponseBody
-	public ListResponse<MemberDto> getMemberList() {
+	public Response<List<MemberDto>> getMemberList() {
 		List<MemberDto> result = memberService.memberList();
 		
-		return responseService.getListResponse(result);
+		return responseService.getResponse(result);
 	}
 
 	/**
@@ -130,7 +131,7 @@ public class ApiController {
 	 */
 	@RequestMapping(value = "/auth/login", method = RequestMethod.POST)
 	@ResponseBody
-	public AuthResult login(@RequestBody MemberDto info) {
+	public Response<AuthResult> login(@RequestBody MemberDto info) {
 		MemberDto result = memberService.memberCheck(info.getId());
 		AuthResult authResult = new AuthResult();
 
@@ -140,7 +141,7 @@ public class ApiController {
 			authResult.setToken(null);
 			authResult.setMessage("id error!");
 
-			return authResult;
+			return responseService.getResponse(authResult);
 		}
 
 		// id는 DB에 있는데 password가 맞지 않는 경우
@@ -148,7 +149,7 @@ public class ApiController {
 			authResult.setToken(null);
 			authResult.setMessage("password error!");
 
-			return authResult;
+			return responseService.getResponse(authResult);
 		}
 
 		MemberInfoDto memberInfo = new MemberInfoDto(result);
@@ -163,7 +164,7 @@ public class ApiController {
 		// 발급된 refresh토큰 DB저장
 		memberService.updateRefreshToken(result.getPid(), refreshToken);
 
-		return authResult;
+		return responseService.getResponse(authResult);
 	}
 
 	/**

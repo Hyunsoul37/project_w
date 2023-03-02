@@ -1,6 +1,6 @@
 package shop.winetoy.server.response.entity;
 
-public class SingleResponse<T> extends CommonResponse {
+public class Response<T> extends CommonResponse {
 	T data;
 
 	public T getData() {
