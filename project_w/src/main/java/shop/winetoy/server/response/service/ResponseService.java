@@ -31,7 +31,7 @@ public class ResponseService {
 	}
 
 	private void setSuccessResponse(CommonResponse response) {
-		response.setCode(0);
+		response.setCode(200);
 		response.setSucess(true);
 		response.setMessage("Success");
 	}
