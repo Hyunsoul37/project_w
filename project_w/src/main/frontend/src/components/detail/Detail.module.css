@@ -32,7 +32,7 @@
     font-size: 27px;
     font-weight: 700;
     text-align: start;
-    margin-top: 20px;
+    margin-top: 10px;
     margin-bottom: 10px;
 }
 .wineName p {
@@ -40,7 +40,7 @@
     font-size: 20px;
     font-weight: 300;
     text-align: start;
-    margin-bottom: 40px;
+    margin-bottom: 25px;
 }
 
 .wineInfo table th{
@@ -61,7 +61,7 @@
     margin-top: 20px;
     padding-top: 20px;
     border-top: 2px solid #EFEFEF;
-    margin-bottom: 30px;
+    margin-bottom: 25px;
 }
 
 .wineTasty table th{
@@ -85,4 +85,41 @@
 .wineFood p{
     font-size: 16px;
     font-weight: bold;
+    margin-bottom: 10px;
+}
+.wineFood img{
+    padding: 3px;
+    width: 65px;
+    height: 65px;
+    border: 3px solid #EFEFEF;
+    border-radius: 65px;
+    margin-right: 10px;
+}
+.wineFoodTextWrapper{
+    display: flex;
+}
+.wineFoodTextWrapper div{
+    width: 65px;
+    margin-right: 10px;
+    margin-top: 5px;
+    text-align: center;
+}
+
+
+.Desc{
+    padding: 200px 150px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.Desc p:first-child{
+    font-size: 18px;
+    font-weight: 800;
+    margin-bottom: 50px;
+}
+.Desc P:last-child{
+    width: 750px;
+    font-size: 18px;
+    text-align: center;
 }
