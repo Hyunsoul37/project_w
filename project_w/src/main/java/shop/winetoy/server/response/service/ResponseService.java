@@ -1,18 +1,19 @@
 package shop.winetoy.server.response.service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
 
 import shop.winetoy.server.response.entity.CommonResponse;
 import shop.winetoy.server.response.entity.ListResponse;
-import shop.winetoy.server.response.entity.SingleResponse;
+import shop.winetoy.server.response.entity.Response;
 
 @Service
 public class ResponseService {
-	public <T> SingleResponse<T> getSingleResponse(T data) {
+	public <T> Response<T> getResponse(T data) {
 
-		SingleResponse<T> singleResponse = new SingleResponse<>();
+		Response<T> singleResponse = new Response<>();
 
 		singleResponse.setData(data);
 		setSuccessResponse(singleResponse);
@@ -32,7 +33,7 @@ public class ResponseService {
 
 	private void setSuccessResponse(CommonResponse response) {
 		response.setCode(200);
-		response.setSucess(true);
 		response.setMessage("Success");
+		response.setTime(LocalDateTime.now());
 	}
 }

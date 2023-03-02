@@ -24,6 +24,8 @@ import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jws;
 import io.jsonwebtoken.Jwts;
 import jakarta.servlet.http.HttpServletRequest;
+import shop.winetoy.server.response.entity.Response;
+import shop.winetoy.server.response.service.ResponseService;
 import shop.winetoy.server.s3.service.S3UpladerService;
 import shop.winetoy.server.tools.JwtManager;
 import shop.winetoy.server.tools.WineDataUpload;
@@ -37,15 +39,17 @@ public class WineController {
 
 	WineService wineService;
 	S3UpladerService s3UpladerService;
-	
+	ResponseService responseService;
+
 	@Value("${custom.access-key}")
 	private String secretAccessKey;
 	final String s3Bucket = "winetoy";
 
 	@Autowired
-	public WineController(WineService wineService, S3UpladerService s3UpladerService) {
+	public WineController(WineService wineService, S3UpladerService s3UpladerService, ResponseService responseService) {
 		this.wineService = wineService;
 		this.s3UpladerService = s3UpladerService;
+		this.responseService = responseService;
 	}
 
 	/**
@@ -80,9 +84,9 @@ public class WineController {
 	 */
 	@RequestMapping(value = "/wine/detail", method = RequestMethod.GET)
 	@ResponseBody
-	public WineDto detailWineList(int pid) {
-
-		return wineService.getWineDetail(pid);
+	public Response<WineDto> detailWineList(int pid) {
+		WineDto result = wineService.getWineDetail(pid);
+		return responseService.getResponse(result);
 	}
 
 	/**
@@ -90,28 +94,27 @@ public class WineController {
 	 */
 	@RequestMapping(value = "/wine/{userId}/search", method = RequestMethod.GET)
 	@ResponseBody
-	public List<WineInfoDto> searchWine(@PathVariable int userId,Integer type, Integer body, Integer sweet, Integer acidity, Integer tannin, Integer price,
-			String country, int page) {
-		
+	public Response<List<WineInfoDto>> searchWine(@PathVariable int userId, Integer type, Integer body, Integer sweet,
+			Integer acidity, Integer tannin, Integer price, String country, int page) {
+
 		List<WineInfoDto> result = null;
 
 		System.out.println(userId);
-		
-		if(userId != 0) {
+
+		if (userId != 0) {
 			result = wineService.searchWineWithPid(userId, type, body, sweet, acidity, tannin, price, country, page);
-		}
-		else {
+		} else {
 			result = wineService.searchWine(type, body, sweet, acidity, tannin, price, country, page);
 		}
-		
-		return result;
+
+		return responseService.getResponse(result);
 	}
-	
+
 	@RequestMapping(value = "/wine/count", method = RequestMethod.GET)
 	@ResponseBody
 	public int searchWine(Integer type, Integer body, Integer sweet, Integer acidity, Integer tannin, Integer price,
 			String country) {
-		
+
 		return wineService.getWineCount(type, body, sweet, acidity, tannin, price, country);
 	}
 
