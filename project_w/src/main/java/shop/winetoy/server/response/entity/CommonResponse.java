@@ -1,16 +1,18 @@
 package shop.winetoy.server.response.entity;
 
+import java.time.LocalDateTime;
+
 public class CommonResponse {
-	private boolean sucess;
 	private int code;
 	private String message;
+	private LocalDateTime time;
 
-	public boolean isSucess() {
-		return sucess;
+	public LocalDateTime getTime() {
+		return time;
 	}
 
-	public void setSucess(boolean sucess) {
-		this.sucess = sucess;
+	public void setTime(LocalDateTime time) {
+		this.time = time;
 	}
 
 	public int getCode() {
