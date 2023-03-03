@@ -1,10 +1,14 @@
-import data from '../../../components/util/wine_add_sweet.json';
-import Detail from '../../../components/detail/Detail.tsx';
-
+import data from "../../../components/util/wine_add_sweet.json";
+import Detail from "../../../components/detail/Detail.tsx";
+import WineTerms from "../../../components/detail/Wineterms";
 const detailPage = ({ id }) => {
   const filterlist = data.filter((d) => d.winePid === Number(id));
-  console.log(filterlist);
-  return <Detail {...filterlist[0]} />;
+  return (
+    <>
+      <Detail {...filterlist[0]} />
+      <WineTerms />
+    </>
+  );
 };
 export default detailPage;
 
