@@ -1,6 +1,6 @@
 package shop.winetoy.server.member.entity;
 
-public class IdDuplicateCheckDto {
+public class DuplicateCheckDto {
 	public boolean duplicate;
 
 	public boolean isDuplicate() {

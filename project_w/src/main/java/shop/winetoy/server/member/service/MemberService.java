@@ -3,10 +3,10 @@ package shop.winetoy.server.member.service;
 import java.util.List;
 
 import shop.winetoy.server.member.entity.MemberDto;
-import shop.winetoy.server.member.entity.RefreshDto;
+import shop.winetoy.server.member.entity.MemberInfoDto;
 
 public interface MemberService {
-	int join(MemberDto memberInfo);
+	MemberInfoDto join(MemberDto memberInfo);
 
 	List<MemberDto> memberList();
 
@@ -14,7 +14,9 @@ public interface MemberService {
 
 	int deleteMemberInfoTable();
 	
-	int updateRefreshToken(Long pid, String refreshToken);
+	int updateRefreshToken(int pid, String refreshToken);
 	
-	MemberDto getRefreshToken(Long pid);
+	MemberDto getRefreshToken(int pid);
+	
+	MemberDto nickNameCheck(String nickName);
 }
