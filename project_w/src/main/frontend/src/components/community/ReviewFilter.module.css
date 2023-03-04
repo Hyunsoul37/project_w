@@ -1,0 +1,84 @@
+.ReviewFilter {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+.ReviewFilter div {
+  height: 40px;
+  border: 2px solid var(--primary);
+  border-radius: 20px;
+}
+.ReviewFilter_Selector {
+  width: 150px;
+  padding: 0px 10px;
+  margin-right: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+}
+.ReviewFilter_Selector p {
+  flex-grow: 1;
+  text-align: center;
+}
+.ReviewFilter_Selector svg {
+  color: var(--primary);
+}
+
+.ReviewFilter_Selector_list {
+  width: 100%;
+  padding: 10px 280px;
+  cursor: pointer;
+  transform-origin: top center;
+  transition: all 0.5s;
+}
+.active {
+  transform: scaleY(1);
+  opacity: 1;
+  margin-bottom: 80px;
+}
+.unactive {
+  transform: scaleY(0);
+  opacity: 0;
+}
+.ReviewFilter_Selector_list ul {
+  padding: 10px 0px;
+  width: 150px;
+  border: 2px solid var(--primary);
+  border-radius: 15px;
+}
+.ReviewFilter_Selector_list li {
+  height: 28px;
+  line-height: 28px;
+  font-size: 15px;
+  border: none;
+  text-align: center;
+}
+.ReviewFilter_Selector_list li:hover {
+  background-color: var(--secondary);
+  color: white;
+  font-weight: 800;
+}
+
+.ReviewFilter_Input {
+  width: 480px;
+  padding-left: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.ReviewFilter_Input input {
+  border: none;
+  height: 24px;
+  font-size: 16px;
+  width: 75%;
+}
+.ReviewFilter_Input button {
+  width: 108px;
+  height: 100%;
+  color: white;
+  background-color: var(--primary);
+  border-radius: 20px;
+  font-size: 16px;
+  font-weight: 800;
+}

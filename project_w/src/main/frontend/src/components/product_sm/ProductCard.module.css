@@ -20,15 +20,8 @@
   height: 200px;
   width: 200px;
 }
-.heart {
-  position: absolute;
-  bottom: 0px;
-  right: 0px;
-  color: var(--primary-txt);
-  padding: 8px;
-  font-size: 18px;
-}
-.ProductCard a p[id='name_ko'] {
+
+.ProductCard a p[id="name_ko"] {
   width: 210px;
   font-size: 15px;
   margin: 10px 0px;
@@ -49,7 +42,7 @@
   font-size: 10px;
   margin-bottom: 10px;
 }
-.ProductCard p[id='name_en'] {
+.ProductCard p[id="name_en"] {
   width: 90%;
   color: var(--primary-txt);
   height: 15px;
@@ -59,7 +52,7 @@
   text-align: center;
   line-height: 15px;
 }
-.ProductCard p[id='desc'] {
+.ProductCard p[id="desc"] {
   color: #cccc;
   width: 137px;
   height: 15px;
@@ -81,4 +74,9 @@
   padding: 5px;
   border-radius: 15px;
   margin-right: 10px;
+}
+.heart {
+  position: absolute;
+  bottom: 5px;
+  right: 5px;
 }

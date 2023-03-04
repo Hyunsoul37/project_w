@@ -1,4 +1,4 @@
-import data from "../../../components/util/wine_add_sweet.json";
+import data from "../../../components/dummydata/wine_add_sweet.json";
 import Detail from "../../../components/detail/Detail.tsx";
 import WineTerms from "../../../components/detail/Wineterms";
 const detailPage = ({ id }) => {
