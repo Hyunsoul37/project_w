@@ -4,7 +4,7 @@ public class AuthResult {
 	private String message;
 	private String token;
 	private String refreshToken;
-	private MemberInfoDto data;
+	private MemberInfoDto memberInfo;
 
 	public String getMessage() {
 		return message;
@@ -22,12 +22,12 @@ public class AuthResult {
 		this.token = token;
 	}
 
-	public MemberInfoDto getData() {
-		return data;
+	public MemberInfoDto getMemberInfo() {
+		return memberInfo;
 	}
 
-	public void setData(MemberInfoDto data) {
-		this.data = data;
+	public void setMemberInfo(MemberInfoDto memberInfo) {
+		this.memberInfo = memberInfo;
 	}
 
 	public String getRefreshToken() {
@@ -40,8 +40,8 @@ public class AuthResult {
 
 	@Override
 	public String toString() {
-		return "AuthResult [message=" + message + ", token=" + token + ", refreshToken=" + refreshToken + ", data="
-				+ data + "]";
+		return "AuthResult [message=" + message + ", token=" + token + ", refreshToken=" + refreshToken + ", memberInfo="
+				+ memberInfo + "]";
 	}
 
 }

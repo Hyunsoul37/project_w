@@ -3,10 +3,11 @@ package shop.winetoy.server.member.entity;
 import java.util.Date;
 
 public class MemberDto {
-	private Long pid;
+	private int pid;
 	private String id;
 	private String password;
 	private String name;
+	private String nickName;
 	private String email;
 	private String address;
 	private String phone;
@@ -14,11 +15,11 @@ public class MemberDto {
 	private String role;
 	private String refreshToken;
 
-	public Long getPid() {
+	public int getPid() {
 		return pid;
 	}
 
-	public void setPid(Long pid) {
+	public void setPid(int pid) {
 		this.pid = pid;
 	}
 
@@ -44,6 +45,14 @@ public class MemberDto {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public String getNickName() {
+		return nickName;
+	}
+
+	public void setNickName(String nickName) {
+		this.nickName = nickName;
 	}
 
 	public String getEmail() {
@@ -96,9 +105,9 @@ public class MemberDto {
 
 	@Override
 	public String toString() {
-		return "MemberDto [pid=" + pid + ", id=" + id + ", password=" + password + ", name=" + name + ", email=" + email
-				+ ", address=" + address + ", phone=" + phone + ", regiDate=" + regiDate + ", role=" + role
-				+ ", refreshToken=" + refreshToken + "]";
+		return "MemberDto [pid=" + pid + ", id=" + id + ", password=" + password + ", name=" + name + ", nickName="
+				+ nickName + ", email=" + email + ", address=" + address + ", phone=" + phone + ", regiDate=" + regiDate
+				+ ", role=" + role + ", refreshToken=" + refreshToken + "]";
 	}
 
 }

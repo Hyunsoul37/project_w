@@ -3,10 +3,10 @@ package shop.winetoy.server.member.entity;
 import java.util.Date;
 
 public class MemberInfoDto {
-	private Long pid;
+	private int pid;
 	private String id;
-	private String password;
 	private String name;
+	private String nickName;
 	private String email;
 	private String address;
 	private String phone;
@@ -16,20 +16,22 @@ public class MemberInfoDto {
 	public MemberInfoDto(MemberDto memberDto) {
 		this.pid = memberDto.getPid();
 		this.id = memberDto.getId();
-		this.password = memberDto.getPassword();
 		this.name = memberDto.getName();
+		this.nickName = memberDto.getNickName();
 		this.email = memberDto.getEmail();
 		this.address = memberDto.getAddress();
 		this.phone = memberDto.getPhone();
 		this.regiDate = memberDto.getRegiDate();
 		this.role = memberDto.getRole();
 	}
+
+	public MemberInfoDto() { }
 	
-	public Long getPid() {
+	public int getPid() {
 		return pid;
 	}
 
-	public void setPid(Long pid) {
+	public void setPid(int pid) {
 		this.pid = pid;
 	}
 
@@ -41,20 +43,20 @@ public class MemberInfoDto {
 		this.id = id;
 	}
 
-	public String getPassword() {
-		return password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
-	}
-
 	public String getName() {
 		return name;
 	}
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public String getNickName() {
+		return nickName;
+	}
+
+	public void setNickName(String nickName) {
+		this.nickName = nickName;
 	}
 
 	public String getEmail() {
@@ -99,9 +101,9 @@ public class MemberInfoDto {
 
 	@Override
 	public String toString() {
-		return "MemberInfoDto [pid=" + pid + ", id=" + id + ", password=" + password + ", name=" + name + ", email="
+		return "MemberInfoDto [pid=" + pid + ", id=" + id + ", name=" + name + ", nickName=" + nickName + ", email="
 				+ email + ", address=" + address + ", phone=" + phone + ", regiDate=" + regiDate + ", role=" + role
 				+ "]";
 	}
-
+	
 }
