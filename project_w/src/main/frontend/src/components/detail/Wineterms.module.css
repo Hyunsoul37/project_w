@@ -45,6 +45,7 @@
   width: 85%;
   text-align: center;
   white-space: pre-wrap;
+  word-break: keep-all;
   font-size: 18px;
   line-height: 30px;
   color: #555;
