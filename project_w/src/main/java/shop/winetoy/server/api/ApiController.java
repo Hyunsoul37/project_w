@@ -14,12 +14,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import shop.winetoy.server.member.entity.AuthResult;
-import shop.winetoy.server.member.entity.IdDuplicateCheckDto;
+import shop.winetoy.server.member.entity.DuplicateCheckDto;
 import shop.winetoy.server.member.entity.MemberDto;
 import shop.winetoy.server.member.entity.MemberInfoDto;
 import shop.winetoy.server.member.entity.RefreshDto;
 import shop.winetoy.server.member.service.MemberService;
-import shop.winetoy.server.response.entity.ListResponse;
 import shop.winetoy.server.response.entity.Response;
 import shop.winetoy.server.response.service.ResponseService;
 import shop.winetoy.server.tools.ExceptionCode;
@@ -77,8 +76,8 @@ public class ApiController {
 	 */
 	@RequestMapping(value = "/auth/id-check", method = RequestMethod.POST)
 	@ResponseBody
-	public Response<IdDuplicateCheckDto> duplicateIdCheck(@RequestBody Map<String, String> res) {
-		IdDuplicateCheckDto result = new IdDuplicateCheckDto();
+	public Response<DuplicateCheckDto> duplicateIdCheck(@RequestBody Map<String, String> res) {
+		DuplicateCheckDto result = new DuplicateCheckDto();
 		result.setDuplicate(memberDuplicateCheck(res.get("id")));
 		return responseService.getResponse(result);
 	}
@@ -89,9 +88,20 @@ public class ApiController {
 	 */
 	@RequestMapping(value = "/auth/id-check", method = RequestMethod.GET)
 	@ResponseBody
-	public Response<IdDuplicateCheckDto> duplicateIdCheck(String id) {
-		IdDuplicateCheckDto result = new IdDuplicateCheckDto();
+	public Response<DuplicateCheckDto> duplicateIdCheck(String id) {
+		DuplicateCheckDto result = new DuplicateCheckDto();
 		result.setDuplicate(memberDuplicateCheck(id));
+		return responseService.getResponse(result);
+	}
+	
+	/**
+	 * 닉네임 중복 체크
+	 */
+	@RequestMapping(value = "/auth/nickname-check", method = RequestMethod.GET)
+	@ResponseBody
+	public Response<DuplicateCheckDto> duplicateNickNameCheck(String nickName){
+		DuplicateCheckDto result = new DuplicateCheckDto();
+		result.setDuplicate(nickNameDuplicateCheck(nickName));
 		return responseService.getResponse(result);
 	}
 
@@ -101,16 +111,17 @@ public class ApiController {
 	 */
 	@RequestMapping(value = "/join", method = RequestMethod.POST)
 	@ResponseBody
-	public int join(@RequestBody MemberDto info) {
-		boolean isDuplicate = memberDuplicateCheck(info.getId());
-
-		if (isDuplicate == true) {
-			return 0;
+	public Response<MemberInfoDto> join(@RequestBody MemberDto info) {
+		boolean isIdDuplicate = memberDuplicateCheck(info.getId());
+		boolean isNickNameDuplicate  = nickNameDuplicateCheck(info.getNickName());
+		
+		if (isIdDuplicate || isNickNameDuplicate) {
+			return null;
 		}
 
-		int result = memberService.join(info);
+		MemberInfoDto result = memberService.join(info);
 
-		return result;
+		return responseService.getResponse(result);
 	}
 
 	/**
@@ -159,7 +170,7 @@ public class ApiController {
 		authResult.setToken(accessToken);
 		authResult.setRefreshToken(refreshToken);
 		authResult.setMessage("success");
-		authResult.setData(memberInfo);
+		authResult.setMemberInfo(memberInfo);
 
 		// 발급된 refresh토큰 DB저장
 		memberService.updateRefreshToken(result.getPid(), refreshToken);
@@ -221,7 +232,15 @@ public class ApiController {
 		if (result == null) {
 			return false;
 		}
-
+		return true;
+	}
+	
+	private boolean nickNameDuplicateCheck(String nickName) {
+		MemberDto result = memberService.nickNameCheck(nickName);
+		
+		if(result == null)
+			return false;
+		
 		return true;
 	}
 

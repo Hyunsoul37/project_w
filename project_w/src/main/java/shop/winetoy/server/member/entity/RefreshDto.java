@@ -1,14 +1,14 @@
 package shop.winetoy.server.member.entity;
 
 public class RefreshDto {
-	private Long pid;
+	private int pid;
 	private String refreshToken;
 
-	public Long getPid() {
+	public int getPid() {
 		return pid;
 	}
 
-	public void setPid(Long pid) {
+	public void setPid(int pid) {
 		this.pid = pid;
 	}
 

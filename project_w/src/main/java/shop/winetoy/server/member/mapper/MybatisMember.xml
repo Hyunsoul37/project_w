@@ -3,26 +3,31 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="shop.winetoy.server.member.dao.MemberDao">
+	
 	<insert id="join"
-		parameterType="shop.winetoy.server.member.entity.MemberDto">
+		parameterType="shop.winetoy.server.member.entity.MemberDto"
+		useGeneratedKeys="true" keyProperty="pid">
 		INSERT INTO `member`
 		(
-		`id`,
-		`password`,
-		`name`,
-		`email`,
-		`address`,
-		`phone`
+			`id`,
+			`password`,
+			`name`,
+			`nick_name`,
+			`email`,
+			`address`,
+			`phone`
 		)
 		VALUES
 		(
-		#{id},
-		#{password},
-		#{name},
-		#{email},
-		#{address},
-		#{phone}
+			#{id},
+			#{password},
+			#{name},
+			#{nickName},
+			#{email},
+			#{address},
+			#{phone}
 		);
+	
 	</insert>
 
 	<select id="memberList"
@@ -53,4 +58,13 @@
 		select * from member where pid = #{pid};
 	</select>
 
+	<select id="nickNameCheck"
+		resultType="shop.winetoy.server.member.entity.MemberDto">
+		select * from member where nick_name = #{nickName};
+	</select>
+
+	<select id="getMemberInfo"
+		resultType="shop.winetoy.server.member.entity.MemberInfoDto">
+		select * from member where pid = #{pid};
+	</select>
 </mapper>
