@@ -24,7 +24,7 @@
   margin-bottom: 150px;
   transform-origin: top center;
 }
-.showfilter{
+.showfilter {
   animation: Ani 0.5s forwards;
 }
 .offfilter {
@@ -43,7 +43,7 @@
 .inputbox label {
   margin-right: 32px;
 }
-.inputbox input[type='range'] {
+.inputbox input[type="range"] {
   width: 600px;
 }
 .inputbox p {

@@ -1,6 +1,6 @@
-import { useDispatch, useSelector } from 'react-redux';
-import Product_SM from '../../components/product_sm/Product_SM';
-import data from '../../components/util/wine_add_sweet.json';
+import { useDispatch, useSelector } from "react-redux";
+import Product_SM from "../../components/product_sm/Product_SM";
+import data from "../../components/dummydata/wine_add_sweet.json";
 
 const product = ({ list }) => {
   // return <></>;

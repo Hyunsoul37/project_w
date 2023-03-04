@@ -1,8 +1,8 @@
-import { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { useRouter } from 'next/router';
-import { logout, DataClear } from '../../slice/userSlice';
-import styled from './Header.module.css';
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useRouter } from "next/router";
+import { logout, DataClear } from "../../slice/userSlice";
+import styled from "./Header.module.css";
 
 const Header = () => {
   const router = useRouter();
@@ -12,7 +12,7 @@ const Header = () => {
   const [headerBG, setHeaderBg] = useState(false);
 
   const LoginBtnHandler = () => {
-    router.push('/login');
+    router.push("/login");
   };
   const LogOutHandler = () => {
     dispatch(logout());
@@ -31,34 +31,33 @@ const Header = () => {
   };
 
   useEffect(() => {
-    window.addEventListener('scroll', HeaderFadeHandler);
+    window.addEventListener("scroll", HeaderFadeHandler);
   }, []);
 
   return (
     <div
-      className={[styled.headerWrapper, headerBG ? styled.activebg : ''].join(
-        ' '
+      className={[styled.headerWrapper, headerBG ? styled.activebg : ""].join(
+        " "
       )}
     >
       <div className="maxframe">
         <div className={styled.Header}>
-          <span
-            className={styled.logo}
-            onClick={() => router.push('/')}
-          >
+          <span className={styled.logo} onClick={() => router.push("/")}>
             WAGU
           </span>
           <div className={styled.btnWrapper}>
             <span
               onClick={() =>
-                router.push({ pathname: '/product', query: { page: 1 } })
+                router.push({ pathname: "/product", query: { page: 1 } })
               }
             >
               PRODUCT
             </span>
-            <span onClick={() => router.push('/community')}>COMMUNITY</span>
-            <span onClick={() => router.push('/QnA')}>QnA</span>
-            <span onClick={() => router.push('/notice')}>NOTICE</span>
+            <span onClick={() => router.push({ pathname: "/community" })}>
+              COMMUNITY
+            </span>
+            <span onClick={() => router.push("/QnA")}>QnA</span>
+            <span onClick={() => router.push("/notice")}>NOTICE</span>
           </div>
           <div className={styled.btnWrapper}>
             {user.isLoggedIn ? (
@@ -68,7 +67,7 @@ const Header = () => {
               </>
             ) : (
               <>
-                <span onClick={() => router.push('/login/join')}>SIGN IN</span>
+                <span onClick={() => router.push("/login/join")}>SIGN IN</span>
                 <span onClick={LoginBtnHandler}>LOGIN</span>
               </>
             )}
