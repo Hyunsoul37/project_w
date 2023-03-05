@@ -1,0 +1,135 @@
+.Detail {
+  padding-top: 250px;
+  display: flex;
+  width: 100%;
+  height: 100%;
+  border-bottom: 2px solid #efefef;
+}
+.wineInfoWrapper {
+  flex-grow: 1;
+}
+.imageWrapper {
+  width: 400px;
+  height: 400px;
+  background-color: #efefef;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 68px;
+}
+.imageWrapper img {
+  width: 318px;
+  height: 318px;
+  position: absolute;
+}
+
+.wineName {
+  width: 100%;
+}
+.wineName h4 {
+  font-size: 27px;
+  font-weight: 700;
+  text-align: start;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+.wineName p {
+  color: #cccccc;
+  font-size: 20px;
+  font-weight: 300;
+  text-align: start;
+  margin-bottom: 25px;
+}
+
+.wineInfo table th {
+  text-align: start;
+  padding-right: 30px;
+}
+.wineInfo table tr {
+  height: 30px;
+}
+.wineInfo table td {
+  text-align: start;
+}
+.wineInfo table td:nth-child(2) {
+  padding-right: 100px;
+}
+
+.wineTasty {
+  margin-top: 20px;
+  padding-top: 20px;
+  border-top: 2px solid #efefef;
+  margin-bottom: 25px;
+}
+
+.wineTasty table th {
+  text-align: start;
+  padding-right: 30px;
+}
+.wineTasty table tr {
+  height: 30px;
+}
+.wineTasty table td {
+  text-align: start;
+}
+.wineTasty table td:nth-child(2) {
+  padding-right: 100px;
+}
+.wineTasty table td svg {
+  margin-right: 5px;
+  color: var(--primary);
+}
+
+.wineFood p {
+  font-size: 16px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+.wineFood img {
+  padding: 3px;
+  width: 65px;
+  height: 65px;
+  border: 3px solid #efefef;
+  border-radius: 65px;
+  margin-right: 10px;
+}
+.wineFoodTextWrapper {
+  display: flex;
+}
+.wineFoodTextWrapper div {
+  width: 65px;
+  margin-right: 10px;
+  margin-top: 5px;
+  text-align: center;
+}
+
+.Desc {
+  padding: 100px 0px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  position: relative;
+}
+.Desc img {
+  opacity: 0.3;
+  width: 100%;
+  height: 455px;
+}
+
+.Desctitle {
+  position: absolute;
+  top: 300px;
+  font-size: 18px;
+  font-weight: 800;
+  /* margin-bottom: 50px; */
+}
+.desctext {
+  position: absolute;
+  top: 340px;
+  width: 750px;
+  font-size: 18px;
+  text-align: center;
+  line-height: 28px;
+}
