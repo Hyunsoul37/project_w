@@ -31,13 +31,13 @@ public class S3UploaderController {
 		return s3UpladerService.upload(file, "winetoy", "video");
 	}
 
-//	@RequestMapping(value = "/image-upload", method = RequestMethod.POST)
-//	@ResponseBody
-//	public String imageUpload(@RequestParam(value = "file", required = false) MultipartFile file)
-//			throws IOException {
-//		return s3UpladerService.upload(file, "winetoy", "image");
-//	}
-//
+	@RequestMapping(value = "/api/product/image-upload", method = RequestMethod.POST)
+	@ResponseBody
+	public String imageUpload_test(@RequestParam(value = "file", required = false) MultipartFile file)
+			throws IOException {
+		return s3UpladerService.upload(file, "winetoy", "image");
+	}
+
 //	@RequestMapping(value = "/video-upload", method = RequestMethod.POST)
 //	@ResponseBody
 //	public String videoUpload(@RequestParam(value = "file", required = false) MultipartFile file)

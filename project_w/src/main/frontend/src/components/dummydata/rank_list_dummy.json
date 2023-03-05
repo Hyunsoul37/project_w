@@ -1,0 +1,162 @@
+[
+  {
+    "winetype": "레드",
+    "image": "/images/main_flow1.png",
+    "pdname": "블라블라숑 레드1",
+    "pdprice": 12900,
+    "sweetness": 1,
+    "acidity": 3
+  },
+  {
+    "winetype": "주정강화",
+    "image": "/images/main_flow2.png",
+    "pdname": "블라블라숑 주정강화1",
+    "pdprice": 12900,
+    "sweetness": 3,
+    "acidity": 2
+  },
+  {
+    "winetype": "화이트",
+    "image": "/images/main_flow3.png",
+    "pdname": "블라블라숑 화이트4",
+    "pdprice": 12900,
+    "sweetness": 3,
+    "acidity": 2
+  },
+  {
+    "winetype": "스파클링",
+    "image": "/images/main_flow4.png",
+    "pdname": "블라블라숑 스파클링0232",
+    "pdprice": 12900,
+    "sweetness": 1,
+    "acidity": 2
+  },
+  {
+    "winetype": "레드",
+    "image": "/images/main_flow5.png",
+    "pdname": "블라블라숑 레드2",
+    "pdprice": 12900,
+    "sweetness": 3,
+    "acidity": 4
+  },
+  {
+    "winetype": "화이트",
+    "image": "/images/main_flow0.png",
+    "pdname": "블라블라숑 화이트2098",
+    "pdprice": 12900,
+    "sweetness": 3,
+    "acidity": 3
+  },
+  {
+    "winetype": "레드",
+    "image": "/images/main_flow6.png",
+    "pdname": "블라블라숑 레드3",
+    "pdprice": 12900,
+    "sweetness": 1,
+    "acidity": 3
+  },
+  {
+    "winetype": "화이트",
+    "image": "/images/main_flow7.png",
+    "pdname": "블라블라숑 화이트2098",
+    "pdprice": 12900,
+    "sweetness": 3,
+    "acidity": 3
+  },
+  {
+    "winetype": "주정강화",
+    "image": "/images/main_flow8.png",
+    "pdname": "블라블라숑 주정강화2",
+    "pdprice": 12900,
+    "sweetness": 3,
+    "acidity": 2
+  },
+  {
+    "winetype": "주정강화",
+    "image": "/images/main_flow9.png",
+    "pdname": "블라블라숑 주정강화3",
+    "pdprice": 12900,
+    "sweetness": 3,
+    "acidity": 2
+  },
+  {
+    "winetype": "주정강화",
+    "image": "/images/main_flow10.png",
+    "pdname": "블라블라숑 주정강화4",
+    "pdprice": 12900,
+    "sweetness": 3,
+    "acidity": 2
+  },
+  {
+    "winetype": "주정강화",
+    "image": "/images/main_flow11.png",
+    "pdname": "블라블라숑 주정강화5",
+    "pdprice": 12900,
+    "sweetness": 3,
+    "acidity": 2
+  },
+  {
+    "winetype": "화이트",
+    "image": "/images/main_flow12.png",
+    "pdname": "블라블라숑 화이트208",
+    "pdprice": 12900,
+    "sweetness": 3,
+    "acidity": 3
+  },
+  {
+    "winetype": "화이트",
+    "image": "/images/main_flow13.png",
+    "pdname": "블라블라숑 화이트98",
+    "pdprice": 12900,
+    "sweetness": 3,
+    "acidity": 3
+  },
+  {
+    "winetype": "레드",
+    "image": "/images/main_flow14.png",
+    "pdname": "블라블라숑 레드4",
+    "pdprice": 12900,
+    "sweetness": 3,
+    "acidity": 4
+  },
+  {
+    "winetype": "레드",
+    "image": "/images/main_flow6.png",
+    "pdname": "블라블라숑 레드5",
+    "pdprice": 12900,
+    "sweetness": 3,
+    "acidity": 4
+  },
+  {
+    "winetype": "스파클링",
+    "image": "/images/main_flow1.png",
+    "pdname": "블라블라숑 스파클링2",
+    "pdprice": 12900,
+    "sweetness": 1,
+    "acidity": 2
+  },
+  {
+    "winetype": "스파클링",
+    "image": "/images/main_flow2.png",
+    "pdname": "블라블라숑 스파클링0232",
+    "pdprice": 12900,
+    "sweetness": 1,
+    "acidity": 2
+  },
+  {
+    "winetype": "스파클링",
+    "image": "/images/main_flow3.png",
+    "pdname": "블라블라숑 스파클링232",
+    "pdprice": 12900,
+    "sweetness": 1,
+    "acidity": 2
+  },
+  {
+    "winetype": "스파클링",
+    "image": "/images/main_flow4.png",
+    "pdname": "블라블라숑 스파클링022",
+    "pdprice": 12900,
+    "sweetness": 4,
+    "acidity": 2
+  }
+]
