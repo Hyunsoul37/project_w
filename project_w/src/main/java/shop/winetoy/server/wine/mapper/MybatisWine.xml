@@ -7,41 +7,41 @@
 		parameterType="shop.winetoy.server.wine.entity.WineDto">
 		INSERT INTO `wineToy`.`wine`
 		(
-		`type`,
-		`kor_name`,
-		`eng_name`,
-		`star_point`,
-		`price`,
-		`sweet`,
-		`body`,
-		`acidity`,
-		`tannin`,
-		`alcohol`,
-		`country`,
-		`region`,
-		`grape_variety`,
-		`recommended_snack`,
-		`desc`,
-		`image_url`
+			`type`,
+			`kor_name`,
+			`eng_name`,
+			`star_point`,
+			`price`,
+			`sweet`,
+			`body`,
+			`acidity`,
+			`tannin`,
+			`alcohol`,
+			`country`,
+			`region`,
+			`grape_variety`,
+			`recommended_snack`,
+			`desc`,
+			`image_url`
 		)
 		VALUES
 		(
-		#{type},
-		#{korName},
-		#{engName},
-		#{starPoint},
-		#{price},
-		#{sweet},
-		#{body},
-		#{acidity},
-		#{tannin},
-		#{alcohol},
-		#{country},
-		#{region},
-		#{grapeVariety},
-		#{recommendedSnack},
-		#{desc},
-		#{imageUrl}
+			#{type},
+			#{korName},
+			#{engName},
+			#{starPoint},
+			#{price},
+			#{sweet},
+			#{body},
+			#{acidity},
+			#{tannin},
+			#{alcohol},
+			#{country},
+			#{region},
+			#{grapeVariety},
+			#{recommendedSnack},
+			#{desc},
+			#{imageUrl}
 		);
 	</insert>
 
