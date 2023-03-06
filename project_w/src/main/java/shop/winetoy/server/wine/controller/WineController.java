@@ -4,14 +4,12 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -20,14 +18,9 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.Jws;
-import io.jsonwebtoken.Jwts;
-import jakarta.servlet.http.HttpServletRequest;
 import shop.winetoy.server.response.entity.Response;
 import shop.winetoy.server.response.service.ResponseService;
 import shop.winetoy.server.s3.service.S3UpladerService;
-import shop.winetoy.server.tools.JwtManager;
 import shop.winetoy.server.tools.WineDataUpload;
 import shop.winetoy.server.wine.entity.WineDto;
 import shop.winetoy.server.wine.entity.WineInfoDto;
@@ -59,7 +52,7 @@ public class WineController {
 	 */
 	@RequestMapping(value = "/wine", method = RequestMethod.POST)
 	@ResponseBody
-	public int registerWine(@RequestParam(value = "file", required = false) MultipartFile file,
+	public Response<WineDto> registerWine(@RequestParam(value = "file", required = false) MultipartFile file,
 			@RequestParam String wine) {
 
 		ObjectMapper mapper = new ObjectMapper();
@@ -71,11 +64,11 @@ public class WineController {
 
 			registerWine.setImageUrl(imgUrl);
 
-			return wineService.registerWine(registerWine);
+			return responseService.getResponse(wineService.registerWine(registerWine)); 
 
 		} catch (Exception e) {
 			e.printStackTrace();
-			return 0;
+			return responseService.getResponse(null);
 		}
 	}
 
@@ -188,7 +181,7 @@ public class WineController {
 
 				ObjectMapper mapper = new ObjectMapper();
 				String jsonString = mapper.writeValueAsString(wine);
-				index += registerWine(multipartFile, jsonString);
+				index += registerWine(multipartFile, jsonString) == null ? 0 : 1;
 //				System.out.println(wine.getT);
 				System.out.println(index);
 

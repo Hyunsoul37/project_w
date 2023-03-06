@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import shop.winetoy.server.s3.service.S3UpladerService;
 import shop.winetoy.server.wine.dao.WineDao;
@@ -18,8 +19,12 @@ public class WineServiceImp implements WineService {
 	S3UpladerService s3Uploader;
 
 	@Override
-	public int registerWine(WineDto registerWine) {
-		return wineDao.registerWine(registerWine);
+	@Transactional
+	public WineDto registerWine(WineDto registerWine) {
+		wineDao.registerWine(registerWine);
+		WineDto result = wineDao.getWineDetail(registerWine.getPid());
+		
+		return result;
 	}
 
 	@Override
