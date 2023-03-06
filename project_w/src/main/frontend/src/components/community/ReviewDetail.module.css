@@ -1,0 +1,36 @@
+.ReviewDetail {
+  padding: 150px 0px;
+}
+.ReviewDetail h1 {
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+.ReviewDetail h3 {
+  margin-bottom: 80px;
+  font-size: 16px;
+  color: #bcbcbc;
+}
+.HeaderImage {
+  height: 280px;
+  overflow: hidden;
+  position: relative;
+}
+.HeaderImage div {
+  background-color: rgba(0, 0, 0, 0.3);
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.HeaderImage div p {
+  color: white;
+  font-size: 24px;
+}
+.HeaderImage img {
+  width: 100%;
+  position: absolute;
+  top: -150%;
+  left: 0;
+}
