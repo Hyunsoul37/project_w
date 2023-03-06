@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import shop.winetoy.server.member.entity.AuthResult;
@@ -72,23 +73,12 @@ public class ApiController {
 	}
 
 	/**
-	 * ID 중복 체크 (POST)
-	 */
-	@RequestMapping(value = "/auth/id-check", method = RequestMethod.POST)
-	@ResponseBody
-	public Response<DuplicateCheckDto> duplicateIdCheck(@RequestBody Map<String, String> res) {
-		DuplicateCheckDto result = new DuplicateCheckDto();
-		result.setDuplicate(memberDuplicateCheck(res.get("id")));
-		return responseService.getResponse(result);
-	}
-
-	/**
 	 * ID 중복 체크 (GET + Query String)
 	 * https://www.notion.so/ID-d778d565471546eeae4748acdb3a93de?pvs=4
 	 */
 	@RequestMapping(value = "/auth/id-check", method = RequestMethod.GET)
 	@ResponseBody
-	public Response<DuplicateCheckDto> duplicateIdCheck(String id) {
+	public Response<DuplicateCheckDto> duplicateIdCheck(@RequestParam(required = true)  String id) {
 		DuplicateCheckDto result = new DuplicateCheckDto();
 		result.setDuplicate(memberDuplicateCheck(id));
 		return responseService.getResponse(result);
@@ -96,10 +86,11 @@ public class ApiController {
 	
 	/**
 	 * 닉네임 중복 체크
+	 * https://www.notion.so/990376f83a1c484e8812c4ed425f05d4?pvs=4
 	 */
 	@RequestMapping(value = "/auth/nickname-check", method = RequestMethod.GET)
 	@ResponseBody
-	public Response<DuplicateCheckDto> duplicateNickNameCheck(String nickName){
+	public Response<DuplicateCheckDto> duplicateNickNameCheck(@RequestParam(required = true) String nickName){
 		DuplicateCheckDto result = new DuplicateCheckDto();
 		result.setDuplicate(nickNameDuplicateCheck(nickName));
 		return responseService.getResponse(result);
@@ -180,13 +171,11 @@ public class ApiController {
 
 	/**
 	 * refreshToken으로 Access토큰 재발급
-	 * 
-	 * @param requestRefreshToken
-	 * @return
+	 * https://www.notion.so/AccessToken-2b7825b3a66144e5a8ece6248d36e737?pvs=4
 	 */
 	@RequestMapping(value = "/auth/refresh", method = RequestMethod.POST)
 	@ResponseBody
-	public Map<String, String> reissueAccessToken(@RequestBody RefreshDto requestRefreshToken) {
+	public Response<Map<String, String>> reissueAccessToken(@RequestBody RefreshDto requestRefreshToken) {
 
 		Map<String, String> response = new HashMap<String, String>();
 		String responseString = "response Message";
@@ -194,36 +183,36 @@ public class ApiController {
 		MemberDto result = memberService.getRefreshToken(requestRefreshToken.getPid());
 		if (!jwtManager.validationRefreshToken(requestRefreshToken.getRefreshToken())) {
 			response.put(responseString , ExceptionCode.EXPIRED_TOKEN);
-			return response;
+			return responseService.getResponse(response);
 		} 
 		
 		if(!result.getRefreshToken().equals(requestRefreshToken.getRefreshToken())) {
 			System.out.println(!result.getRefreshToken().equals(requestRefreshToken.getRefreshToken()));
 			response.put(responseString , ExceptionCode.INVALID_TOKEN);
-			return response;
+			return responseService.getResponse(response);
 		}
 
 		String accessToken = jwtManager.generateAccessToken(result);
 		response.put(responseString , accessToken);
-		return response;
+		return responseService.getResponse(response);
 	}
 
-	/**
-	 * DB memberInfo Table 초기화 API
-	 * 
-	 * @return
-	 */
-	@RequestMapping(value = "/member", method = RequestMethod.DELETE)
-	@ResponseBody
-	public Map<String, Integer> deleteMemberInfoTable() {
-		Map<String, Integer> data = new HashMap<String, Integer>();
-
-		int result = memberService.deleteMemberInfoTable();
-
-		data.put("deleteCount", result);
-
-		return data;
-	}
+//	/**
+//	 * DB memberInfo Table 초기화 API
+//	 * 
+//	 * @return
+//	 */
+//	@RequestMapping(value = "/member", method = RequestMethod.DELETE)
+//	@ResponseBody
+//	public Map<String, Integer> deleteMemberInfoTable() {
+//		Map<String, Integer> data = new HashMap<String, Integer>();
+//
+//		int result = memberService.deleteMemberInfoTable();
+//
+//		data.put("deleteCount", result);
+//
+//		return data;
+//	}
 
 	// -----------------------------------------------------------------------------------//
 
