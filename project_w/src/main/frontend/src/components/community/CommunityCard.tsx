@@ -2,6 +2,7 @@ import styled from "./CommunityCard.module.css";
 import { reviewState } from "./ReviewTypes";
 import Heart from "../util/Heart";
 import { useEffect, useState } from "react";
+import Link from "next/link";
 
 const CommunityCard: React.FC<reviewState> = (props) => {
   const [heartnum, setHeartNum] = useState(props.heartCount);
@@ -36,12 +37,35 @@ const CommunityCard: React.FC<reviewState> = (props) => {
         </div>
       </div>
       <div className={styled.CommunityCard_Image}>
-        <img src={`/images/review/${data.reviewimage[0]}.PNG`} />
+        <Link
+          href={{
+            pathname: `/community/detail/${props.reviewId}`,
+            query: {
+              id: props.reviewId,
+            },
+          }}
+        >
+          <img src={`/images/review/${data.reviewimage[0]}.PNG`} />
+        </Link>
       </div>
       <div className={styled.CommunityCard_Contents}>
-        <h4>{props.reviewTitle}</h4>
-        <p>{props.reviewContents}</p>
+        <Link
+          href={{
+            pathname: `/community/detail/${props.reviewId}`,
+            query: {
+              id: props.reviewId,
+            },
+          }}
+        >
+          <h4 className={styled.CommunityCard_Contents_title}>
+            {props.reviewTitle}
+          </h4>
+          <p className={styled.CommunityCard_Contents_text}>
+            {props.reviewContents}
+          </p>
+        </Link>
       </div>
+
       <div className={styled.CommunityCard_hashTag}>
         {data.hashTag.map((hashTag) => (
           <span>#{hashTag}</span>
