@@ -1,4 +1,5 @@
 export interface reviewState {
+  reviewId: number;
   nickname: string;
   heartCount: number;
   reviewTitle: string;
@@ -7,4 +8,5 @@ export interface reviewState {
   wineName: string;
   price: string;
   hashTag: string[];
+  wineType: string;
 }
