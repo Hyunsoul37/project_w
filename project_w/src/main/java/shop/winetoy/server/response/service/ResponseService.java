@@ -21,19 +21,19 @@ public class ResponseService {
 		return singleResponse;
 	}
 
-	public <T> ListResponse<T> getListResponse(List<T> data) {
-
-		ListResponse<T> listResponse = new ListResponse<>();
-
-		listResponse.setData(data);
-		setSuccessResponse(listResponse);
-
-		return listResponse;
-	}
-
 	private void setSuccessResponse(CommonResponse response) {
 		response.setCode(200);
 		response.setMessage("Success");
 		response.setTime(LocalDateTime.now());
 	}
+	
+//	public <T> ListResponse<T> getListResponse(List<T> data) {
+//
+//		ListResponse<T> listResponse = new ListResponse<>();
+//
+//		listResponse.setData(data);
+//		setSuccessResponse(listResponse);
+//
+//		return listResponse;
+//	}
 }
