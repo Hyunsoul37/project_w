@@ -23,7 +23,6 @@ public class MemberServiceImp implements MemberService{
 	@Override
 	public MemberInfoDto join(MemberDto memberInfo) {
 		int result = memberDao.join(memberInfo);
-		System.out.println(memberInfo.getPid());
 		MemberInfoDto info = memberDao.getMemberInfo(memberInfo.getPid());
 		return info;
 	}

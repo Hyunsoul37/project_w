@@ -5,13 +5,13 @@ import data from "../../components/dummydata/review_list.json";
 import { TestGetReview } from "../../slice/reviewSlice.js";
 
 const reviewPage = ({ newlist }) => {
-  const review = useSelector((state) => state.review);
-  const dispatch = useDispatch();
+  // const review = useSelector((state) => state.review);
+  // const dispatch = useDispatch();
 
-  useEffect(() => {
-    dispatch(TestGetReview([...newlist]));
-  }, []);
-  return <Community />;
+  // useEffect(() => {
+  //   dispatch(TestGetReview([...newlist]));
+  // }, []);
+  return <Community list={newlist} />;
 };
 export default reviewPage;
 

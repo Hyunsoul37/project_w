@@ -40,19 +40,22 @@
   height: 100%;
 }
 .CommunityCard_Contents {
-  width: 100%;
   flex-grow: 1;
+}
+.CommunityCard_Contents a {
+  width: 100%;
+  height: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
 }
-.CommunityCard_Contents h4 {
+.CommunityCard_Contents_title {
   font-size: 14px;
   font-weight: 800;
   margin-bottom: 8px;
 }
-.CommunityCard_Contents p {
+.CommunityCard_Contents_text {
   width: 90%;
   font-size: 12px;
   white-space: pre-wrap;
