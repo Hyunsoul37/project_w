@@ -1,6 +1,8 @@
 export interface reviewState {
   reviewId: number;
   nickname: string;
+  profileimg: string;
+  reviewDate: string;
   heartCount: number;
   reviewTitle: string;
   reviewContents: string;
