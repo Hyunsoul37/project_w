@@ -1,0 +1,50 @@
+.CommunityComment {
+  width: 100%;
+  padding-top: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.MainInput {
+  width: max-content;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-top: 1px solid #c4b8b9;
+  padding-top: 50px;
+  padding-bottom: 70px;
+}
+.MainInput img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin-right: 20px;
+}
+.CommunityComment_mainInput {
+  display: flex;
+  align-items: center;
+  border: 1px solid #c4b8b9;
+  border-radius: 5px;
+  padding-left: 10px;
+}
+.CommunityComment_mainInput input {
+  width: 830px;
+  height: 35px;
+  font-size: 15px;
+  border: none;
+}
+.CommunityComment_mainInput input::placeholder {
+  color: #c4b8b9;
+}
+
+.CommunityComment_mainInput button {
+  background-color: var(--primary);
+  height: 35px;
+  width: 50px;
+  color: white;
+  border-radius: 5px;
+}
+.CommentList {
+  width: 950px;
+}

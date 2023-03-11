@@ -24,6 +24,7 @@ const Community: React.FC<{ list: reviewState[] }> = (props) => {
   const curpage = useRef(-1);
   const [isStart, setisStart] = useState(true);
   const [targetrender, setTargetRender] = useState(true);
+
   const loadData = () => {
     curpage.current++;
     if (curpage.current > 0) {
@@ -67,7 +68,6 @@ const Community: React.FC<{ list: reviewState[] }> = (props) => {
 
     if (!review.isloadding) {
       timer = window.setTimeout(() => {
-        console.log("지금이야 지금");
         setTargetRender(true);
       }, 500);
     }
@@ -93,9 +93,7 @@ const Community: React.FC<{ list: reviewState[] }> = (props) => {
         </div>
         {review.isloadding && !isStart ? <Loading /> : null}
         {!review.isfinish && targetrender ? (
-          <div ref={target} className={styled.Community_SrollChecker}>
-            target
-          </div>
+          <div ref={target} className={styled.Community_SrollChecker}></div>
         ) : (
           <span style={{ display: "inline-block", height: "250px" }}></span>
         )}

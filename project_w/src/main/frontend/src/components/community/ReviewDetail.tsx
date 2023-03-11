@@ -7,6 +7,7 @@ import { FaHeart } from "react-icons/fa";
 import styled from "./ReviewDetail.module.css";
 import { reviewState } from "./ReviewTypes";
 import { AiFillCaretLeft, AiFillCaretRight } from "react-icons/ai";
+import CommunityComment from "./CommunityComment";
 
 const ReviewDetail: React.FC<reviewState> = (props) => {
   const [heart, setHeart] = useState(false);
@@ -30,7 +31,7 @@ const ReviewDetail: React.FC<reviewState> = (props) => {
     };
     return (
       <span
-        className={[className, props.cssclassName].join(" ")}
+        className={[props.cssclassName, className].join(" ")}
         style={{ ...style, display: "block" }}
         onClick={(e) => {
           ClickHandler();
@@ -59,7 +60,7 @@ const ReviewDetail: React.FC<reviewState> = (props) => {
     };
     return (
       <span
-        className={[className, props.cssclassName].join(" ")}
+        className={[props.cssclassName, className].join(" ")}
         style={{ ...style, display: "block" }}
         onClick={(e) => {
           ClickHandler();
@@ -84,6 +85,9 @@ const ReviewDetail: React.FC<reviewState> = (props) => {
     arrows: true,
     nextArrow: <NextArrow cssclassName={styled.nextbtn} />,
     prevArrow: <PrevArrow cssclassName={styled.prevbtn} />,
+    beforeChange: (currentSlide: number, nextSlide: number) => {
+      setCurCard(nextSlide);
+    },
     afterChange: () => {
       setChangeFinish(true);
     },
@@ -93,6 +97,11 @@ const ReviewDetail: React.FC<reviewState> = (props) => {
     slidesToScroll: 1,
     speed: 500,
     dots: true,
+    nextArrow: <NextArrow cssclassName={styled.nextbtn} />,
+    prevArrow: <PrevArrow cssclassName={styled.prevbtn} />,
+    beforeChange: (currentSlide: number, nextSlide: number) => {
+      setCurCard(nextSlide);
+    },
   };
 
   let setting;
@@ -179,6 +188,7 @@ const ReviewDetail: React.FC<reviewState> = (props) => {
         <div className={styled.ReviewContents}>
           <p>{props.reviewContents}</p>
         </div>
+        <CommunityComment reviewId={props.reviewId} />
       </div>
     </div>
   );

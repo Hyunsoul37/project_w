@@ -121,7 +121,7 @@
   width: 100%;
   display: flex;
   justify-content: center;
-  margin-bottom: 120px;
+  margin-bottom: 150px;
 }
 
 .ReviewSlider {
@@ -136,6 +136,7 @@
 .ReviewSlider img {
   width: 480px;
   height: 480px;
+  transition: all 0.3s;
 }
 .ReviewSlider_three img {
   width: 480px !important;
@@ -151,6 +152,7 @@
 .ReviewContents {
   display: flex;
   justify-content: center;
+  margin-bottom: 250px;
 }
 
 .ReviewContents p {
@@ -161,15 +163,15 @@
   line-height: 25px;
   color: #939393;
 }
-.nextbtn {
-  color: var(--primary);
+.nextbtn::before {
+  color: var(--primary) !important;
 }
 .nextbtn:hover {
-  color: var(--primary);
+  color: var(--primary) !important;
 }
-.prevbtn {
-  color: var(--primary);
+.prevbtn::before {
+  color: var(--primary) !important;
 }
 .prevbtn:hover {
-  color: var(--primary);
+  color: var(--primary) !important;
 }
