@@ -1,21 +1,25 @@
-import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { useRouter } from 'next/router';
-import { LogIn } from '../../slice/userSlice';
-import Form from '../../components/ui/Form';
-import styled from './Login.module.css';
-import Seo from '../../util/Seo';
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useRouter } from "next/router";
+import { LogIn } from "../../slice/userSlice";
+import Form from "../../components/ui/Form";
+import styled from "./Login.module.css";
+import Seo from "../../util/Seo";
 
-const Login = () => {
+const Login = ({ returnUrl }) => {
   const router = useRouter();
-  const [id, setId] = useState('');
-  const [password, setPassword] = useState('');
+  const [id, setId] = useState("");
+  const [password, setPassword] = useState("");
   const user = useSelector((state) => state.user);
   const dispatch = useDispatch();
-
+  console.log(returnUrl);
   useEffect(() => {
     if (user.isLoggedIn) {
-      router.push('/');
+      if (returnUrl) {
+        router.push(returnUrl);
+      } else {
+        router.push("/");
+      }
     }
   }, [user.isLoggedIn]);
 
@@ -34,29 +38,26 @@ const Login = () => {
         password: password,
       })
     );
-    setId('');
-    setPassword('');
+    setId("");
+    setPassword("");
   };
 
   return (
     <div className={styled.formWrapper}>
       <Seo title="login" />
       <h4>LOGIN</h4>
-      <Form
-        onsubmit={submitHandler}
-        isLogin={true}
-      >
+      <Form onsubmit={submitHandler} isLogin={true}>
         <input
           id="id"
           type="text"
-          value={id ? id : ''}
+          value={id ? id : ""}
           onChange={ChangeIdHandler}
           placeholder="사용자 아이디"
         />
         <input
           id="password"
           type="password"
-          value={password ? password : ''}
+          value={password ? password : ""}
           onChange={ChangePasswordHandler}
           placeholder="비밀번호"
         />
@@ -69,3 +70,10 @@ const Login = () => {
 };
 
 export default Login;
+
+export async function getServerSideProps({ query }) {
+  const { returnUrl } = query;
+  return {
+    props: { returnUrl },
+  };
+}

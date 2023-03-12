@@ -12,7 +12,6 @@ import {
 } from "../../slice/reviewSlice.js";
 import data from "../dummydata/review_list.json";
 import Loading from "../ui/Loading";
-import { setTimeout } from "timers";
 export interface GetReviewAction {
   data: reviewState;
   curpage: number;

@@ -7,6 +7,26 @@
   border-radius: 50%;
   margin-right: 20px;
 }
+.modal {
+  border: none;
+  border-radius: 10px;
+  padding: 55px 80px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.modal button {
+  background-color: var(--primary);
+  color: white;
+  padding: 5px 20px;
+  border-radius: 5px;
+  margin-top: 30px;
+}
+.CommentList dialog::backdrop {
+  background-color: black;
+  opacity: 0.5;
+}
 .firstComment {
   margin-bottom: 20px;
 }
@@ -68,4 +88,11 @@
   padding-right: 7px;
   margin-right: 7px;
   border-right: 1px solid #aaaaaa;
+}
+.SecondComment_commentText span:nth-child(2) {
+  cursor: pointer;
+}
+.SecondComment_commentText span:last-child {
+  border: none;
+  cursor: pointer;
 }

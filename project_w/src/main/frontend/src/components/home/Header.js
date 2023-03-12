@@ -12,7 +12,8 @@ const Header = () => {
   const [headerBG, setHeaderBg] = useState(false);
 
   const LoginBtnHandler = () => {
-    router.push("/login");
+    router.push({ pathname: "/login", query: { returnUrl: router.asPath } });
+    //router.push("/login");
   };
   const LogOutHandler = () => {
     dispatch(logout());
