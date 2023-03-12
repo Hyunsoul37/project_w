@@ -2,6 +2,7 @@ import { useDispatch, useSelector } from "react-redux";
 import Product_SM from "../../components/product_sm/Product_SM";
 import Product_HJ from "../../components/product_hj/Product_HJ";
 import data from "../../components/dummydata/wine_add_sweet.json";
+import { useRouter } from 'next/router';
 
 //Product_SM
 // const product = ({ list }) => {
@@ -19,9 +20,17 @@ import data from "../../components/dummydata/wine_add_sweet.json";
 //   };
 // }
 
+
 //Product_HJ
 const product = () => {
-  console.log(data);
+  const router = useRouter();
+  const { food, body, sweet, sour } = router.query;
+  console.log('food: ', food);
+  console.log('body: ', body);
+  console.log('sweet: ', sweet);
+  console.log('sour: ', sour);
+
+  // console.log(data);
   return <Product_HJ {...data} />;
 }
 export default product;

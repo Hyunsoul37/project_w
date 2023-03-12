@@ -1,7 +1,7 @@
 import ProductList from "./ProductList";
 
 const Product_HJ = (props) => {
-   console.log(props[0])
+   // console.log(props[0])
    //const arr = [props]
    //console.log(arr)
    return (
