@@ -65,6 +65,56 @@
 		(
 		#{tagName}
 		);
-
 	</insert>
+
+	<select id="getReviewDetail"
+		resultType="shop.winetoy.server.review.entity.ReviewDto">
+		select * from review where review_id = #{reviewId};
+	</select>
+
+	<select id="getReviewHashTags"
+		resultType="shop.winetoy.server.review.entity.HashTagDto">
+		SELECT hash_tag.* FROM hash_tag
+		RIGHT JOIN review_tag
+		ON
+		hash_tag.tag_id = review_tag.tag_id
+		WHERE review_id = #{reviewId};
+	</select>
+
+	<select id="getReview"
+		resultType="shop.winetoy.server.review.entity.ReviewDto">
+		select * from review;
+	</select>
+
+	<delete id="deleteReview">
+		DELETE FROM `wineToy`.`review`
+		WHERE review_id =
+		#{reviewId}
+	</delete>
+
+	<update id="modifyReview"
+		parameterType="shop.winetoy.server.review.entity.ReviewDto">
+		UPDATE `wineToy`.`review`
+		SET
+		`wine_type` = #{wineType},
+		`wine_name` = #{wineName},
+		`wine_price` = #{winePrice},
+		`regi_date` =
+		current_timestamp(),
+		`review_img_1` = #{reviewImg1},
+		`review_img_2` =
+		#{reviewImg2},
+		`review_img_3` = #{reviewImg3},
+		`review_img_4` =
+		#{reviewImg4},
+		`review_img_5` = #{reviewImg5},
+		`desc` = #{desc}
+		WHERE
+		`review_id` = #{reviewId}
+	</update>
+
+	<delete id="initHashTag">
+		DELETE FROM `wineToy`.`review_tag`
+		WHERE review_id = #{reviewId}
+	</delete>
 </mapper>

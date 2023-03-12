@@ -52,7 +52,7 @@ public class SecurityConfig {
 			.requestMatchers("/api/auth/**").permitAll()
 			.requestMatchers("/api/join").permitAll()
 			.requestMatchers("/api/product/**").permitAll()
-			.requestMatchers("/api/review/**").permitAll()
+			.requestMatchers("/api/community/**").permitAll()
 			.requestMatchers("/api/time").hasRole("ADMIN")
 			.requestMatchers("/api/admin/**").hasRole("ADMIN")
 			.anyRequest().authenticated()
