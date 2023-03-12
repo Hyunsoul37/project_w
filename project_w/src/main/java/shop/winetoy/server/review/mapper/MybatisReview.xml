@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="shop.winetoy.server.review.dao.ReviewDao">
+
+	<insert id="postReview"
+		parameterType="shop.winetoy.server.review.entity.ReviewDto"
+		useGeneratedKeys="true" keyProperty="reviewId">
+		INSERT INTO `wineToy`.`review`
+		(
+		`wine_type`,
+		`wine_name`,
+		`wine_price`,
+		`review_img_1`,
+		`review_img_2`,
+		`review_img_3`,
+		`review_img_4`,
+		`review_img_5`,
+		`desc`,
+		`writer_id`
+		)
+		VALUES
+		(
+		#{wineType},
+		#{wineName},
+		#{winePrice},
+		#{reviewImg1},
+		#{reviewImg2},
+		#{reviewImg3},
+		#{reviewImg4},
+		#{reviewImg5},
+		#{desc},
+		#{writerId}
+		);
+	</insert>
+
+	<insert id="insertReviewTag"
+		parameterType="shop.winetoy.server.review.entity.ReviewTagDto">
+		INSERT INTO `wineToy`.`review_tag`
+		(
+		`review_id`,
+		`tag_id`
+		)
+		VALUES
+		(
+		#{reviewId},
+		#{tagId}
+		);
+	</insert>
+
+	<select id="searchTag"
+		resultType="shop.winetoy.server.review.entity.HashTagDto">
+		select * from hash_tag where tag_name = #{tagName};
+	</select>
+
+	<insert id="insertTag"
+		parameterType="shop.winetoy.server.review.entity.HashTagDto"
+		useGeneratedKeys="true" keyProperty="tagId">
+		INSERT INTO `wineToy`.`hash_tag`
+		(
+		`tag_name`
+		)
+		VALUES
+		(
+		#{tagName}
+		);
+
+	</insert>
+</mapper>
