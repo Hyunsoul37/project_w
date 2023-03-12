@@ -1,4 +1,5 @@
 import styled from './Selector.module.css';
+import Button from '../ui/Button';
 
 const Selector = () => {
    const foods = ['육류', '해산물', '치즈'];
@@ -18,7 +19,7 @@ const Selector = () => {
          <div className={styled.selector_wrap}>
             <div>
                <span className={styled.text}>나는</span>
-               <select className={styled.select}>
+               <select className={styled.select} placeholder='안주선택'>
                   {foodList}
                </select>
                <span className={styled.text}>에 어울리는</span>
@@ -40,9 +41,8 @@ const Selector = () => {
                <span className={styled.text}>와인이 필요해요</span>
             </div>
          </div>
-         <div className="btn_area">
-            <button>다른 조건 보기</button>
-            <button>보러가기</button>
+         <div className={styled.btn_area}>
+            <Button buttontext={'보러가기'} buttonColor={'main'} />
          </div>
       </div>
    );

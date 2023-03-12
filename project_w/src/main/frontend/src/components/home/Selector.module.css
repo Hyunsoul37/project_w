@@ -7,13 +7,6 @@
     font-weight: 700;
 }
 
-/* .selector_wrap {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-} */
-
 .selector_wrap>div {
     height: 50px;
     display: flex;
@@ -31,4 +24,14 @@
 
 .select>option[value] {
     font-weight: 700;
+}
+
+.btn_area {
+    display: flex;
+    justify-content: center;
+    padding: 50px 0;
+}
+
+.btn_area button {
+    margin: 0 10px;
 }
