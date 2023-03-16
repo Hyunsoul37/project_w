@@ -7,59 +7,70 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import shop.winetoy.server.response.entity.Response;
 import shop.winetoy.server.response.service.ResponseService;
 import shop.winetoy.server.review.entity.ReviewDto;
 import shop.winetoy.server.review.service.ReviewService;
+import shop.winetoy.server.s3.service.S3UpladerService;
+import shop.winetoy.server.wine.entity.WineDto;
 
 @Controller
 @RequestMapping("/api/community")
 public class ReviewController {
-	ReviewService reviewService;	
+	ReviewService reviewService;
 	ResponseService responseService;
+	S3UpladerService s3UpladerService;
+	final String s3Bucket = "winetoy";
 	
 	@Autowired
-	public ReviewController(ReviewService reviewService, ResponseService responseService) {
+	public ReviewController(ReviewService reviewService, ResponseService responseService, S3UpladerService s3UpladerService) {
 		this.reviewService = reviewService;
 		this.responseService = responseService;
+		this.s3UpladerService = s3UpladerService;
 	}
 
-	@RequestMapping(value="/review", method = RequestMethod.POST)
+	@RequestMapping(value = "/review", method = RequestMethod.POST)
 	@ResponseBody
-	public Response<ReviewDto> postReview(@RequestBody ReviewDto review){
-		ReviewDto result = reviewService.postReivew(review);
-		return responseService.getResponse(result);
- 	}
-	
-	@RequestMapping(value="/review", method = RequestMethod.GET)
-	@ResponseBody
-	public Response<List<ReviewDto>> getReview(){
-		List<ReviewDto> result = reviewService.getReview();
-		
+	public Response<ReviewDto> postReview(@RequestParam(value = "files", required = false) List<MultipartFile> files,
+			@RequestPart ReviewDto review) throws Exception{
+		ReviewDto result = reviewService.postReivew(files, review);
 		return responseService.getResponse(result);
 	}
-	
-	@RequestMapping(value="/review", method = RequestMethod.DELETE)
+
+	@RequestMapping(value = "/review", method = RequestMethod.GET)
 	@ResponseBody
-	public Response<Boolean> deletetReview(int reviewId){
+	public Response<List<ReviewDto>> getReview() {
+		List<ReviewDto> result = reviewService.getReview();
+
+		return responseService.getResponse(result);
+	}
+
+	@RequestMapping(value = "/review", method = RequestMethod.DELETE)
+	@ResponseBody
+	public Response<Boolean> deletetReview(int reviewId) {
 		boolean result = reviewService.deleteReview(reviewId);
 		return responseService.getResponse(result);
 	}
-	
-	@RequestMapping(value="/review", method = RequestMethod.PUT)
+
+	@RequestMapping(value = "/review", method = RequestMethod.PUT)
 	@ResponseBody
-	public Response<ReviewDto> modifyReview(@RequestBody ReviewDto review){
+	public Response<ReviewDto> modifyReview(@RequestBody ReviewDto review) {
 		ReviewDto result = reviewService.modifyReview(review);
 		return responseService.getResponse(result);
 	}
-	
-	@RequestMapping(value="/review/detail", method = RequestMethod.GET)
+
+	@RequestMapping(value = "/review/detail", method = RequestMethod.GET)
 	@ResponseBody
-	public Response<ReviewDto> getReviewDetail(int reviewId){
+	public Response<ReviewDto> getReviewDetail(int reviewId) {
 		ReviewDto result = reviewService.getReviewDetail(reviewId);
 		return responseService.getResponse(result);
- 	}
-	
+	}
+
 }

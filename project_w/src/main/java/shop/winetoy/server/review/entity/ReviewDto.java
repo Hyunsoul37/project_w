@@ -3,6 +3,8 @@ package shop.winetoy.server.review.entity;
 import java.util.Date;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 public class ReviewDto {
 	private int reviewId;
 	private String wineType;
@@ -131,6 +133,21 @@ public class ReviewDto {
 		this.hashTag = hashTag;
 	}
 
+	 @JsonIgnore
+	public String[] getReviewImgs() {
+		String[] result = { reviewImg1, reviewImg2, reviewImg3, reviewImg4, reviewImg5 };
+		return result;
+	}
+
+	 @JsonIgnore
+	public void setReviewImgs(String[] reviewImgs) {
+		setReviewImg1(reviewImgs[0]);
+		setReviewImg2(reviewImgs[1]);
+		setReviewImg3(reviewImgs[2]);
+		setReviewImg4(reviewImgs[3]);
+		setReviewImg5(reviewImgs[4]);
+	}
+
 	@Override
 	public String toString() {
 		return "ReviewDto [reviewId=" + reviewId + ", wineType=" + wineType + ", wineName=" + wineName + ", winePrice="
@@ -139,5 +156,5 @@ public class ReviewDto {
 				+ ", reviewImg5=" + reviewImg5 + ", desc=" + desc + ", writerId=" + writerId + ", hashTag=" + hashTag
 				+ "]";
 	}
-	
+
 }

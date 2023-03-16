@@ -58,7 +58,7 @@ public class WineController {
 		ObjectMapper mapper = new ObjectMapper();
 
 		try {
-			String imgUrl = s3UpladerService.upload(file, s3Bucket, "registeredWineImg");
+			String imgUrl = s3UpladerService.upload(file, "registeredWineImg");
 
 			WineDto registerWine = mapper.readValue(wine, WineDto.class);
 

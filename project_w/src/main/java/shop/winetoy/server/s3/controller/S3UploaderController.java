@@ -23,21 +23,33 @@ public class S3UploaderController {
 	
 	public String imageUpload(MultipartFile file)
 			throws IOException {
-		return s3UpladerService.upload(file, "winetoy", "image");
+		return s3UpladerService.upload(file, "image");
 	}
 
 	public String videoUpload(MultipartFile file)
 			throws IOException {
-		return s3UpladerService.upload(file, "winetoy", "video");
+		return s3UpladerService.upload(file, "video");
 	}
 
-	@RequestMapping(value = "/api/product/image-upload", method = RequestMethod.POST)
-	@ResponseBody
-	public String imageUpload_test(@RequestParam(value = "file", required = false) MultipartFile file)
-			throws IOException {
-		return s3UpladerService.upload(file, "winetoy", "image");
-	}
-
+//	@RequestMapping(value = "/api/product/image-upload", method = RequestMethod.POST)
+//	@ResponseBody
+//	public String imageUpload_test(@RequestParam(value = "file", required = false) MultipartFile file)
+//			throws IOException {
+//		return s3UpladerService.upload(file, "winetoy", "image");
+//	}
+//	
+//	@RequestMapping(value = "/api/product/existCheck", method = RequestMethod.GET)
+//	@ResponseBody
+//	public boolean existCheck(String url) {
+//		return s3UpladerService.isObjectExist("winetoy", url);
+//	}
+//
+//	@RequestMapping(value = "/api/product/delete", method = RequestMethod.DELETE)
+//	@ResponseBody
+//	public boolean delete(String url) {
+//		return s3UpladerService.delete("winetoy", url);
+//	}
+	
 //	@RequestMapping(value = "/video-upload", method = RequestMethod.POST)
 //	@ResponseBody
 //	public String videoUpload(@RequestParam(value = "file", required = false) MultipartFile file)
