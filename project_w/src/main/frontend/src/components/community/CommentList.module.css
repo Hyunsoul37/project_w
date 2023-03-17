@@ -69,6 +69,7 @@
   border-radius: 10px;
   margin-bottom: 15px;
 }
+
 .SecondComment_Info {
   display: flex;
   align-items: center;
@@ -79,9 +80,18 @@
 .SecondComment_commentText {
   padding-left: 60px;
 }
-.SecondComment_commentText p {
-  margin-bottom: 5px;
+.SecondComment_contents {
+  display: flex;
+  align-items: center;
 }
+.SecondComment_contents p:first-child {
+  color: rgb(69, 69, 191);
+  margin-right: 10px;
+}
+.SecondComment_contents p {
+  margin-bottom: 8px;
+}
+
 .SecondComment_commentText span {
   font-size: 12px;
   color: #aaaaaa;
@@ -95,4 +105,8 @@
 .SecondComment_commentText span:last-child {
   border: none;
   cursor: pointer;
+}
+.like {
+  color: var(--primary) !important;
+  font-weight: 800;
 }

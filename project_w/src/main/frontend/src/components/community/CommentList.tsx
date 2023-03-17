@@ -14,6 +14,8 @@ interface CommentPropsType {
   ChangeSubComment: (index: number) => void;
   AddFirstComment: () => void;
   AddSecondComment: (commnetindex: number) => void;
+  firstCommentLikeHandler: (id: number) => void;
+  SecondCommentLikeHandler: (secondCommentid: number) => void;
 }
 
 const CommentList: React.FC<firstCommentState & CommentPropsType> = (props) => {
@@ -75,6 +77,12 @@ const CommentList: React.FC<firstCommentState & CommentPropsType> = (props) => {
     setShowModal(false);
     router.push({ pathname: "/login", query: { returnUrl: router.asPath } });
   };
+  const firstCommentLikeHandler = (id: number) => () => {
+    props.firstCommentLikeHandler(id);
+  };
+  const SecondCommentLikeHandler = (secondid: number) => () => {
+    props.SecondCommentLikeHandler(secondid);
+  };
 
   return (
     <div className={styled.CommentList}>
@@ -89,7 +97,12 @@ const CommentList: React.FC<firstCommentState & CommentPropsType> = (props) => {
           <p>{props.commentText}</p>
           <div>
             <span>{props.regiDate}</span>
-            <span>♥ 좋아요</span>
+            <span
+              className={props.commentLike ? styled.like : ""}
+              onClick={firstCommentLikeHandler(props.firstComment_Id)}
+            >
+              ♥ 좋아요
+            </span>
             <span onClick={CommentInputHandler(props.firstComment_Id)}>
               답글달기
             </span>
@@ -116,10 +129,18 @@ const CommentList: React.FC<firstCommentState & CommentPropsType> = (props) => {
                   <div>{c.writerNickName}</div>
                 </div>
                 <div className={styled.SecondComment_commentText}>
-                  <p>{c.commentText}</p>
+                  <div className={styled.SecondComment_contents}>
+                    <p>@{c.writerTag}</p>
+                    <p>{c.commentText}</p>
+                  </div>
                   <div>
                     <span>{c.regiDate}</span>
-                    <span>♥ 좋아요</span>
+                    <span
+                      className={c.commentLike ? styled.like : ""}
+                      onClick={SecondCommentLikeHandler(c.secondComment_Id)}
+                    >
+                      ♥ 좋아요
+                    </span>
                     <span
                       onClick={SubCommentInputHandler(
                         c.writerNickName,
