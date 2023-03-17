@@ -58,3 +58,30 @@
   color: white;
   border-radius: 5px;
 }
+.like {
+  color: var(--primary);
+}
+.modal {
+  border: none;
+  border-radius: 10px;
+  padding: 55px 80px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.modal button {
+  background-color: var(--primary);
+  color: white;
+  padding: 5px 20px;
+  border-radius: 5px;
+  margin-top: 30px;
+}
+.CommentInput dialog::backdrop {
+  background-color: black;
+  opacity: 0.5;
+}
+.CommentInput_sub dialog::backdrop {
+  background-color: black;
+  opacity: 0.5;
+}

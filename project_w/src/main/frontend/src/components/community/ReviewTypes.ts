@@ -29,6 +29,7 @@ interface secondCommentState {
   commentText: string;
   writerImage: string;
   regiDate: string;
+  writerTag?: string;
   commentLike: boolean;
 }
 export interface commentState {
