@@ -13,7 +13,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 import shop.winetoy.server.auth.MemberDetailsService;
 
 @Configuration
-@EnableWebSecurity//(debug = true)
+@EnableWebSecurity(debug = true)
 public class SecurityConfig {
 
 	JwtManager jwtManager;
@@ -28,7 +28,7 @@ public class SecurityConfig {
 
 	@Bean
 	public WebSecurityCustomizer webSecurityCustomizer() {
-		return (web) -> web.ignoring().requestMatchers("/api/auth/**", "/api/join");
+		return (web) -> web.ignoring().requestMatchers("/api/auth/**");
 	}
 
 	@Bean
@@ -50,7 +50,7 @@ public class SecurityConfig {
             .httpBasic().disable()
 			.authorizeHttpRequests()
 			.requestMatchers("/api/auth/**").permitAll()
-			.requestMatchers("/api/join").permitAll()
+//			.requestMatchers("/api/join").permitAll()
 			.requestMatchers("/api/product/**").permitAll()
 			.requestMatchers("/api/community/**").permitAll()
 			.requestMatchers("/api/time").hasRole("ADMIN")

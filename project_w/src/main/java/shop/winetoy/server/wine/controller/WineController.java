@@ -110,7 +110,23 @@ public class WineController {
 
 		return wineService.getWineCount(type, body, sweet, acidity, tannin, price, country);
 	}
-
+	
+	
+	@RequestMapping(value = "/wine/test", method = RequestMethod.GET)
+	@ResponseBody
+	public void wineTest(@RequestParam List<Integer> type,  @RequestParam List<Integer> body) {
+		
+		System.out.println("TEST");
+		
+		for(int i = 0; i< type.size(); i++) {
+			System.out.println(type.get(i));
+		}
+		
+		for(int i = 0; i< body.size(); i++) {
+			System.out.println(body.get(i));
+		}
+		
+	}
 	// --------------------------------------------------------------------------------------------------------//
 
 	public void tmp() throws IOException {
