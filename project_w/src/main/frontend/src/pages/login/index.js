@@ -6,17 +6,23 @@ import Form from "../../components/ui/Form";
 import styled from "./Login.module.css";
 import Seo from "../../util/Seo";
 
-const Login = ({ returnUrl }) => {
+const Login = () => {
   const router = useRouter();
   const [id, setId] = useState("");
   const [password, setPassword] = useState("");
   const user = useSelector((state) => state.user);
   const dispatch = useDispatch();
-  console.log(returnUrl);
+
   useEffect(() => {
+    const prevPath = sessionStorage.getItem("prevPath");
+    const prevPrevPath = sessionStorage.getItem("prevPrevPath");
     if (user.isLoggedIn) {
-      if (returnUrl) {
-        router.push(returnUrl);
+      if ((prevPath !== null) | (prevPrevPath !== null)) {
+        if (prevPath !== "/login/join") {
+          router.push(prevPath);
+        } else {
+          router.push(prevPrevPath);
+        }
       } else {
         router.push("/");
       }
@@ -70,10 +76,3 @@ const Login = ({ returnUrl }) => {
 };
 
 export default Login;
-
-export async function getServerSideProps({ query }) {
-  const { returnUrl } = query;
-  return {
-    props: { returnUrl },
-  };
-}

@@ -1,38 +1,41 @@
-import React, { useEffect, useState } from 'react';
-import useFetch from '../../customHooks/useFetch';
-import Form from '../../components/ui/Form';
-import styled from './Signupform.module.css';
-import Seo from '../../util/Seo';
+import React, { useEffect, useState } from "react";
+import useFetch from "../../customHooks/useFetch";
+import Form from "../../components/ui/Form";
+import styled from "./Signupform.module.css";
+import Seo from "../../util/Seo";
 
 const join = () => {
   const { sendRequestData: postData } = useFetch();
-  const [id, setId] = useState('');
-  const [password, setPassword] = useState('');
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [address, setAddress] = useState('');
-  const [phone, setPhone] = useState('');
+  const [id, setId] = useState("");
+  const [password, setPassword] = useState("");
+  const [name, setName] = useState("");
+  const [nickName, setnickName] = useState("");
+  const [email, setEmail] = useState("");
+  const [address, setAddress] = useState("");
+  const [phone, setPhone] = useState("");
   const [isduplicate, setDuplicate] = useState(false);
   const [iseditedId, setIseditedId] = useState(false);
+  const [isNickNameduplicate, setNickNameDuplicate] = useState(false);
+  const [iseditedNickName, setIseditedNickName] = useState(false);
 
-  const url = '/api/join';
-  const type = 'POST';
-  const header = { 'Content-Type': 'application/json;charset=UTF-8' };
-  const movepath = '/login';
+  const url = "/api/auth/join";
+  const type = "POST";
+  const header = { "Content-Type": "application/json;charset=UTF-8" };
+  const movepath = "/login";
 
   const submitHandler = (e) => {
     e.preventDefault();
-    if (isduplicate) {
-      alert('아이디 중복임 다시하셈');
+    if (isduplicate || isNickNameduplicate) {
+      alert("아이디 또는 닉네임이 중복입니다.");
       return;
     }
-    console.log('data전송 시작!!');
     postData({
       url: url,
       type: type,
       header: header,
       data: {
         id: id,
+        nickName: nickName,
         password: password,
         name: name,
         email: email,
@@ -41,35 +44,58 @@ const join = () => {
       },
       movepath: movepath,
     });
-    setId('');
-    setPassword('');
-    setName('');
-    setEmail('');
-    setAddress('');
-    setPhone('');
+    setId("");
+    setnickName("");
+    setPassword("");
+    setName("");
+    setEmail("");
+    setAddress("");
+    setPhone("");
   };
-  const DuplicateResponseMessage = (data) => {
-    if (data === true) {
+  const IDDuplicateResponseMessage = (data) => {
+    if (data.data.duplicate === true) {
       setDuplicate(true);
     } else {
       setDuplicate(false);
     }
     setIseditedId(true);
   };
+  const NickNameDuplicateResponseMessage = (data) => {
+    if (data.data.duplicate === true) {
+      setNickNameDuplicate(true);
+    } else {
+      setNickNameDuplicate(false);
+    }
+    setIseditedNickName(true);
+  };
 
   const OnCheckduplicateID = async () => {
     await postData({
       url: `api/auth/id-check?id=${id}`,
-      type: 'GET',
+      type: "GET",
       data: null,
-      header: { 'Content-Type': 'text/plain' },
-      AfterGetData: DuplicateResponseMessage,
+      header: { "Content-Type": "text/plain" },
+      AfterGetData: IDDuplicateResponseMessage,
+    });
+  };
+
+  const OnCheckduplicateNickName = async () => {
+    await postData({
+      url: `api/auth/nickname-check?nickName=${nickName}`,
+      type: "GET",
+      data: null,
+      header: { "Content-Type": "text/plain" },
+      AfterGetData: NickNameDuplicateResponseMessage,
     });
   };
 
   const ChangeIdHandler = (e) => {
     setIseditedId(false);
     setId(e.target.value);
+  };
+  const ChangeNickNameHandler = (e) => {
+    setIseditedNickName(false);
+    setnickName(e.target.value);
   };
   const ChangePasswordHandler = (e) => {
     setPassword(e.target.value);
@@ -91,16 +117,13 @@ const join = () => {
       <Seo title="Sign In" />
       <h1>SIGN IN</h1>
       <h4>회원정보 입력</h4>
-      <Form
-        onsubmit={submitHandler}
-        isLogin={false}
-      >
+      <Form onsubmit={submitHandler} isLogin={false}>
         <label htmlFor="name">
           이름
           <input
             id="name"
             type="text"
-            value={name ? name : ''}
+            value={name ? name : ""}
             onChange={ChangeNameHandler}
             placeholder="사용자 이름"
           />
@@ -110,16 +133,35 @@ const join = () => {
           <input
             id="id"
             type="text"
-            value={id ? id : ''}
+            value={id ? id : ""}
             onChange={ChangeIdHandler}
             onBlur={OnCheckduplicateID}
             placeholder="사용자 아이디"
           />
-          {id !== '' && iseditedId ? (
+          {id !== "" && iseditedId ? (
             isduplicate ? (
               <p className={styled.errormsg}>아이디 중복입니다.</p>
             ) : (
               <p>사용가능한 아이디입니다.</p>
+            )
+          ) : null}
+        </label>
+
+        <label htmlFor="nickName">
+          닉네임
+          <input
+            id="nickName"
+            type="text"
+            value={nickName ? nickName : ""}
+            onChange={ChangeNickNameHandler}
+            onBlur={OnCheckduplicateNickName}
+            placeholder="사용자 닉네임"
+          />
+          {nickName !== "" && iseditedNickName ? (
+            isNickNameduplicate ? (
+              <p className={styled.errormsg}>닉네임 중복입니다.</p>
+            ) : (
+              <p>사용가능한 닉네임입니다.</p>
             )
           ) : null}
         </label>
@@ -129,7 +171,7 @@ const join = () => {
           <input
             id="password"
             type="password"
-            value={password ? password : ''}
+            value={password ? password : ""}
             onChange={ChangePasswordHandler}
             placeholder="비밀번호"
           />
@@ -140,7 +182,7 @@ const join = () => {
           <input
             id="email"
             type="email"
-            value={email ? email : ''}
+            value={email ? email : ""}
             onChange={ChangeEmailHandler}
           />
         </label>
@@ -158,7 +200,7 @@ const join = () => {
           <input
             id="phone"
             type="tel"
-            value={phone ? phone : ''}
+            value={phone ? phone : ""}
             onChange={ChangePhoneHandler}
           />
         </label>

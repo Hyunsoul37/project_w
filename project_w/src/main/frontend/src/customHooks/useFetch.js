@@ -1,5 +1,5 @@
-import { useCallback } from 'react';
-import { useRouter } from 'next/router';
+import { useCallback } from "react";
+import { useRouter } from "next/router";
 
 // import { useNavigate } from 'react-router-dom';
 
@@ -9,7 +9,7 @@ const useFetch = () => {
   const sendRequestData = useCallback(
     async ({
       url,
-      type = 'GET',
+      type = "GET",
       data,
       header,
       movepath = null,
@@ -19,7 +19,7 @@ const useFetch = () => {
       url:${url}
       type: ${type} 
       data: ${data}
-      header Content-Type:${header['Content-Type']}
+      header Content-Type:${header["Content-Type"]}
       movepath:${movepath}`);
 
       try {
@@ -33,7 +33,12 @@ const useFetch = () => {
         // }
         const responseData = await response.json();
         if (movepath) {
-          router.push(movepath);
+          router.push(
+            {
+              pathname: movepath,
+            },
+            movepath
+          );
         }
         if (AfterGetData !== null) {
           AfterGetData(responseData);
