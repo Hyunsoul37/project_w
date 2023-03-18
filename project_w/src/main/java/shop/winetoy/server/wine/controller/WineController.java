@@ -52,7 +52,8 @@ public class WineController {
 	 */
 	@RequestMapping(value = "/wine", method = RequestMethod.POST)
 	@ResponseBody
-	public Response<WineDto> registerWine(@RequestParam(value = "file", required = false) MultipartFile file,
+	public Response<WineDto> registerWine(
+			@RequestParam(value = "file", required = false) MultipartFile file,
 			@RequestParam String wine) {
 
 		ObjectMapper mapper = new ObjectMapper();
@@ -64,7 +65,7 @@ public class WineController {
 
 			registerWine.setImageUrl(imgUrl);
 
-			return responseService.getResponse(wineService.registerWine(registerWine)); 
+			return responseService.getResponse(wineService.registerWine(registerWine));
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -87,17 +88,26 @@ public class WineController {
 	 */
 	@RequestMapping(value = "/wine/{userId}/search", method = RequestMethod.GET)
 	@ResponseBody
-	public Response<List<WineInfoDto>> searchWine(@PathVariable int userId, Integer type, Integer body, Integer sweet,
-			Integer acidity, Integer tannin, Integer price, String country, int page) {
+	public Response<List<WineInfoDto>> searchWine(
+			@PathVariable Integer userId, 
+			@RequestParam(required = false) List<Integer> type,
+			@RequestParam(required = false) List<Integer> body,
+			@RequestParam(required = false) List<Integer> sweet,
+			@RequestParam(required = false) List<Integer> acidity,
+			@RequestParam(required = false) List<Integer> tannin,
+			@RequestParam(required = false) List<String> country,
+			@RequestParam(required = false) Integer maxPrice, 
+			@RequestParam(required = false) Integer minPrice,
+			int page) {
 
 		List<WineInfoDto> result = null;
 
 		System.out.println(userId);
 
-		if (userId != 0) {
-			result = wineService.searchWineWithPid(userId, type, body, sweet, acidity, tannin, price, country, page);
+		if (userId != 0 || userId != null) {
+			result = wineService.searchWineWithPid(userId, type, body, sweet, acidity, tannin, country, maxPrice, minPrice, page);
 		} else {
-			result = wineService.searchWine(type, body, sweet, acidity, tannin, price, country, page);
+			result = wineService.searchWine(type, body, sweet, acidity, tannin, country, maxPrice, minPrice, page);
 		}
 
 		return responseService.getResponse(result);
@@ -105,10 +115,16 @@ public class WineController {
 
 	@RequestMapping(value = "/wine/count", method = RequestMethod.GET)
 	@ResponseBody
-	public int searchWine(Integer type, Integer body, Integer sweet, Integer acidity, Integer tannin, Integer price,
-			String country) {
-
-		return wineService.getWineCount(type, body, sweet, acidity, tannin, price, country);
+	public int searchWine(			
+			@RequestParam(required = false) List<Integer> type,
+			@RequestParam(required = false) List<Integer> body,
+			@RequestParam(required = false) List<Integer> sweet,
+			@RequestParam(required = false) List<Integer> acidity,
+			@RequestParam(required = false) List<Integer> tannin,
+			@RequestParam(required = false) List<String> country,
+			@RequestParam(required = false) Integer maxPrice, 
+			@RequestParam(required = false) Integer minPrice) {
+		return wineService.getWineCount(type, body, sweet, acidity, tannin, country, maxPrice, minPrice);
 	}
 
 	// --------------------------------------------------------------------------------------------------------//

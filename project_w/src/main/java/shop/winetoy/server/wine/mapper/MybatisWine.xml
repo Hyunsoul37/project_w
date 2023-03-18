@@ -8,41 +8,41 @@
 		useGeneratedKeys="true" keyProperty="pid">
 		INSERT INTO `wineToy`.`wine`
 		(
-			`type`,
-			`kor_name`,
-			`eng_name`,
-			`star_point`,
-			`price`,
-			`sweet`,
-			`body`,
-			`acidity`,
-			`tannin`,
-			`alcohol`,
-			`country`,
-			`region`,
-			`grape_variety`,
-			`recommended_snack`,
-			`desc`,
-			`image_url`
+		`type`,
+		`kor_name`,
+		`eng_name`,
+		`star_point`,
+		`price`,
+		`sweet`,
+		`body`,
+		`acidity`,
+		`tannin`,
+		`alcohol`,
+		`country`,
+		`region`,
+		`grape_variety`,
+		`recommended_snack`,
+		`desc`,
+		`image_url`
 		)
 		VALUES
 		(
-			#{type},
-			#{korName},
-			#{engName},
-			#{starPoint},
-			#{price},
-			#{sweet},
-			#{body},
-			#{acidity},
-			#{tannin},
-			#{alcohol},
-			#{country},
-			#{region},
-			#{grapeVariety},
-			#{recommendedSnack},
-			#{desc},
-			#{imageUrl}
+		#{type},
+		#{korName},
+		#{engName},
+		#{starPoint},
+		#{price},
+		#{sweet},
+		#{body},
+		#{acidity},
+		#{tannin},
+		#{alcohol},
+		#{country},
+		#{region},
+		#{grapeVariety},
+		#{recommendedSnack},
+		#{desc},
+		#{imageUrl}
 		);
 	</insert>
 
@@ -54,15 +54,7 @@
 	<select id="searchWine"
 		resultType="shop.winetoy.server.wine.entity.WineInfoDto">
 		select * from wine
-		<where>
-			<if test="type != null"> and type = #{type}</if>
-			<if test="body != null"> and body = #{body}</if>
-			<if test="sweet != null"> and sweet = #{sweet}</if>
-			<if test="acidity != null"> and acidity = #{acidity}</if>
-			<if test="tannin != null"> and tannin = #{tannin}</if>
-			<if test="price != null"> and price > #{price}</if>
-			<if test="country != null"> and country = #{country}</if>
-		</where>
+		<include refid="wineSearcher" />
 		order by pid asc limit #{listCount} offset #{offset};
 	</select>
 
@@ -71,29 +63,85 @@
 		select wine.*, bookmark_id as 'like' from wine
 		left join bookmark ON
 		(bookmark.wine_pid = wine.pid and bookmark.member_pid = #{pid})
-		<where>
-			<if test="type != null"> and type = #{type}</if>
-			<if test="body != null"> and body = #{body}</if>
-			<if test="sweet != null"> and sweet = #{sweet}</if>
-			<if test="acidity != null"> and acidity = #{acidity}</if>
-			<if test="tannin != null"> and tannin = #{tannin}</if>
-			<if test="price != null"> and price > #{price}</if>
-			<if test="country != null"> and country = #{country}</if>
-		</where>
-		order by pid asc limit 20 offset 0;
+		<include refid="wineSearcher" />
+		order by pid asc limit #{listCount} offset #{offset};
 	</select>
 
 	<select id="getWineCount" resultType="int">
 		select count(*) as num from wine
-		<where>
-			<if test="type != null"> and type = #{type}</if>
-			<if test="body != null"> and body = #{body}</if>
-			<if test="sweet != null"> and sweet = #{sweet}</if>
-			<if test="acidity != null"> and acidity = #{acidity}</if>
-			<if test="tannin != null"> and tannin = #{tannin}</if>
-			<if test="price != null"> and price = #{price}</if>
-			<if test="country != null"> and country = #{country}</if>
-		</where>
+		<include refid="wineSearcher" />
 	</select>
-	
+
+	<select id="searchTest"
+		resultType="shop.winetoy.server.wine.entity.WineInfoDto">
+		select wine.*, bookmark_id as 'like' from wine
+		left join bookmark ON
+		(bookmark.wine_pid = wine.pid and bookmark.member_pid = #{pid})
+		<include refid="wineSearcher" />
+		order by pid asc limit #{listCount} offset #{offset};
+	</select>
+
+
+	<sql id="wineSearcher">
+		<where>
+
+			<if test="typeList != null">
+				and type IN
+				<foreach collection="typeList" index="index" item="type"
+					open="(" separator="," close=")">
+					#{type}
+				</foreach>
+			</if>
+
+			<if test="bodyList != null">
+				and body IN
+				<foreach collection="bodyList" index="index" item="body"
+					open="(" separator="," close=")">
+					#{body}
+				</foreach>
+			</if>
+
+			<if test="sweetList != null">
+				and sweet IN
+				<foreach collection="sweetList" index="index" item="sweet"
+					open="(" separator="," close=")">
+					#{sweet}
+				</foreach>
+			</if>
+
+			<if test="acidityList != null">
+				and acidity IN
+				<foreach collection="acidityList" index="index"
+					item="acidity" open="(" separator="," close=")">
+					#{acidity}
+				</foreach>
+			</if>
+
+			<if test="tanninList != null">
+				and tannin IN
+				<foreach collection="tanninList" index="index" item="tannin"
+					open="(" separator="," close=")">
+					#{tannin}
+				</foreach>
+			</if>
+
+			<if test="countryList != null">
+				and country IN
+				<foreach collection="countryList" index="index"
+					item="country" open="(" separator="," close=")">
+					#{country}
+				</foreach>
+			</if>
+
+			<if test="minPrice != null">
+				and price &gt;= #{minPrice}
+			</if>
+
+			<if test="maxPrice != null">
+				and price &lt;= #{minPrice}
+			</if>
+
+		</where>
+	</sql>
+
 </mapper>

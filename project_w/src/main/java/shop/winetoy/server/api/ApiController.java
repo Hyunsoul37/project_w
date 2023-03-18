@@ -19,6 +19,7 @@ import shop.winetoy.server.member.entity.DuplicateCheckDto;
 import shop.winetoy.server.member.entity.MemberDto;
 import shop.winetoy.server.member.entity.MemberInfoDto;
 import shop.winetoy.server.member.entity.RefreshDto;
+import shop.winetoy.server.member.entity.ReissueTokenDto;
 import shop.winetoy.server.member.service.MemberService;
 import shop.winetoy.server.response.entity.Response;
 import shop.winetoy.server.response.service.ResponseService;
@@ -100,9 +101,10 @@ public class ApiController {
 	 * 회원가입
 	 * https://www.notion.so/37801f24ecd3431bb0a7aad2f08fb546?pvs=4
 	 */
-	@RequestMapping(value = "/join", method = RequestMethod.POST)
+	@RequestMapping(value = "/auth/join", method = RequestMethod.POST)
 	@ResponseBody
 	public Response<MemberInfoDto> join(@RequestBody MemberDto info) {
+		System.out.println(info.toString());
 		boolean isIdDuplicate = memberDuplicateCheck(info.getId());
 		boolean isNickNameDuplicate  = nickNameDuplicateCheck(info.getNickName());
 		
@@ -117,7 +119,7 @@ public class ApiController {
 
 	/**
 	 * 회원 리스트 조회
-	 * https://www.notion.so/9e5a6611a0b043819647b909061a7e7c?pvs=4
+	 * 
 	 */
 	@RequestMapping(value = "/admin/memberList", method = RequestMethod.GET)
 	@ResponseBody
@@ -175,26 +177,25 @@ public class ApiController {
 	 */
 	@RequestMapping(value = "/auth/refresh", method = RequestMethod.POST)
 	@ResponseBody
-	public Response<Map<String, String>> reissueAccessToken(@RequestBody RefreshDto requestRefreshToken) {
+	public Response<ReissueTokenDto> reissueAccessToken(@RequestBody RefreshDto requestRefreshToken) {
 
-		Map<String, String> response = new HashMap<String, String>();
-		String responseString = "response Message";
-		
+		ReissueTokenDto reissueTokenDto = new ReissueTokenDto();
 		MemberDto result = memberService.getRefreshToken(requestRefreshToken.getPid());
+		
 		if (!jwtManager.validationRefreshToken(requestRefreshToken.getRefreshToken())) {
-			response.put(responseString , ExceptionCode.EXPIRED_TOKEN);
-			return responseService.getResponse(response);
+			reissueTokenDto.setReissueToken(ExceptionCode.EXPIRED_TOKEN);
+			return responseService.getResponse(reissueTokenDto);
 		} 
 		
 		if(!result.getRefreshToken().equals(requestRefreshToken.getRefreshToken())) {
 			System.out.println(!result.getRefreshToken().equals(requestRefreshToken.getRefreshToken()));
-			response.put(responseString , ExceptionCode.INVALID_TOKEN);
-			return responseService.getResponse(response);
+			reissueTokenDto.setReissueToken(ExceptionCode.INVALID_TOKEN);
+			return responseService.getResponse(reissueTokenDto);
 		}
 
 		String accessToken = jwtManager.generateAccessToken(result);
-		response.put(responseString , accessToken);
-		return responseService.getResponse(response);
+		reissueTokenDto.setReissueToken(accessToken);
+		return responseService.getResponse(reissueTokenDto);
 	}
 
 //	/**
