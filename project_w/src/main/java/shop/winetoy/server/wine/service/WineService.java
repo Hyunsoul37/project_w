@@ -6,7 +6,6 @@ import shop.winetoy.server.wine.entity.WineDto;
 import shop.winetoy.server.wine.entity.WineInfoDto;
 
 public interface WineService {
-	WineDto registerWine(WineDto registerWine);
 
 	WineDto getWineDetail(int pid);
 

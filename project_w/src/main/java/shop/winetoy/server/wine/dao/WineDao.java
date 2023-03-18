@@ -12,7 +12,8 @@ import shop.winetoy.server.wine.entity.WineInfoDto;
 public interface WineDao {
 
 	int registerWine(WineDto wine);
-
+	int deleteWine(int pid);
+	
 	WineDto getWineDetail(int pid);
 
 	List<WineInfoDto> searchWine(
@@ -52,7 +53,17 @@ public interface WineDao {
 			Integer maxPrice,
 			Integer minPrice);
 
-	List<WineInfoDto> searchTest(int pid, List<Integer> typeList, List<Integer> bodyList, List<Integer> sweetList,
-			List<Integer> acidityList, List<Integer> tanninList, List<String> countryList, Integer maxPrice,
-			Integer minPrice, int page, int listCount, int offset);
+	List<WineInfoDto> searchTest(
+			int pid, 
+			List<Integer> typeList, 
+			List<Integer> bodyList, 
+			List<Integer> sweetList,
+			List<Integer> acidityList, 
+			List<Integer> tanninList, 
+			List<String> countryList, 
+			Integer maxPrice,
+			Integer minPrice, 
+			int page, 
+			int listCount, 
+			int offset);
 }

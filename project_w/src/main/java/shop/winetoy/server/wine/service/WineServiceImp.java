@@ -16,16 +16,6 @@ public class WineServiceImp implements WineService {
 
 	@Autowired
 	WineDao wineDao;
-	S3UpladerService s3Uploader;
-
-	@Override
-	@Transactional
-	public WineDto registerWine(WineDto registerWine) {
-		wineDao.registerWine(registerWine);
-		WineDto result = wineDao.getWineDetail(registerWine.getPid());
-
-		return result;
-	}
 
 	@Override
 	public WineDto getWineDetail(int pid) {
