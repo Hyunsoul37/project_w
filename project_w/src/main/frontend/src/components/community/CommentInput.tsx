@@ -4,24 +4,54 @@ import { useRouter } from "next/router";
 import { RootState } from "../../store";
 import { defaultimg } from "./CommunityComment";
 import styled from "./CommentInput.module.css";
+import { firstCommentState, secondCommentState } from "./ReviewTypes";
+import { getDate, GetReviewid } from "../util/util";
 
-const CommentInput: React.FC<{
+interface commentState {
   isMainInput: boolean;
   subCommentuser?: string;
-  AddfirstComment?: () => void;
-  AddSecondComment?: () => void;
-}> = ({ isMainInput, subCommentuser, AddfirstComment, AddSecondComment }) => {
+  AddfirstComment?: (data: firstCommentState) => void;
+  AddSecondComment?: (
+    comment: string,
+    commentId: number,
+    tagName: string
+  ) => void;
+}
+
+const CommentInput: React.FC<commentState> = ({
+  isMainInput,
+  subCommentuser,
+  AddfirstComment,
+  AddSecondComment,
+}) => {
   const user = useSelector((state: RootState) => state.user);
   const ref = useRef<HTMLDialogElement>(null);
   const router = useRouter();
   const [showModal, setShowModal] = useState(false);
   const [comment, setComment] = useState("");
+
   const CommentSubmitHandler = () => {
     if (user.isLoggedIn === true) {
       if (isMainInput) {
-        AddfirstComment!();
+        AddfirstComment!({
+          firstComment_Id: GetReviewid(),
+          writerId: user.userData.data.memberInfo.pid,
+          writerNickName: user.userData.data.memberInfo.nickName
+            ? user.userData.data.memberInfo.nickName
+            : "임시",
+          commentText: comment,
+          writerImage:
+            user.userData.data.memberInfo.userImage === undefined
+              ? "null"
+              : user.userData.data.memberInfo.userImage,
+          regiDate: getDate(),
+          commentLike: false,
+          secondComment: [],
+        });
+        setComment("");
       } else {
-        AddSecondComment!();
+        AddSecondComment!(comment, GetReviewid(), subCommentuser!);
+        setComment("");
       }
     } else {
       ref.current?.showModal();
@@ -31,7 +61,10 @@ const CommentInput: React.FC<{
   const OffModal = () => {
     ref.current?.close();
     setShowModal(false);
-    router.push({ pathname: "/login", query: { returnUrl: router.asPath } });
+    router.push(
+      { pathname: "/login", query: { returnUrl: router.asPath } },
+      "/login"
+    );
   };
 
   return (
@@ -40,8 +73,10 @@ const CommentInput: React.FC<{
     >
       <img
         src={
-          user.userData !== null && user.userData.data.userImage
-            ? user.userData.data.userImage
+          user.userData !== null &&
+          user.userData.data.memberInfo.userImage !== "" &&
+          user.userData.data.memberInfo.userImage !== undefined
+            ? user.userData.data.memberInfo.userImage
             : defaultimg
         }
       />
@@ -59,6 +94,7 @@ const CommentInput: React.FC<{
             <input
               type="text"
               value={comment}
+              autoFocus
               onChange={(e) => setComment(e.target.value)}
             />
           </div>

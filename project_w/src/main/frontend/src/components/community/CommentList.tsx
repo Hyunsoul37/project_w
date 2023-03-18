@@ -2,18 +2,18 @@ import { useRouter } from "next/router";
 import { useEffect, useRef, useState } from "react";
 import { useSelector } from "react-redux";
 import { RootState } from "../../store";
+import { getDate } from "../util/util";
 import CommentInput from "./CommentInput";
 import styled from "./CommentList.module.css";
 import { defaultimg } from "./CommunityComment";
-import { firstCommentState } from "./ReviewTypes";
+import { firstCommentState, secondCommentState } from "./ReviewTypes";
 
 interface CommentPropsType {
   curCommentnumber: number;
   cursubCommentnumber: number;
   ChangeComment: (index: number) => void;
   ChangeSubComment: (index: number) => void;
-  AddFirstComment: () => void;
-  AddSecondComment: (commnetindex: number) => void;
+  AddSecondComment: (commnetindex: number, data: secondCommentState) => void;
   firstCommentLikeHandler: (id: number) => void;
   SecondCommentLikeHandler: (secondCommentid: number) => void;
 }
@@ -75,13 +75,49 @@ const CommentList: React.FC<firstCommentState & CommentPropsType> = (props) => {
   const OffModal = () => {
     ref.current?.close();
     setShowModal(false);
-    router.push({ pathname: "/login", query: { returnUrl: router.asPath } });
+    router.push(
+      { pathname: "/login", query: { returnUrl: router.asPath } },
+      "/login"
+    );
   };
   const firstCommentLikeHandler = (id: number) => () => {
-    props.firstCommentLikeHandler(id);
+    if (user.isLoggedIn === true) {
+      props.firstCommentLikeHandler(id);
+    } else {
+      ref.current?.showModal();
+      setShowModal(true);
+    }
   };
   const SecondCommentLikeHandler = (secondid: number) => () => {
-    props.SecondCommentLikeHandler(secondid);
+    if (user.isLoggedIn === true) {
+      props.SecondCommentLikeHandler(secondid);
+    } else {
+      ref.current?.showModal();
+      setShowModal(true);
+    }
+  };
+  const AddSecondComment = (
+    comment: string,
+    commentId: number,
+    tagName: string
+  ) => {
+    props.AddSecondComment(props.firstComment_Id, {
+      secondComment_Id: commentId,
+      writerId: user.userData.data.memberInfo.pid,
+      writerNickName: user.userData.data.memberInfo.nickName,
+      commentText: comment,
+      writerImage:
+        user.userData.data.memberInfo.userImage === undefined
+          ? "null"
+          : user.userData.data.memberInfo.userImage,
+      regiDate: getDate(),
+      commentLike: false,
+      writerTag: tagName,
+    });
+    setCommentNum(-10);
+    setsubCommentNum(-10);
+    props.ChangeComment(-1);
+    props.ChangeSubComment(-1);
   };
 
   return (
@@ -112,6 +148,7 @@ const CommentList: React.FC<firstCommentState & CommentPropsType> = (props) => {
           <CommentInput
             isMainInput={false}
             subCommentuser={props.writerNickName}
+            AddSecondComment={AddSecondComment}
           />
         )}
       </div>
@@ -123,7 +160,9 @@ const CommentList: React.FC<firstCommentState & CommentPropsType> = (props) => {
                 <div className={styled.SecondComment_Info}>
                   <img
                     src={
-                      c.writerImage !== "null" ? props.writerImage : defaultimg
+                      c.writerImage !== ("null" || undefined)
+                        ? props.writerImage
+                        : defaultimg
                     }
                   />
                   <div>{c.writerNickName}</div>
@@ -155,7 +194,11 @@ const CommentList: React.FC<firstCommentState & CommentPropsType> = (props) => {
             ))}
           </div>
           {props.cursubCommentnumber === subCommentNum && (
-            <CommentInput isMainInput={false} subCommentuser={subNickName} />
+            <CommentInput
+              isMainInput={false}
+              subCommentuser={subNickName}
+              AddSecondComment={AddSecondComment}
+            />
           )}
         </>
       )}

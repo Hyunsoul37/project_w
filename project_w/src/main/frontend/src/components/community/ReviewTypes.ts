@@ -22,7 +22,7 @@ export interface firstCommentState {
   commentLike: boolean;
   secondComment: secondCommentState[];
 }
-interface secondCommentState {
+export interface secondCommentState {
   secondComment_Id: number;
   writerId: number;
   writerNickName: string;

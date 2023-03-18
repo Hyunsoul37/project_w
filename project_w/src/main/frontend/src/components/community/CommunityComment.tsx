@@ -2,8 +2,12 @@ import CommentList from "./CommentList";
 import CommentInput from "./CommentInput";
 import styled from "./CommunityComment.module.css";
 import comment from "../dummydata/review_Comment.json";
-import { useEffect, useState } from "react";
-import { commentState, firstCommentState } from "./ReviewTypes";
+import { useEffect, useRef, useState } from "react";
+import {
+  commentState,
+  firstCommentState,
+  secondCommentState,
+} from "./ReviewTypes";
 export const defaultimg = `/images/default_profile.png`;
 
 const CommunityComment: React.FC<{ reviewId: number }> = ({ reviewId }) => {
@@ -23,8 +27,24 @@ const CommunityComment: React.FC<{ reviewId: number }> = ({ reviewId }) => {
     setactiveSubCommentNum(index);
   };
 
-  const AddFirstComment = () => {};
-  const AddSecondComment = (index: number) => {};
+  const AddFirstComment = (data: firstCommentState) => {
+    const commentlist = { ...commmentData };
+    commentlist!.firstComment!.push(data);
+    setCommentData(commentlist as commentState);
+  };
+
+  const AddSecondComment = (index: number, data: secondCommentState) => {
+    const commentlist = { ...commmentData };
+    commentlist?.firstComment?.map((comment) => {
+      comment.firstComment_Id === index
+        ? {
+            ...comment,
+            secondComment: comment.secondComment.push(data),
+          }
+        : comment;
+    });
+    setCommentData(commentlist as commentState);
+  };
 
   const firstCommentLikeHandler = (id: number) => {
     const editdata = commmentData?.firstComment.map((data) =>
@@ -71,7 +91,6 @@ const CommunityComment: React.FC<{ reviewId: number }> = ({ reviewId }) => {
             cursubCommentnumber={activeSubCommentNum}
             ChangeSubComment={ChangeSubComment}
             ChangeComment={ChangeComment}
-            AddFirstComment={AddFirstComment}
             AddSecondComment={AddSecondComment}
             firstCommentLikeHandler={firstCommentLikeHandler}
             SecondCommentLikeHandler={SecondCommentLikeHandler}

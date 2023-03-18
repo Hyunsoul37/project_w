@@ -11,7 +11,7 @@
   color: #bcbcbc;
 }
 .Community_CardWrapper {
-  /* margin-top: 80px; */
+  margin-top: 30px;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 30px;
@@ -20,4 +20,8 @@
 .Community_SrollChecker {
   height: 250px;
   /* background-color: rebeccapurple; */
+}
+.btnWrapper {
+  display: flex;
+  justify-content: flex-end;
 }

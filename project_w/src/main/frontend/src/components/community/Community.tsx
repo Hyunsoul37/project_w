@@ -2,6 +2,7 @@ import styled from "./Community.module.css";
 import { useSelector, useDispatch } from "react-redux";
 import { Dispatch, useEffect, useReducer, useRef, useState } from "react";
 import CommunityCard from "./CommunityCard";
+import Button from "../ui/Button";
 import ReviewFilter from "./ReviewFilter";
 import { RootState } from "../../store";
 import { reviewState } from "./ReviewTypes";
@@ -12,6 +13,7 @@ import {
 } from "../../slice/reviewSlice.js";
 import data from "../dummydata/review_list.json";
 import Loading from "../ui/Loading";
+import { useRouter } from "next/router";
 export interface GetReviewAction {
   data: reviewState;
   curpage: number;
@@ -23,6 +25,7 @@ const Community: React.FC<{ list: reviewState[] }> = (props) => {
   const curpage = useRef(-1);
   const [isStart, setisStart] = useState(true);
   const [targetrender, setTargetRender] = useState(true);
+  const router = useRouter();
 
   const loadData = () => {
     curpage.current++;
@@ -85,6 +88,14 @@ const Community: React.FC<{ list: reviewState[] }> = (props) => {
         <h1>COMMUNITY</h1>
         <h3>와구 회원들과의 즐거운 와인 이야기</h3>
         <ReviewFilter />
+        <div className={styled.btnWrapper}>
+          <Button
+            buttontext="새글작성"
+            buttonColor="second"
+            buttonSize="m"
+            onClick={() => router.push("/community/post")}
+          />
+        </div>
         <div className={styled.Community_CardWrapper}>
           {review.post.map((data: reviewState, index: number) => (
             <CommunityCard key={`review_${index}`} {...data} />
