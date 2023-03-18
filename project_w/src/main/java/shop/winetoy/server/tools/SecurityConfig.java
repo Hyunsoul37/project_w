@@ -13,7 +13,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 import shop.winetoy.server.auth.MemberDetailsService;
 
 @Configuration
-@EnableWebSecurity(debug = true)
+@EnableWebSecurity//(debug = true)
 public class SecurityConfig {
 
 	JwtManager jwtManager;

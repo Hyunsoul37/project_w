@@ -42,8 +42,15 @@ public interface WineDao {
 			int listCount, 
 			int offset);
 
-	int getWineCount(Integer type, Integer body, Integer sweet, Integer acidity, Integer tannin, Integer price,
-			String country);
+	int getWineCount(
+			List<Integer> typeList, 
+			List<Integer> bodyList, 
+			List<Integer> sweetList,
+			List<Integer> acidityList, 
+			List<Integer> tanninList, 
+			List<String> countryList, 
+			Integer maxPrice,
+			Integer minPrice);
 
 	List<WineInfoDto> searchTest(int pid, List<Integer> typeList, List<Integer> bodyList, List<Integer> sweetList,
 			List<Integer> acidityList, List<Integer> tanninList, List<String> countryList, Integer maxPrice,

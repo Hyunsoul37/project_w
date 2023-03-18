@@ -52,7 +52,8 @@ public class WineController {
 	 */
 	@RequestMapping(value = "/wine", method = RequestMethod.POST)
 	@ResponseBody
-	public Response<WineDto> registerWine(@RequestParam(value = "file", required = false) MultipartFile file,
+	public Response<WineDto> registerWine(
+			@RequestParam(value = "file", required = false) MultipartFile file,
 			@RequestParam String wine) {
 
 		ObjectMapper mapper = new ObjectMapper();
@@ -114,10 +115,16 @@ public class WineController {
 
 	@RequestMapping(value = "/wine/count", method = RequestMethod.GET)
 	@ResponseBody
-	public int searchWine(Integer type, Integer body, Integer sweet, Integer acidity, Integer tannin, Integer price,
-			String country) {
-
-		return wineService.getWineCount(type, body, sweet, acidity, tannin, price, country);
+	public int searchWine(			
+			@RequestParam(required = false) List<Integer> type,
+			@RequestParam(required = false) List<Integer> body,
+			@RequestParam(required = false) List<Integer> sweet,
+			@RequestParam(required = false) List<Integer> acidity,
+			@RequestParam(required = false) List<Integer> tannin,
+			@RequestParam(required = false) List<String> country,
+			@RequestParam(required = false) Integer maxPrice, 
+			@RequestParam(required = false) Integer minPrice) {
+		return wineService.getWineCount(type, body, sweet, acidity, tannin, country, maxPrice, minPrice);
 	}
 
 	// --------------------------------------------------------------------------------------------------------//
