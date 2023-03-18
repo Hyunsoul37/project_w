@@ -28,15 +28,6 @@ public class MemberServiceImp implements MemberService{
 	}
 
 	/**
-	 * 회원 리스트 조회
-	 */
-	@Override
-	public List<MemberDto> memberList() {
-		List<MemberDto> result = memberDao.memberList();
-		return result;
-	}
-
-	/**
 	 * 로그인시 id로 정보 가져오기
 	 */
 	@Override

@@ -1,9 +1,13 @@
 package shop.winetoy.server.admin.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import shop.winetoy.server.member.dao.MemberDao;
+import shop.winetoy.server.member.entity.MemberDto;
 import shop.winetoy.server.s3.service.S3UpladerService;
 import shop.winetoy.server.wine.dao.WineDao;
 import shop.winetoy.server.wine.entity.WineDto;
@@ -13,8 +17,12 @@ public class AdminServiceImp implements AdminService {
 	
 	@Autowired
 	WineDao wineDao;
+	
 	@Autowired
 	S3UpladerService s3UpladerService;
+	
+	@Autowired
+	MemberDao memberDao;
 	
 	@Override
 	public WineDto registerWine(WineDto registerWine) {
@@ -45,5 +53,11 @@ public class AdminServiceImp implements AdminService {
 
 	public boolean removeS3Image(String imgS3Path) {
 		return s3UpladerService.delete(imgS3Path);
+	}
+	
+	@Override
+	public List<MemberDto> memberList() {
+		List<MemberDto> result = memberDao.memberList();
+		return result;
 	}
 }

@@ -3,6 +3,7 @@ package shop.winetoy.server.admin.controller;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import shop.winetoy.server.admin.service.AdminService;
+import shop.winetoy.server.member.entity.MemberDto;
 import shop.winetoy.server.response.entity.Response;
 import shop.winetoy.server.response.service.ResponseService;
 import shop.winetoy.server.s3.service.S3UpladerService;
@@ -78,6 +80,18 @@ public class AdminApiController {
 	}
 	
 	/**
+	 * 회원 리스트 조회
+	 * https://www.notion.so/9e5a6611a0b043819647b909061a7e7c?pvs=4
+	 */
+	@RequestMapping(value = "/memberList", method = RequestMethod.GET)
+	@ResponseBody
+	public Response<List<MemberDto>> getMemberList() {
+		List<MemberDto> result = adminService.memberList();
+		
+		return responseService.getResponse(result);
+	}
+	
+	/**
 	 * wine 등록
 	 * https://www.notion.so/Wine-ccd0b836a3194afb9028f5dc2f330f11?pvs=4
 	 */
@@ -91,7 +105,7 @@ public class AdminApiController {
 		String folder = "registeredWineImg";
 
 		try {
-			String imgUrl = s3UpladerService.upload(file, "test/" + folder);
+			String imgUrl = s3UpladerService.upload(file, folder);
 			wineInfo.setImageUrl(imgUrl);
 			return responseService.getResponse(adminService.registerWine(wineInfo));
 
@@ -101,9 +115,15 @@ public class AdminApiController {
 		}
 	}
 	
+	/**
+	 * wine 삭제
+	 * https://www.notion.so/Wine-be717f2aefca4ac6b350ac233a1028ec?pvs=4
+	 */
 	@RequestMapping(value = "/wine", method = RequestMethod.DELETE)
 	@ResponseBody
 	public Response<Boolean> deleteWine(int pid){
 		return responseService.getResponse(adminService.deleteWine(pid));
 	}
+	
+	
 }

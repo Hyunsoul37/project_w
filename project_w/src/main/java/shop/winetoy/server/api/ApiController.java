@@ -82,18 +82,6 @@ public class ApiController {
 	}
 
 	/**
-	 * 회원 리스트 조회
-	 * 
-	 */
-	@RequestMapping(value = "/admin/memberList", method = RequestMethod.GET)
-	@ResponseBody
-	public Response<List<MemberDto>> getMemberList() {
-		List<MemberDto> result = memberService.memberList();
-		
-		return responseService.getResponse(result);
-	}
-
-	/**
 	 * Login
 	 * https://www.notion.so/c526acbfee4a43ae9cc203f9c00862af?pvs=4
 	 */
