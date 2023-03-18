@@ -1,11 +1,11 @@
 .headerWrapper {
   width: 100vw;
-  height: 100px;  
+  height: 100px;
   position: fixed;
   z-index: 10;
   transition: all 0.3s ease;
 }
-.activebg{
+.activebg {
   background-color: white;
   border-bottom: 2px solid lightgray;
 }
@@ -18,21 +18,26 @@
   position: fixed;
   z-index: 10;
 }
+
 .btnWrapper:last-child {
   flex-grow: 1;
   display: flex;
   justify-content: flex-end;
 }
 .btnWrapper span {
-  font-family: 'campton';
+  font-family: "campton";
   font-size: 15px;
   font-weight: 700;
   color: var(--primary-txt);
   cursor: pointer;
   padding: 0px 10px;
+  line-height: 20px;
   /* padding-bottom: 5px; */
 }
-
+.btnWrapper svg {
+  font-size: 20px;
+  color: var(--primary-txt);
+}
 .Header button {
   width: 3rem;
   height: 1.5rem;
@@ -40,7 +45,7 @@
 .logo {
   display: block;
   font-size: 35px;
-  font-family: 'campton';
+  font-family: "campton";
   font-weight: 700;
   color: var(--primary-txt);
   cursor: pointer;

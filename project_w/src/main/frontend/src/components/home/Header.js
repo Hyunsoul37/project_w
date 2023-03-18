@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useRouter } from "next/router";
 import { logout, DataClear } from "../../slice/userSlice";
 import styled from "./Header.module.css";
+import { RiUser5Line } from "react-icons/ri";
 
 const Header = () => {
   const router = useRouter();
@@ -12,7 +13,7 @@ const Header = () => {
   const [headerBG, setHeaderBg] = useState(false);
 
   const LoginBtnHandler = () => {
-    router.push({ pathname: "/login", query: { returnUrl: router.asPath } });
+    router.push({ pathname: "/login" });
     //router.push("/login");
   };
   const LogOutHandler = () => {
@@ -33,6 +34,7 @@ const Header = () => {
 
   useEffect(() => {
     window.addEventListener("scroll", HeaderFadeHandler);
+    HeaderFadeHandler();
   }, []);
 
   return (
@@ -57,13 +59,15 @@ const Header = () => {
             <span onClick={() => router.push({ pathname: "/community" })}>
               COMMUNITY
             </span>
-            <span onClick={() => router.push("/QnA")}>QnA</span>
-            <span onClick={() => router.push("/notice")}>NOTICE</span>
+            {/* <span onClick={() => router.push("/QnA")}>QnA</span>
+            <span onClick={() => router.push("/notice")}>NOTICE</span> */}
           </div>
           <div className={styled.btnWrapper}>
             {user.isLoggedIn ? (
               <>
-                <div> Hi!! {userData.name}</div>
+                <RiUser5Line
+                  onClick={() => router.push({ pathname: "/mypage" })}
+                />
                 <span onClick={LogOutHandler}>LOGOUT</span>
               </>
             ) : (
