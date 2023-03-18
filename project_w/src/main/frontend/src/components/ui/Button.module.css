@@ -1,14 +1,29 @@
-.main{
-    color: white;
-    border-radius: 25px;
-    width: 150px;
-    height: 50px;
-    background-color: var(--primary);
+.main {
+  color: white;
+  border-radius: 25px;
+  /* width: 150px;
+  height: 50px; */
+  background-color: var(--primary);
 }
-.second{
-    color: white;
-    border-radius: 25px;
-    width: 150px;
-    height: 50px;
-    background-color: var(--secondary);
+.second {
+  color: white;
+  border-radius: 25px;
+  /* width: 150px;
+  height: 50px; */
+  background-color: var(--secondary);
+}
+.small {
+  width: 80px;
+  height: 30px;
+  font-size: 10px;
+}
+.medium {
+  width: 100px;
+  height: 40px;
+  font-size: 13px;
+}
+.large {
+  width: 150px;
+  height: 50px;
+  font-size: 16px;
 }
