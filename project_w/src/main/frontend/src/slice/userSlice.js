@@ -48,7 +48,6 @@ const saveToken = (data) => {
   const today = new Date();
   // today.setDate(today.getDate() + 1); // 하루
   today.setMinutes(today.getMinutes() + 3); // 3분
-  console.log(today);
   if (data.token === null) {
     console.log(data.message);
   } else {
