@@ -36,42 +36,6 @@ public class ApiController {
 	JwtManager jwtManager;
 	@Autowired
 	ResponseService responseService;
-	
-	/**
-	 * 서버 시간 조회
-	 */
-	@RequestMapping(value = "/admin/time", method = RequestMethod.GET)
-	@ResponseBody
-	public Map<String, String> time() {
-		LocalDateTime now = LocalDateTime.now();
-		String format = now.format(DateTimeFormatter.ofPattern("yyyy년 MM월 dd일 HH시 mm분 ss초"));
-
-		HashMap<String, String> map = new HashMap<String, String>();
-		map.put("time", format);
-
-		return map;
-	}
-
-	/**
-	 * POST 테스트
-	 */
-	@RequestMapping(value = "/admin/test", method = RequestMethod.POST)
-	@ResponseBody
-	public Map<String, String> postData(@RequestBody Map<String, String> data) {
-		return data;
-	}
-
-	/**
-	 * GET 테스트
-	 */
-	@RequestMapping(value = "/admin/test", method = RequestMethod.GET)
-	@ResponseBody
-	public Map<String, String> getData() {
-		Map<String, String> data = new HashMap<String, String>();
-		data.put("data", "RequestMethod.GET");
-
-		return data;
-	}
 
 	/**
 	 * ID 중복 체크 (GET + Query String)
@@ -114,18 +78,6 @@ public class ApiController {
 
 		MemberInfoDto result = memberService.join(info);
 
-		return responseService.getResponse(result);
-	}
-
-	/**
-	 * 회원 리스트 조회
-	 * 
-	 */
-	@RequestMapping(value = "/admin/memberList", method = RequestMethod.GET)
-	@ResponseBody
-	public Response<List<MemberDto>> getMemberList() {
-		List<MemberDto> result = memberService.memberList();
-		
 		return responseService.getResponse(result);
 	}
 
