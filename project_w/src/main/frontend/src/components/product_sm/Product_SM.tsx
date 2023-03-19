@@ -27,7 +27,7 @@ export interface filterdataState {
   wineSweet: number[];
   wineAcidity: number[];
   wineTannin: number[];
-  winePrice: string[]; // 백엔드랑 연결할때 number로 변경 할 것
+  winePrice: number[]; // 백엔드랑 연결할때 number로 변경 할 것
   wineCountry: string[];
 }
 

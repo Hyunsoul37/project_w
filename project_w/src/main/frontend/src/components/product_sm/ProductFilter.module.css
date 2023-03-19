@@ -68,3 +68,6 @@
   margin-left: 30px;
   background-color: var(--primary);
 }
+.PriceRange {
+  color: var(--primary);
+}
