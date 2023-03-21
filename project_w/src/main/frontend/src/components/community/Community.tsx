@@ -19,12 +19,14 @@ export interface GetReviewAction {
   curpage: number;
 }
 const Community: React.FC<{ list: reviewState[] }> = (props) => {
-  const review = useSelector((state: RootState) => state.review);
+  const { review, user } = useSelector((state: RootState) => state);
   const dispatch = useDispatch();
   const target = useRef<HTMLDivElement>(null);
   const curpage = useRef(-1);
+  const modalref = useRef<HTMLDialogElement>(null);
   const [isStart, setisStart] = useState(true);
   const [targetrender, setTargetRender] = useState(true);
+  const [showModal, setShowModal] = useState(false);
   const router = useRouter();
 
   const loadData = () => {
@@ -82,6 +84,22 @@ const Community: React.FC<{ list: reviewState[] }> = (props) => {
     };
   }, [review.isloadding, targetrender]);
 
+  const OnClickWritePost = () => {
+    if (user.isLoggedIn === true) {
+      router.push("/community/post");
+    } else {
+      modalref.current?.showModal();
+      setShowModal(true);
+    }
+  };
+  const OffModal = () => {
+    modalref.current?.close();
+    setShowModal(false);
+    router.push(
+      { pathname: "/login", query: { returnUrl: router.asPath } },
+      "/login"
+    );
+  };
   return (
     <div className="maxframe">
       <div className={styled.Community}>
@@ -93,7 +111,7 @@ const Community: React.FC<{ list: reviewState[] }> = (props) => {
             buttontext="새글작성"
             buttonColor="second"
             buttonSize="m"
-            onClick={() => router.push("/community/post")}
+            onClick={OnClickWritePost}
           />
         </div>
         <div className={styled.Community_CardWrapper}>
@@ -108,6 +126,14 @@ const Community: React.FC<{ list: reviewState[] }> = (props) => {
           <span style={{ display: "inline-block", height: "250px" }}></span>
         )}
       </div>
+      <dialog
+        style={!showModal ? { display: "none" } : { display: "flex" }}
+        className={styled.modal}
+        ref={modalref}
+      >
+        <p>로그인이 필요한 기능입니다.</p>
+        <button onClick={OffModal}>확인</button>
+      </dialog>
     </div>
   );
 };
