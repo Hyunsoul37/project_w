@@ -13,7 +13,7 @@ const useFetch = () => {
       data,
       header,
       movepath = null,
-      AfterGetData = null,
+      AfterGetData,
     }) => {
       console.log(`useFetch에서 받은데이터
       url:${url}
@@ -40,7 +40,7 @@ const useFetch = () => {
             movepath
           );
         }
-        if (AfterGetData !== null) {
+        if (AfterGetData !== null || AfterGetData !== undefined) {
           AfterGetData(responseData);
         }
       } catch (err) {
