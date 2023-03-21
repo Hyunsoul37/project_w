@@ -1,9 +1,15 @@
 import ReviewDetail from "../../../components/community/ReviewDetail";
 import data from "../../../components/dummydata/review_list.json";
+import Seo from "../../../util/Seo";
 
 const CommunityDetail = ({ id }) => {
   const filterlist = data.filter((d) => d.reviewId === Number(id));
-  return <ReviewDetail {...filterlist[0]} />;
+  return (
+    <>
+      <Seo title={`${filterlist[0].nickname}님의 포스팅`} />
+      <ReviewDetail {...filterlist[0]} />
+    </>
+  );
 };
 export default CommunityDetail;
 

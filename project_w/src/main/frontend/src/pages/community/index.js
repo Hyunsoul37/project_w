@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import Community from "../../components/community/Community";
 import data from "../../components/dummydata/review_list.json";
 import { TestGetReview } from "../../slice/reviewSlice.js";
+import Seo from "../../util/Seo";
 
 const reviewPage = ({ newlist }) => {
   // const review = useSelector((state) => state.review);
@@ -11,7 +12,12 @@ const reviewPage = ({ newlist }) => {
   // useEffect(() => {
   //   dispatch(TestGetReview([...newlist]));
   // }, []);
-  return <Community list={newlist} />;
+  return (
+    <>
+      <Seo title={"Community"} />
+      <Community list={newlist} />
+    </>
+  );
 };
 export default reviewPage;
 
