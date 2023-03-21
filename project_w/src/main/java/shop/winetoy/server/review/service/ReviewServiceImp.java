@@ -72,6 +72,10 @@ public class ReviewServiceImp implements ReviewService {
 	@Transactional
 	public ReviewDto getReviewDetail(int reviewId) {
 		ReviewDto result = reviewDao.getReviewDetail(reviewId);
+		
+		if(result == null)
+			return null;
+		
 		result = setHashTag(result);
 
 		return result;
@@ -94,6 +98,9 @@ public class ReviewServiceImp implements ReviewService {
 	public boolean deleteReview(int reviewId) {
 
 		ReviewDto deleteReview = getReviewDetail(reviewId);
+		if(deleteReview == null)
+			return false;
+		
 		String[] str = deleteReview.getReviewImgs();
 
 		for (int i = 0; i < str.length; i++) {
