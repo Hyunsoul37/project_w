@@ -3,12 +3,17 @@ import Product_SM from "../../components/product_sm/Product_SM";
 import Product_HJ from "../../components/product_hj/Product_HJ";
 import data from "../../components/dummydata/wine_add_sweet.json";
 import { useRouter } from "next/router";
-
+import Seo from "../../util/Seo";
 //Product_SM
 const product = ({ list }) => {
   // return <></>;
   console.log(list);
-  return <Product_SM list={list} />;
+  return (
+    <>
+      <Seo title="Product" />
+      <Product_SM list={list} />
+    </>
+  );
 };
 export default product;
 
