@@ -144,23 +144,6 @@ public class ApiController {
 		return responseService.getResponse(reissueTokenDto);
 	}
 
-//	/**
-//	 * DB memberInfo Table 초기화 API
-//	 * 
-//	 * @return
-//	 */
-//	@RequestMapping(value = "/member", method = RequestMethod.DELETE)
-//	@ResponseBody
-//	public Map<String, Integer> deleteMemberInfoTable() {
-//		Map<String, Integer> data = new HashMap<String, Integer>();
-//
-//		int result = memberService.deleteMemberInfoTable();
-//
-//		data.put("deleteCount", result);
-//
-//		return data;
-//	}
-
 	// -----------------------------------------------------------------------------------//
 
 	private boolean memberDuplicateCheck(String id) {
