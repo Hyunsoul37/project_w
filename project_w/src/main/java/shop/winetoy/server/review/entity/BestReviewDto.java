@@ -10,6 +10,7 @@ public class BestReviewDto {
 	private Date regiDate;
 	private float starPoint;
 	private String reviewImg1;
+	private String writerNick;
 
 	public int getReviewId() {
 		return reviewId;
@@ -67,9 +68,18 @@ public class BestReviewDto {
 		this.reviewImg1 = reviewImg1;
 	}
 
+	public String getWriterNick() {
+		return writerNick;
+	}
+
+	public void setWriterNick(String writerNick) {
+		this.writerNick = writerNick;
+	}
+
 	@Override
 	public String toString() {
 		return "BestReviewDto [reviewId=" + reviewId + ", reviewTitle=" + reviewTitle + ", desc=" + desc + ", writerId="
-				+ writerId + ", regiDate=" + regiDate + ", starPoint=" + starPoint + ", reviewImg1=" + reviewImg1 + "]";
+				+ writerId + ", regiDate=" + regiDate + ", starPoint=" + starPoint + ", reviewImg1=" + reviewImg1
+				+ ", writerNick=" + writerNick + "]";
 	}
 }

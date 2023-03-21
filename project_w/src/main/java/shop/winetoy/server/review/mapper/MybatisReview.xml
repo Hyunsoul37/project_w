@@ -125,6 +125,8 @@
 	</delete>
 	
 	<select id="getBestReview" resultType="shop.winetoy.server.review.entity.BestReviewDto">
-		select * from review order by review_like desc limit 3;
+		select review.*, member.nick_name as writer_nick from review 
+		inner join  member ON (review.writer_id = member.pid)
+		order by review_like desc limit 3
 	</select>
 </mapper>
