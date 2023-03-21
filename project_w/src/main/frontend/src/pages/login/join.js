@@ -1,10 +1,21 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import useFetch from "../../customHooks/useFetch";
 import Form from "../../components/ui/Form";
 import styled from "./Signupform.module.css";
 import Seo from "../../util/Seo";
 
+const url = "/api/auth/join";
+const type = "POST";
+const header = { "Content-Type": "application/json;charset=UTF-8" };
+const movepath = "/login";
+const emailReg =
+  /^[A-Za-z0-9]([-_.]?[A-Za-z0-9])*@[A-Za-z0-9]([-_.]?[A-Za-z0-9])*\.[A-Za-z]{2,3}$/;
+
+export const passwordreg =
+  /^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,20}$/;
+
 const join = () => {
+  const EmailRef = useRef(null);
   const { sendRequestData: postData } = useFetch();
   const [id, setId] = useState("");
   const [password, setPassword] = useState("");
@@ -18,15 +29,15 @@ const join = () => {
   const [isNickNameduplicate, setNickNameDuplicate] = useState(false);
   const [iseditedNickName, setIseditedNickName] = useState(false);
 
-  const url = "/api/auth/join";
-  const type = "POST";
-  const header = { "Content-Type": "application/json;charset=UTF-8" };
-  const movepath = "/login";
-
   const submitHandler = (e) => {
     e.preventDefault();
     if (isduplicate || isNickNameduplicate) {
       alert("아이디 또는 닉네임이 중복입니다.");
+      return;
+    }
+    if (!emailReg.test(email)) {
+      alert("유효하지 않은 이메일입니다");
+      EmailRef.current.focus();
       return;
     }
     postData({
@@ -112,6 +123,12 @@ const join = () => {
   const ChangePhoneHandler = (e) => {
     setPhone(e.target.value);
   };
+  const CheckEmailVaild = () => {
+    if (!emailReg.test(email)) {
+      alert("유효하지 않은 이메일입니다");
+      EmailRef.current.focus();
+    }
+  };
   return (
     <div className={styled.formWrapper}>
       <Seo title="Sign In" />
@@ -182,8 +199,10 @@ const join = () => {
           <input
             id="email"
             type="email"
+            ref={EmailRef}
             value={email ? email : ""}
             onChange={ChangeEmailHandler}
+            onBlur={CheckEmailVaild}
           />
         </label>
         {/* <label htmlFor="address">
