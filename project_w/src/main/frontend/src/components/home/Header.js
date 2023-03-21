@@ -38,13 +38,13 @@ const Header = () => {
   }, []);
 
   return (
-    <div
+    <header
       className={[styled.headerWrapper, headerBG ? styled.activebg : ""].join(
         " "
       )}
     >
       <div className="maxframe">
-        <div className={styled.Header}>
+        <nav className={styled.Header}>
           <span className={styled.logo} onClick={() => router.push("/")}>
             WAGU
           </span>
@@ -78,9 +78,9 @@ const Header = () => {
             )}
             {/* <button onClick={DataClearHandler}>Data Clear</button> */}
           </div>
-        </div>
+        </nav>
       </div>
-    </div>
+    </header>
   );
 };
 export default Header;
