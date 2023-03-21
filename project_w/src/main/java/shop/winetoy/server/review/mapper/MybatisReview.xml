@@ -9,9 +9,11 @@
 		useGeneratedKeys="true" keyProperty="reviewId">
 		INSERT INTO `wineToy`.`review`
 		(
+		`review_title`,
 		`wine_type`,
 		`wine_name`,
 		`wine_price`,
+		`star_point`,
 		`review_img_1`,
 		`review_img_2`,
 		`review_img_3`,
@@ -22,9 +24,11 @@
 		)
 		VALUES
 		(
+		#{reviewTitle},
 		#{wineType},
 		#{wineName},
 		#{winePrice},
+		#{starPoint},
 		#{reviewImg1},
 		#{reviewImg2},
 		#{reviewImg3},
@@ -96,9 +100,11 @@
 		parameterType="shop.winetoy.server.review.entity.ReviewDto">
 		UPDATE `wineToy`.`review`
 		SET
+		`review_title` = #{reviewTitle},
 		`wine_type` = #{wineType},
 		`wine_name` = #{wineName},
 		`wine_price` = #{winePrice},
+		`star_point` = #{starPoint},
 		`regi_date` =
 		current_timestamp(),
 		`review_img_1` = #{reviewImg1},
@@ -117,4 +123,10 @@
 		DELETE FROM `wineToy`.`review_tag`
 		WHERE review_id = #{reviewId}
 	</delete>
+	
+	<select id="getBestReview" resultType="shop.winetoy.server.review.entity.BestReviewDto">
+		select review.*, member.nick_name as writer_nick from review 
+		inner join  member ON (review.writer_id = member.pid)
+		order by review_like desc limit 3
+	</select>
 </mapper>

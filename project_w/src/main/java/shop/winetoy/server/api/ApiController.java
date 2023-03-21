@@ -1,11 +1,5 @@
 package shop.winetoy.server.api;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -149,23 +143,6 @@ public class ApiController {
 		reissueTokenDto.setReissueToken(accessToken);
 		return responseService.getResponse(reissueTokenDto);
 	}
-
-//	/**
-//	 * DB memberInfo Table 초기화 API
-//	 * 
-//	 * @return
-//	 */
-//	@RequestMapping(value = "/member", method = RequestMethod.DELETE)
-//	@ResponseBody
-//	public Map<String, Integer> deleteMemberInfoTable() {
-//		Map<String, Integer> data = new HashMap<String, Integer>();
-//
-//		int result = memberService.deleteMemberInfoTable();
-//
-//		data.put("deleteCount", result);
-//
-//		return data;
-//	}
 
 	// -----------------------------------------------------------------------------------//
 

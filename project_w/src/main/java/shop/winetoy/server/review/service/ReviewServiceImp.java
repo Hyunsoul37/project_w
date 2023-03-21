@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import shop.winetoy.server.review.dao.ReviewDao;
+import shop.winetoy.server.review.entity.BestReviewDto;
 import shop.winetoy.server.review.entity.HashTagDto;
 import shop.winetoy.server.review.entity.ReviewDto;
 import shop.winetoy.server.review.entity.ReviewTagDto;
@@ -72,6 +73,10 @@ public class ReviewServiceImp implements ReviewService {
 	@Transactional
 	public ReviewDto getReviewDetail(int reviewId) {
 		ReviewDto result = reviewDao.getReviewDetail(reviewId);
+		
+		if(result == null)
+			return null;
+		
 		result = setHashTag(result);
 
 		return result;
@@ -94,6 +99,9 @@ public class ReviewServiceImp implements ReviewService {
 	public boolean deleteReview(int reviewId) {
 
 		ReviewDto deleteReview = getReviewDetail(reviewId);
+		if(deleteReview == null)
+			return false;
+		
 		String[] str = deleteReview.getReviewImgs();
 
 		for (int i = 0; i < str.length; i++) {
@@ -144,6 +152,11 @@ public class ReviewServiceImp implements ReviewService {
 
 		ReviewDto result = getReviewDetail(review.getReviewId());
 		return result;
+	}
+	
+	@Override
+	public List<BestReviewDto> getBestReview() {
+		return reviewDao.getBestReview();
 	}
 
 	// =====================================================================//
