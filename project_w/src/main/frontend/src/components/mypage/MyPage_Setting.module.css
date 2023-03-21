@@ -1,0 +1,65 @@
+.MyPage_Setting {
+  padding: 0px 70px;
+}
+.MyPage_Setting span {
+  display: inline-block;
+  min-width: 130px;
+  margin-bottom: 30px;
+}
+.Setting_Email {
+  display: flex;
+  justify-content: space-between;
+}
+.fade {
+  color: #bcbcbc;
+  text-align: end;
+  text-decoration: underline;
+  font-size: 14px;
+  cursor: pointer;
+}
+.imageBtn {
+  width: 180px;
+  height: 180px;
+  background-color: #a6a6a6;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 10px;
+}
+.imageinput {
+  display: none;
+}
+.contents_ProfileImage {
+  display: flex;
+}
+.contents_ProfileImage span {
+  margin-bottom: 5px;
+}
+.imageBtn img {
+  width: 100%;
+  height: 100%;
+}
+.MyPage_Setting input {
+  width: 250px;
+  height: 30px;
+  border: 1px solid #d9d9d9;
+}
+.MyPage_Setting button {
+  background-color: var(--primary);
+  color: white;
+  height: 30px;
+  padding: 0px 10px;
+  border-radius: 3px;
+}
+.btnWrapper {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 50px;
+}
+.MyPage_Setting p {
+  margin-bottom: 10px;
+  color: red;
+}
+.marginZero {
+  margin-bottom: 0px !important;
+}

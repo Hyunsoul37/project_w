@@ -1,0 +1,8 @@
+.MyPage_LikePost {
+  background-color: var(--secondary);
+  width: 100%;
+  height: 210px;
+  text-align: center;
+  line-height: 210px;
+  margin-bottom: 40px;
+}
