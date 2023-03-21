@@ -36,6 +36,10 @@ public class ReviewController {
 		this.s3UpladerService = s3UpladerService;
 	}
 
+	/**
+	 * 리뷰 작성
+	 * https://www.notion.so/Review-2be3699be7f44f9bb53a17d386673b1a?pvs=4
+	 */
 	@RequestMapping(value = "/review", method = RequestMethod.POST)
 	@ResponseBody
 	public Response<ReviewDto> postReview(@RequestParam(value = "files", required = false) List<MultipartFile> files,
@@ -44,6 +48,10 @@ public class ReviewController {
 		return responseService.getResponse(result);
 	}
 
+	/**
+	 * 리뷰 리스트 조회
+	 * https://www.notion.so/Review-List-82a44d3cda8a43bd9ab8a5acfb479311?pvs=4
+	 */
 	@RequestMapping(value = "/review", method = RequestMethod.GET)
 	@ResponseBody
 	public Response<List<ReviewDto>> getReview() {
