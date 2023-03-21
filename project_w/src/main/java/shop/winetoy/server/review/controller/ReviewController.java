@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -12,14 +13,12 @@ import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-
 import shop.winetoy.server.response.entity.Response;
 import shop.winetoy.server.response.service.ResponseService;
+import shop.winetoy.server.review.entity.BestReviewDto;
 import shop.winetoy.server.review.entity.ReviewDto;
 import shop.winetoy.server.review.service.ReviewService;
 import shop.winetoy.server.s3.service.S3UpladerService;
-import shop.winetoy.server.wine.entity.WineDto;
 
 @Controller
 @RequestMapping("/api/community")
@@ -78,6 +77,13 @@ public class ReviewController {
 	@ResponseBody
 	public Response<ReviewDto> getReviewDetail(int reviewId) {
 		ReviewDto result = reviewService.getReviewDetail(reviewId);
+		return responseService.getResponse(result);
+	}
+	
+	@RequestMapping(value = "/best-review", method = RequestMethod.GET)
+	@ResponseBody
+	public Response<List<BestReviewDto>> getBestReview(){
+		List<BestReviewDto> result = reviewService.getBestReview();
 		return responseService.getResponse(result);
 	}
 

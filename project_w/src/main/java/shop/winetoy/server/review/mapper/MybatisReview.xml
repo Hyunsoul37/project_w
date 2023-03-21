@@ -123,4 +123,8 @@
 		DELETE FROM `wineToy`.`review_tag`
 		WHERE review_id = #{reviewId}
 	</delete>
+	
+	<select id="getBestReview" resultType="shop.winetoy.server.review.entity.BestReviewDto">
+		select * from review order by review_like desc limit 3;
+	</select>
 </mapper>
