@@ -7,9 +7,11 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 public class ReviewDto {
 	private int reviewId;
+	private String reviewTitle;
 	private String wineType;
 	private String wineName;
 	private int winePrice;
+	private float starPoint;
 	private Date regiDate;
 	private int reviewLike;
 	private String reviewImg1;
@@ -21,12 +23,22 @@ public class ReviewDto {
 	private int writerId;
 	private List<String> hashTag;
 
-	public int getReviewId() {
+	
+	
+	 public int getReviewId() {
 		return reviewId;
 	}
 
 	public void setReviewId(int reviewId) {
 		this.reviewId = reviewId;
+	}
+
+	public String getReviewTitle() {
+		return reviewTitle;
+	}
+
+	public void setReviewTitle(String reviewTitle) {
+		this.reviewTitle = reviewTitle;
 	}
 
 	public String getWineType() {
@@ -51,6 +63,14 @@ public class ReviewDto {
 
 	public void setWinePrice(int winePrice) {
 		this.winePrice = winePrice;
+	}
+
+	public float getStarPoint() {
+		return starPoint;
+	}
+
+	public void setStarPoint(float starPoint) {
+		this.starPoint = starPoint;
 	}
 
 	public Date getRegiDate() {
@@ -133,7 +153,7 @@ public class ReviewDto {
 		this.hashTag = hashTag;
 	}
 
-	 @JsonIgnore
+	@JsonIgnore
 	public String[] getReviewImgs() {
 		String[] result = { reviewImg1, reviewImg2, reviewImg3, reviewImg4, reviewImg5 };
 		return result;
@@ -150,11 +170,13 @@ public class ReviewDto {
 
 	@Override
 	public String toString() {
-		return "ReviewDto [reviewId=" + reviewId + ", wineType=" + wineType + ", wineName=" + wineName + ", winePrice="
-				+ winePrice + ", regiDate=" + regiDate + ", reviewLike=" + reviewLike + ", reviewImg1=" + reviewImg1
-				+ ", reviewImg2=" + reviewImg2 + ", reviewImg3=" + reviewImg3 + ", reviewImg4=" + reviewImg4
-				+ ", reviewImg5=" + reviewImg5 + ", desc=" + desc + ", writerId=" + writerId + ", hashTag=" + hashTag
-				+ "]";
+		return "ReviewDto [reviewId=" + reviewId + ", reviewTitle=" + reviewTitle + ", wineType=" + wineType
+				+ ", wineName=" + wineName + ", winePrice=" + winePrice + ", starPoint=" + starPoint + ", regiDate="
+				+ regiDate + ", reviewLike=" + reviewLike + ", reviewImg1=" + reviewImg1 + ", reviewImg2=" + reviewImg2
+				+ ", reviewImg3=" + reviewImg3 + ", reviewImg4=" + reviewImg4 + ", reviewImg5=" + reviewImg5 + ", desc="
+				+ desc + ", writerId=" + writerId + ", hashTag=" + hashTag + "]";
 	}
+
+
 
 }
