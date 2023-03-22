@@ -6,10 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import shop.winetoy.server.s3.service.S3UpladerService;
 import shop.winetoy.server.wine.dao.WineDao;
 import shop.winetoy.server.wine.entity.WineDto;
 import shop.winetoy.server.wine.entity.WineInfoDto;
+import shop.winetoy.server.wine.entity.WineRankDto;
 
 @Service
 public class WineServiceImp implements WineService {
@@ -56,15 +56,28 @@ public class WineServiceImp implements WineService {
 		return wineDao.getWineCount(typeList, bodyList, sweetList, acidityList, tanninList, countryList, maxPrice, minPrice);
 	}
 
+//	@Override
+//	public List<WineInfoDto> searchTest(int pid, List<Integer> typeList, List<Integer> bodyList,
+//			List<Integer> sweetList, List<Integer> acidityList, List<Integer> tanninList, List<String> countryList,
+//			Integer maxPrice, Integer minPrice, int page) {
+//
+//		int listCount = 20;
+//		int offset = (page - 1) * listCount;
+//
+//		return wineDao.searchTest(pid, typeList, bodyList, sweetList, acidityList, tanninList, countryList, maxPrice,
+//				minPrice, page, listCount, offset);
+//	}
+
 	@Override
-	public List<WineInfoDto> searchTest(int pid, List<Integer> typeList, List<Integer> bodyList,
-			List<Integer> sweetList, List<Integer> acidityList, List<Integer> tanninList, List<String> countryList,
-			Integer maxPrice, Integer minPrice, int page) {
-
-		int listCount = 20;
-		int offset = (page - 1) * listCount;
-
-		return wineDao.searchTest(pid, typeList, bodyList, sweetList, acidityList, tanninList, countryList, maxPrice,
-				minPrice, page, listCount, offset);
+	@Transactional
+	public WineRankDto getCategoryRanking() {
+		WineRankDto result = new WineRankDto();
+		
+		result.setRed(wineDao.getCategoryRanking(1));
+		result.setWhite(wineDao.getCategoryRanking(2));
+		result.setSparkling(wineDao.getCategoryRanking(4));
+		result.setPort(wineDao.getCategoryRanking(5));
+		
+		return result;
 	}
 }

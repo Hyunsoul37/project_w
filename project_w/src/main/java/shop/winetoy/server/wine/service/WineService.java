@@ -4,6 +4,7 @@ import java.util.List;
 
 import shop.winetoy.server.wine.entity.WineDto;
 import shop.winetoy.server.wine.entity.WineInfoDto;
+import shop.winetoy.server.wine.entity.WineRankDto;
 
 public interface WineService {
 
@@ -20,7 +21,9 @@ public interface WineService {
 	int getWineCount(List<Integer> typeList, List<Integer> bodyList, List<Integer> sweetList, List<Integer> acidityList,
 			List<Integer> tanninList, List<String> countryList, Integer maxPrice, Integer minPrice);
 
-	List<WineInfoDto> searchTest(int pid, List<Integer> typeList, List<Integer> bodyList, List<Integer> sweetList,
-			List<Integer> acidityList, List<Integer> tanninList, List<String> countryList, Integer maxPrice,
-			Integer minPrice, int page);
+//	List<WineInfoDto> searchTest(int pid, List<Integer> typeList, List<Integer> bodyList, List<Integer> sweetList,
+//			List<Integer> acidityList, List<Integer> tanninList, List<String> countryList, Integer maxPrice,
+//			Integer minPrice, int page);
+	
+	WineRankDto getCategoryRanking();
 }

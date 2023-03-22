@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import shop.winetoy.server.wine.entity.WineDto;
 import shop.winetoy.server.wine.entity.WineInfoDto;
+import shop.winetoy.server.wine.entity.WineRankInfoDto;
 
 @Mapper
 public interface WineDao {
@@ -66,4 +67,6 @@ public interface WineDao {
 			int page, 
 			int listCount, 
 			int offset);
+	
+	List<WineRankInfoDto> getCategoryRanking(int wineType);
 }
