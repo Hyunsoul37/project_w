@@ -6,7 +6,18 @@
   width: 100%;
   height: 250px;
   font-size: 30px;
-  background-color: #d9d9d9;
+  background-color: #676767;
+}
+.logo {
+  font-size: 50px;
+  font-family: "campton";
+  color: white;
+  font-weight: 800;
+}
+.Footer_Info {
+  width: 100%;
+  display: flex;
+  justify-content: space-evenly;
 }
 .devInfo {
   display: flex;
@@ -17,6 +28,27 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
   width: 300px;
+  color: white;
+  margin: 0px 20px;
+}
+.devInfo div h1 {
+  font-size: 26px;
+  font-family: "campton";
+  margin-bottom: 10px;
+}
+.devInfo div h3 {
+  font-size: 20px;
+  font-family: "campton";
+  margin-bottom: 10px;
+}
+.devInfo div p {
+  font-family: "campton";
+  margin-bottom: 10px;
+}
+
+.Footer > p {
+  color: white;
+  margin-top: 30px;
 }
