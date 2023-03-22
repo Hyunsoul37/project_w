@@ -22,7 +22,7 @@ import { wineState } from "./productTypes";
 // ];
 
 export interface filterdataState {
-  wineType: string[];
+  wineType: number[];
   winebody: number[];
   wineSweet: number[];
   wineAcidity: number[];
@@ -31,37 +31,40 @@ export interface filterdataState {
   wineCountry: string[];
 }
 
-const Product_SM: React.FC<{ list: wineState[] }> = (props) => {
+const Product_SM: React.FC<{ list: wineState[]; fullpage: number }> = (
+  props
+) => {
   const router = useRouter();
   const [showFilter, setshowFilter] = useState(false);
   //const [curfilter, setCurFilter] = useState(0);
   const [winelist, setWinelist] = useState<wineState[]>([]);
   const [curpage, setcurPage] = useState<number>(0);
-  const fulldata = props.list;
+  // const fulldata = props.list;
 
   useEffect(() => {
+    console.log(props.list);
     setWinelist(props.list);
-  }, []);
+  }, [props.list]);
 
   useEffect(() => {
     setcurPage(Number(router.query.page) - 1);
   }, [router.query.page]);
 
   useEffect(() => {
-    let newwinelist: wineState[] = [];
-    for (let i = 0; i < 20; i++) {
-      if (fulldata[i + curpage * 20]) {
-        newwinelist.push(fulldata[i + curpage * 20]);
-      }
-    }
-    setWinelist(newwinelist);
+    // let newwinelist: wineState[] = [];
+    // for (let i = 0; i < 20; i++) {
+    //   if (fulldata[i + curpage * 20]) {
+    //     newwinelist.push(fulldata[i + curpage * 20]);
+    //   }
+    // }
+    //setWinelist(newwinelist);
   }, [curpage]);
 
   const PageBtn = useCallback(() => {
     let pagebtns: ReactElement[] = [];
     for (let i = 0; i < 10; i++) {
       let num = Math.floor(curpage / 10) * 10 + i;
-      if (num < fulldata.length / 20) {
+      if (num < props.fullpage / 20) {
         pagebtns.push(
           <Link href={{ pathname: `/product`, query: { page: num + 1 } }}>
             <span
@@ -77,11 +80,9 @@ const Product_SM: React.FC<{ list: wineState[] }> = (props) => {
       }
     }
     return pagebtns;
-  }, [curpage]);
+  }, [curpage, props.fullpage]);
 
-  const SetFilterData = (filterdata: filterdataState) => {
-    console.log(filterdata);
-  };
+  const SetFilterData = (filterdata: filterdataState) => {};
   const offFilter = () => {
     setshowFilter(false);
   };
@@ -114,9 +115,9 @@ const Product_SM: React.FC<{ list: wineState[] }> = (props) => {
         <div className={styled.ProductCardWrapper}>
           {winelist.map((list) => (
             <ProductCard
-              key={`product_${list.winePid}`}
+              key={`product_${list.pid}`}
               {...list}
-              userLike={list.userLike}
+              like={list.like}
             />
           ))}
         </div>

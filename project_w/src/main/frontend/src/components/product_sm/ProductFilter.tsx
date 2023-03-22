@@ -15,7 +15,7 @@ interface FilterPropsState {
 }
 
 const ProductFilter: React.FC<FilterPropsState> = (props) => {
-  const [type, setWineType] = useState<string[]>([]);
+  const [type, setWineType] = useState<number[]>([]);
   const [body, setbody] = useState<number[]>([]);
   const [sweet, setsweet] = useState<number[]>([]);
   const [acidity, setAcidity] = useState<number[]>([]);
@@ -54,7 +54,7 @@ const ProductFilter: React.FC<FilterPropsState> = (props) => {
     setsweet([]);
     setAcidity([]);
     setTannin([]);
-    setPrice([]);
+    setPrice([40000, 90000]);
     setMakeCountry([]);
   };
   const handleChange = (event: Event, newValue: number | number[]) => {
@@ -72,11 +72,11 @@ const ProductFilter: React.FC<FilterPropsState> = (props) => {
       <div className={["maxframe", styled.filter].join(" ")}>
         <div className={styled.inputbox}>
           <p>와인종류</p>
-          {winetype.map((data, idx) => (
+          {winetype.map((data: string, idx) => (
             <label key={`F_winetype_${idx}`}>
               <FilterInput
                 name="winetype"
-                value={data}
+                value={idx + 1}
                 setFilterState={setWineType}
                 list={type}
               />
