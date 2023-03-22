@@ -15,4 +15,6 @@ public interface MemberService {
 	MemberDto getRefreshToken(int pid);
 	
 	MemberDto nickNameCheck(String nickName);
+	
+	MemberInfoDto getMemberInfo(int pid);
 }

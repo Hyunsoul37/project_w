@@ -66,4 +66,10 @@ public class MemberServiceImp implements MemberService{
 		return result;
 	}
 
+	@Override
+	public MemberInfoDto getMemberInfo(int pid) {
+		MemberInfoDto result = memberDao.getMemberInfo(pid);
+		return result;
+	}
+
 }
