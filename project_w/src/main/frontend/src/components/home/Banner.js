@@ -1,12 +1,14 @@
-import styled from './Banner.module.css';
-import Slider from 'react-slick';
-import 'slick-carousel/slick/slick.css';
-import 'slick-carousel/slick/slick-theme.css';
+import styled from "./Banner.module.css";
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+import Image from "next/image";
+const imageLoader = require("../../util/imageLoader");
 
 const bannerimg = [
-  '/images/banner_1.png',
-  '/images/banner_2.png',
-  '/images/banner_3.png',
+  "/images/banner_1.png",
+  "/images/banner_2.png",
+  "/images/banner_3.png",
 ];
 const Settings = {
   autoplay: true,
@@ -23,7 +25,15 @@ const Banner = () => {
     <div>
       <Slider {...Settings} className={styled.Banner}>
         {bannerimg.map((bannerimg, idx) => (
-          <img key={`banner_${idx}`} alt="bannerimg" src={bannerimg} />
+          <Image
+            key={`banner_${idx}`}
+            loader={imageLoader}
+            width={100}
+            height={100}
+            alt="bannerimg"
+            src={bannerimg}
+            priority
+          />
         ))}
       </Slider>
     </div>

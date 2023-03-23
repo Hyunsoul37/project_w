@@ -2,6 +2,8 @@ import styled from "./ProductCard.module.css";
 import { wineState } from "./productTypes";
 import Link from "next/link";
 import Heart from "../util/Heart";
+import Image from "next/image";
+const imageLoader = require("../../util/imageLoader");
 
 const ProductCard: React.FC<wineState> = (props) => {
   const winetype =
@@ -28,7 +30,21 @@ const ProductCard: React.FC<wineState> = (props) => {
             },
           }}
         >
-          <img src={`/images/wine/${props.pid - 1}.png`} />
+          <Image
+            alt="wine"
+            // loader={imageLoader}
+            width={100}
+            height={100}
+            sizes="(max-width: 768px) 200px,
+              (max-width: 1200px) 200px,"
+            // loading={"lazy"}
+            priority
+            src={
+              props.imageUrl
+                ? props.imageUrl
+                : `/images/wine/${props.pid - 1}.png`
+            }
+          />
         </Link>
         <div className={styled.heart}>
           <Heart userLike={props.like} />
