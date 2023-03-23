@@ -1,8 +1,12 @@
 package shop.winetoy.server.api;
 
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -142,6 +146,38 @@ public class ApiController {
 		String accessToken = jwtManager.generateAccessToken(result);
 		reissueTokenDto.setReissueToken(accessToken);
 		return responseService.getResponse(reissueTokenDto);
+	}
+	
+	@RequestMapping(value = "/auth/login-check", method = RequestMethod.GET)
+	@ResponseBody
+	public Response<AuthResult> loginCheck(@RequestHeader Map<String, String> headers){
+		AuthResult authResult = new AuthResult();
+		String authorization = headers.get("authorization");
+		boolean isValidate = false;
+		
+		if(authorization == null || authorization.isEmpty()) {
+			authResult.setMessage("does not login");
+		}
+		else
+		{
+			// access token 유효기간 check
+	        isValidate = jwtManager.validationAccessToken(authorization);
+	        
+			// access token의 유호기간 만료시
+	        if(!isValidate) {
+				authResult.setMessage(ExceptionCode.EXPIRED_TOKEN);
+	        }
+	        else {
+	        	int pid = jwtManager.extractPidFromAccessToken(authorization);
+	        	
+	        	MemberInfoDto result = memberService.getMemberInfo(pid);
+	    		
+	    		authResult.setMessage("success");
+	    		authResult.setMemberInfo(result);
+	        }
+		}
+	
+		return responseService.getResponse(authResult);
 	}
 
 	// -----------------------------------------------------------------------------------//

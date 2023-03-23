@@ -176,5 +176,23 @@ public class JwtManager {
 			return false;
 		}
 	}
+	
+	public boolean validationAccessToken(String accessToken) {
+		try {
+			String[] split = accessToken.split(" ");
+			
+			Jws<Claims> claims = Jwts.parser().setSigningKey(secretAccessKey).parseClaimsJws(split[1]);
+			return !claims.getBody().getExpiration().before(new Date());
+		} catch (Exception e) {
+			return false;
+		}
+	}
+	
+	public int extractPidFromAccessToken(String accessToken) {
+		String[] split = accessToken.split(" ");
+		
+		Jws<Claims> claims = Jwts.parser().setSigningKey(secretAccessKey).parseClaimsJws(split[1]);
+		return (int) claims.getBody().get("pid");
+	}
 
 }

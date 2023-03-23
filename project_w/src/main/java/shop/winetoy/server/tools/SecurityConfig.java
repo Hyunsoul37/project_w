@@ -13,7 +13,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 import shop.winetoy.server.auth.MemberDetailsService;
 
 @Configuration
-@EnableWebSecurity//(debug = true)
+@EnableWebSecurity(debug = true)
 public class SecurityConfig {
 
 	JwtManager jwtManager;
@@ -26,13 +26,13 @@ public class SecurityConfig {
 		this.memberDetailsService = memberDetailsService;
 	}
 
-	@Bean
-	public WebSecurityCustomizer webSecurityCustomizer() {
+    @Bean
+    WebSecurityCustomizer webSecurityCustomizer() {
 		return (web) -> web.ignoring().requestMatchers("/api/auth/**");
 	}
 
-	@Bean
-	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+    @Bean
+    SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 		System.out.println("filterChain");
 
 		http
