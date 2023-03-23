@@ -11,11 +11,11 @@
 	</parent>
 	<groupId>shop.winetoy</groupId>
 	<artifactId>project_w</artifactId>
-	<version>0.0.5</version>
+	<version>0.0.6</version>
 	<name>project_w</name>
 	<description>winetoy for Spring Boot</description>
 	<properties>
-		<java.version>11</java.version>
+		<java.version>17</java.version>
 	</properties>
 	<dependencies>
 		<dependency>
