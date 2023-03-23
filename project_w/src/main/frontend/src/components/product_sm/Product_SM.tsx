@@ -22,13 +22,14 @@ import { wineState } from "./productTypes";
 // ];
 
 export interface filterdataState {
-  wineType: number[];
-  winebody: number[];
-  wineSweet: number[];
-  wineAcidity: number[];
-  wineTannin: number[];
-  winePrice: number[]; // 백엔드랑 연결할때 number로 변경 할 것
-  wineCountry: string[];
+  type: number[];
+  body: number[];
+  sweet: number[];
+  acidity: number[];
+  tannin: number[];
+  maxPrice: number;
+  minPrice: number;
+  country: string[];
 }
 
 const Product_SM: React.FC<{ list: wineState[]; fullpage: number }> = (
@@ -40,9 +41,8 @@ const Product_SM: React.FC<{ list: wineState[]; fullpage: number }> = (
   const [winelist, setWinelist] = useState<wineState[]>([]);
   const [curpage, setcurPage] = useState<number>(0);
   // const fulldata = props.list;
-
+  const test = router.query;
   useEffect(() => {
-    console.log(props.list);
     setWinelist(props.list);
   }, [props.list]);
 
@@ -50,15 +50,15 @@ const Product_SM: React.FC<{ list: wineState[]; fullpage: number }> = (
     setcurPage(Number(router.query.page) - 1);
   }, [router.query.page]);
 
-  useEffect(() => {
-    // let newwinelist: wineState[] = [];
-    // for (let i = 0; i < 20; i++) {
-    //   if (fulldata[i + curpage * 20]) {
-    //     newwinelist.push(fulldata[i + curpage * 20]);
-    //   }
-    // }
-    //setWinelist(newwinelist);
-  }, [curpage]);
+  // useEffect(() => {
+  //   // let newwinelist: wineState[] = [];
+  //   // for (let i = 0; i < 20; i++) {
+  //   //   if (fulldata[i + curpage * 20]) {
+  //   //     newwinelist.push(fulldata[i + curpage * 20]);
+  //   //   }
+  //   // }
+  //   //setWinelist(newwinelist);
+  // }, [curpage]);
 
   const PageBtn = useCallback(() => {
     let pagebtns: ReactElement[] = [];
@@ -66,7 +66,9 @@ const Product_SM: React.FC<{ list: wineState[]; fullpage: number }> = (
       let num = Math.floor(curpage / 10) * 10 + i;
       if (num < props.fullpage / 20) {
         pagebtns.push(
-          <Link href={{ pathname: `/product`, query: { page: num + 1 } }}>
+          <Link
+            href={{ pathname: `/product`, query: { ...test, page: num + 1 } }}
+          >
             <span
               className={[
                 styled.pagebtn,
@@ -82,7 +84,12 @@ const Product_SM: React.FC<{ list: wineState[]; fullpage: number }> = (
     return pagebtns;
   }, [curpage, props.fullpage]);
 
-  const SetFilterData = (filterdata: filterdataState) => {};
+  const SetFilterData = (filterdata: filterdataState) => {
+    //console.log(filterdata);
+    if (filterdata) {
+      router.push({ pathname: `/product`, query: { page: 1, ...filterdata } });
+    }
+  };
   const offFilter = () => {
     setshowFilter(false);
   };

@@ -7,8 +7,9 @@ import Seo from "../../util/Seo";
 import { useCallback, useEffect, useState } from "react";
 import useFetch from "../../customHooks/useFetch";
 //Product_SM
-const product = () => {
+const product = ({ query }) => {
   const user = useSelector((state) => state.user);
+  const router = useRouter();
   const [list, setList] = useState([]);
   const [fullpagenum, setFullPageNum] = useState(0);
   const { sendRequestData } = useFetch();
@@ -19,14 +20,15 @@ const product = () => {
   };
   const GetproductCount = (data) => {
     if (data) {
-      setFullPageNum(data);
+      setFullPageNum(data.data);
     }
   };
+
   const getList = async () => {
     await sendRequestData({
       url: `api/product/wine/${
         user.isLoggedIn ? user.userData.data.memberInfo.pid : 0
-      }/search?page=${1}`,
+      }/search?page=${query.page}`,
       type: "GET",
       data: null,
       header: { "Content-Type": "application/json" },
@@ -42,7 +44,7 @@ const product = () => {
   };
   useEffect(() => {
     getList();
-  }, []);
+  }, [query]);
 
   return (
     <>
@@ -52,6 +54,15 @@ const product = () => {
   );
 };
 export default product;
+
+export function getServerSideProps({ query }) {
+  console.log(query);
+
+  //const { page ,type,} = query;
+  return {
+    props: { query },
+  };
+}
 
 // export async function getServerSideProps() {
 //   //여기에 서버에서 받는 코드 작성

@@ -37,13 +37,14 @@ const ProductFilter: React.FC<FilterPropsState> = (props) => {
 
   const FilterSubmitHandler = () => {
     props.SetFilterData({
-      wineType: type,
-      winebody: body,
-      wineSweet: sweet,
-      wineAcidity: acidity,
-      wineTannin: tannin,
-      winePrice: price,
-      wineCountry: makeCountry,
+      type: type,
+      body: body,
+      sweet: sweet,
+      acidity: acidity,
+      tannin: tannin,
+      minPrice: price[0],
+      maxPrice: price[1],
+      country: makeCountry,
     });
     props.offFilter();
   };
