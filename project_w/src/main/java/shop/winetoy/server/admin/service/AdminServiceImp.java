@@ -15,14 +15,16 @@ import shop.winetoy.server.wine.entity.WineDto;
 @Service
 public class AdminServiceImp implements AdminService {
 	
-	@Autowired
 	WineDao wineDao;
-	
-	@Autowired
 	S3UpladerService s3UpladerService;
-	
-	@Autowired
 	MemberDao memberDao;
+
+	@Autowired
+	public AdminServiceImp(WineDao wineDao, S3UpladerService s3UpladerService, MemberDao memberDao) {
+		this.wineDao = wineDao;
+		this.s3UpladerService = s3UpladerService;
+		this.memberDao = memberDao;
+	}
 	
 	@Override
 	public WineDto registerWine(WineDto registerWine) {

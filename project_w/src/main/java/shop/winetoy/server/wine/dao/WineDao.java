@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import shop.winetoy.server.wine.entity.WineBookmarkDto;
 import shop.winetoy.server.wine.entity.WineDto;
 import shop.winetoy.server.wine.entity.WineInfoDto;
 import shop.winetoy.server.wine.entity.WineRankInfoDto;
@@ -69,4 +70,9 @@ public interface WineDao {
 			int offset);
 	
 	List<WineRankInfoDto> getCategoryRanking(int wineType);
+	
+	WineBookmarkDto findWineBookmark(WineBookmarkDto wineLike);
+	int insertWineLike(WineBookmarkDto wineLike);
+	int deleteWineLike(WineBookmarkDto wineLike);
+	
 }

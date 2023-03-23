@@ -2,6 +2,8 @@ package shop.winetoy.server.wine.service;
 
 import java.util.List;
 
+import shop.winetoy.server.wine.entity.WineBookmarkDto;
+import shop.winetoy.server.wine.entity.WineBookmarkResultDto;
 import shop.winetoy.server.wine.entity.WineDto;
 import shop.winetoy.server.wine.entity.WineInfoDto;
 import shop.winetoy.server.wine.entity.WineRankDto;
@@ -21,9 +23,7 @@ public interface WineService {
 	int getWineCount(List<Integer> typeList, List<Integer> bodyList, List<Integer> sweetList, List<Integer> acidityList,
 			List<Integer> tanninList, List<String> countryList, Integer maxPrice, Integer minPrice);
 
-//	List<WineInfoDto> searchTest(int pid, List<Integer> typeList, List<Integer> bodyList, List<Integer> sweetList,
-//			List<Integer> acidityList, List<Integer> tanninList, List<String> countryList, Integer maxPrice,
-//			Integer minPrice, int page);
-	
 	WineRankDto getCategoryRanking();
+	
+	WineBookmarkResultDto setWineBookmark(WineBookmarkDto wineBookmark);
 }
