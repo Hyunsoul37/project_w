@@ -2,63 +2,50 @@ import { useDispatch, useSelector } from "react-redux";
 import Product_SM from "../../components/product_sm/Product_SM";
 import Product_HJ from "../../components/product_hj/Product_HJ";
 import data from "../../components/dummydata/wine_add_sweet.json";
-import { useRouter } from "next/router";
 import Seo from "../../util/Seo";
-import { useCallback, useEffect, useState } from "react";
-import useFetch from "../../customHooks/useFetch";
+import { useEffect } from "react";
+import { GetList, GetCount } from "../../slice/wineSlice";
+import Loading from "../../components/ui/Loading";
+
 //Product_SM
 const product = ({ query }) => {
-  const user = useSelector((state) => state.user);
-  const router = useRouter();
-  const [list, setList] = useState([]);
-  const [fullpagenum, setFullPageNum] = useState(0);
-  const { sendRequestData } = useFetch();
-  const GetproductList = (data) => {
-    if (data) {
-      setList(data.data);
-    }
-  };
-  const GetproductCount = (data) => {
-    if (data) {
-      setFullPageNum(data.data);
-    }
-  };
+  const { user, wine } = useSelector((state) => state);
+  const dispatch = useDispatch();
 
-  const getList = async () => {
-    await sendRequestData({
-      url: `api/product/wine/${
-        user.isLoggedIn ? user.userData.data.memberInfo.pid : 0
-      }/search?page=${query.page}`,
-      type: "GET",
-      data: null,
-      header: { "Content-Type": "application/json" },
-      AfterGetData: GetproductList,
-    });
-    await sendRequestData({
-      url: `api/product/wine/count`,
-      type: "GET",
-      data: null,
-      header: { "Content-Type": "application/json" },
-      AfterGetData: GetproductCount,
-    });
-  };
   useEffect(() => {
-    getList();
+    const queryurl = decodeURI(window.location.search);
+    const queryarr = queryurl.split("&");
+    queryarr.shift();
+    const counturl = queryarr.length > 0 ? `?${queryarr.join("&")}` : "";
+    dispatch(
+      GetList({
+        userId: user.isLoggedIn ? user.userData.data.memberInfo.pid : -1,
+        queryurl: queryurl,
+      })
+    );
+    dispatch(
+      GetCount({
+        counturl: counturl,
+      })
+    );
   }, [query]);
 
   return (
     <>
       <Seo title="Product" />
-      <Product_SM list={list} fullpage={fullpagenum} />
+      {!wine.isLoadding ? (
+        <Product_SM />
+      ) : (
+        <div style={{ padding: "80px 0px" }}>
+          <Loading height={700} />
+        </div>
+      )}
     </>
   );
 };
 export default product;
 
 export function getServerSideProps({ query }) {
-  console.log(query);
-
-  //const { page ,type,} = query;
   return {
     props: { query },
   };
