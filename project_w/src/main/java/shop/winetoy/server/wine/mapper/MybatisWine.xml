@@ -1,7 +1,5 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE mapper
-  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="shop.winetoy.server.wine.dao.WineDao">
 
 	<insert id="registerWine"
@@ -58,94 +56,120 @@
 	</select>
 
 	<select id="searchWine"
-		resultType="shop.winetoy.server.wine.entity.WineInfoDto">
-		select * from wine
-		<include refid="wineSearcher" />
-		order by pid asc limit #{listCount} offset #{offset};
-	</select>
+		resultType="shop.winetoy.server.wine.entity.WineInfoDto"> 
+		select * from
+		wine 
+		<include refid="wineSearcher" /> 
+		order by pid asc limit
+		#{listCount} offset #{offset}
+		</select>
 
 	<select id="searchWineWithPid"
-		resultType="shop.winetoy.server.wine.entity.WineInfoDto">
-		select wine.*, bookmark_id as 'like' from wine
-		left join bookmark ON
-		(bookmark.wine_pid = wine.pid and bookmark.member_pid = #{pid})
-		<include refid="wineSearcher" />
-		order by pid asc limit #{listCount} offset #{offset};
+		resultType="shop.winetoy.server.wine.entity.WineInfoDto"> 
+		select wine.*, bookmark_id as 'like' 
+		from wine left join bookmark ON 
+		(bookmark.wine_pid = wine.pid and bookmark.member_pid = #{pid}) 
+		<include refid="wineSearcher" /> 
+		order by pid asc limit #{listCount} offset
+		#{offset}; 
 	</select>
 
-	<select id="getWineCount" resultType="int">
-		select count(*) as num from wine
+	<select id="getWineCount" resultType="int"> 
+		select count(*) as num from wine 
 		<include refid="wineSearcher" />
 	</select>
 
 	<select id="searchTest"
-		resultType="shop.winetoy.server.wine.entity.WineInfoDto">
-		select wine.*, bookmark_id as 'like' from wine
-		left join bookmark ON
-		(bookmark.wine_pid = wine.pid and bookmark.member_pid = #{pid})
-		<include refid="wineSearcher" />
-		order by pid asc limit #{listCount} offset #{offset};
-	</select>
-	
-	<select id="getCategoryRanking" resultType="shop.winetoy.server.wine.entity.WineRankInfoDto">
-		select 
-			wine.*,
-			count(bookmark.wine_pid) as cnt,
-			row_number() over(order by cnt desc) as 'rank' 
-		from wine
-		left outer join bookmark ON (wine.pid = bookmark.wine_pid) 
-		where wine.type = #{wineType}
-		group by wine.pid 
-		limit 5 
+		resultType="shop.winetoy.server.wine.entity.WineInfoDto"> 
+		select wine.*, bookmark_id as 'like' 
+		from wine left join bookmark ON 
+		(bookmark.wine_pid = wine.pid and bookmark.member_pid = #{pid}) 
+		<include refid="wineSearcher" /> 
+		order by pid asc limit #{listCount} offset #{offset}
 	</select>
 
+	<select id="getCategoryRanking"
+		resultType="shop.winetoy.server.wine.entity.WineRankInfoDto">
+		select
+		wine.*,
+		count(bookmark.wine_pid) as cnt,
+		row_number() over(order by cnt desc) as 'rank'
+		from wine
+		left outer join bookmark ON (wine.pid = bookmark.wine_pid)
+		where wine.type = #{wineType}
+		group by wine.pid
+		limit 5
+	</select>
+
+
+	<select id="findWineBookmark"
+		resultType="shop.winetoy.server.wine.entity.WineBookmarkDto">
+		select * from `wineToy`.`bookmark`
+		where member_pid = #{memberPid} and wine_pid = #{winePid}
+	</select>
+
+	<insert id="insertWineLike"
+		parameterType="shop.winetoy.server.wine.entity.WineBookmarkDto">
+		INSERT INTO `wineToy`.`bookmark`
+		(
+		`member_pid`,
+		`wine_pid`
+		)
+		VALUES
+		(
+		#{memberPid},
+		#{winePid}
+		)
+	</insert>
+
+	<delete id="deleteWineLike"
+		parameterType="shop.winetoy.server.wine.entity.WineBookmarkDto">
+		DELETE FROM `wineToy`.`bookmark`
+		WHERE member_pid = #{memberPid} and #{winePid}
+	</delete>
+
+	<!-- common sql -->
 
 	<sql id="wineSearcher">
 		<where>
 
-			<if test="typeList != null">
-				and type IN
-				<foreach collection="typeList" index="index" item="type"
+			<if test="typeList != null"> and type IN <foreach
+					collection="typeList" index="index" item="type"
 					open="(" separator="," close=")">
 					#{type}
 				</foreach>
 			</if>
 
-			<if test="bodyList != null">
-				and body IN
-				<foreach collection="bodyList" index="index" item="body"
+			<if test="bodyList != null"> and body IN <foreach
+					collection="bodyList" index="index" item="body"
 					open="(" separator="," close=")">
 					#{body}
 				</foreach>
 			</if>
 
-			<if test="sweetList != null">
-				and sweet IN
-				<foreach collection="sweetList" index="index" item="sweet"
+			<if test="sweetList != null"> and sweet IN <foreach
+					collection="sweetList" index="index" item="sweet"
 					open="(" separator="," close=")">
 					#{sweet}
 				</foreach>
 			</if>
 
-			<if test="acidityList != null">
-				and acidity IN
-				<foreach collection="acidityList" index="index"
+			<if test="acidityList != null"> and acidity IN <foreach
+					collection="acidityList" index="index"
 					item="acidity" open="(" separator="," close=")">
 					#{acidity}
 				</foreach>
 			</if>
 
-			<if test="tanninList != null">
-				and tannin IN
-				<foreach collection="tanninList" index="index" item="tannin"
+			<if test="tanninList != null"> and tannin IN <foreach
+					collection="tanninList" index="index" item="tannin"
 					open="(" separator="," close=")">
 					#{tannin}
 				</foreach>
 			</if>
 
-			<if test="countryList != null">
-				and country IN
-				<foreach collection="countryList" index="index"
+			<if test="countryList != null"> and country IN <foreach
+					collection="countryList" index="index"
 					item="country" open="(" separator="," close=")">
 					#{country}
 				</foreach>

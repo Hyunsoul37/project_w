@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -13,10 +14,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import shop.winetoy.server.response.entity.Response;
 import shop.winetoy.server.response.service.ResponseService;
+import shop.winetoy.server.wine.entity.WineBookmarkDto;
+import shop.winetoy.server.wine.entity.WineBookmarkResultDto;
 import shop.winetoy.server.wine.entity.WineDto;
 import shop.winetoy.server.wine.entity.WineInfoDto;
 import shop.winetoy.server.wine.entity.WineRankDto;
-import shop.winetoy.server.wine.entity.WineRankInfoDto;
 import shop.winetoy.server.wine.service.WineService;
 
 @Controller
@@ -98,10 +100,23 @@ public class WineController {
 		return responseService.getResponse(count);
 	}
 	
+	/**
+	 * 와인 랭킹 조회 
+	 */
 	@RequestMapping(value="/rank", method = RequestMethod.GET)
 	@ResponseBody
 	public Response<WineRankDto> getWineCategoryRanking(){
 		WineRankDto result = wineService.getCategoryRanking();
+		return responseService.getResponse(result);
+	}
+	
+	/**
+	 * 와인 좋아요 등록 및 해제 
+	 */
+	@RequestMapping(value="/wine/like", method = RequestMethod.POST)
+	@ResponseBody
+	public Response<WineBookmarkResultDto> wineLike(@RequestBody WineBookmarkDto info){
+		WineBookmarkResultDto result = wineService.setWineBookmark(info);
 		return responseService.getResponse(result);
 	}
 }
