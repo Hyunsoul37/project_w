@@ -1,9 +1,9 @@
 import Lottie from "lottie-react";
 import LottieData from "./94906-wine.json";
 
-const Loading = () => {
+const Loading = ({ height }) => {
   const style = {
-    height: 300,
+    height: height ? height : 300,
   };
 
   return <Lottie animationData={LottieData} style={style} />;

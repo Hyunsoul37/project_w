@@ -119,7 +119,7 @@ const Community: React.FC<{ list: reviewState[] }> = (props) => {
             <CommunityCard key={`review_${index}`} {...data} />
           ))}
         </div>
-        {review.isloadding && !isStart ? <Loading /> : null}
+        {review.isloadding && !isStart ? <Loading height={300} /> : null}
         {!review.isfinish && targetrender ? (
           <div ref={target} className={styled.Community_SrollChecker}></div>
         ) : (
