@@ -3,40 +3,49 @@ import styled from "./Detail.module.css";
 import { FaCircle, FaRegCircle } from "react-icons/fa";
 import { drawStar } from "../util/util";
 import StarRatings from "react-star-ratings";
+import Image from "next/image";
 
 const Detail: React.FC<wineState> = (props) => {
-  const snack = props.wineRecommendedSnack?.split("/");
+  const snack = props.recommendedSnack?.split("/");
   const newarr = snack?.map((data) => data.replaceAll(" ", ""));
   const arrUnique = [...new Set(newarr)];
   const snackList = arrUnique.filter((data) => data !== "null");
 
+  if (!props.imageUrl) {
+    return;
+  }
   return (
     <div className="maxframe">
       <div className={styled.Detail}>
         <div className={styled.imageWrapper}>
-          <img src={`/images/wine/${props.winePid - 1}.png`} />
+          <Image
+            alt="wineimg"
+            width={318}
+            height={318}
+            src={props.imageUrl ? props.imageUrl : ""}
+          />
         </div>
         <div className={styled.wineInfoWrapper}>
           <div className={styled.wineName}>
-            <h4>{props.wineKorName}</h4>
-            <p>{props.wineEngName}</p>
+            <h4>{props.korName}</h4>
+            <p>{props.engName}</p>
           </div>
           <div className={styled.wineInfo}>
             <table>
               <tbody>
                 <tr>
                   <th>소비자가</th>
-                  <td>{props.winePrice}</td>
+                  <td>{props.price}</td>
                   <th>생산국가 / 지역</th>
                   <td>
-                    {props.wineCountry} / {props.wineRegion}
+                    {props.country} / {props.region}
                   </td>
                 </tr>
                 <tr>
-                  <th>평점({props.wineStarPoint}점)</th>
+                  <th>평점({props.starPoint}점)</th>
                   <td>
                     <StarRatings
-                      rating={props.wineStarPoint}
+                      rating={props.starPoint}
                       starRatedColor="#61002E"
                       numberOfStars={5}
                       starDimension="20px"
@@ -45,9 +54,7 @@ const Detail: React.FC<wineState> = (props) => {
                     />
                   </td>
                   <th>알콜도수</th>
-                  <td>
-                    {props.wineAlcohol !== "null" ? props.wineAlcohol : "없음"}
-                  </td>
+                  <td>{props.alcohol !== "null" ? props.alcohol : "없음"}</td>
                 </tr>
               </tbody>
             </table>
@@ -58,36 +65,28 @@ const Detail: React.FC<wineState> = (props) => {
                 <tr>
                   <th>당도</th>
                   <td>
-                    {props.wineSweet
-                      ? drawStar(props.wineSweet, <FaCircle />, <FaRegCircle />)
+                    {props.sweet
+                      ? drawStar(props.sweet, <FaCircle />, <FaRegCircle />)
                       : "없음"}
                   </td>
                   <th>바디</th>
                   <td>
-                    {props.winebody
-                      ? drawStar(props.winebody, <FaCircle />, <FaRegCircle />)
+                    {props.body
+                      ? drawStar(props.body, <FaCircle />, <FaRegCircle />)
                       : "없음"}
                   </td>
                 </tr>
                 <tr>
                   <th>산도</th>
                   <td>
-                    {props.wineAcidity
-                      ? drawStar(
-                          props.wineAcidity,
-                          <FaCircle />,
-                          <FaRegCircle />
-                        )
+                    {props.acidity
+                      ? drawStar(props.acidity, <FaCircle />, <FaRegCircle />)
                       : "없음"}
                   </td>
                   <th>타닌</th>
                   <td>
-                    {props.wineTannin
-                      ? drawStar(
-                          props.wineTannin,
-                          <FaCircle />,
-                          <FaRegCircle />
-                        )
+                    {props.tannin
+                      ? drawStar(props.tannin, <FaCircle />, <FaRegCircle />)
                       : "없음"}
                   </td>
                 </tr>
@@ -98,7 +97,12 @@ const Detail: React.FC<wineState> = (props) => {
             <p>음식매칭</p>
             <div>
               {snackList.map((food) => (
-                <img key={food} src={`/images/icon/${food}.PNG`} />
+                <Image
+                  alt="food"
+                  width={100}
+                  height={100}
+                  src={`/images/icon/${food}.PNG`}
+                />
               ))}
             </div>
             <div className={styled.wineFoodTextWrapper}>
@@ -111,8 +115,8 @@ const Detail: React.FC<wineState> = (props) => {
       </div>
       <div className={styled.Desc}>
         <img src="/images/wineBg.png" />
-        <p className={styled.Desctitle}>{props.wineKorName}</p>
-        <p className={styled.desctext}>{props.wineDesc}</p>
+        <p className={styled.Desctitle}>{props.korName}</p>
+        <p className={styled.desctext}>{props.desc}</p>
       </div>
     </div>
   );

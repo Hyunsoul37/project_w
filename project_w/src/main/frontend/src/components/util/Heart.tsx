@@ -1,16 +1,27 @@
 import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styled from "./Heart.module.css";
+import { useSelector } from "react-redux";
+import { RootState } from "../../store";
 
 interface HeartState {
   userLike: boolean;
   onClick?: (islike: boolean) => void;
 }
 const Heart: React.FC<HeartState> = (props) => {
+  const user = useSelector((state: RootState) => state.user);
   const [like, setLike] = useState(props.userLike);
+  useEffect(() => {
+    if (!user.isLoggedIn) {
+      setLike(false);
+    }
+  }, [user.isLoggedIn]);
   const ClickHandler = (islike: boolean) => () => {
     if (props.onClick) {
       props.onClick(islike);
+    }
+    if (!user.isLoggedIn) {
+      return;
     }
     setLike(islike);
   };

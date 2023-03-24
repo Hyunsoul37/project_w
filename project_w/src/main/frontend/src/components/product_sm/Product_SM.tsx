@@ -11,15 +11,19 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { wineState } from "./productTypes";
 
-// const winetypeTab = [
-//   'ALL',
-//   '레드',
-//   '화이트',
-//   '로제',
-//   '디저트',
-//   '스파클링',
-//   '주정강화',
-// ];
+import Lottie from "lottie-react";
+import LottieData from "../ui/wineNotFound.json";
+import Button from "../ui/Button";
+import { useSelector } from "react-redux";
+import { RootState } from "../../store";
+
+const wineNotFound = () => {
+  const style = {
+    height: 300,
+  };
+
+  return <Lottie animationData={LottieData} style={style} />;
+};
 
 export interface filterdataState {
   type: number[];
@@ -32,42 +36,30 @@ export interface filterdataState {
   country: string[];
 }
 
-const Product_SM: React.FC<{ list: wineState[]; fullpage: number }> = (
-  props
-) => {
+const Product_SM = () => {
   const router = useRouter();
   const [showFilter, setshowFilter] = useState(false);
   //const [curfilter, setCurFilter] = useState(0);
-  const [winelist, setWinelist] = useState<wineState[]>([]);
+  const wine = useSelector((state: RootState) => state.wine);
   const [curpage, setcurPage] = useState<number>(0);
-  // const fulldata = props.list;
-  const test = router.query;
-  useEffect(() => {
-    setWinelist(props.list);
-  }, [props.list]);
+
+  const filterurl = router.query;
 
   useEffect(() => {
     setcurPage(Number(router.query.page) - 1);
   }, [router.query.page]);
 
-  // useEffect(() => {
-  //   // let newwinelist: wineState[] = [];
-  //   // for (let i = 0; i < 20; i++) {
-  //   //   if (fulldata[i + curpage * 20]) {
-  //   //     newwinelist.push(fulldata[i + curpage * 20]);
-  //   //   }
-  //   // }
-  //   //setWinelist(newwinelist);
-  // }, [curpage]);
-
   const PageBtn = useCallback(() => {
     let pagebtns: ReactElement[] = [];
     for (let i = 0; i < 10; i++) {
       let num = Math.floor(curpage / 10) * 10 + i;
-      if (num < props.fullpage / 20) {
+      if (num < wine.pageNum / 20) {
         pagebtns.push(
           <Link
-            href={{ pathname: `/product`, query: { ...test, page: num + 1 } }}
+            href={{
+              pathname: `/product`,
+              query: { ...filterurl, page: num + 1 },
+            }}
           >
             <span
               className={[
@@ -82,7 +74,7 @@ const Product_SM: React.FC<{ list: wineState[]; fullpage: number }> = (
       }
     }
     return pagebtns;
-  }, [curpage, props.fullpage]);
+  }, [curpage, wine.pageNum]);
 
   const SetFilterData = (filterdata: filterdataState) => {
     //console.log(filterdata);
@@ -111,97 +103,79 @@ const Product_SM: React.FC<{ list: wineState[]; fullpage: number }> = (
         />
       )}
 
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "center",
-          flexDirection: "column",
-          alignItems: "center",
-        }}
-      >
-        <div className={styled.ProductCardWrapper}>
-          {winelist.map((list) => (
-            <ProductCard
-              key={`product_${list.pid}`}
-              {...list}
-              like={list.like}
-            />
-          ))}
-        </div>
+      {wine.pageNum > 0 ? (
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            flexDirection: "column",
+            alignItems: "center",
+          }}
+        >
+          <div className={styled.ProductCardWrapper}>
+            {wine.data.map((list, index) => (
+              <ProductCard
+                key={`product_${list.pid}`}
+                {...list}
+                like={list.like}
+                index={index}
+              />
+            ))}
+          </div>
 
-        <div className={styled.pagebtnWrapper}>
-          {curpage > 9 ? (
-            <Link
-              href={{
-                pathname: `/product`,
-                query: { page: Math.ceil((curpage - 9) / 10) * 10 },
-              }}
-            >
-              <div className={styled.prevNextBtn}>
-                <MdKeyboardArrowLeft />
-                <span>이전</span>
+          <div className={styled.pagebtnWrapper}>
+            {curpage > 9 ? (
+              <Link
+                href={{
+                  pathname: `/product`,
+                  query: { page: Math.ceil((curpage - 9) / 10) * 10 },
+                }}
+              >
+                <div className={styled.prevNextBtn}>
+                  <MdKeyboardArrowLeft />
+                  <span>이전</span>
+                </div>
+              </Link>
+            ) : (
+              ""
+            )}
+            {PageBtn().map((c, idx) => (
+              <div key={`btn_${idx}`} className={styled.pagebtn}>
+                {c}
               </div>
-            </Link>
-          ) : (
-            ""
-          )}
-          {PageBtn().map((c, idx) => (
-            <div key={`btn_${idx}`} className={styled.pagebtn}>
-              {c}
-            </div>
-          ))}
-          {PageBtn().length < 10 ? (
-            ""
-          ) : (
-            <Link
-              href={{
-                pathname: `/product`,
-                query: { page: Math.ceil((curpage + 1) / 10) * 10 + 1 },
-              }}
-            >
-              <div className={styled.prevNextBtn}>
-                <span>다음</span>
-                <MdKeyboardArrowRight />
-              </div>
-            </Link>
-          )}
+            ))}
+            {PageBtn().length < 10 ? (
+              ""
+            ) : (
+              <Link
+                href={{
+                  pathname: `/product`,
+                  query: { page: Math.ceil((curpage + 1) / 10) * 10 + 1 },
+                }}
+              >
+                <div className={styled.prevNextBtn}>
+                  <span>다음</span>
+                  <MdKeyboardArrowRight />
+                </div>
+              </Link>
+            )}
+          </div>
         </div>
-      </div>
+      ) : (
+        <div className={["maxframe", styled.noWine].join(" ")}>
+          {wineNotFound()}
+          <p>조건에 맞는 와인이 없습니다.</p>
+          <Button
+            buttontext="조건 초기화"
+            buttonColor="main"
+            buttonSize="m"
+            onClick={() =>
+              router.push({ pathname: "/product", query: { page: 1 } })
+            }
+          />
+        </div>
+      )}
     </div>
   );
 };
 export default Product_SM;
-
-//혹시 나중에 와인 종류를 따로 밖으로 빼는 상황을 대비해서 남겨두는 코드...
-// const WineTabHandler = (index: number) => () => {
-//   setCurFilter(index);
-// };
-
-/*
-  useEffect(() => {
-    if (curfilter !== 0) {
-      let newWinelist: ProductCardState[] = [];
-      data.map((winelist) => {
-        if (winelist.wineType === winetypeTab[curfilter]) {
-          newWinelist.push({ ...winelist });
-        }
-      });
-      setWinelist(newWinelist);
-    } else {
-      setWinelist(data);
-    }
-  }, [curfilter]);*/
-
-{
-  /* <div className={styled.winetypetab}>
-          {winetypeTab.map((data, index) => (
-            <span
-              key={`winetype_${index}`}
-              onClick={WineTabHandler(index)}
-              className={index === curfilter ? styled.activetab : ''}
-            >
-              {data}
-            </span>
-          ))}
-        </div> */
-}
