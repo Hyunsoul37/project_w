@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="shop.winetoy.server.comment.dao.CommentDao">
+	<insert id="registerComment" 
+	parameterType="shop.winetoy.server.comment.entity.CommentDto">
+		INSERT INTO `wineToy`.`comment`
+		(
+		`review_id`,
+		`comment`,
+		`writer_id`,
+		`parent_id`,
+		`depth`,
+		`tag_writer_id`
+		)
+		VALUES
+		(
+		#{reviewId},
+		#{comment},
+		#{writerId},
+		#{parentId},
+		#{depth},
+		#{tagWriterId}
+		)
+	</insert>
+	
+	<select id="getCommentList" 
+	resultType="shop.winetoy.server.comment.entity.CommentListEntityDto">
+		SELECT 
+			comment.*,
+			m1.nick_name as `writer_nick`, 
+			m1.profile_img as `writer_profile`,
+			m2.nick_name as `tag_writer_nick`, 
+			m2.profile_img as `tag_writer_profile`
+		FROM 
+			comment
+			left join member m1 on comment.writer_id = m1.pid
+			left join member m2 on comment.tag_writer_id = m2.pid
+		 WHERE review_id = #{reviewId};
+
+	</select>
+</mapper>

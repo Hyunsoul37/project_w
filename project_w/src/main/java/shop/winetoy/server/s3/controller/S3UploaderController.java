@@ -35,7 +35,7 @@ public class S3UploaderController {
 //	@ResponseBody
 //	public String imageUpload_test(@RequestParam(value = "file", required = false) MultipartFile file)
 //			throws IOException {
-//		return s3UpladerService.upload(file, "winetoy", "image");
+//		return s3UpladerService.upload(file, "imageTest");
 //	}
 //	
 //	@RequestMapping(value = "/api/product/existCheck", method = RequestMethod.GET)

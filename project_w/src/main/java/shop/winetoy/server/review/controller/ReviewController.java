@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -12,6 +11,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.ObjectReader;
 
 import shop.winetoy.server.response.entity.Response;
 import shop.winetoy.server.response.service.ResponseService;
@@ -42,8 +44,17 @@ public class ReviewController {
 	@RequestMapping(value = "/review", method = RequestMethod.POST)
 	@ResponseBody
 	public Response<ReviewDto> postReview(@RequestParam(value = "files", required = false) List<MultipartFile> files,
-			@RequestPart ReviewDto review) throws Exception{
-		ReviewDto result = reviewService.postReivew(files, review);
+			@RequestPart String review) throws Exception{
+		System.out.println(review.toString());
+		
+		ObjectMapper mapper = new ObjectMapper();
+		ReviewDto dd = mapper.readValue(review, ReviewDto.class);
+        
+		System.out.println(dd.toString());
+		System.out.println("FILE = " + files.get(0).getOriginalFilename());
+		
+		
+		ReviewDto result = reviewService.postReivew(files, dd);
 		return responseService.getResponse(result);
 	}
 
