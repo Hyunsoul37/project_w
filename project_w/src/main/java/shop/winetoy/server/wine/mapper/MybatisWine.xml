@@ -180,7 +180,7 @@
 			</if>
 
 			<if test="maxPrice != null">
-				and price &lt;= #{minPrice}
+				and price &lt;= #{maxPrice}
 			</if>
 
 		</where>
