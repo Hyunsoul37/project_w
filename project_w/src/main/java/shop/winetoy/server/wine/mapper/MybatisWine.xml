@@ -125,7 +125,7 @@
 	<delete id="deleteWineLike"
 		parameterType="shop.winetoy.server.wine.entity.WineBookmarkDto">
 		DELETE FROM `wineToy`.`bookmark`
-		WHERE member_pid = #{memberPid} and #{winePid}
+        WHERE member_pid = #{memberPid} and wine_pid = #{winePid}
 	</delete>
 
 	<!-- common sql -->
