@@ -4,10 +4,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import shop.winetoy.server.comment.dao.CommentDao;
 import shop.winetoy.server.comment.entity.CommentDto;
+import shop.winetoy.server.comment.entity.CommentLikeDto;
 import shop.winetoy.server.comment.entity.CommentListDto;
 import shop.winetoy.server.comment.entity.CommentListEntityDto;
 
@@ -19,6 +22,15 @@ public class CommentServiceImp implements CommentService{
 
 	@Override
 	public int registerComment(CommentDto comment) {
+		
+		if (comment.getParentId() > 0) {
+			if (comment.getTagWriterId() > 0) {				
+				comment.setDepth(1);
+			}
+			else {
+				return 0;
+			}
+		}
 		
 		return commentDao.registerComment(comment);
 	}
@@ -44,6 +56,24 @@ public class CommentServiceImp implements CommentService{
 		}
 		
 		return list;
+	}
+
+	@Override
+	@Transactional
+	public CommentLikeDto setCommentLike(CommentLikeDto info) {
+		CommentLikeDto result = commentDao.findCommentLike(info);
+		
+		if(result == null) {
+			int pid = commentDao.insertCommentLike(info);
+			result = commentDao.findCommentLikeWithPid(pid);
+			result.setAction("like");
+		}
+		else {
+			commentDao.deleteCommentLike(info);
+			result.setAction("unlike");
+		}
+		
+		return result;
 	}
 
 }
