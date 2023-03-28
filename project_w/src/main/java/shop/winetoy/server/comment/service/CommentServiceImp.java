@@ -1,0 +1,79 @@
+package shop.winetoy.server.comment.service;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import shop.winetoy.server.comment.dao.CommentDao;
+import shop.winetoy.server.comment.entity.CommentDto;
+import shop.winetoy.server.comment.entity.CommentLikeDto;
+import shop.winetoy.server.comment.entity.CommentListDto;
+import shop.winetoy.server.comment.entity.CommentListEntityDto;
+
+@Service
+public class CommentServiceImp implements CommentService{
+	
+	@Autowired
+	CommentDao commentDao;
+
+	@Override
+	public int registerComment(CommentDto comment) {
+		
+		if (comment.getParentId() > 0) {
+			if (comment.getTagWriterId() > 0) {				
+				comment.setDepth(1);
+			}
+			else {
+				return 0;
+			}
+		}
+		
+		return commentDao.registerComment(comment);
+	}
+
+	@Override
+	public List<CommentListDto> getCommentList(int reviewId, int pid) {
+		List<CommentListEntityDto> result = commentDao.getCommentList(reviewId, pid);
+		List<CommentListDto> list = new ArrayList<>();
+
+		for(CommentListEntityDto comment : result) {
+			if(comment.getParentId() == 0 || comment.getDepth() == 0) {
+				CommentListDto cld = new CommentListDto();
+				cld.setParent(comment);
+				list.add(cld);
+			}
+			else {
+				for(CommentListDto cld : list) {
+					if(cld.getParent().getCommentId() == comment.getParentId()) {
+						cld.addChild(comment);
+					}
+				}
+			}
+		}
+		
+		return list;
+	}
+
+	@Override
+	@Transactional
+	public CommentLikeDto setCommentLike(CommentLikeDto info) {
+		CommentLikeDto result = commentDao.findCommentLike(info);
+		
+		if(result == null) {
+			int pid = commentDao.insertCommentLike(info);
+			result = commentDao.findCommentLikeWithPid(pid);
+			result.setAction("like");
+		}
+		else {
+			commentDao.deleteCommentLike(info);
+			result.setAction("unlike");
+		}
+		
+		return result;
+	}
+
+}

@@ -102,6 +102,7 @@ public class WineController {
 	
 	/**
 	 * 와인 랭킹 조회 
+	 * https://www.notion.so/ef504b125fba49758dc039c9973df25d?pvs=4
 	 */
 	@RequestMapping(value="/rank", method = RequestMethod.GET)
 	@ResponseBody
@@ -112,6 +113,7 @@ public class WineController {
 	
 	/**
 	 * 와인 좋아요 등록 및 해제 
+	 * https://www.notion.so/Like-fda9157b1db5427797385177d345c60a?pvs=4
 	 */
 	@RequestMapping(value="/wine/like", method = RequestMethod.POST)
 	@ResponseBody
