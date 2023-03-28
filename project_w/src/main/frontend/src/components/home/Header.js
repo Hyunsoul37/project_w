@@ -1,9 +1,16 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import useFetch from "../../customHooks/useFetch";
 import { useRouter } from "next/router";
-import { logout, DataClear } from "../../slice/userSlice";
+import {
+  logout,
+  DataClear,
+  LogInmaintain,
+  saveToken,
+} from "../../slice/userSlice";
 import styled from "./Header.module.css";
 import { RiUser5Line } from "react-icons/ri";
+import { getCookie } from "../../util/cookiesController";
 
 const Header = () => {
   const router = useRouter();
@@ -11,6 +18,7 @@ const Header = () => {
   const user = useSelector((state) => state.user);
   const userData = user.userData ? user.userData.data : null;
   const [headerBG, setHeaderBg] = useState(false);
+  const { sendRequestData: getAccessToken } = useFetch();
 
   const LoginBtnHandler = () => {
     router.push({ pathname: "/login" });
@@ -35,6 +43,29 @@ const Header = () => {
   useEffect(() => {
     window.addEventListener("scroll", HeaderFadeHandler);
     HeaderFadeHandler();
+    const token = getCookie("token");
+
+    if (token) {
+      dispatch(LogInmaintain({ token: token }));
+    } else {
+      const refreshToken = localStorage.getItem("refresh");
+      const id = localStorage.getItem("id");
+      getAccessToken({
+        url: "api/auth/refresh",
+        type: "POST",
+        data: {
+          pid: id,
+          refreshToken: refreshToken,
+        },
+        header: {
+          "Content-Type": "application/json;charset=UTF-8",
+        },
+        AfterGetData: (data) => {
+          dispatch(LogInmaintain({ token: data.data.reissueToken }));
+          saveToken(data.data.reissueToken, refreshToken, id);
+        },
+      });
+    }
   }, []);
 
   return (
@@ -63,7 +94,7 @@ const Header = () => {
             <span onClick={() => router.push("/notice")}>NOTICE</span> */}
           </div>
           <div className={styled.btnWrapper}>
-            {user.isLoggedIn ? (
+            {user.isLoggedIn && user.userData.data.memberInfo ? (
               <>
                 <RiUser5Line
                   onClick={() => router.push({ pathname: "/mypage" })}

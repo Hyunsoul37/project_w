@@ -1,5 +1,11 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import {
+  createAsyncThunk,
+  createSlice,
+  isRejected,
+  isRejectedWithValue,
+} from "@reduxjs/toolkit";
 import { removeCookie, setCookie } from "../util/cookiesController";
+import axios from "axios";
 
 const initialState = {
   isLoggingIn: false,
@@ -27,13 +33,35 @@ const initialState = {
 };
 
 export const LogIn = createAsyncThunk("user/logIn", async (data) => {
-  const response = await fetch("/api/auth/login", {
-    method: "POST",
-    body: data ? JSON.stringify(data) : null,
-    headers: { "Content-Type": "application/json;charset=UTF-8" },
-  });
-  const responseData = await response.json();
-  return responseData;
+  try {
+    const response = await fetch("/api/auth/login", {
+      method: "POST",
+      body: data ? JSON.stringify(data) : null,
+      headers: { "Content-Type": "application/json;charset=UTF-8" },
+    });
+    const responseData = await response.json();
+
+    return responseData;
+  } catch (error) {
+    console.log(error);
+  }
+});
+
+export const LogInmaintain = createAsyncThunk("user/maintain", async (data) => {
+  try {
+    const response = await fetch(`/api/auth/login-check`, {
+      method: "GET",
+      body: null,
+      headers: {
+        "Content-Type": "application/json;charset=UTF-8",
+        authorization: `bearer ${data.token}`,
+      },
+    });
+    const responseData = await response.json();
+    return responseData;
+  } catch (error) {
+    console.log(error);
+  }
 });
 
 export const DataClear = createAsyncThunk("user/Clear", async (data) => {
@@ -44,17 +72,18 @@ export const DataClear = createAsyncThunk("user/Clear", async (data) => {
   console.log(responseStatus);
 });
 
-const saveToken = (data) => {
+export const saveToken = (token, refreshToken, id) => {
   const today = new Date();
   // today.setDate(today.getDate() + 1); // 하루
-  today.setMinutes(today.getMinutes() + 3); // 3분
-  if (data.token === null) {
-    console.log(data.message);
+  today.setMinutes(today.getMinutes() + 1); // 30분
+  if (token === null) {
+    console.log("token이 없습니다");
   } else {
-    setCookie("token", data.token, {
+    setCookie("token", token, {
       expires: today,
     });
-    localStorage.setItem("refresh", data.refreshToken);
+    localStorage.setItem("refresh", refreshToken);
+    localStorage.setItem("id", id);
   }
 };
 
@@ -70,6 +99,7 @@ export const userSlice = createSlice({
       state.userData = null;
       removeCookie("token");
       localStorage.removeItem("refresh");
+      localStorage.removeItem("id");
     },
   },
   extraReducers: (builder) => {
@@ -78,9 +108,28 @@ export const userSlice = createSlice({
         state.isLoggedIn = true;
         state.isSuccess = true;
         state.userData = action.payload;
-        saveToken(action.payload);
+        saveToken(
+          action.payload.data.token,
+          action.payload.data.refreshToken,
+          action.payload.data.memberInfo.pid
+        );
       })
       .addCase(LogIn.rejected, (state, action) => {
+        state.isLoginError = action.error;
+        state.isSuccess = false;
+        state.isLoggedIn = false;
+      });
+
+    builder
+      .addCase(LogInmaintain.fulfilled, (state, action) => {
+        if (action.payload.data.memberInfo) {
+          state.isLoggedIn = true;
+        } else {
+          state.isLoggedIn = false;
+        }
+        state.userData.data.memberInfo = action.payload.data.memberInfo;
+      })
+      .addCase(LogInmaintain.rejected, (state, action) => {
         state.isLoginError = action.error;
         state.isSuccess = false;
         state.isLoggedIn = false;
