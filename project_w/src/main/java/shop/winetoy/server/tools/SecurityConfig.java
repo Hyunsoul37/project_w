@@ -49,10 +49,12 @@ public class SecurityConfig {
             .formLogin().disable()  // jwt를 사용하므로 생략
             .httpBasic().disable()
 			.authorizeHttpRequests()
+			
 			.requestMatchers("/api/auth/**").permitAll()
-//			.requestMatchers("/api/join").permitAll()
 			.requestMatchers("/api/product/**").permitAll()
 			.requestMatchers("/api/community/**").permitAll()
+			.requestMatchers("/api/comment/**").permitAll()
+			
 			.requestMatchers("/api/time").hasRole("ADMIN")
 			.requestMatchers("/api/admin/**").hasRole("ADMIN")
 			.anyRequest().authenticated()

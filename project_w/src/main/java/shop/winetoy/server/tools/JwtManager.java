@@ -189,10 +189,15 @@ public class JwtManager {
 	}
 	
 	public int extractPidFromAccessToken(String accessToken) {
-		String[] split = accessToken.split(" ");
+		try {
+			String[] split = accessToken.split(" ");
+			
+			Jws<Claims> claims = Jwts.parser().setSigningKey(secretAccessKey).parseClaimsJws(split[1]);
+			return (int) claims.getBody().get("pid");
+		} catch (Exception e) {
+			return 0;
+		}
 		
-		Jws<Claims> claims = Jwts.parser().setSigningKey(secretAccessKey).parseClaimsJws(split[1]);
-		return (int) claims.getBody().get("pid");
 	}
 
 }

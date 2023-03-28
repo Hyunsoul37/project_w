@@ -84,7 +84,6 @@ public class CommentController {
     	int pid = jwtManager.extractPidFromAccessToken(authorization);
     	
     	info.setMemberPid(pid);
-    	System.out.println(info.toString());
     	
 		CommentLikeDto result = new CommentLikeDto();
     	
