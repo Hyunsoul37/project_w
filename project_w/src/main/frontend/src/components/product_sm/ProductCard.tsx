@@ -37,13 +37,14 @@ const ProductCard = ({ index, ...rest }: CardProps) => {
       : "디저트";
 
   const HeartHandler = () => {
+    const id = localStorage.getItem("id");
     if (user.isLoggedIn) {
       likewine({
         url: url,
         type: type,
         header: header,
         data: {
-          memberPid: user.userData.data.memberInfo.pid,
+          memberPid: id,
           winePid: rest.pid,
         },
       });
@@ -65,10 +66,10 @@ const ProductCard = ({ index, ...rest }: CardProps) => {
       <div className={styled.imageWrapper}>
         <Link
           href={{
-            pathname: `/product/detail/${rest.engName}`,
+            pathname: `/product/detail/${rest.korName}`,
             query: {
               id: rest.pid,
-              winename: rest.engName,
+              winename: rest.korName,
             },
           }}
         >

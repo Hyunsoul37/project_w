@@ -3,6 +3,7 @@ import Detail from "../../../components/detail/Detail.tsx";
 import WineTerms from "../../../components/detail/Wineterms";
 import Seo from "../../../util/Seo";
 import { useEffect, useState } from "react";
+
 const detailPage = ({ id }) => {
   const [detailData, setDetailData] = useState({});
   //const filterlist = data.filter((d) => d.winePid === Number(id));
@@ -22,7 +23,7 @@ const detailPage = ({ id }) => {
   return (
     <>
       <Seo title={detailData.wineKorName} />
-      <Detail {...detailData} />
+      {detailData !== undefined ? <Detail {...detailData} /> : <></>}
       <WineTerms />
     </>
   );

@@ -20,7 +20,7 @@ const ProductFilter: React.FC<FilterPropsState> = (props) => {
   const [sweet, setsweet] = useState<number[]>([]);
   const [acidity, setAcidity] = useState<number[]>([]);
   const [tannin, setTannin] = useState<number[]>([]);
-  const [price, setPrice] = useState<number[]>([40000, 90000]);
+  const [price, setPrice] = useState<number[]>([40000, 300000]);
   const [makeCountry, setMakeCountry] = useState<string[]>([]);
 
   useEffect(() => {
@@ -55,7 +55,7 @@ const ProductFilter: React.FC<FilterPropsState> = (props) => {
     setsweet([]);
     setAcidity([]);
     setTannin([]);
-    setPrice([40000, 90000]);
+    setPrice([40000, 300000]);
     setMakeCountry([]);
   };
   const handleChange = (event: Event, newValue: number | number[]) => {
@@ -153,8 +153,8 @@ const ProductFilter: React.FC<FilterPropsState> = (props) => {
               color: "#61002E",
             }}
             step={10000}
-            min={30000}
-            max={100000}
+            min={0}
+            max={350000}
             getAriaLabel={() => "Price range"}
             value={price}
             onChange={handleChange}

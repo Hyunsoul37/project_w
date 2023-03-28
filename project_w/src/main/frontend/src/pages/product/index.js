@@ -17,9 +17,10 @@ const product = ({ query }) => {
     const queryarr = queryurl.split("&");
     queryarr.shift();
     const counturl = queryarr.length > 0 ? `?${queryarr.join("&")}` : "";
+    const id = localStorage.getItem("id");
     dispatch(
       GetList({
-        userId: user.isLoggedIn ? user.userData.data.memberInfo.pid : -1,
+        userId: id ? id : -1,
         queryurl: queryurl,
       })
     );

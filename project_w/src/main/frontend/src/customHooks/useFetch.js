@@ -15,12 +15,12 @@ const useFetch = () => {
       movepath = null,
       AfterGetData = null,
     }) => {
-      console.log(`useFetch에서 받은데이터
-      url:${url}
-      type: ${type} 
-      data: ${data}
-      header Content-Type:${header["Content-Type"]}
-      movepath:${movepath}`);
+      // console.log(`useFetch에서 받은데이터
+      // url:${url}
+      // type: ${type}
+      // data: ${data}
+      // header Content-Type:${header["Content-Type"]}
+      // movepath:${movepath}`);
 
       try {
         const response = await fetch(url, {

@@ -117,7 +117,6 @@ const Product_SM = () => {
               <ProductCard
                 key={`product_${list.pid}`}
                 {...list}
-                like={list.like}
                 index={index}
               />
             ))}

@@ -1,10 +1,9 @@
 export interface wineState {
-  winePid: number;
   pid: number;
   imageUrl?: string;
   korName: string;
   engName?: string;
-  price?: string;
+  price?: number;
   type?: number;
   body?: number;
   acidity?: number;
