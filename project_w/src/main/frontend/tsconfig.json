@@ -30,7 +30,8 @@
     "**/*.ts",
     "**/*.tsx",
     "src/components/community/Community.tsx",
-    "src/slice/reviewSlice.js"
+    "src/slice/reviewSlice.ts",
+    "src/pages/index.js"
   ],
   "exclude": ["node_modules"]
 }
