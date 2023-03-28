@@ -23,6 +23,8 @@ public class ReviewServiceImp implements ReviewService {
 	ReviewDao reviewDao;
 	@Autowired
 	S3UpladerService s3UpladerService;
+	
+	final int reviewListCount = 12;
 
 	@Override
 	@Transactional
@@ -84,8 +86,10 @@ public class ReviewServiceImp implements ReviewService {
 
 	@Override
 	@Transactional
-	public List<ReviewDto> getReview() {
-		List<ReviewDto> result = reviewDao.getReview();
+	public List<ReviewDto> getReview(int page) {
+		int listCount = reviewListCount;
+		int offset = (page - 1) * listCount;
+		List<ReviewDto> result = reviewDao.getReview(page, listCount, offset);
 
 		for (ReviewDto review : result) {
 			review = setHashTag(review);
@@ -171,5 +175,17 @@ public class ReviewServiceImp implements ReviewService {
 
 		review.setHashTag(hashTag);
 		return review;
+	}
+
+	@Override
+	public int getReviewCount() {
+		int count = reviewDao.getReviewCount();
+		int result = count / reviewListCount;
+		
+		if(count % reviewListCount != 0) {
+			result += 1;
+		}
+		
+		return result;
 	}
 }

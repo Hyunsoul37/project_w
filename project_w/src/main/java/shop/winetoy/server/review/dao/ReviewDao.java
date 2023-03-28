@@ -23,7 +23,7 @@ public interface ReviewDao {
 
 	public List<HashTagDto> getReviewHashTags(int reviewId);
 
-	public List<ReviewDto> getReview();
+	public List<ReviewDto> getReview(int page, int listCount, int offset);
 
 	public int deleteReview(int reviewId);
 
@@ -32,4 +32,6 @@ public interface ReviewDao {
 	public int initHashTag(int reviewId);
 
 	public List<BestReviewDto> getBestReview();
+	
+	public int getReviewCount();
 }

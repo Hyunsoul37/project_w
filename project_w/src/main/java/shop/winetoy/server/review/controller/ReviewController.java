@@ -64,12 +64,16 @@ public class ReviewController {
 	 */
 	@RequestMapping(value = "/review", method = RequestMethod.GET)
 	@ResponseBody
-	public Response<List<ReviewDto>> getReview() {
-		List<ReviewDto> result = reviewService.getReview();
+	public Response<List<ReviewDto>> getReview(int page) {
+		List<ReviewDto> result = reviewService.getReview(page);
 
 		return responseService.getResponse(result);
 	}
 
+	/**
+	 * 리뷰 삭제
+	 * https://www.notion.so/Review-e4d6917495e145cbb1a8d486c2cb3194?pvs=4
+	 */
 	@RequestMapping(value = "/review", method = RequestMethod.DELETE)
 	@ResponseBody
 	public Response<Boolean> deletetReview(int reviewId) {
@@ -91,6 +95,10 @@ public class ReviewController {
 		return responseService.getResponse(result);
 	}
 	
+	/**
+	 * 베스트 리뷰 조회
+	 * https://www.notion.so/Best-Review-List-5b422a6c244a4984b806c8ebdce8d823?pvs=4
+	 */
 	@RequestMapping(value = "/best-review", method = RequestMethod.GET)
 	@ResponseBody
 	public Response<List<BestReviewDto>> getBestReview(){
@@ -98,4 +106,14 @@ public class ReviewController {
 		return responseService.getResponse(result);
 	}
 
+	/**
+	 * 리뷰 마지막 페이지 번호 조회 
+	 * https://www.notion.so/Review-List-9cdbfc4cebba4116b10e44f7ebd765af?pvs=4
+	 */
+	@RequestMapping(value = "/review/last-page", method = RequestMethod.GET)
+	@ResponseBody
+	public Response<Integer> getReviewCount(){
+		int result = reviewService.getReviewCount();
+		return responseService.getResponse(result);
+	}
 }

@@ -10,8 +10,9 @@ import shop.winetoy.server.review.entity.ReviewDto;
 public interface ReviewService {
 	public ReviewDto postReivew(List<MultipartFile> files, ReviewDto review);
 	public ReviewDto getReviewDetail(int reviewId);
-	public List<ReviewDto> getReview();
+	public List<ReviewDto> getReview(int page);
 	public boolean deleteReview(int reviewId);
 	public ReviewDto modifyReview(ReviewDto review);
 	public List<BestReviewDto> getBestReview();
+	public int getReviewCount();
 }

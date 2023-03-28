@@ -73,7 +73,13 @@
 
 	<select id="getReviewDetail"
 		resultType="shop.winetoy.server.review.entity.ReviewDto">
-		select * from review where review_id = #{reviewId};
+	 	select 
+	 		review.*, 
+	 		member.nick_name as `writer_nick_name`,
+            member.profile_img as `writer_profile_img`
+	    from review
+	    left join member on review.writer_id = member.pid
+        where review_id = #{reviewId};
 	</select>
 
 	<select id="getReviewHashTags"
@@ -87,7 +93,13 @@
 
 	<select id="getReview"
 		resultType="shop.winetoy.server.review.entity.ReviewDto">
-		select * from review;
+	 	select 
+	 		review.*, 
+	 		member.nick_name as `writer_nick_name`,
+            member.profile_img as `writer_profile_img`
+	    from review
+	    left join member on review.writer_id = member.pid
+		order by pid asc limit #{listCount} offset #{offset} 
 	</select>
 
 	<delete id="deleteReview">
@@ -128,5 +140,9 @@
 		select review.*, member.nick_name as writer_nick from review 
 		inner join  member ON (review.writer_id = member.pid)
 		order by review_like desc limit 3
+	</select>
+	
+	<select id="getReviewCount" resultType="int">
+		select count(*) from review
 	</select>
 </mapper>

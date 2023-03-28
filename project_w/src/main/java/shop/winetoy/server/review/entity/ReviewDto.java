@@ -21,11 +21,11 @@ public class ReviewDto {
 	private String reviewImg5;
 	private String desc;
 	private int writerId;
+	private String writerNickName;
+	private String writerProfileImg;
 	private List<String> hashTag;
 
-	
-	
-	 public int getReviewId() {
+	public int getReviewId() {
 		return reviewId;
 	}
 
@@ -89,42 +89,52 @@ public class ReviewDto {
 		this.reviewLike = reviewLike;
 	}
 
+	@JsonIgnore
 	public String getReviewImg1() {
 		return reviewImg1;
 	}
 
+	@JsonIgnore
 	public void setReviewImg1(String reviewImg1) {
 		this.reviewImg1 = reviewImg1;
 	}
 
+	@JsonIgnore
 	public String getReviewImg2() {
 		return reviewImg2;
 	}
 
+	@JsonIgnore
 	public void setReviewImg2(String reviewImg2) {
 		this.reviewImg2 = reviewImg2;
 	}
 
+	@JsonIgnore
 	public String getReviewImg3() {
 		return reviewImg3;
 	}
 
+	@JsonIgnore
 	public void setReviewImg3(String reviewImg3) {
 		this.reviewImg3 = reviewImg3;
 	}
 
+	@JsonIgnore
 	public String getReviewImg4() {
 		return reviewImg4;
 	}
 
+	@JsonIgnore
 	public void setReviewImg4(String reviewImg4) {
 		this.reviewImg4 = reviewImg4;
 	}
 
+	@JsonIgnore
 	public String getReviewImg5() {
 		return reviewImg5;
 	}
 
+	@JsonIgnore
 	public void setReviewImg5(String reviewImg5) {
 		this.reviewImg5 = reviewImg5;
 	}
@@ -145,6 +155,22 @@ public class ReviewDto {
 		this.writerId = writerId;
 	}
 
+	public String getWriterNickName() {
+		return writerNickName;
+	}
+
+	public void setWriterNickName(String writerNickName) {
+		this.writerNickName = writerNickName;
+	}
+
+	public String getWriterProfileImg() {
+		return writerProfileImg;
+	}
+
+	public void setWriterProfileImg(String writerProfileImg) {
+		this.writerProfileImg = writerProfileImg;
+	}
+
 	public List<String> getHashTag() {
 		return hashTag;
 	}
@@ -153,13 +179,11 @@ public class ReviewDto {
 		this.hashTag = hashTag;
 	}
 
-	@JsonIgnore
 	public String[] getReviewImgs() {
 		String[] result = { reviewImg1, reviewImg2, reviewImg3, reviewImg4, reviewImg5 };
 		return result;
 	}
 
-	 @JsonIgnore
 	public void setReviewImgs(String[] reviewImgs) {
 		setReviewImg1(reviewImgs[0]);
 		setReviewImg2(reviewImgs[1]);
@@ -174,9 +198,8 @@ public class ReviewDto {
 				+ ", wineName=" + wineName + ", winePrice=" + winePrice + ", starPoint=" + starPoint + ", regiDate="
 				+ regiDate + ", reviewLike=" + reviewLike + ", reviewImg1=" + reviewImg1 + ", reviewImg2=" + reviewImg2
 				+ ", reviewImg3=" + reviewImg3 + ", reviewImg4=" + reviewImg4 + ", reviewImg5=" + reviewImg5 + ", desc="
-				+ desc + ", writerId=" + writerId + ", hashTag=" + hashTag + "]";
+				+ desc + ", writerId=" + writerId + ", hashTag=" + hashTag + ", writerNickName=" + writerNickName
+				+ ", writerProfileImg=" + writerProfileImg + "]";
 	}
-
-
 
 }
