@@ -11,7 +11,7 @@
 	</parent>
 	<groupId>shop.winetoy</groupId>
 	<artifactId>project_w</artifactId>
-	<version>0.0.7</version>
+	<version>0.0.8</version>
 	<name>project_w</name>
 	<description>winetoy for Spring Boot</description>
 	<properties>
