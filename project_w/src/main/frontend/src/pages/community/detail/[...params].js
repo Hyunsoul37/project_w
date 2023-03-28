@@ -1,12 +1,15 @@
+import { useSelector } from "react-redux";
 import ReviewDetail from "../../../components/community/ReviewDetail";
 import data from "../../../components/dummydata/review_list.json";
 import Seo from "../../../util/Seo";
 
 const CommunityDetail = ({ id }) => {
-  const filterlist = data.filter((d) => d.reviewId === Number(id));
+  const review = useSelector((state) => state.review);
+  const filterlist = review.post.filter((d) => d.reviewId === Number(id));
+  console.log(filterlist);
   return (
     <>
-      <Seo title={`${filterlist[0].nickname}님의 포스팅`} />
+      <Seo title={`${filterlist[0].writerNickName}님의 포스팅`} />
       <ReviewDetail {...filterlist[0]} />
     </>
   );

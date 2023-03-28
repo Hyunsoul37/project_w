@@ -7,18 +7,19 @@ import ReviewFilter from "./ReviewFilter";
 import { RootState } from "../../store";
 import { reviewState } from "./ReviewTypes";
 import {
+  GetReview,
+  NextGetReview,
   PushReview,
-  TestDelayGetReview,
   TestGetReview,
-} from "../../slice/reviewSlice.js";
-import data from "../dummydata/review_list.json";
+} from "../../slice/reviewSlice";
+//import data from "../dummydata/review_list.json";
 import Loading from "../ui/Loading";
 import { useRouter } from "next/router";
 export interface GetReviewAction {
   data: reviewState;
   curpage: number;
 }
-const Community: React.FC<{ list: reviewState[] }> = (props) => {
+const Community: React.FC<{ list: reviewState[] }> = () => {
   const { review, user } = useSelector((state: RootState) => state);
   const dispatch = useDispatch();
   const target = useRef<HTMLDivElement>(null);
@@ -32,20 +33,10 @@ const Community: React.FC<{ list: reviewState[] }> = (props) => {
   const loadData = () => {
     curpage.current++;
     if (curpage.current > 0) {
-      // 서버에서 데이터 받아오기!
+      console.log(curpage.current);
       setisStart(false);
-      dispatch(TestDelayGetReview({ data: data, curpage: curpage.current }));
+      dispatch(NextGetReview(curpage.current));
       setTargetRender(false);
-      // filterData().then((res) => {
-      //   if (res.length < 12) {
-      //     setisfinish(true);
-      //   }
-      //   dispatch(PushReview([...res]));
-      //   setIsLoadding(true);
-      //   setTimeout(() => {
-      //     setIsLoadding(false);
-      //   }, 10000);
-      // });
     }
   };
 
@@ -60,10 +51,6 @@ const Community: React.FC<{ list: reviewState[] }> = (props) => {
       loadData();
     }
   };
-
-  useEffect(() => {
-    dispatch(TestGetReview([...props.list]));
-  }, []);
 
   useEffect(() => {
     const observer = new IntersectionObserver(observerHandler, options);
@@ -116,7 +103,7 @@ const Community: React.FC<{ list: reviewState[] }> = (props) => {
         </div>
         <div className={styled.Community_CardWrapper}>
           {review.post.map((data: reviewState, index: number) => (
-            <CommunityCard key={`review_${index}`} {...data} />
+            <CommunityCard key={`reviewCard_${index}`} {...data} />
           ))}
         </div>
         {review.isloadding && !isStart ? <Loading height={300} /> : null}

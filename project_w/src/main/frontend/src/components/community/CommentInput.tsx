@@ -73,6 +73,7 @@ const CommentInput: React.FC<commentState> = ({
     >
       <img
         src={
+          user.isLoggedIn &&
           user.userData !== null &&
           user.userData.data.memberInfo.userImage !== "" &&
           user.userData.data.memberInfo.userImage !== undefined

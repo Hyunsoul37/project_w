@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 
 const CommunityCard: React.FC<reviewState> = (props) => {
-  const [heartnum, setHeartNum] = useState(props.heartCount);
+  const [heartnum, setHeartNum] = useState(props.reviewLike);
   const [data, setdata] = useState<reviewState>();
 
   const heartCountHandler = (islike: boolean) => {
@@ -20,7 +20,7 @@ const CommunityCard: React.FC<reviewState> = (props) => {
     setdata(props);
   }, [props]);
 
-  if (!data) {
+  if (data === null) {
     return <></>;
   }
 
@@ -28,12 +28,12 @@ const CommunityCard: React.FC<reviewState> = (props) => {
     <div className={styled.CommunityCard}>
       <div className={styled.CommunityCard_Header}>
         <div>
-          <span>{data.nickname}</span>
+          <span>{data?.writerNickName}</span>
           <span>님의 포스팅</span>
         </div>
         <div>
           <Heart userLike={false} onClick={heartCountHandler} />
-          <span>{heartnum}</span>
+          <span>{data?.reviewLike}</span>
         </div>
       </div>
       <div className={styled.CommunityCard_Image}>
@@ -45,29 +45,27 @@ const CommunityCard: React.FC<reviewState> = (props) => {
             },
           }}
         >
-          <img src={`/images/review/${data.reviewimage[0]}.PNG`} />
+          <img src={data?.reviewImgs[0]} />
         </Link>
       </div>
       <div className={styled.CommunityCard_Contents}>
         <Link
           href={{
-            pathname: `/community/detail/${props.reviewId}`,
+            pathname: `/community/detail/${data?.reviewId}`,
             query: {
-              id: props.reviewId,
+              id: data?.reviewId,
             },
           }}
         >
           <h4 className={styled.CommunityCard_Contents_title}>
-            {props.reviewTitle}
+            {data?.reviewTitle}
           </h4>
-          <p className={styled.CommunityCard_Contents_text}>
-            {props.reviewContents}
-          </p>
+          <p className={styled.CommunityCard_Contents_text}>{data?.desc}</p>
         </Link>
       </div>
 
       <div className={styled.CommunityCard_hashTag}>
-        {data.hashTag.map((hashTag) => (
+        {data?.hashTag.map((hashTag) => (
           <span>#{hashTag}</span>
         ))}
       </div>

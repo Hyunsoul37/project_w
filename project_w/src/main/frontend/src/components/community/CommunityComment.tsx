@@ -84,7 +84,7 @@ const CommunityComment: React.FC<{ reviewId: number }> = ({ reviewId }) => {
         <CommentInput isMainInput={true} AddfirstComment={AddFirstComment} />
       </div>
       <div className={styled.CommentList}>
-        {commmentData?.firstComment.map((data, index) => (
+        {commmentData?.firstComment?.map((data, index) => (
           <CommentList
             key={`review_${index}`}
             curCommentnumber={activeCommentNum}

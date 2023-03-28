@@ -3,17 +3,32 @@ import styled from "./Post.module.css";
 import StarRatings from "react-star-ratings";
 import { AiOutlinePlus, AiOutlineDown } from "react-icons/ai";
 
+import axios from "axios";
+import { useRouter } from "next/router";
+
 const Winetype = ["레드", "화이트", "로제", "스파클링", "주정강화"];
 
 const Post = () => {
   const TitlefileRef = useRef<HTMLInputElement>(null);
   const fileRefArr = useRef<HTMLInputElement[]>([]);
-  const [star, setStar] = useState(0);
+  const [starPoint, setstarPoint] = useState(0);
   const [previewTitle, setPreviewTitle] = useState<string | null>(null);
+  const [titleImg, setTitleImg] = useState<File>();
+  const [addImg, setAddImg] = useState<File[]>([]);
   const [previewImg, setPreviewImg] = useState<string[] | null>([]);
   const [showType, setShowType] = useState(false);
-  const [selecttype, setSelectType] = useState("");
   const [filenum, setFilenum] = useState(0);
+
+  const [wineType, setwineType] = useState("");
+  const [reviewTitle, setReviewTitle] = useState("");
+  const [wineName, setWineName] = useState("");
+  const [winePrice, setwinePrice] = useState<number>(0);
+  const [desc, setDesc] = useState("");
+  const [hashTag, setHashTag] = useState("");
+
+  const router = useRouter();
+  const modalref = useRef<HTMLDialogElement>(null);
+  const [showModal, setShowModal] = useState(false);
 
   const OnClickImageUploadBtn = (e: React.MouseEvent<HTMLDivElement>) => {
     e.stopPropagation();
@@ -23,11 +38,13 @@ const Post = () => {
   const PreviewTitleImage = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files != null) {
       const imageFile = e.target.files[0];
+      setTitleImg(imageFile);
       if (imageFile && imageFile.type.substring(0, 5) === "image") {
         const reader = new FileReader();
         reader.onload = () => {
           setPreviewTitle(reader.result as string);
         };
+
         reader.readAsDataURL(imageFile);
       }
     }
@@ -36,6 +53,17 @@ const Post = () => {
   const PreviewImage = (e: React.ChangeEvent<HTMLInputElement>, id: number) => {
     if (e.target.files !== null) {
       const imageFile = e.target.files[0];
+      const imgarr = [...addImg];
+      if (imgarr.length > id + 1) {
+        const updateimg = imgarr.map((img, index) =>
+          index === id ? imageFile : img
+        );
+        setAddImg(updateimg);
+      } else {
+        imgarr.push(imageFile);
+        setAddImg(imgarr);
+      }
+
       if (imageFile && imageFile.type.substring(0, 5) === "image") {
         const reader = new FileReader();
         reader.onload = () => {
@@ -49,6 +77,7 @@ const Post = () => {
       }
     }
   };
+
   const OnClickAddImageUploadBtn = (
     e: React.MouseEvent<HTMLDivElement>,
     id: number
@@ -88,10 +117,59 @@ const Post = () => {
   };
 
   const FilterTypeHandler = (type: string) => () => {
-    setSelectType(type);
+    setwineType(type);
     setShowType(false);
   };
 
+  const OnClickSubmitBtn = async (e: React.MouseEvent) => {
+    e.preventDefault();
+    if (
+      reviewTitle === "" ||
+      previewTitle === null ||
+      wineType === "" ||
+      starPoint === 0 ||
+      wineName === "" ||
+      desc === ""
+    ) {
+      alert("필수 정보는 다 입력해야합니다.");
+    }
+    const formdata = new FormData();
+    formdata.append(
+      "review",
+      JSON.stringify({
+        reviewTitle: reviewTitle,
+        wineType: wineType,
+        wineName: wineName,
+        winePrice: winePrice,
+        starPoint: starPoint,
+        desc: desc,
+        writerId: localStorage.getItem("id"),
+        hashTag: hashTag.split(",")[0] === "" ? [] : hashTag.split(","),
+      })
+    );
+
+    formdata.append("files", titleImg!);
+    addImg.map((data) => formdata.append("files", data));
+
+    axios({
+      method: "post",
+      url: "/api/community/review",
+      data: formdata,
+      headers: { "Content-Type": "multipart/form-data" },
+    })
+      .then((result) => {
+        modalref.current?.showModal();
+        setShowModal(true);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+  const OffModal = () => {
+    modalref.current?.close();
+    setShowModal(false);
+    router.push({ pathname: "/community" });
+  };
   return (
     <div className={styled.PostBackground}>
       <div className="maxframe">
@@ -141,6 +219,8 @@ const Post = () => {
                   <input
                     id="title"
                     type="text"
+                    value={reviewTitle}
+                    onChange={(e) => setReviewTitle(e.target.value)}
                     placeholder="게시글 제목을 입력해주세요."
                   />
                 </div>
@@ -192,7 +272,7 @@ const Post = () => {
                       (1장당 최대 20MB)
                     </p>
                   </div>
-                  {ImageUploadFile().map((c) => c)}
+                  {ImageUploadFile().map((c, index) => c)}
                   {filenum < 4 ? (
                     <div
                       className={styled.imagePlusBtn}
@@ -218,11 +298,11 @@ const Post = () => {
                       onClick={() => setShowType(!showType)}
                     >
                       <span
-                        className={selecttype === "" ? "" : styled.colorBlack}
+                        className={wineType === "" ? "" : styled.colorBlack}
                       >
-                        {selecttype === ""
+                        {wineType === ""
                           ? "와인타입을 선택해 주세요"
-                          : selecttype}
+                          : wineType}
                       </span>
                       <AiOutlineDown />
                     </div>
@@ -242,17 +322,29 @@ const Post = () => {
                     </div>
                   </div>
                   <h3>구매가격</h3>
-                  <input type="number" placeholder="구매가격을 입력해주세요." />
+                  <input
+                    type="number"
+                    placeholder="구매가격을 입력해주세요."
+                    value={winePrice === 0 ? "" : winePrice}
+                    onChange={(e) => setwinePrice(Number(e.target.value))}
+                  />
                 </div>
                 <div className={styled.contents_wineinfo}>
                   <h3>
                     와인명 <span style={{ color: "red" }}>*</span>
                   </h3>
-                  <input type="text" />
+                  <input
+                    type="text"
+                    placeholder="와인명을 입력해주세요."
+                    value={wineName}
+                    onChange={(e) => setWineName(e.target.value)}
+                  />
                   <h3>해시태그</h3>
                   <input
                     type="text"
-                    placeholder="ex) #선물용 #파티용 #크리스마스 #연말파티"
+                    placeholder="해시태그는 콤마(,)로 구분해주세요."
+                    value={hashTag}
+                    onChange={(e) => setHashTag(e.target.value)}
                   />
                 </div>
                 <div className={styled.contents_wineStar}>
@@ -260,25 +352,37 @@ const Post = () => {
                     와인별점 <span style={{ color: "red" }}>*</span>
                   </h3>
                   <StarRatings
-                    rating={star}
+                    rating={starPoint}
                     starDimension="25px"
                     starHoverColor={"#61002E"}
                     starRatedColor={"#61002E"}
-                    changeRating={(rating) => setStar(rating)}
+                    changeRating={(rating) => setstarPoint(rating)}
                   />
                 </div>
                 <div>
                   <h3>
                     내용 <span style={{ color: "red" }}>*</span>
                   </h3>
-                  <textarea placeholder="내용을 입력해주세요." />
+                  <textarea
+                    placeholder="내용을 입력해주세요."
+                    value={desc}
+                    onChange={(e) => setDesc(e.target.value)}
+                  />
                 </div>
                 <div className={styled.btnWrapper}>
-                  <button>등록</button>
+                  <button onClick={OnClickSubmitBtn}>등록</button>
                 </div>
               </form>
             </div>
           </div>
+          <dialog
+            style={!showModal ? { display: "none" } : { display: "flex" }}
+            className={styled.modal}
+            ref={modalref}
+          >
+            <p>저장되었습니다.</p>
+            <button onClick={OffModal}>확인</button>
+          </dialog>
         </div>
       </div>
     </div>

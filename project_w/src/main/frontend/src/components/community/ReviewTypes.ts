@@ -1,16 +1,18 @@
 export interface reviewState {
   reviewId: number;
-  nickname: string;
+  writerId: number;
+  writerNickName: string;
   profileimg: string;
-  reviewDate: string;
-  heartCount: number;
+  regiDate: string;
+  reviewLike: number;
   reviewTitle: string;
-  reviewContents: string;
-  reviewimage: string[];
+  desc: string;
+  reviewImgs: string[];
   wineName: string;
-  price: string;
+  winePrice: string;
   hashTag: string[];
   wineType: string;
+  starPoint: number;
 }
 export interface firstCommentState {
   firstComment_Id: number;
