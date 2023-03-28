@@ -11,7 +11,7 @@ import shop.winetoy.server.comment.entity.CommentListEntityDto;
 @Mapper
 public interface CommentDao {
 	int registerComment(CommentDto comment);
-	List<CommentListEntityDto> getCommentList(int reviewId);
+	List<CommentListEntityDto> getCommentList(int reviewId, int pid);
 	CommentLikeDto findCommentLikeWithPid(int pid);
 	CommentLikeDto findCommentLike(CommentLikeDto info);
 	int insertCommentLike(CommentLikeDto info);

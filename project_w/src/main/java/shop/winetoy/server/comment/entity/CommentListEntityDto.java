@@ -5,6 +5,7 @@ public class CommentListEntityDto extends CommentDto {
 	String writerProfile;
 	String tagWriterNick;
 	String tagWriterProfile;
+	boolean like;
 
 	public String getWriterNick() {
 		return writerNick;
@@ -36,6 +37,17 @@ public class CommentListEntityDto extends CommentDto {
 
 	public void setTagWriterProfile(String tagWriterProfile) {
 		this.tagWriterProfile = tagWriterProfile;
+	}
+	
+	public boolean isLike() {
+		return like;
+	}
+
+	public void setLike(int like) {
+		if(like != 0)
+			this.like = true;
+		else
+			this.like = false;
 	}
 
 	@Override

@@ -36,8 +36,8 @@ public class CommentServiceImp implements CommentService{
 	}
 
 	@Override
-	public List<CommentListDto> getCommentList(int reviewId) {
-		List<CommentListEntityDto> result = commentDao.getCommentList(reviewId);
+	public List<CommentListDto> getCommentList(int reviewId, int pid) {
+		List<CommentListEntityDto> result = commentDao.getCommentList(reviewId, pid);
 		List<CommentListDto> list = new ArrayList<>();
 
 		for(CommentListEntityDto comment : result) {

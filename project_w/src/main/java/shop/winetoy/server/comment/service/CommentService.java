@@ -8,6 +8,6 @@ import shop.winetoy.server.comment.entity.CommentListDto;
 
 public interface CommentService {
 	int registerComment(CommentDto comment);
-	List<CommentListDto> getCommentList(int reviewId);
+	List<CommentListDto> getCommentList(int reviewId, int pid);
 	CommentLikeDto setCommentLike(CommentLikeDto info);
 }

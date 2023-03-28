@@ -60,9 +60,14 @@ public class CommentController {
 	 */
 	@RequestMapping(method = RequestMethod.GET)
 	@ResponseBody
-	public Response<List<CommentListDto>> getCommentList(int reviewId) {
+	public Response<List<CommentListDto>> getCommentList(
+			@RequestHeader Map<String, String> headers,
+			int reviewId) {
     	
-		List<CommentListDto> result = commentService.getCommentList(reviewId);
+		String authorization = headers.get("authorization");
+    	int pid = jwtManager.extractPidFromAccessToken(authorization);
+    	
+		List<CommentListDto> result = commentService.getCommentList(reviewId, pid);
 		return responsService.getResponse(result);
 	}
 	
