@@ -16,6 +16,7 @@ const Heart: React.FC<HeartState> = (props) => {
       setLike(false);
     }
   }, [user.isLoggedIn]);
+
   const ClickHandler = (islike: boolean) => () => {
     if (props.onClick) {
       props.onClick(islike);
@@ -25,6 +26,7 @@ const Heart: React.FC<HeartState> = (props) => {
     }
     setLike(islike);
   };
+
   return (
     <div className={styled.heart}>
       {like ? (
