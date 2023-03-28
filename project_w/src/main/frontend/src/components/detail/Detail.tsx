@@ -6,12 +6,12 @@ import StarRatings from "react-star-ratings";
 import Image from "next/image";
 
 const Detail: React.FC<wineState> = (props) => {
-  const snack = props.recommendedSnack?.split("/");
+  const snack = props?.recommendedSnack?.split("/");
   const newarr = snack?.map((data) => data.replaceAll(" ", ""));
   const arrUnique = [...new Set(newarr)];
   const snackList = arrUnique.filter((data) => data !== "null");
 
-  if (!props.imageUrl) {
+  if (!props?.imageUrl) {
     return;
   }
   return (

@@ -5,55 +5,63 @@ const initialState = {
   ListErrormsg: "",
   CountErrormsg: "",
   pageNum: -1,
-  data: {
-    pid: -1,
-    korName: "",
-    engName: "",
-    price: 0,
-    type: 1,
-    body: 1,
-    acidity: 1,
-    tannin: 1,
-    sweet: 1,
-    alcohol: "",
-    country: "",
-    region: "",
-    desc: "",
-    starPoint: 0,
-    recommendedSnack: "",
-    grapeVariety: "",
-    like: false,
-  },
+  data: [
+    {
+      pid: -1,
+      korName: "",
+      engName: "",
+      price: 0,
+      type: 1,
+      body: 1,
+      acidity: 1,
+      tannin: 1,
+      sweet: 1,
+      alcohol: "",
+      country: "",
+      region: "",
+      desc: "",
+      starPoint: 0,
+      recommendedSnack: "",
+      grapeVariety: "",
+      like: false,
+    },
+  ],
 };
 
 export const GetList = createAsyncThunk("wine/GetList", async (data) => {
-  console.log(data);
-  const response = await fetch(
-    `/api/product/wine/${data.userId !== -1 ? data.userId : 0}/search${
-      data.queryurl
-    }`,
-    {
-      method: "GET",
-      body: null,
-      headers: { "Content-Type": "application/json;charset=UTF-8" },
-    }
-  );
-  const responseData = await response.json();
-  return responseData;
+  const id = localStorage.getItem("id");
+  try {
+    const response = await fetch(
+      `/api/product/wine/${id ? id : 0}/search${data.queryurl}`,
+      {
+        method: "GET",
+        body: null,
+        headers: { "Content-Type": "application/json;charset=UTF-8" },
+      }
+    );
+    const responseData = await response.json();
+    return responseData;
+  } catch (err) {
+    console.log(err);
+  }
 });
 
 export const GetCount = createAsyncThunk("wine/GetCount", async (data) => {
-  const response = await fetch(
-    `/api/product/wine/count${data.counturl}
+  try {
+    const response = await fetch(
+      `/api/product/wine/count${data.counturl}
     `,
-    {
-      method: "GET",
-      body: null,
-      headers: { "Content-Type": "application/json;charset=UTF-8" },
-    }
-  );
-  const responseData = await response.json();
-  return responseData;
+      {
+        method: "GET",
+        body: null,
+        headers: { "Content-Type": "application/json;charset=UTF-8" },
+      }
+    );
+    const responseData = await response.json();
+    return responseData;
+  } catch (error) {
+    console.log(err);
+  }
 });
 
 export const wineSlice = createSlice({
