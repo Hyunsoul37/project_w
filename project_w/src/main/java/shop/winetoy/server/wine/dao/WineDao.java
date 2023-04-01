@@ -25,6 +25,7 @@ public interface WineDao {
 			List<Integer> acidityList, 
 			List<Integer> tanninList, 
 			List<String> countryList, 
+			List<String> snackList,
 			Integer maxPrice,
 			Integer minPrice, 
 			int page, 
@@ -39,6 +40,7 @@ public interface WineDao {
 			List<Integer> acidityList, 
 			List<Integer> tanninList, 
 			List<String> countryList, 
+			List<String> snackList,
 			Integer maxPrice,
 			Integer minPrice, 
 			int page, 
@@ -52,6 +54,7 @@ public interface WineDao {
 			List<Integer> acidityList, 
 			List<Integer> tanninList, 
 			List<String> countryList, 
+			List<String> snackList,
 			Integer maxPrice,
 			Integer minPrice);
 

@@ -63,6 +63,7 @@ public class WineController {
 			@RequestParam(required = false) List<Integer> acidity,
 			@RequestParam(required = false) List<Integer> tannin, 
 			@RequestParam(required = false) List<String> country,
+			@RequestParam(required = false) List<String> snack,
 			@RequestParam(required = false) Integer maxPrice, 
 			@RequestParam(required = false) Integer minPrice,
 			int page) {
@@ -72,10 +73,10 @@ public class WineController {
 		System.out.println(userId);
 
 		if (userId != 0 || userId != null) {
-			result = wineService.searchWineWithPid(userId, type, body, sweet, acidity, tannin, country, maxPrice,
+			result = wineService.searchWineWithPid(userId, type, body, sweet, acidity, tannin, country, snack, maxPrice,
 					minPrice, page);
 		} else {
-			result = wineService.searchWine(type, body, sweet, acidity, tannin, country, maxPrice, minPrice, page);
+			result = wineService.searchWine(type, body, sweet, acidity, tannin, country, snack, maxPrice, minPrice, page);
 		}
 
 		return responseService.getResponse(result);
@@ -94,9 +95,10 @@ public class WineController {
 			@RequestParam(required = false) List<Integer> acidity, 
 			@RequestParam(required = false) List<Integer> tannin,
 			@RequestParam(required = false) List<String> country, 
+			@RequestParam(required = false) List<String> snack,
 			@RequestParam(required = false) Integer maxPrice,
 			@RequestParam(required = false) Integer minPrice) {
-		int count = wineService.getWineCount(type, body, sweet, acidity, tannin, country, maxPrice, minPrice);
+		int count = wineService.getWineCount(type, body, sweet, acidity, tannin, country, snack, maxPrice, minPrice);
 		return responseService.getResponse(count);
 	}
 	

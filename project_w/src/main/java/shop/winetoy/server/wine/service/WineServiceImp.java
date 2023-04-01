@@ -25,37 +25,62 @@ public class WineServiceImp implements WineService {
 	}
 
 	@Override
-	public List<WineInfoDto> searchWine(List<Integer> typeList, List<Integer> bodyList, List<Integer> sweetList,
-			List<Integer> acidityList, List<Integer> tanninList, List<String> countryList, Integer maxPrice,
-			Integer minPrice, int page) {
+	public List<WineInfoDto> searchWine(
+			List<Integer> typeList, 
+			List<Integer> bodyList, 
+			List<Integer> sweetList,
+			List<Integer> acidityList, 
+			List<Integer> tanninList, 
+			List<String> countryList, 
+			List<String> snackList,
+			Integer maxPrice,
+			Integer minPrice, 
+			int page) {
 
 		int listCount = 20;
 		int offset = (page - 1) * listCount;
 
 		List<WineInfoDto> result = wineDao.searchWine(typeList, bodyList, sweetList, acidityList, tanninList,
-				countryList, maxPrice, minPrice, page, listCount, offset);
+				countryList, snackList, maxPrice, minPrice, page, listCount, offset);
 		return result;
 	}
 
 	@Override
-	public List<WineInfoDto> searchWineWithPid(int pid, List<Integer> typeList, List<Integer> bodyList,
-			List<Integer> sweetList, List<Integer> acidityList, List<Integer> tanninList, List<String> countryList,
-			Integer maxPrice, Integer minPrice, int page) {
+	public List<WineInfoDto> searchWineWithPid(
+			int pid, 
+			List<Integer> typeList, 
+			List<Integer> bodyList,
+			List<Integer> sweetList, 
+			List<Integer> acidityList,
+			List<Integer> tanninList, 
+			List<String> countryList,
+			List<String> snackList,
+			Integer maxPrice, 
+			Integer minPrice, 
+			int page) {
+		
 		int listCount = 20;
 		int offset = (page - 1) * listCount;
 
 		List<WineInfoDto> result = wineDao.searchWineWithPid(pid, typeList, bodyList, sweetList, acidityList,
-				tanninList, countryList, maxPrice, minPrice, page, listCount, offset);
+				tanninList, countryList, snackList,  maxPrice, minPrice, page, listCount, offset);
 
 		return result;
 	}
 
 	@Override
-	public int getWineCount(List<Integer> typeList, List<Integer> bodyList, List<Integer> sweetList,
-			List<Integer> acidityList, List<Integer> tanninList, List<String> countryList, Integer maxPrice,
+	public int getWineCount(
+			List<Integer> typeList, 
+			List<Integer> bodyList, 
+			List<Integer> sweetList,
+			List<Integer> acidityList,
+			List<Integer> tanninList, 
+			List<String> countryList, 
+			List<String> snackList,
+			Integer maxPrice,
 			Integer minPrice) {
 
-		return wineDao.getWineCount(typeList, bodyList, sweetList, acidityList, tanninList, countryList, maxPrice, minPrice);
+		return wineDao.getWineCount(typeList, bodyList, sweetList, acidityList, tanninList, countryList, snackList, maxPrice, minPrice);
 	}
 
 	@Override
