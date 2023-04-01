@@ -14,6 +14,7 @@ public class MemberDto {
 	private Date regiDate;
 	private String role;
 	private String refreshToken;
+	private String profileImg;
 
 	public int getPid() {
 		return pid;
@@ -102,12 +103,20 @@ public class MemberDto {
 	public void setRefreshToken(String refreshToken) {
 		this.refreshToken = refreshToken;
 	}
+	
+	public String getProfileImg() {
+		return profileImg;
+	}
+
+	public void setProfileImg(String profileImg) {
+		this.profileImg = profileImg;
+	}
 
 	@Override
 	public String toString() {
 		return "MemberDto [pid=" + pid + ", id=" + id + ", password=" + password + ", name=" + name + ", nickName="
 				+ nickName + ", email=" + email + ", address=" + address + ", phone=" + phone + ", regiDate=" + regiDate
-				+ ", role=" + role + ", refreshToken=" + refreshToken + "]";
+				+ ", role=" + role + ", refreshToken=" + refreshToken + ", profileImg=" + profileImg + "]";
 	}
 
 }

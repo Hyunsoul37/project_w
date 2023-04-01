@@ -45,12 +45,12 @@ public class ReviewController {
 	@ResponseBody
 	public Response<ReviewDto> postReview(
 			@RequestParam(value = "files", required = false) List<MultipartFile> files,
-			@RequestPart String review) throws Exception{
+			@RequestPart ReviewDto review) throws Exception{
 		
-		ObjectMapper mapper = new ObjectMapper();
-		ReviewDto convertReview = mapper.readValue(review, ReviewDto.class);
+//		ObjectMapper mapper = new ObjectMapper();
+//		ReviewDto convertReview = mapper.readValue(review, ReviewDto.class);
         		
-		ReviewDto result = reviewService.postReivew(files, convertReview);
+		ReviewDto result = reviewService.postReivew(files, review);
 		return responseService.getResponse(result);
 	}
 
@@ -85,12 +85,17 @@ public class ReviewController {
 	@ResponseBody
 	public Response<ReviewDto> modifyReview(
 			@RequestParam(value = "files", required = false) List<MultipartFile> files,
-			@RequestPart String review) throws Exception{
+			@RequestPart ReviewDto review,
+			@RequestParam(required = false) List<String> deleteUrl) throws Exception{
 		
-		ObjectMapper mapper = new ObjectMapper();
-		ReviewDto convertReview = mapper.readValue(review, ReviewDto.class);
+//		ObjectMapper mapper = new ObjectMapper();
+//		ReviewDto convertReview = mapper.readValue(review, ReviewDto.class);
 		
-		ReviewDto result = reviewService.modifyReview(files, convertReview);
+		if(deleteUrl != null) {
+			System.out.println(deleteUrl.toString());
+		}
+				
+		ReviewDto result = reviewService.modifyReview(files, review, deleteUrl);
 		return responseService.getResponse(result);
 	}
 

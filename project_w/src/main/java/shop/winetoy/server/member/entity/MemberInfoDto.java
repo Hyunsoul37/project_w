@@ -12,6 +12,7 @@ public class MemberInfoDto {
 	private String phone;
 	private Date regiDate;
 	private String role;
+	private String profileImg;
 
 	public MemberInfoDto(MemberDto memberDto) {
 		this.pid = memberDto.getPid();
@@ -23,6 +24,7 @@ public class MemberInfoDto {
 		this.phone = memberDto.getPhone();
 		this.regiDate = memberDto.getRegiDate();
 		this.role = memberDto.getRole();
+		this.profileImg = memberDto.getProfileImg();
 	}
 
 	public MemberInfoDto() { }
@@ -98,12 +100,20 @@ public class MemberInfoDto {
 	public void setRole(String role) {
 		this.role = role;
 	}
+	
+	public String getProfileImg() {
+		return profileImg;
+	}
+
+	public void setProfileImg(String profileImg) {
+		this.profileImg = profileImg;
+	}
 
 	@Override
 	public String toString() {
 		return "MemberInfoDto [pid=" + pid + ", id=" + id + ", name=" + name + ", nickName=" + nickName + ", email="
 				+ email + ", address=" + address + ", phone=" + phone + ", regiDate=" + regiDate + ", role=" + role
-				+ "]";
+				+ ", profileImg=" + profileImg + "]";
 	}
 	
 }

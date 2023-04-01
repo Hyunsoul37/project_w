@@ -10,7 +10,6 @@ import org.springframework.transaction.annotation.Transactional;
 import shop.winetoy.server.comment.dao.CommentDao;
 import shop.winetoy.server.comment.entity.CommentDto;
 import shop.winetoy.server.comment.entity.CommentLikeDto;
-import shop.winetoy.server.comment.entity.CommentListDto;
 import shop.winetoy.server.comment.entity.CommentListEntityDto;
 
 @Service
@@ -35,19 +34,19 @@ public class CommentServiceImp implements CommentService{
 	}
 
 	@Override
-	public List<CommentListDto> getCommentList(int reviewId, int pid) {
+	public List<CommentListEntityDto> getCommentList(int reviewId, int pid) {
 		List<CommentListEntityDto> result = commentDao.getCommentList(reviewId, pid);
-		List<CommentListDto> list = new ArrayList<>();
+		List<CommentListEntityDto> list = new ArrayList<>();
 
 		for(CommentListEntityDto comment : result) {
 			if(comment.getParentId() == 0 || comment.getDepth() == 0) {
-				CommentListDto cld = new CommentListDto();
-				cld.setParent(comment);
+				CommentListEntityDto cld = new CommentListEntityDto();
+				cld = (comment);
 				list.add(cld);
 			}
 			else {
-				for(CommentListDto cld : list) {
-					if(cld.getParent().getCommentId() == comment.getParentId()) {
+				for(CommentListEntityDto cld : list) {
+					if(cld.getCommentId() == comment.getParentId()) {
 						cld.addChild(comment);
 					}
 				}

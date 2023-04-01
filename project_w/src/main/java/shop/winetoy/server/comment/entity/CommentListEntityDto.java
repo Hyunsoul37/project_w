@@ -1,5 +1,6 @@
 package shop.winetoy.server.comment.entity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class CommentListEntityDto extends CommentDto {
@@ -61,6 +62,13 @@ public class CommentListEntityDto extends CommentDto {
 		this.child = child;
 	}
 
+	public void addChild(CommentListEntityDto comment) {
+		if (child == null) {
+			child = new ArrayList<>();
+		}
+		child.add(comment);
+	}
+	
 	@Override
 	public String toString() {
 		super.toString();

@@ -125,30 +125,39 @@ public class ReviewServiceImp implements ReviewService {
 
 	@Override
 	@Transactional
-	public ReviewDto modifyReview(List<MultipartFile> files, ReviewDto review) {
+	public ReviewDto modifyReview(List<MultipartFile> files, ReviewDto review, List<String> deleteUrl) {
+
+		String[] imgUrlArray = review.getReviewImgs();
+		int index = 0;
 		
-		ReviewDto tmp = reviewDao.getReviewDetail(review.getReviewId());
-		System.out.println(tmp);
-		for(int i = 1 ; i< tmp.getReviewImgs().length; i++) {
-			if (tmp.getReviewImgs()[i] != null)
-				s3UpladerService.delete(tmp.getReviewImgs()[i]);
+		for (int i = 0 ; i < imgUrlArray.length; i++) {
+			if(imgUrlArray[i] != null) {
+				index++;
+			}
+			else 
+				break;
 		}
 		
-		reviewDao.initImageUrl(review.getReviewId());
+		System.out.println("### index : " + index);
 		
-		String[] imgUrl = new String[5];
-
-		for (int i = 0; i < files.size(); i++) {
-			try {
-				imgUrl[i] = s3UpladerService.upload(files.get(i), "review");
-			} catch (IOException e) {
-				e.printStackTrace();
+		if(deleteUrl != null) {			
+			for (int i = 0 ; i < deleteUrl.size(); i++) {
+				s3UpladerService.delete(deleteUrl.get(i));
 			}
 		}
 
-		review.setReviewImgs(imgUrl);
-
+		if(files != null) {
+			for (int i = 0; i < files.size(); i++) {
+				try {
+					imgUrlArray[index++] = s3UpladerService.upload(files.get(i), "review");
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+		}
 		
+		review.setReviewImgs(imgUrlArray);
+
 		ReviewTagDto reviewTag = new ReviewTagDto();
 		
 		System.out.println(review.toString());

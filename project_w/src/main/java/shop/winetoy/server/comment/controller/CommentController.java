@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import shop.winetoy.server.comment.entity.CommentDto;
 import shop.winetoy.server.comment.entity.CommentLikeDto;
-import shop.winetoy.server.comment.entity.CommentListDto;
+import shop.winetoy.server.comment.entity.CommentListEntityDto;
 import shop.winetoy.server.comment.service.CommentService;
 import shop.winetoy.server.response.entity.Response;
 import shop.winetoy.server.response.service.ResponseService;
@@ -66,14 +66,14 @@ public class CommentController {
 	 */
 	@RequestMapping(method = RequestMethod.GET)
 	@ResponseBody
-	public Response<List<CommentListDto>> getCommentList(
+	public Response<List<CommentListEntityDto>> getCommentList(
 			@RequestHeader Map<String, String> headers,
 			int reviewId) {
     	
 		String authorization = headers.get("authorization");
     	int pid = jwtManager.extractPidFromAccessToken(authorization);
     	
-		List<CommentListDto> result = commentService.getCommentList(reviewId, pid);
+		List<CommentListEntityDto> result = commentService.getCommentList(reviewId, pid);
 		return responsService.getResponse(result);
 	}
 	
