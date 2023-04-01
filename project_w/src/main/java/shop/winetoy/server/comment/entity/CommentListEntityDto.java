@@ -1,11 +1,14 @@
 package shop.winetoy.server.comment.entity;
 
+import java.util.List;
+
 public class CommentListEntityDto extends CommentDto {
 	String writerNick;
 	String writerProfile;
 	String tagWriterNick;
 	String tagWriterProfile;
 	boolean like;
+	List<CommentListEntityDto> child;
 
 	public String getWriterNick() {
 		return writerNick;
@@ -48,6 +51,14 @@ public class CommentListEntityDto extends CommentDto {
 			this.like = true;
 		else
 			this.like = false;
+	}
+
+	public List<CommentListEntityDto> getChild() {
+		return child;
+	}
+
+	public void setChild(List<CommentListEntityDto> child) {
+		this.child = child;
 	}
 
 	@Override

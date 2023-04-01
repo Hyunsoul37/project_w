@@ -43,6 +43,7 @@ public class ReviewServiceImp implements ReviewService {
 		review.setReviewImgs(imgUrl);
 
 		reviewDao.postReview(review);
+		
 		int postReviewId = review.getReviewId();
 
 		reviewTag.setReviewId(postReviewId);

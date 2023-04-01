@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -63,8 +62,11 @@ public class CommentServiceImp implements CommentService{
 	public CommentLikeDto setCommentLike(CommentLikeDto info) {
 		CommentLikeDto result = commentDao.findCommentLike(info);
 		
+		System.out.println(info.toString());
+		
 		if(result == null) {
-			int pid = commentDao.insertCommentLike(info);
+			commentDao.insertCommentLike(info);
+			int pid = info.getPid();
 			result = commentDao.findCommentLikeWithPid(pid);
 			result.setAction("like");
 		}

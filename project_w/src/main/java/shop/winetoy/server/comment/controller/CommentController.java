@@ -37,6 +37,7 @@ public class CommentController {
 	
 	/**
 	 * 댓글 등록
+	 * https://www.notion.so/comment-4806f83a8786475bb9dc6b1ed0cb652b?pvs=4
 	 */
 	@RequestMapping(method = RequestMethod.POST)
 	@ResponseBody
@@ -61,6 +62,7 @@ public class CommentController {
 	
 	/**
 	 * 댓글 조회
+	 * https://www.notion.so/comment-b3aede047ad243428756ba23623b3ea6?pvs=4
 	 */
 	@RequestMapping(method = RequestMethod.GET)
 	@ResponseBody
