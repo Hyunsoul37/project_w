@@ -3,6 +3,7 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="shop.winetoy.server.comment.dao.CommentDao">
+	
 	<insert id="registerComment" 
 	parameterType="shop.winetoy.server.comment.entity.CommentDto">
 		INSERT INTO `wineToy`.`comment`
@@ -77,4 +78,6 @@
 		delete from comment_like 
 		where comment_id = #{commentId} and member_pid = #{memberPid}
 	</delete>
+	
+	
 </mapper>

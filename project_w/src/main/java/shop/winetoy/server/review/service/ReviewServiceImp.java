@@ -124,8 +124,32 @@ public class ReviewServiceImp implements ReviewService {
 
 	@Override
 	@Transactional
-	public ReviewDto modifyReview(ReviewDto review) {
+	public ReviewDto modifyReview(List<MultipartFile> files, ReviewDto review) {
+		
+		ReviewDto tmp = reviewDao.getReviewDetail(review.getReviewId());
+		System.out.println(tmp);
+		for(int i = 1 ; i< tmp.getReviewImgs().length; i++) {
+			if (tmp.getReviewImgs()[i] != null)
+				s3UpladerService.delete(tmp.getReviewImgs()[i]);
+		}
+		
+		reviewDao.initImageUrl(review.getReviewId());
+		
+		String[] imgUrl = new String[5];
+
+		for (int i = 0; i < files.size(); i++) {
+			try {
+				imgUrl[i] = s3UpladerService.upload(files.get(i), "review");
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+
+		review.setReviewImgs(imgUrl);
+
+		
 		ReviewTagDto reviewTag = new ReviewTagDto();
+		
 		System.out.println(review.toString());
 		reviewDao.initHashTag(review.getReviewId());
 

@@ -120,11 +120,9 @@
 		`regi_date` =
 		current_timestamp(),
 		`review_img_1` = #{reviewImg1},
-		`review_img_2` =
-		#{reviewImg2},
+		`review_img_2` = #{reviewImg2},
 		`review_img_3` = #{reviewImg3},
-		`review_img_4` =
-		#{reviewImg4},
+		`review_img_4` = #{reviewImg4},
 		`review_img_5` = #{reviewImg5},
 		`desc` = #{desc}
 		WHERE
@@ -135,6 +133,17 @@
 		DELETE FROM `wineToy`.`review_tag`
 		WHERE review_id = #{reviewId}
 	</delete>
+	
+	<update id="initImageUrl">
+		UPDATE `wineToy`.`review`
+		SET
+			review_img_2 = null,
+			review_img_3 = null,
+			review_img_4 = null,
+			review_img_5 = null
+		WHERE 
+			review_id = #{reviewId}
+	</update>
 	
 	<select id="getBestReview" resultType="shop.winetoy.server.review.entity.BestReviewDto">
 		select review.*, member.nick_name as writer_nick from review 

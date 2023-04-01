@@ -47,6 +47,10 @@ public class CommentController {
 		String authorization = headers.get("authorization");
     	int pid = jwtManager.extractPidFromAccessToken(authorization);
     	
+    	// 로그인을 하지 않은 경우 
+    	if(pid == 0)
+    		return responsService.getResponse(0);
+    	
     	comment.setWriterId(pid);
     	
     	System.out.println(comment.toString());

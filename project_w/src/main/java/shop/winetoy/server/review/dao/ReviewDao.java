@@ -30,6 +30,8 @@ public interface ReviewDao {
 	public int modifyReview(ReviewDto review);
 
 	public int initHashTag(int reviewId);
+	
+	public int initImageUrl(int reviewId);
 
 	public List<BestReviewDto> getBestReview();
 	

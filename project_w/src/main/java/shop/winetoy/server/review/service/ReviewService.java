@@ -12,7 +12,7 @@ public interface ReviewService {
 	public ReviewDto getReviewDetail(int reviewId);
 	public List<ReviewDto> getReview(int page);
 	public boolean deleteReview(int reviewId);
-	public ReviewDto modifyReview(ReviewDto review);
+	public ReviewDto modifyReview(List<MultipartFile> files,ReviewDto review);
 	public List<BestReviewDto> getBestReview();
 	public int getReviewCount();
 }

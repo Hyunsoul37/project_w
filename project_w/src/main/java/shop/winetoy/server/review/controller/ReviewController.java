@@ -43,18 +43,14 @@ public class ReviewController {
 	 */
 	@RequestMapping(value = "/review", method = RequestMethod.POST)
 	@ResponseBody
-	public Response<ReviewDto> postReview(@RequestParam(value = "files", required = false) List<MultipartFile> files,
+	public Response<ReviewDto> postReview(
+			@RequestParam(value = "files", required = false) List<MultipartFile> files,
 			@RequestPart String review) throws Exception{
-		System.out.println(review.toString());
 		
 		ObjectMapper mapper = new ObjectMapper();
-		ReviewDto dd = mapper.readValue(review, ReviewDto.class);
-        
-		System.out.println(dd.toString());
-		System.out.println("FILE = " + files.get(0).getOriginalFilename());
-		
-		
-		ReviewDto result = reviewService.postReivew(files, dd);
+		ReviewDto convertReview = mapper.readValue(review, ReviewDto.class);
+        		
+		ReviewDto result = reviewService.postReivew(files, convertReview);
 		return responseService.getResponse(result);
 	}
 
@@ -81,13 +77,27 @@ public class ReviewController {
 		return responseService.getResponse(result);
 	}
 
+	/**
+	 * 리뷰 수정
+	 * https://www.notion.so/Review-db5cc8c605b84fdcba1e8f8db9d2c1eb?pvs=4
+	 */
 	@RequestMapping(value = "/review", method = RequestMethod.PUT)
 	@ResponseBody
-	public Response<ReviewDto> modifyReview(@RequestBody ReviewDto review) {
-		ReviewDto result = reviewService.modifyReview(review);
+	public Response<ReviewDto> modifyReview(
+			@RequestParam(value = "files", required = false) List<MultipartFile> files,
+			@RequestPart String review) throws Exception{
+		
+		ObjectMapper mapper = new ObjectMapper();
+		ReviewDto convertReview = mapper.readValue(review, ReviewDto.class);
+		
+		ReviewDto result = reviewService.modifyReview(files, convertReview);
 		return responseService.getResponse(result);
 	}
 
+	/**
+	 * 리뷰 디테일 조회
+	 * https://www.notion.so/Review-detail-022a3263216e4c4e9facce35e9649914?pvs=4
+	 */
 	@RequestMapping(value = "/review/detail", method = RequestMethod.GET)
 	@ResponseBody
 	public Response<ReviewDto> getReviewDetail(int reviewId) {
