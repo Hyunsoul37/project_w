@@ -5,17 +5,27 @@ import { AiOutlinePlus, AiOutlineDown } from "react-icons/ai";
 
 import axios from "axios";
 import { useRouter } from "next/router";
+import { useSelector } from "react-redux";
+import { RootState } from "../../store";
+import { reviewState } from "./ReviewTypes";
 
 const Winetype = ["레드", "화이트", "로제", "스파클링", "주정강화"];
-
-const Post = () => {
+interface PostProps extends reviewState {
+  reviewId: number;
+  edit: string;
+}
+const Post = ({ reviewId, edit, ...rest }: PostProps) => {
+  const user = useSelector((state: RootState) => state.user);
   const TitlefileRef = useRef<HTMLInputElement>(null);
   const fileRefArr = useRef<HTMLInputElement[]>([]);
   const [starPoint, setstarPoint] = useState(0);
   const [previewTitle, setPreviewTitle] = useState<string | null>(null);
+  const [titleimgUrl, setTitleimgUrl] = useState<string | null>(null);
+
   const [titleImg, setTitleImg] = useState<File>();
   const [addImg, setAddImg] = useState<File[]>([]);
   const [previewImg, setPreviewImg] = useState<string[] | null>([]);
+  const [addimgUrl, setAddImgUrl] = useState<string[] | null>([]);
   const [showType, setShowType] = useState(false);
   const [filenum, setFilenum] = useState(0);
 
@@ -26,9 +36,34 @@ const Post = () => {
   const [desc, setDesc] = useState("");
   const [hashTag, setHashTag] = useState("");
 
+  const [removeImgUrl, setRemoveImgUrl] = useState<string[]>([]);
   const router = useRouter();
   const modalref = useRef<HTMLDialogElement>(null);
   const [showModal, setShowModal] = useState(false);
+  const [btndisable, setBtnDisable] = useState(false);
+
+  useEffect(() => {
+    if (edit === "true" && rest.reviewImgs) {
+      setstarPoint(rest.starPoint);
+      setPreviewTitle(rest.reviewImgs[0]);
+      //setTitleimgUrl(rest.reviewImgs[0]);
+      setPreviewImg(
+        rest.reviewImgs.filter((c, index) => c !== null && index !== 0)
+      );
+      setAddImgUrl(
+        rest.reviewImgs.filter((c, index) => c !== null && index !== 0)
+      );
+      setFilenum(
+        rest.reviewImgs.filter((c, index) => c !== null && index !== 0).length
+      );
+      setwineType(rest.wineType);
+      setReviewTitle(rest.reviewTitle);
+      setWineName(rest.wineName);
+      setwinePrice(rest.winePrice);
+      setDesc(rest.desc);
+      setHashTag(rest.hashTag.join(","));
+    }
+  }, [edit]);
 
   const OnClickImageUploadBtn = (e: React.MouseEvent<HTMLDivElement>) => {
     e.stopPropagation();
@@ -42,6 +77,10 @@ const Post = () => {
       if (imageFile && imageFile.type.substring(0, 5) === "image") {
         const reader = new FileReader();
         reader.onload = () => {
+          if (edit === "true") {
+            setRemoveImgUrl([...removeImgUrl, titleimgUrl!]);
+            setTitleimgUrl(null);
+          }
           setPreviewTitle(reader.result as string);
         };
 
@@ -58,6 +97,14 @@ const Post = () => {
         const updateimg = imgarr.map((img, index) =>
           index === id ? imageFile : img
         );
+        if (edit) {
+          setRemoveImgUrl([...removeImgUrl, previewImg![id]]);
+          if (addimgUrl) {
+            let tmp = [...addimgUrl];
+            let filterarr = tmp.filter((data, index) => id !== index);
+            setAddImgUrl([...filterarr]);
+          }
+        }
         setAddImg(updateimg);
       } else {
         imgarr.push(imageFile);
@@ -86,6 +133,16 @@ const Post = () => {
     fileRefArr.current[id]?.click();
   };
 
+  const removeImg = (
+    removenum: number,
+    e: React.MouseEvent<HTMLParagraphElement>
+  ) => {
+    e.stopPropagation();
+    setRemoveImgUrl([...removeImgUrl, previewImg![removenum]]);
+    const filterarr = previewImg!.filter((c, index) => index !== removenum);
+    setPreviewImg(filterarr);
+    setFilenum(filterarr.length);
+  };
   const ImageUploadFile = () => {
     let filearr = [];
     for (let i = 0; i < filenum; i++) {
@@ -96,7 +153,10 @@ const Post = () => {
             onClick={(e) => OnClickAddImageUploadBtn(e, i)}
           >
             {previewImg![i] ? (
-              <img src={previewImg![i] as string} />
+              <div>
+                <img src={previewImg![i] as string} />
+                <p onClick={(e) => removeImg(i, e)}>X</p>
+              </div>
             ) : (
               <div style={{ color: "white", marginBottom: "0px" }}>image</div>
             )}
@@ -123,36 +183,72 @@ const Post = () => {
 
   const OnClickSubmitBtn = async (e: React.MouseEvent) => {
     e.preventDefault();
+    setBtnDisable(true);
+
     if (
-      reviewTitle === "" ||
-      previewTitle === null ||
-      wineType === "" ||
-      starPoint === 0 ||
-      wineName === "" ||
-      desc === ""
+      (reviewTitle === "" ||
+        previewTitle === null ||
+        wineType === "" ||
+        starPoint === 0 ||
+        wineName === "" ||
+        desc === "") &&
+      !edit
     ) {
       alert("필수 정보는 다 입력해야합니다.");
     }
     const formdata = new FormData();
-    formdata.append(
-      "review",
-      JSON.stringify({
-        reviewTitle: reviewTitle,
-        wineType: wineType,
-        wineName: wineName,
-        winePrice: winePrice,
-        starPoint: starPoint,
-        desc: desc,
-        writerId: localStorage.getItem("id"),
-        hashTag: hashTag.split(",")[0] === "" ? [] : hashTag.split(","),
-      })
-    );
+    if (edit === "true") {
+      console.log(titleimgUrl);
+      let reviewimg: any[] =
+        titleimgUrl !== "null" ? [titleimgUrl, ...addimgUrl!] : [...addimgUrl!];
 
-    formdata.append("files", titleImg!);
+      if (reviewimg.length < 5) {
+        for (let i = reviewimg.length; i < 5; i++) {
+          reviewimg.push(null);
+        }
+      }
+      formdata.append(
+        "review",
+        JSON.stringify({
+          reviewId: reviewId,
+          reviewTitle: reviewTitle,
+          wineType: wineType,
+          wineName: wineName,
+          winePrice: winePrice,
+          starPoint: starPoint,
+          desc: desc,
+          writerId: user.userData.data.memberInfo.pid,
+          hashTag: hashTag.split(",")[0] === "" ? [] : hashTag.split(","),
+          reviewImgs: reviewimg,
+        })
+      );
+      if (removeImgUrl.length > 0) {
+        formdata.append("deleteUrl", removeImgUrl.toString());
+      }
+    } else {
+      formdata.append(
+        "review",
+        JSON.stringify({
+          reviewTitle: reviewTitle,
+          wineType: wineType,
+          wineName: wineName,
+          winePrice: winePrice,
+          starPoint: starPoint,
+          desc: desc,
+          writerId: user.userData.data.memberInfo.pid,
+          hashTag: hashTag.split(",")[0] === "" ? [] : hashTag.split(","),
+        })
+      );
+    }
+
+    if (titleImg) {
+      formdata.append("files", titleImg);
+    }
+
     addImg.map((data) => formdata.append("files", data));
 
     axios({
-      method: "post",
+      method: `${edit === "true" ? "put" : "post"}`,
       url: "/api/community/review",
       data: formdata,
       headers: { "Content-Type": "multipart/form-data" },
@@ -370,7 +466,15 @@ const Post = () => {
                   />
                 </div>
                 <div className={styled.btnWrapper}>
-                  <button onClick={OnClickSubmitBtn}>등록</button>
+                  {edit ? (
+                    <button disabled={btndisable} onClick={OnClickSubmitBtn}>
+                      수정
+                    </button>
+                  ) : (
+                    <button disabled={btndisable} onClick={OnClickSubmitBtn}>
+                      등록
+                    </button>
+                  )}
                 </div>
               </form>
             </div>
