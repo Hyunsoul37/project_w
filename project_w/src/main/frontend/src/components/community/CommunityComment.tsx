@@ -76,9 +76,10 @@ const CommunityComment: React.FC<{ reviewId: number }> = ({ reviewId }) => {
         { reviewId: data.reviewId, comment: data.comment },
         { headers: { Authorization: `bearer ${token}` } }
       )
-      .then(() => {
+      .then((res) => {
+        let resCommentId = res.data.data;
         const commentlist = { ...commmentData };
-        commentlist!.parent!.push(data);
+        commentlist!.parent!.push({ ...data, commentId: resCommentId });
         setCommentData(commentlist as commentState);
       })
       .catch((err) => console.log(err));
