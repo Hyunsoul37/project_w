@@ -10,4 +10,5 @@ public interface CommentService {
 	int registerComment(CommentDto comment);
 	List<CommentListEntityDto> getCommentList(int reviewId, int pid);
 	CommentLikeDto setCommentLike(CommentLikeDto info);
+	int modifyComment(CommentDto comment);
 }

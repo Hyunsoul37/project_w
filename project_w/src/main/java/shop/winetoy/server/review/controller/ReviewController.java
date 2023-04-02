@@ -45,12 +45,12 @@ public class ReviewController {
 	@ResponseBody
 	public Response<ReviewDto> postReview(
 			@RequestParam(value = "files", required = false) List<MultipartFile> files,
-			@RequestPart ReviewDto review) throws Exception{
+			@RequestPart String review) throws Exception{
 		
-//		ObjectMapper mapper = new ObjectMapper();
-//		ReviewDto convertReview = mapper.readValue(review, ReviewDto.class);
+		ObjectMapper mapper = new ObjectMapper();
+		ReviewDto convertReview = mapper.readValue(review, ReviewDto.class);
         		
-		ReviewDto result = reviewService.postReivew(files, review);
+		ReviewDto result = reviewService.postReivew(files, convertReview);
 		return responseService.getResponse(result);
 	}
 

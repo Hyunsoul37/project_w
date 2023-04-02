@@ -103,5 +103,12 @@ public class CommentController {
     	return responsService.getResponse(result);
 	}
 	
+	@RequestMapping(method = RequestMethod.PUT)
+	@ResponseBody
+	public Response<Integer> modifiyComment(@RequestBody CommentDto comment){
+		int result = commentService.modifyComment(comment);
+		
+		return responsService.getResponse(result);
+	}
 	
 }

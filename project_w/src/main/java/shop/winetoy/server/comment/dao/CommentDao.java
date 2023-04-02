@@ -16,4 +16,6 @@ public interface CommentDao {
 	CommentLikeDto findCommentLike(CommentLikeDto info);
 	int insertCommentLike(CommentLikeDto info);
 	int deleteCommentLike(CommentLikeDto info);
+	int modifyComment(CommentDto comment);
+	int deleteComment(CommentDto comment);
 }

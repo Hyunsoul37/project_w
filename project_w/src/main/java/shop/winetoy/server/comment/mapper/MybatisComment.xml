@@ -5,7 +5,8 @@
 <mapper namespace="shop.winetoy.server.comment.dao.CommentDao">
 	
 	<insert id="registerComment" 
-	parameterType="shop.winetoy.server.comment.entity.CommentDto">
+	parameterType="shop.winetoy.server.comment.entity.CommentDto"
+	useGeneratedKeys="true" keyProperty="commentId">
 		INSERT INTO `wineToy`.`comment`
 		(
 		`review_id`,
@@ -79,5 +80,14 @@
 		where comment_id = #{commentId} and member_pid = #{memberPid}
 	</delete>
 	
+	<update id="modifyComment" parameterType="shop.winetoy.server.comment.entity.CommentDto">
+		UPDATE comment
+		SET
+			comment = #{comment},
+			tag_writer_id = #{tagWriterId},
+			modify_date = current_timestamp()
+		WHERE 
+			comment_id = #{commentId}
+	</update>
 	
 </mapper>

@@ -30,7 +30,9 @@ public class CommentServiceImp implements CommentService{
 			}
 		}
 		
-		return commentDao.registerComment(comment);
+		commentDao.registerComment(comment);
+		
+		return comment.getCommentId();
 	}
 
 	@Override
@@ -75,6 +77,12 @@ public class CommentServiceImp implements CommentService{
 		}
 		
 		return result;
+	}
+
+	@Override
+	@Transactional
+	public int modifyComment(CommentDto comment) {
+		return commentDao.modifyComment(comment);
 	}
 
 }
