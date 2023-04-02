@@ -47,6 +47,7 @@ const ProductCard = ({ index, ...rest }: CardProps) => {
           memberPid: id,
           winePid: rest.pid,
         },
+        AfterGetData: null,
       });
     } else {
       modalref.current?.showModal();

@@ -68,6 +68,7 @@ const MyPage_Setting = () => {
 
   const CheckNickNameDuplicate = async (e: React.MouseEvent) => {
     e.preventDefault();
+
     await nickNameCheck({
       url: `api/auth/nickname-check?nickName=${nickName}`,
       type: "GET",
