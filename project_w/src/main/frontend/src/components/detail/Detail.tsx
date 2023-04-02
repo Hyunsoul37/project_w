@@ -12,7 +12,7 @@ const Detail: React.FC<wineState> = (props) => {
   const snackList = arrUnique.filter((data) => data !== "null");
 
   if (!props?.imageUrl) {
-    return;
+    return <></>;
   }
   return (
     <div className="maxframe">
