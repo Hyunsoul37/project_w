@@ -16,6 +16,7 @@ export const passwordreg =
 
 const join = () => {
   const EmailRef = useRef(null);
+  const passwordRef = useRef(null);
   const { sendRequestData: postData } = useFetch();
   const [id, setId] = useState("");
   const [password, setPassword] = useState("");
@@ -33,6 +34,13 @@ const join = () => {
     e.preventDefault();
     if (isduplicate || isNickNameduplicate) {
       alert("아이디 또는 닉네임이 중복입니다.");
+      return;
+    }
+    if (!passwordreg.test(password)) {
+      alert(
+        "비밀번호는 대소문자,숫자,특수문자를 포함한 8글자 이상이여야 합니다."
+      );
+      passwordRef.current.focus();
       return;
     }
     if (!emailReg.test(email)) {
@@ -123,12 +131,7 @@ const join = () => {
   const ChangePhoneHandler = (e) => {
     setPhone(e.target.value);
   };
-  const CheckEmailVaild = () => {
-    if (!emailReg.test(email)) {
-      alert("유효하지 않은 이메일입니다");
-      EmailRef.current.focus();
-    }
-  };
+
   return (
     <div className={styled.formWrapper}>
       <Seo title="Sign In" />
@@ -188,6 +191,7 @@ const join = () => {
           <input
             id="password"
             type="password"
+            ref={passwordRef}
             value={password ? password : ""}
             onChange={ChangePasswordHandler}
             placeholder="비밀번호"
@@ -202,7 +206,6 @@ const join = () => {
             ref={EmailRef}
             value={email ? email : ""}
             onChange={ChangeEmailHandler}
-            onBlur={CheckEmailVaild}
           />
         </label>
         {/* <label htmlFor="address">
