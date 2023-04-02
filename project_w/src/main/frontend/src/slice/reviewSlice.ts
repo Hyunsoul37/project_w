@@ -6,19 +6,19 @@ interface reviewSliceState {
   isloadding: boolean;
   isSuccess: boolean;
   isError: string;
-  isfinish: boolean;
   post: reviewState[];
+  TotalpageNum: number;
 }
 const initialState: reviewSliceState = {
   isloadding: false,
   isSuccess: false,
   isError: "",
-  isfinish: false,
   post: [],
+  TotalpageNum: 0,
 };
 
 export const NextGetReview = createAsyncThunk(
-  "review/getTest",
+  "review/Addlist",
   async (curpage: number) => {
     let newlist: reviewState[] = [];
     console.log(curpage);
@@ -34,14 +34,18 @@ export const NextGetReview = createAsyncThunk(
 
 export const GetReview = createAsyncThunk("review/get", async () => {
   const newlist: reviewState[] = [];
+  let pagenum: number = 0;
   await axios
     .get(`/api/community/review?page=1`)
     .then((res) => {
       res.data.data.map((data: reviewState) => newlist.push(data));
     })
     .catch((err) => console.log(err));
-
-  return newlist;
+  await axios
+    .get("/api/community/review/last-page")
+    .then((res) => (pagenum = res.data.data))
+    .catch((err) => console.log(err));
+  return { newlist, pagenum };
 });
 
 export const reviewSlice = createSlice({
@@ -61,7 +65,8 @@ export const reviewSlice = createSlice({
       .addCase(GetReview.fulfilled, (state, action) => {
         state.isloadding = false;
         state.isSuccess = true;
-        state.post = action.payload;
+        state.post = action.payload.newlist;
+        state.TotalpageNum = action.payload.pagenum;
       })
       .addCase(GetReview.rejected, (state, action) => {
         state.isloadding = false;
@@ -74,10 +79,6 @@ export const reviewSlice = createSlice({
       .addCase(NextGetReview.fulfilled, (state, action) => {
         state.isloadding = false;
         const arr = action.payload;
-
-        if (arr.length < 12) {
-          state.isfinish = true;
-        }
         arr.map((data) => state.post.push(data));
       })
       .addCase(NextGetReview.rejected, (state, action) => {
