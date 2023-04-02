@@ -10,7 +10,9 @@ const MyPage_Setting = () => {
   const user = useSelector((state: RootState) => state.user);
   const TitlefileRef = useRef<HTMLInputElement>(null);
   const { sendRequestData: nickNameCheck } = useFetch();
-  const [previewTitle, setPreviewTitle] = useState<string | null>(null);
+  const [previewTitle, setPreviewTitle] = useState<string | null>(
+    user.userData.data.memberInfo.profileImg
+  );
   const [nickName, setNickName] = useState(
     user.userData.data.memberInfo.nickName
   );
@@ -54,7 +56,9 @@ const MyPage_Setting = () => {
 
   const CheckPasswordVaild = () => {
     if (!passwordreg.test(password)) {
-      alert("비밀번호는 대소문자,숫자를 포함한 8글자 이상이여야 합니다.");
+      alert(
+        "비밀번호는 대소문자,숫자, 특수문자를 포함한 8글자 이상이여야 합니다."
+      );
       setPasswordValid(false);
       SetpassWordCheck("");
     } else {

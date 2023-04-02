@@ -12,8 +12,8 @@ const MyPage_All = () => {
       <div className={styled.userInfo}>
         <img
           src={
-            user.userData.data.memberInfo.userImage
-              ? user.userData.data.memberInfo.userImage
+            user.userData.data.memberInfo.profileImg
+              ? user.userData.data.memberInfo.profileImg
               : defaultimg
           }
         />
