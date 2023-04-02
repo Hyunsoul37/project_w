@@ -5,11 +5,12 @@ import { RootState } from "../../store";
 import { defaultimg } from "./CommunityComment";
 import styled from "./CommentInput.module.css";
 import { firstCommentState, secondCommentState } from "./ReviewTypes";
-import { getDate, GetReviewid } from "../util/util";
+import { getDate } from "../util/util";
 
 interface commentState {
   isMainInput: boolean;
   subCommentuser?: string;
+  reviewId: number;
   AddfirstComment?: (data: firstCommentState) => void;
   AddSecondComment?: (
     comment: string,
@@ -21,6 +22,7 @@ interface commentState {
 const CommentInput: React.FC<commentState> = ({
   isMainInput,
   subCommentuser,
+  reviewId,
   AddfirstComment,
   AddSecondComment,
 }) => {
@@ -34,23 +36,24 @@ const CommentInput: React.FC<commentState> = ({
     if (user.isLoggedIn === true) {
       if (isMainInput) {
         AddfirstComment!({
-          firstComment_Id: GetReviewid(),
+          reviewId: reviewId,
+          commentId: 0,
           writerId: user.userData.data.memberInfo.pid,
-          writerNickName: user.userData.data.memberInfo.nickName
+          writerNick: user.userData.data.memberInfo.nickName
             ? user.userData.data.memberInfo.nickName
             : "임시",
-          commentText: comment,
-          writerImage:
-            user.userData.data.memberInfo.userImage === undefined
+          comment: comment,
+          writerProfile:
+            user.userData.data.memberInfo.profileImg === undefined
               ? "null"
-              : user.userData.data.memberInfo.userImage,
+              : user.userData.data.memberInfo.profileImg,
           regiDate: getDate(),
-          commentLike: false,
-          secondComment: [],
+          like: false,
+          child: [],
         });
         setComment("");
       } else {
-        AddSecondComment!(comment, GetReviewid(), subCommentuser!);
+        AddSecondComment!(comment, 0, subCommentuser!);
         setComment("");
       }
     } else {
@@ -75,9 +78,9 @@ const CommentInput: React.FC<commentState> = ({
         src={
           user.isLoggedIn &&
           user.userData !== null &&
-          user.userData.data.memberInfo.userImage !== "" &&
-          user.userData.data.memberInfo.userImage !== undefined
-            ? user.userData.data.memberInfo.userImage
+          user.userData.data.memberInfo.profileImg !== "" &&
+          user.userData.data.memberInfo.profileImg !== undefined
+            ? user.userData.data.memberInfo.profileImg
             : defaultimg
         }
       />

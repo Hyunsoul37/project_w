@@ -24,6 +24,7 @@ const CommentList: React.FC<firstCommentState & CommentPropsType> = (props) => {
   const router = useRouter();
   const [showModal, setShowModal] = useState(false);
   const [subNickName, setSubNickName] = useState("");
+  const [subWriterId, setSubWriterId] = useState(-1);
   const [CommentNum, setCommentNum] = useState(-10);
   const [subCommentNum, setsubCommentNum] = useState(-10);
 
@@ -42,14 +43,16 @@ const CommentList: React.FC<firstCommentState & CommentPropsType> = (props) => {
     setSubNickName(nickname);
   };
 
-  const CommentInputHandler = (index: number) => () => {
+  const CommentInputHandler = (index: number, tagId: number) => () => {
     if (props.curCommentnumber !== -1 || props.cursubCommentnumber !== -1) {
       if (window.confirm("작성중인 댓글이 있습니다. 댓글 전환 하시겠습니까?")) {
         SetCommentInput(index);
+        setSubWriterId(tagId);
       }
     } else {
       if (user.isLoggedIn === true) {
         SetCommentInput(index);
+        setSubWriterId(tagId);
       } else {
         ref.current?.showModal();
         setShowModal(true);
@@ -57,20 +60,25 @@ const CommentList: React.FC<firstCommentState & CommentPropsType> = (props) => {
     }
   };
 
-  const SubCommentInputHandler = (nickname: string, index: number) => () => {
-    if (props.curCommentnumber !== -1 || props.cursubCommentnumber !== -1) {
-      if (window.confirm("작성중인 댓글이 있습니다. 댓글 전환 하시겠습니까?")) {
-        SetSubCommentInput(nickname, index);
-      }
-    } else {
-      if (user.isLoggedIn === true) {
-        SetSubCommentInput(nickname, index);
+  const SubCommentInputHandler =
+    (nickname: string, index: number, tagId: number) => () => {
+      if (props.curCommentnumber !== -1 || props.cursubCommentnumber !== -1) {
+        if (
+          window.confirm("작성중인 댓글이 있습니다. 댓글 전환 하시겠습니까?")
+        ) {
+          SetSubCommentInput(nickname, index);
+          setSubWriterId(tagId);
+        }
       } else {
-        ref.current?.showModal();
-        setShowModal(true);
+        if (user.isLoggedIn === true) {
+          SetSubCommentInput(nickname, index);
+          setSubWriterId(tagId);
+        } else {
+          ref.current?.showModal();
+          setShowModal(true);
+        }
       }
-    }
-  };
+    };
 
   const OffModal = () => {
     ref.current?.close();
@@ -101,18 +109,21 @@ const CommentList: React.FC<firstCommentState & CommentPropsType> = (props) => {
     commentId: number,
     tagName: string
   ) => {
-    props.AddSecondComment(props.firstComment_Id, {
-      secondComment_Id: commentId,
+    props.AddSecondComment(props.commentId, {
+      reviewId: props.reviewId,
+      parentId: props.commentId,
+      commentId: commentId,
       writerId: user.userData.data.memberInfo.pid,
-      writerNickName: user.userData.data.memberInfo.nickName,
-      commentText: comment,
-      writerImage:
-        user.userData.data.memberInfo.userImage === undefined
+      writerNick: user.userData.data.memberInfo.nickName,
+      comment: comment,
+      writerProfile:
+        user.userData.data.memberInfo.profileImg === undefined
           ? "null"
-          : user.userData.data.memberInfo.userImage,
+          : user.userData.data.memberInfo.profileImg,
       regiDate: getDate(),
-      commentLike: false,
-      writerTag: tagName,
+      like: false,
+      tagWriterNick: tagName,
+      tagWriterId: subWriterId,
     });
     setCommentNum(-10);
     setsubCommentNum(-10);
@@ -125,21 +136,27 @@ const CommentList: React.FC<firstCommentState & CommentPropsType> = (props) => {
       <div className={styled.firstComment}>
         <div className={styled.firstComment_Info}>
           <img
-            src={props.writerImage !== "null" ? props.writerImage : defaultimg}
+            src={
+              props.writerProfile !== ("null" || null)
+                ? props.writerProfile
+                : defaultimg
+            }
           />
-          <div>{props.writerNickName}</div>
+          <div>{props.writerNick}</div>
         </div>
         <div className={styled.commentText}>
-          <p>{props.commentText}</p>
+          <p>{props.comment}</p>
           <div>
-            <span>{props.regiDate}</span>
+            <span>{props.regiDate.split("T")[0]}</span>
             <span
-              className={props.commentLike ? styled.like : ""}
-              onClick={firstCommentLikeHandler(props.firstComment_Id)}
+              className={props.like ? styled.like : ""}
+              onClick={firstCommentLikeHandler(props.commentId)}
             >
               ♥ 좋아요
             </span>
-            <span onClick={CommentInputHandler(props.firstComment_Id)}>
+            <span
+              onClick={CommentInputHandler(props.commentId, props.writerId)}
+            >
               답글달기
             </span>
           </div>
@@ -147,43 +164,46 @@ const CommentList: React.FC<firstCommentState & CommentPropsType> = (props) => {
         {props.curCommentnumber === CommentNum && (
           <CommentInput
             isMainInput={false}
-            subCommentuser={props.writerNickName}
+            reviewId={props.reviewId}
+            subCommentuser={props.writerNick}
             AddSecondComment={AddSecondComment}
           />
         )}
       </div>
-      {props.secondComment.length > 0 && (
+
+      {props.child?.length > 0 && (
         <>
           <div className={styled.SecondCommentWrapper}>
-            {props.secondComment.map((c) => (
+            {props.child.map((c) => (
               <div className={styled.SecondComment}>
                 <div className={styled.SecondComment_Info}>
                   <img
                     src={
-                      c.writerImage !== ("null" || undefined)
-                        ? props.writerImage
+                      c.writerProfile !== ("null" || null)
+                        ? c.writerProfile
                         : defaultimg
                     }
                   />
-                  <div>{c.writerNickName}</div>
+                  <div>{c.writerNick}</div>
                 </div>
                 <div className={styled.SecondComment_commentText}>
                   <div className={styled.SecondComment_contents}>
-                    <p>@{c.writerTag}</p>
-                    <p>{c.commentText}</p>
+                    <p>@{c.tagWriterNick}</p>
+                    <p>{c.comment}</p>
                   </div>
                   <div>
-                    <span>{c.regiDate}</span>
+                    <span>{c.regiDate.split("T")[0]}</span>
                     <span
-                      className={c.commentLike ? styled.like : ""}
-                      onClick={SecondCommentLikeHandler(c.secondComment_Id)}
+                      className={c.like ? styled.like : ""}
+                      onClick={SecondCommentLikeHandler(c.commentId)}
                     >
                       ♥ 좋아요
                     </span>
                     <span
                       onClick={SubCommentInputHandler(
-                        c.writerNickName,
-                        c.secondComment_Id
+                        c.writerNick,
+                        c.commentId,
+                        c.writerId
                       )}
                     >
                       답글달기
@@ -197,6 +217,7 @@ const CommentList: React.FC<firstCommentState & CommentPropsType> = (props) => {
             <CommentInput
               isMainInput={false}
               subCommentuser={subNickName}
+              reviewId={props.reviewId}
               AddSecondComment={AddSecondComment}
             />
           )}

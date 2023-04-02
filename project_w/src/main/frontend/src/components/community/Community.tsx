@@ -1,6 +1,13 @@
 import styled from "./Community.module.css";
 import { useSelector, useDispatch } from "react-redux";
-import { Dispatch, useEffect, useReducer, useRef, useState } from "react";
+import {
+  Dispatch,
+  useCallback,
+  useEffect,
+  useReducer,
+  useRef,
+  useState,
+} from "react";
 import CommunityCard from "./CommunityCard";
 import Button from "../ui/Button";
 import ReviewFilter from "./ReviewFilter";
@@ -15,6 +22,7 @@ import {
 //import data from "../dummydata/review_list.json";
 import Loading from "../ui/Loading";
 import { useRouter } from "next/router";
+import axios from "axios";
 export interface GetReviewAction {
   data: reviewState;
   curpage: number;
@@ -23,7 +31,7 @@ const Community: React.FC<{ list: reviewState[] }> = () => {
   const { review, user } = useSelector((state: RootState) => state);
   const dispatch = useDispatch();
   const target = useRef<HTMLDivElement>(null);
-  const curpage = useRef(-1);
+  const curpage = useRef(0);
   const modalref = useRef<HTMLDialogElement>(null);
   const [isStart, setisStart] = useState(true);
   const [targetrender, setTargetRender] = useState(true);
@@ -31,9 +39,7 @@ const Community: React.FC<{ list: reviewState[] }> = () => {
   const router = useRouter();
 
   const loadData = () => {
-    curpage.current++;
-    if (curpage.current > 0) {
-      console.log(curpage.current);
+    if (curpage.current >= 0) {
       setisStart(false);
       dispatch(NextGetReview(curpage.current));
       setTargetRender(false);
@@ -47,7 +53,12 @@ const Community: React.FC<{ list: reviewState[] }> = () => {
 
   const observerHandler = (entries: IntersectionObserverEntry[]) => {
     const endtarget = entries[0];
-    if (!review.isloadding && endtarget.isIntersecting) {
+    if (
+      !review.isloadding &&
+      curpage.current <= review.TotalpageNum &&
+      endtarget.isIntersecting
+    ) {
+      curpage.current++;
       loadData();
     }
   };
@@ -59,8 +70,10 @@ const Community: React.FC<{ list: reviewState[] }> = () => {
 
     if (!review.isloadding) {
       timer = window.setTimeout(() => {
-        setTargetRender(true);
-      }, 500);
+        if (curpage.current < review.TotalpageNum - 1) {
+          setTargetRender(true);
+        }
+      }, 450);
     }
     if (input) {
       observer.observe(input);
@@ -73,7 +86,10 @@ const Community: React.FC<{ list: reviewState[] }> = () => {
 
   const OnClickWritePost = () => {
     if (user.isLoggedIn === true) {
-      router.push("/community/post");
+      router.push({
+        pathname: "/community/post",
+        query: { edit: false, reviewId: -1 },
+      });
     } else {
       modalref.current?.showModal();
       setShowModal(true);
@@ -107,7 +123,7 @@ const Community: React.FC<{ list: reviewState[] }> = () => {
           ))}
         </div>
         {review.isloadding && !isStart ? <Loading height={300} /> : null}
-        {!review.isfinish && targetrender ? (
+        {targetrender ? (
           <div ref={target} className={styled.Community_SrollChecker}></div>
         ) : (
           <span style={{ display: "inline-block", height: "250px" }}></span>

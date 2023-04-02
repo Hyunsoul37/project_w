@@ -2,12 +2,14 @@ import CommentList from "./CommentList";
 import CommentInput from "./CommentInput";
 import styled from "./CommunityComment.module.css";
 import comment from "../dummydata/review_Comment.json";
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import {
   commentState,
   firstCommentState,
   secondCommentState,
 } from "./ReviewTypes";
+import axios from "axios";
+import { getCookie, setCookie } from "../../util/cookiesController";
 export const defaultimg = `/images/default_profile.png`;
 
 const CommunityComment: React.FC<{ reviewId: number }> = ({ reviewId }) => {
@@ -16,9 +18,21 @@ const CommunityComment: React.FC<{ reviewId: number }> = ({ reviewId }) => {
   const [activeSubCommentNum, setactiveSubCommentNum] = useState(-1);
 
   useEffect(() => {
-    const filterlist = comment.filter((data) => data.reviewId === reviewId);
-    setCommentData({ ...filterlist[0] });
+    getCommentList();
   }, []);
+
+  const getCommentList = useCallback(async () => {
+    let commentList: firstCommentState[] = [];
+    await axios
+      .get(`/api/comment?reviewId=${reviewId}`)
+      .then((res) => {
+        let tmp: firstCommentState[] = res.data.data;
+        commentList = tmp.map((c) => (c.child ? c : { ...c, child: [] }));
+      })
+      .catch((err) => console.log(err));
+
+    setCommentData({ parent: commentList });
+  }, [reviewId]);
 
   const ChangeComment = (index: number) => {
     setActiveCommentNum(index);
@@ -27,64 +41,122 @@ const CommunityComment: React.FC<{ reviewId: number }> = ({ reviewId }) => {
     setactiveSubCommentNum(index);
   };
 
-  const AddFirstComment = (data: firstCommentState) => {
-    const commentlist = { ...commmentData };
-    commentlist!.firstComment!.push(data);
-    setCommentData(commentlist as commentState);
+  const getToken = async () => {
+    const token = getCookie("token");
+    let authToken: string = "";
+    if (token) {
+      authToken = token;
+    } else {
+      const refreshToken = localStorage.getItem("refresh");
+      const id = localStorage.getItem("id");
+      const today = new Date();
+      today.setMinutes(today.getMinutes() + 1);
+      await axios
+        .post("/api/auth/refresh", {
+          pid: id,
+          refreshToken: refreshToken,
+        })
+        .then((res) => {
+          setCookie("token", res.data.data.reissueToken, {
+            expires: today,
+          });
+          authToken = res.data.data.reissueToken;
+        })
+        .catch((err) => console.log(err));
+    }
+    return authToken;
   };
 
-  const AddSecondComment = (index: number, data: secondCommentState) => {
-    const commentlist = { ...commmentData };
-    commentlist?.firstComment?.map((comment) => {
-      comment.firstComment_Id === index
-        ? {
-            ...comment,
-            secondComment: comment.secondComment.push(data),
-          }
-        : comment;
-    });
-    setCommentData(commentlist as commentState);
+  const AddFirstComment = async (data: firstCommentState) => {
+    let token = await getToken().then((res) => res);
+
+    await axios
+      .post(
+        "/api/comment",
+        { reviewId: data.reviewId, comment: data.comment },
+        { headers: { Authorization: `bearer ${token}` } }
+      )
+      .then(() => {
+        const commentlist = { ...commmentData };
+        commentlist!.parent!.push(data);
+        setCommentData(commentlist as commentState);
+      })
+      .catch((err) => console.log(err));
+  };
+
+  const AddSecondComment = async (index: number, data: secondCommentState) => {
+    let token = await getToken().then((res) => res);
+    await axios
+      .post(
+        "/api/comment",
+        {
+          reviewId: data.reviewId,
+          comment: data.comment,
+          parentId: data.parentId,
+          tagWriterId: data.tagWriterId,
+        },
+        {
+          headers: { Authorization: `bearer ${token}` },
+        }
+      )
+      .then(() => {
+        const commentlist = { ...commmentData };
+        commentlist?.parent?.map((comment) => {
+          comment.commentId === index
+            ? {
+                ...comment,
+                child: comment.child.push(data),
+              }
+            : comment;
+        });
+        setCommentData(commentlist as commentState);
+      })
+      .catch((err) => console.log(err));
   };
 
   const firstCommentLikeHandler = (id: number) => {
-    const editdata = commmentData?.firstComment.map((data) =>
-      data.firstComment_Id === id
-        ? { ...data, commentLike: data.commentLike ? false : true }
+    const editdata = commmentData?.parent.map((data) =>
+      data.commentId === id
+        ? { ...data, commentLike: data.like ? false : true }
         : data
     );
     if (editdata) {
-      setCommentData({ reviewId, firstComment: editdata });
+      setCommentData({ parent: editdata });
     }
   };
 
   const SecondCommentLikeHandler = (secondCommentid: number) => {
-    let tmp: firstCommentState = { ...commmentData?.firstComment[0]! };
-    commmentData?.firstComment.map((data) =>
-      data.secondComment.map((secdata) => {
-        if (secdata.secondComment_Id === secondCommentid) {
-          secdata.commentLike = !secdata.commentLike;
+    let tmp: firstCommentState = { ...commmentData?.parent[0]! };
+    commmentData?.parent.map((data) =>
+      data.child.map((secdata) => {
+        if (secdata.commentId === secondCommentid) {
+          secdata.like = !secdata.like;
           tmp = {
             ...data,
-            secondComment: [...data.secondComment],
+            child: [...data.child],
           };
         }
       })
     );
-    const editdata = commmentData?.firstComment.map((data) =>
-      data.firstComment_Id === tmp.firstComment_Id ? { ...tmp } : data
+    const editdata = commmentData?.parent.map((data) =>
+      data.commentId === tmp.commentId ? { ...tmp } : data
     );
     if (editdata) {
-      setCommentData({ reviewId, firstComment: editdata });
+      setCommentData({ parent: editdata });
     }
   };
 
   return (
     <div className={styled.CommunityComment}>
       <div className={styled.InputWrapper}>
-        <CommentInput isMainInput={true} AddfirstComment={AddFirstComment} />
+        <CommentInput
+          isMainInput={true}
+          reviewId={commmentData?.parent[0]?.reviewId ?? reviewId}
+          AddfirstComment={AddFirstComment}
+        />
       </div>
       <div className={styled.CommentList}>
-        {commmentData?.firstComment?.map((data, index) => (
+        {commmentData?.parent?.map((data, index) => (
           <CommentList
             key={`review_${index}`}
             curCommentnumber={activeCommentNum}

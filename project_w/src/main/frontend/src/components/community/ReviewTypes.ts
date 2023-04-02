@@ -9,32 +9,35 @@ export interface reviewState {
   desc: string;
   reviewImgs: string[];
   wineName: string;
-  winePrice: string;
+  winePrice: number;
   hashTag: string[];
   wineType: string;
   starPoint: number;
 }
 export interface firstCommentState {
-  firstComment_Id: number;
+  commentId: number;
+  reviewId: number;
+  comment: string;
   writerId: number;
-  writerNickName: string;
-  commentText: string;
-  writerImage: string;
   regiDate: string;
-  commentLike: boolean;
-  secondComment: secondCommentState[];
+  writerNick: string;
+  writerProfile: string;
+  like: boolean;
+  child: secondCommentState[];
 }
 export interface secondCommentState {
-  secondComment_Id: number;
+  commentId: number;
+  reviewId: number;
+  comment: string;
   writerId: number;
-  writerNickName: string;
-  commentText: string;
-  writerImage: string;
+  parentId: number;
+  writerNick: string;
+  writerProfile: string;
   regiDate: string;
-  writerTag?: string;
-  commentLike: boolean;
+  tagWriterNick?: string;
+  tagWriterId: number;
+  like: boolean;
 }
 export interface commentState {
-  reviewId: number;
-  firstComment: firstCommentState[];
+  parent: firstCommentState[];
 }
