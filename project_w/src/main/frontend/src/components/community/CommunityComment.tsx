@@ -1,7 +1,6 @@
 import CommentList from "./CommentList";
 import CommentInput from "./CommentInput";
 import styled from "./CommunityComment.module.css";
-import comment from "../dummydata/review_Comment.json";
 import { useCallback, useEffect, useRef, useState } from "react";
 import {
   commentState,

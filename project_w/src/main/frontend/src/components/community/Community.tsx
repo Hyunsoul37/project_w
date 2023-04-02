@@ -1,35 +1,24 @@
 import styled from "./Community.module.css";
 import { useSelector, useDispatch } from "react-redux";
-import {
-  Dispatch,
-  useCallback,
-  useEffect,
-  useReducer,
-  useRef,
-  useState,
-} from "react";
+import { useEffect, useRef, useState } from "react";
+
 import CommunityCard from "./CommunityCard";
 import Button from "../ui/Button";
 import ReviewFilter from "./ReviewFilter";
-import { RootState } from "../../store";
+import { AppDispatch, RootState } from "../../store";
 import { reviewState } from "./ReviewTypes";
-import {
-  GetReview,
-  NextGetReview,
-  PushReview,
-  TestGetReview,
-} from "../../slice/reviewSlice";
-//import data from "../dummydata/review_list.json";
+import { NextGetReview } from "../../slice/reviewSlice";
+
 import Loading from "../ui/Loading";
 import { useRouter } from "next/router";
-import axios from "axios";
+
 export interface GetReviewAction {
   data: reviewState;
   curpage: number;
 }
 const Community: React.FC<{ list: reviewState[] }> = () => {
   const { review, user } = useSelector((state: RootState) => state);
-  const dispatch = useDispatch();
+  const dispatch: AppDispatch = useDispatch();
   const target = useRef<HTMLDivElement>(null);
   const curpage = useRef(0);
   const modalref = useRef<HTMLDialogElement>(null);
@@ -41,6 +30,7 @@ const Community: React.FC<{ list: reviewState[] }> = () => {
   const loadData = () => {
     if (curpage.current >= 0) {
       setisStart(false);
+
       dispatch(NextGetReview(curpage.current));
       setTargetRender(false);
     }

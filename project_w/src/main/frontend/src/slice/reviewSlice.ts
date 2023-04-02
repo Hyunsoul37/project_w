@@ -1,17 +1,23 @@
 import { reviewState } from "./../components/community/ReviewTypes";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
+import { RootState } from "../store";
 
 interface reviewSliceState {
   isloadding: boolean;
   isSuccess: boolean;
-  isError: string;
+  isError: string | null;
   post: reviewState[];
   TotalpageNum: number;
 }
-const initialState: reviewSliceState = {
+interface ReviewState extends reviewSliceState {
+  status: "loading" | "succeeded" | "failed";
+}
+
+const initialState: ReviewState = {
   isloadding: false,
   isSuccess: false,
+  status: "loading",
   isError: "",
   post: [],
   TotalpageNum: 0,
@@ -69,6 +75,7 @@ export const reviewSlice = createSlice({
         state.TotalpageNum = action.payload.pagenum;
       })
       .addCase(GetReview.rejected, (state, action) => {
+        state.status = "loading";
         state.isloadding = false;
         state.isSuccess = false;
         state.isError = action.error.message ? action.error.message : "";
@@ -77,14 +84,18 @@ export const reviewSlice = createSlice({
         state.isloadding = true;
       })
       .addCase(NextGetReview.fulfilled, (state, action) => {
+        state.status = "succeeded";
         state.isloadding = false;
         const arr = action.payload;
         arr.map((data) => state.post.push(data));
       })
       .addCase(NextGetReview.rejected, (state, action) => {
+        state.status = "failed";
         state.isloadding = false;
         state.isError = action.error.message ? action.error.message : "";
       });
   },
 });
 export const { TestGetReview, PushReview } = reviewSlice.actions;
+export const selectReviews = (state: RootState) => state.review.post;
+export const selectStatus = (state: RootState) => state.review.status;
