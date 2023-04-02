@@ -94,6 +94,16 @@
   margin-bottom: 0px;
   color: #aaaaaa;
 }
+.ReviewEditBtn {
+  padding: 5px 8px;
+  border: 2px solid var(--primary);
+  border-radius: 8px;
+  cursor: pointer;
+}
+.ReviewEditBtn p {
+  font-size: 13px;
+  font-weight: 800;
+}
 
 .ReviewLikeBtn {
   padding: 5px 8px;

@@ -8,12 +8,19 @@ import styled from "./ReviewDetail.module.css";
 import { reviewState } from "./ReviewTypes";
 import { AiFillCaretLeft, AiFillCaretRight } from "react-icons/ai";
 import CommunityComment from "./CommunityComment";
+import { useSelector } from "react-redux";
+import { RootState } from "../../store";
+import { useRouter } from "next/router";
 
 const ReviewDetail: React.FC<reviewState> = (props) => {
   const [heart, setHeart] = useState(false);
   const [curCard, setCurCard] = useState(0);
   const [changeFinish, setChangeFinish] = useState(true);
   const [image, setImage] = useState<string[]>([]);
+  const router = useRouter();
+
+  const user = useSelector((state: RootState) => state.user);
+
   const NextArrow = (props: CustomArrowProps & { cssclassName: string }) => {
     const { className, style, currentSlide, onClick, slideCount } = props;
     const ClickHandler = () => {
@@ -159,8 +166,20 @@ const ReviewDetail: React.FC<reviewState> = (props) => {
             <span>{props.writerNickName}</span>
             <span>{props.regiDate.split("T")[0]}</span>
           </div>
-          {/* 여기에 내가 쓴 글이면 수정하기, 아니면 좋아요 버튼나오게 수정 */}
-          {
+          {user.isLoggedIn &&
+          props.writerId === user.userData.data.memberInfo.pid ? (
+            <div
+              className={styled.ReviewEditBtn}
+              onClick={() =>
+                router.push({
+                  pathname: "/community/post",
+                  query: { reviewId: props.reviewId, edit: true },
+                })
+              }
+            >
+              <p>수정하기</p>
+            </div>
+          ) : (
             <div
               className={[
                 styled.ReviewLikeBtn,
@@ -171,7 +190,7 @@ const ReviewDetail: React.FC<reviewState> = (props) => {
               <FaHeart />
               <p>좋아요</p>
             </div>
-          }
+          )}
         </div>
         <div className={styled.ReviewSliderWrapper}>
           <Slider
