@@ -21,7 +21,7 @@ const initialState = {
       memberInfo: {
         pid: 0,
         nickName: "",
-        userImage: "",
+        profileImg: "",
         address: "",
         email: "",
         phone: 0,

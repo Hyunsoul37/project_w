@@ -30,9 +30,10 @@ const initialState = {
 
 export const GetList = createAsyncThunk("wine/GetList", async (data) => {
   const id = localStorage.getItem("id");
+
   try {
     const response = await fetch(
-      `/api/product/wine/${id ? id : 0}/search${data.queryurl}`,
+      `/api/product/wine/${id === "null" ? 0 : id}/search${data.queryurl}`,
       {
         method: "GET",
         body: null,
