@@ -1,7 +1,17 @@
 .Banner {
-  width: 100%;
+  width: 100vw;
   height: 915px;
 }
 .Banner img {
   height: 915px;
+}
+
+@media screen and (max-device-width: 586px) {
+  .Banner {
+    width: 100vw;
+    height: 50vh;
+  }
+  .Banner img {
+    height: 50vh;
+  }
 }

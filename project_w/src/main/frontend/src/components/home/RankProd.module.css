@@ -187,3 +187,36 @@
   width: 120px !important;
   word-break: keep-all;
 }
+
+@media screen and (max-device-width: 586px) {
+  .rank_wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100vw;
+    height: max-content;
+  }
+  .rankcard {
+    width: 320px;
+    height: 320px;
+  }
+  .rank_wrap a {
+    width: 320px;
+    height: 100%;
+    border: 2px solid #fff;
+    background-color: #efefef;
+  }
+  .rank_wrap .rankcard figure {
+    position: absolute;
+    right: 0px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 200px;
+  }
+
+  .rank_wrap .rankcard figure img {
+    width: 200px;
+    height: 200px;
+  }
+}

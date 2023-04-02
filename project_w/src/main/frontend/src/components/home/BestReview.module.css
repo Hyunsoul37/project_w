@@ -8,6 +8,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  overflow-x: scroll;
 }
 
 .card {
@@ -15,7 +16,7 @@
   height: 494px;
   margin-right: 60px;
 }
-.card div{
+.card div {
   padding: 0px 17px;
 }
 .reviewimg {
@@ -32,62 +33,62 @@
   border-top-left-radius: 10px;
   margin-bottom: 17px;
 }
-.card h1{
+.card h1 {
   font-size: 18px;
   margin-bottom: 14px;
   padding: 0px 17px;
 }
-.card div[id="text"]{
+.card div[id="text"] {
   font-size: 10px;
   margin-bottom: 4px;
-  color: #CCCC;
+  color: #cccc;
 }
-.card div[id="contents"]{
+.card div[id="contents"] {
   font-size: 12px;
   height: 15px;
   overflow: hidden;
   text-overflow: ellipsis;
-  white-space:nowrap;
+  white-space: nowrap;
   margin-bottom: 9px;
 }
-.card div[id="star"]{
+.card div[id="star"] {
   font-size: 12px;
   margin-top: 5px;
   color: var(--primary-txt);
 }
 
-.modalText{
+.modalText {
   padding: 9px 17px;
 }
-.modalText h1{
+.modalText h1 {
   font-size: 18px;
   margin-bottom: 8px;
 }
-.modalText div{
+.modalText div {
   font-size: 15px;
   margin-bottom: 8px;
 }
-.modalText div[id="modal_star"]{
+.modalText div[id="modal_star"] {
   color: var(--primary-txt);
   margin-bottom: 8px;
   display: block;
   margin-right: 20px;
 }
-.modalText div[id="winename"]{
-  color: #CCCC;
+.modalText div[id="winename"] {
+  color: #cccc;
   font-size: 12px;
-  font-family: 'campton';
+  font-family: "campton";
   margin-right: 10px;
 }
-.modalText div[id="modal_name"]{
-  color: #CCCC;
+.modalText div[id="modal_name"] {
+  color: #cccc;
   font-size: 12px;
   margin-right: 10px;
   margin-top: 10px;
   margin-bottom: 5px;
 }
-.modalText div[id="modal_date"]{
-  color: #CCCC;
+.modalText div[id="modal_date"] {
+  color: #cccc;
   font-size: 12px;
   margin-right: 10px;
 }

@@ -10,6 +10,7 @@ import {
 } from "../../slice/userSlice";
 import styled from "./Header.module.css";
 import { RiUser5Line } from "react-icons/ri";
+import { AiOutlineMenu } from "react-icons/ai";
 import { getCookie } from "../../util/cookiesController";
 
 const Header = () => {
@@ -19,6 +20,7 @@ const Header = () => {
   const userData = user.userData ? user.userData.data : null;
   const [headerBG, setHeaderBg] = useState(false);
   const { sendRequestData: getAccessToken } = useFetch();
+  const [showmoblieMenu, setShowMobileMenu] = useState(false);
 
   const LoginBtnHandler = () => {
     router.push({ pathname: "/login" });
@@ -26,10 +28,6 @@ const Header = () => {
   };
   const LogOutHandler = () => {
     dispatch(logout());
-  };
-
-  const DataClearHandler = () => {
-    dispatch(DataClear());
   };
 
   const HeaderFadeHandler = () => {
@@ -51,7 +49,7 @@ const Header = () => {
       const refreshToken = localStorage.getItem("refresh");
       const id = localStorage.getItem("id");
       getAccessToken({
-        url: "api/auth/refresh",
+        url: "/api/auth/refresh",
         type: "POST",
         data: {
           pid: id,
@@ -69,13 +67,57 @@ const Header = () => {
   }, []);
 
   return (
-    <header
-      className={[styled.headerWrapper, headerBG ? styled.activebg : ""].join(
-        " "
-      )}
-    >
-      <div className="maxframe">
-        <nav className={styled.Header}>
+    <>
+      <header
+        className={[styled.headerWrapper, headerBG ? styled.activebg : ""].join(
+          " "
+        )}
+      >
+        <div className="maxframe">
+          <nav className={styled.Header}>
+            <span className={styled.logo} onClick={() => router.push("/")}>
+              WAGU
+            </span>
+            <div className={styled.btnWrapper}>
+              <span
+                onClick={() =>
+                  router.push({ pathname: "/product", query: { page: 1 } })
+                }
+              >
+                PRODUCT
+              </span>
+              <span onClick={() => router.push({ pathname: "/community" })}>
+                COMMUNITY
+              </span>
+            </div>
+            <div className={styled.btnWrapper}>
+              {user.isLoggedIn && user.userData.data.memberInfo ? (
+                <>
+                  <RiUser5Line
+                    onClick={() => router.push({ pathname: "/mypage" })}
+                  />
+                  <span onClick={LogOutHandler}>LOGOUT</span>
+                </>
+              ) : (
+                <>
+                  <span onClick={() => router.push("/login/join")}>
+                    SIGN IN
+                  </span>
+                  <span onClick={LoginBtnHandler}>LOGIN</span>
+                </>
+              )}
+            </div>
+          </nav>
+        </div>
+      </header>
+      <header
+        className={[
+          styled.mobile_headerWrapper,
+          headerBG ? styled.mobile_activebg : "",
+        ].join(" ")}
+      >
+        <AiOutlineMenu />
+        <nav>
           <span className={styled.logo} onClick={() => router.push("/")}>
             WAGU
           </span>
@@ -90,8 +132,6 @@ const Header = () => {
             <span onClick={() => router.push({ pathname: "/community" })}>
               COMMUNITY
             </span>
-            {/* <span onClick={() => router.push("/QnA")}>QnA</span>
-            <span onClick={() => router.push("/notice")}>NOTICE</span> */}
           </div>
           <div className={styled.btnWrapper}>
             {user.isLoggedIn && user.userData.data.memberInfo ? (
@@ -107,11 +147,10 @@ const Header = () => {
                 <span onClick={LoginBtnHandler}>LOGIN</span>
               </>
             )}
-            {/* <button onClick={DataClearHandler}>Data Clear</button> */}
           </div>
         </nav>
-      </div>
-    </header>
+      </header>
+    </>
   );
 };
 export default Header;
