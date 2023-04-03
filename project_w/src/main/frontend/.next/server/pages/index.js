@@ -191,10 +191,10 @@ const Banner = ()=>{
         children: /*#__PURE__*/ jsx_runtime_.jsx((external_react_slick_default()), {
             ...Settings,
             className: (Banner_module_default()).Banner,
-            children: bannerimg.map((bannerimg, idx)=>/*#__PURE__*/ jsx_runtime_.jsx("img", {
-                    // loader={imageLoader}
-                    // width={100}
-                    // height={100}
+            children: bannerimg.map((bannerimg, idx)=>/*#__PURE__*/ jsx_runtime_.jsx((image_default()), {
+                    loader: imageLoader,
+                    width: 100,
+                    height: 100,
                     alt: "bannerimg",
                     src: bannerimg
                 }, `banner_${idx}`))

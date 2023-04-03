@@ -25,11 +25,11 @@ const Banner = () => {
     <div>
       <Slider {...Settings} className={styled.Banner}>
         {bannerimg.map((bannerimg, idx) => (
-          <img
+          <Image
             key={`banner_${idx}`}
-            // loader={imageLoader}
-            // width={100}
-            // height={100}
+            loader={imageLoader}
+            width={100}
+            height={100}
             alt="bannerimg"
             src={bannerimg}
             //priority
