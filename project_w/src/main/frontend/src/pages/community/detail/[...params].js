@@ -23,7 +23,9 @@ export async function getServerSideProps({ query }) {
   const { id } = query;
   let data;
   await axios
-    .get(`http://winetoy.shop/api/community/review/detail?reviewId=${id}`)
+    .get(
+      `http://ec2-3-35-233-57.ap-northeast-2.compute.amazonaws.com:8080/api/community/review/detail?reviewId=${id}`
+    )
     .then((res) => (data = { ...res.data.data }))
     .catch((err) => console.log(err));
 
