@@ -12,7 +12,6 @@
 
 ## ✨프로젝트 소개
 
----
 
 <br/>
 
@@ -24,7 +23,6 @@
 
 ## 기술스택
 
----
 
 - 백엔드　:　<img src="https://img.shields.io/badge/JAVA-007396?style=for-the-badge&logo=java&logoColor=white">
   <img src="https://img.shields.io/badge/SpringBoot-6DB33F?style=for-the-badge&logo=Spring&logoColor=white">
@@ -34,11 +32,11 @@
   <img src="https://img.shields.io/badge/NextJs-000000?style=for-the-badge&logo=Next.js&logoColor=white">
   <img src="https://img.shields.io/badge/react-61DAFB?style=for-the-badge&logo=react&logoColor=white">
   <img src="https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge&logo=TypeScript&logoColor=white">
-  <img src="https://img.shields.io/badge/html-E34F26?style=for-the-badge&logo=html5&logoColor=white">　
+  <img src="https://img.shields.io/badge/html-E34F26?style=for-the-badge&logo=html5&logoColor=white">
   <img src="https://img.shields.io/badge/css-1572B6?style=for-the-badge&logo=css3&logoColor=white">
 
 - DB 　:　<img src="https://img.shields.io/badge/mariaDB-003545?style=for-the-badge&logo=mariaDB&logoColor=white">
 
 - 배포　:　<img src="https://img.shields.io/badge/Amazon EC2-FF9900?style=for-the-badge&logo=Amazon EC2&logoColor=white">
-  <img src="https://img.shields.io/badge/Amazon s3-569A31?style=for-the-badge&logo=Amazon s3&logoColor=white">
-  <img src="https://img.shields.io/badge/Amazon s3-569A31?style=for-the-badge&logo=Amazon s3&logoColor=white">
+<img src="https://img.shields.io/badge/Amazon s3-569A31?style=for-the-badge&logo=Amazon s3&logoColor=white">
+<img src="https://img.shields.io/badge/Amazon s3-569A31?style=for-the-badge&logo=Amazon s3&logoColor=white">
