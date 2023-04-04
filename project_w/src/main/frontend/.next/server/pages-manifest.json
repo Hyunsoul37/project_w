@@ -9,8 +9,8 @@
   "/manager/winelist": "pages/manager/winelist.html",
   "/mypage": "pages/mypage.html",
   "/community/detail/[...params]": "pages/community/detail/[...params].js",
+  "/": "pages/index.js",
   "/product/detail/[...params]": "pages/product/detail/[...params].js",
   "/community/post": "pages/community/post.js",
-  "/": "pages/index.js",
   "/product": "pages/product.js"
 }

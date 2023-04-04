@@ -93,78 +93,25 @@ module.exports = {
 
 /***/ }),
 
-/***/ 72:
+/***/ 728:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "_3": () => (/* binding */ getDate),
-/* harmony export */   "qJ": () => (/* binding */ drawStar)
+/* harmony export */   "Z": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* unused harmony export GetReviewid */
-const drawStar = (score, fill, emtpy)=>{
-    let i = 0;
-    let star = [];
-    let num = Math.round(score);
-    for(i = 0; i < num; i++){
-        star.push(fill);
-    }
-    for(i = 0; i < 5 - num; i++){
-        star.push(emtpy);
-    }
-    return star;
-};
-const getDate = ()=>{
-    let year = new Date().getFullYear();
-    let month = new Date().getMonth() + 1;
-    let day = new Date().getDate();
-    if (month < 10) {
-        month = `0${month}`;
-    }
-    if (day < 10) {
-        day = `0${day}`;
-    }
-    return `${year}.${month}.${day}`;
-};
-const GetReviewid = ()=>{
-    let id = Math.random() * 1000000;
-    return id;
-};
-
-
-/***/ }),
-
-/***/ 6479:
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-// ESM COMPAT FLAG
-__webpack_require__.r(__webpack_exports__);
-
-// EXPORTS
-__webpack_require__.d(__webpack_exports__, {
-  "default": () => (/* binding */ pages),
-  "getServerSideProps": () => (/* binding */ getServerSideProps)
-});
-
-// EXTERNAL MODULE: external "react/jsx-runtime"
-var jsx_runtime_ = __webpack_require__(997);
-// EXTERNAL MODULE: ./src/util/Seo.js
-var Seo = __webpack_require__(8606);
-// EXTERNAL MODULE: ./src/components/home/Banner.module.css
-var Banner_module = __webpack_require__(117);
-var Banner_module_default = /*#__PURE__*/__webpack_require__.n(Banner_module);
-// EXTERNAL MODULE: external "react-slick"
-var external_react_slick_ = __webpack_require__(8096);
-var external_react_slick_default = /*#__PURE__*/__webpack_require__.n(external_react_slick_);
-// EXTERNAL MODULE: ./node_modules/slick-carousel/slick/slick.css
-var slick = __webpack_require__(8278);
-// EXTERNAL MODULE: ./node_modules/slick-carousel/slick/slick-theme.css
-var slick_theme = __webpack_require__(782);
-// EXTERNAL MODULE: ./node_modules/next/image.js
-var next_image = __webpack_require__(5675);
-var image_default = /*#__PURE__*/__webpack_require__.n(next_image);
-;// CONCATENATED MODULE: ./src/components/home/Banner.js
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(997);
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _Banner_module_css__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(117);
+/* harmony import */ var _Banner_module_css__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_Banner_module_css__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var react_slick__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(8096);
+/* harmony import */ var react_slick__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_slick__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var slick_carousel_slick_slick_css__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(8278);
+/* harmony import */ var slick_carousel_slick_slick_css__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(slick_carousel_slick_slick_css__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var slick_carousel_slick_slick_theme_css__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(782);
+/* harmony import */ var slick_carousel_slick_slick_theme_css__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(slick_carousel_slick_slick_theme_css__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var next_image__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(5675);
+/* harmony import */ var next_image__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(next_image__WEBPACK_IMPORTED_MODULE_4__);
 
 
 
@@ -187,11 +134,11 @@ const Settings = {
     arrows: false
 };
 const Banner = ()=>{
-    return /*#__PURE__*/ jsx_runtime_.jsx("div", {
-        children: /*#__PURE__*/ jsx_runtime_.jsx((external_react_slick_default()), {
+    return /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
+        children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx((react_slick__WEBPACK_IMPORTED_MODULE_1___default()), {
             ...Settings,
-            className: (Banner_module_default()).Banner,
-            children: bannerimg.map((bannerimg, idx)=>/*#__PURE__*/ jsx_runtime_.jsx((image_default()), {
+            className: (_Banner_module_css__WEBPACK_IMPORTED_MODULE_5___default().Banner),
+            children: bannerimg.map((bannerimg, idx)=>/*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx((next_image__WEBPACK_IMPORTED_MODULE_4___default()), {
                     loader: imageLoader,
                     width: 100,
                     height: 100,
@@ -201,8 +148,23 @@ const Banner = ()=>{
         })
     });
 };
-/* harmony default export */ const home_Banner = (Banner);
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Banner);
 
+
+/***/ }),
+
+/***/ 4946:
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+
+// EXPORTS
+__webpack_require__.d(__webpack_exports__, {
+  "Z": () => (/* binding */ home_BestReview)
+});
+
+// EXTERNAL MODULE: external "react/jsx-runtime"
+var jsx_runtime_ = __webpack_require__(997);
 // EXTERNAL MODULE: ./src/components/home/BestReview.module.css
 var BestReview_module = __webpack_require__(7252);
 var BestReview_module_default = /*#__PURE__*/__webpack_require__.n(BestReview_module);
@@ -268,53 +230,17 @@ const Card = (props)=>{
 var ai_ = __webpack_require__(9847);
 // EXTERNAL MODULE: external "react"
 var external_react_ = __webpack_require__(6689);
-;// CONCATENATED MODULE: ./src/components/home/BestReview.js
+;// CONCATENATED MODULE: ./src/components/home/BestReview.tsx
 
 
 
 
 
 
-const img = [
-    "/images/review_0.jpg",
-    "/images/review_1.jpg",
-    "/images/review_2.jpg"
-];
-const dummyreview = [
-    {
-        reviewImage: img[0],
-        title: "와인이 정말 맛있어요~~!!",
-        contents: `여기서 리뷰 보고 달달하다고 해서 주문해봤는데 역시 리뷰대로 너무 맛잇네요!!
-       추천합니당`,
-        winename: "GANCIA",
-        name: "임선민",
-        date: "2020.01.02",
-        star: 3.2
-    },
-    {
-        reviewImage: img[1],
-        title: "최고의 와인 추천합니다",
-        contents: `여기서 리뷰 보고 달달하다고 해서 주문해봤는데 역시 리뷰대로 너무 맛잇네요!!
-       추천합니당`,
-        winename: "GANCIA",
-        name: "임선민",
-        date: "2020.01.02",
-        star: 4.7
-    },
-    {
-        reviewImage: img[2],
-        title: "굳굳굳!!!",
-        contents: `여기서 리뷰 보고 달달하다고 해서 주문해봤는데 역시 리뷰대로 너무 맛잇네요!!
-       추천합니당`,
-        winename: "GANCIA",
-        name: "임선민",
-        date: "2020.01.02",
-        star: 2.4
-    }
-];
-const BestReview = ()=>{
+const BestReview = (props)=>{
     const [ShowModal, setShowModal] = (0,external_react_.useState)(false);
     const [curModalNum, setcurModalNum] = (0,external_react_.useState)(-1);
+    const [bestreviewArr, setbestreviewArr] = (0,external_react_.useState)(props.list);
     const OnModal = (idx)=>()=>{
             setShowModal(true);
             setcurModalNum(idx);
@@ -357,36 +283,36 @@ const BestReview = ()=>{
                     "maxframe",
                     (BestReview_module_default()).BestReview
                 ].join(" "),
-                children: dummyreview.map((data, idx)=>/*#__PURE__*/ (0,jsx_runtime_.jsxs)(ui_Card, {
+                children: bestreviewArr.map((data, idx)=>/*#__PURE__*/ (0,jsx_runtime_.jsxs)(ui_Card, {
                         id: idx,
                         onClick: OnModal(idx),
                         className: (BestReview_module_default()).card,
                         children: [
                             /*#__PURE__*/ jsx_runtime_.jsx("img", {
-                                id: idx,
+                                id: idx.toString(),
                                 className: (BestReview_module_default()).reviewimg,
-                                alt: `${data.winename}_review_img`,
-                                src: data.reviewImage
+                                alt: `${data.wineName}_review_img`,
+                                src: data.reviewImg1
                             }),
                             /*#__PURE__*/ jsx_runtime_.jsx("h1", {
-                                id: idx,
-                                children: data.title
+                                id: idx.toString(),
+                                children: data.reviewTitle
                             }),
                             /*#__PURE__*/ jsx_runtime_.jsx("div", {
                                 id: "contents",
-                                children: data.contents
+                                children: data.desc
                             }),
                             /*#__PURE__*/ jsx_runtime_.jsx("div", {
                                 id: "text",
-                                children: data.name
+                                children: data.writerNick
                             }),
                             /*#__PURE__*/ jsx_runtime_.jsx("div", {
                                 id: "text",
-                                children: data.date
+                                children: data.regiDate.split("T")[0]
                             }),
                             /*#__PURE__*/ jsx_runtime_.jsx("div", {
                                 id: "star",
-                                children: drawStar(data.star).map((star, idx)=>/*#__PURE__*/ jsx_runtime_.jsx("span", {
+                                children: drawStar(data.starPoint).map((star, idx)=>/*#__PURE__*/ jsx_runtime_.jsx("span", {
                                         children: star
                                     }, `star_${idx}`))
                             })
@@ -398,14 +324,14 @@ const BestReview = ()=>{
                 children: [
                     /*#__PURE__*/ jsx_runtime_.jsx("img", {
                         className: (BestReview_module_default()).reviewimg_Modal,
-                        alt: `${dummyreview[curModalNum].winename}_review_img`,
-                        src: dummyreview[curModalNum].reviewImage
+                        alt: `${bestreviewArr[curModalNum].wineName}_review_img`,
+                        src: bestreviewArr[curModalNum].reviewImg1
                     }),
                     /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
                         className: (BestReview_module_default()).modalText,
                         children: [
                             /*#__PURE__*/ jsx_runtime_.jsx("h1", {
-                                children: dummyreview[curModalNum].title
+                                children: bestreviewArr[curModalNum].reviewTitle
                             }),
                             /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
                                 style: {
@@ -415,26 +341,26 @@ const BestReview = ()=>{
                                 children: [
                                     /*#__PURE__*/ jsx_runtime_.jsx("div", {
                                         id: "winename",
-                                        children: dummyreview[curModalNum].winename
+                                        children: bestreviewArr[curModalNum].wineName
                                     }),
                                     /*#__PURE__*/ jsx_runtime_.jsx("div", {
                                         id: "modal_star",
-                                        children: drawStar(dummyreview[curModalNum].star).map((star, idx)=>/*#__PURE__*/ jsx_runtime_.jsx("span", {
+                                        children: drawStar(bestreviewArr[curModalNum].starPoint).map((star, idx)=>/*#__PURE__*/ jsx_runtime_.jsx("span", {
                                                 children: star
                                             }, `star_${idx}`))
                                     })
                                 ]
                             }),
                             /*#__PURE__*/ jsx_runtime_.jsx("div", {
-                                children: dummyreview[curModalNum].contents
+                                children: bestreviewArr[curModalNum].desc
                             }),
                             /*#__PURE__*/ jsx_runtime_.jsx("div", {
                                 id: "modal_name",
-                                children: dummyreview[curModalNum].name
+                                children: bestreviewArr[curModalNum].writerNick
                             }),
                             /*#__PURE__*/ jsx_runtime_.jsx("div", {
                                 id: "modal_date",
-                                children: dummyreview[curModalNum].date
+                                children: bestreviewArr[curModalNum].regiDate.split("T")[0]
                             })
                         ]
                     })
@@ -445,272 +371,23 @@ const BestReview = ()=>{
 };
 /* harmony default export */ const home_BestReview = (BestReview);
 
-// EXTERNAL MODULE: external "next/router"
-var router_ = __webpack_require__(1853);
-// EXTERNAL MODULE: ./src/components/home/Selector.module.css
-var Selector_module = __webpack_require__(3108);
-var Selector_module_default = /*#__PURE__*/__webpack_require__.n(Selector_module);
-// EXTERNAL MODULE: ./src/components/ui/Button.tsx
-var Button = __webpack_require__(1936);
-;// CONCATENATED MODULE: ./src/components/home/Selector.js
 
+/***/ }),
 
+/***/ 6195:
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 
+// EXPORTS
+__webpack_require__.d(__webpack_exports__, {
+  "Z": () => (/* binding */ home_RankProd)
+});
 
-const foods = [
-    {
-        key: 0,
-        value: "육류",
-        label: "육류"
-    },
-    {
-        key: 1,
-        value: "해산물",
-        label: "해산물"
-    },
-    {
-        key: 2,
-        value: "치즈",
-        label: "치즈"
-    }
-];
-const bodys = [
-    {
-        key: 0,
-        value: "산뜻",
-        label: "산뜻"
-    },
-    {
-        key: 1,
-        value: "묵직",
-        label: "묵직"
-    }
-];
-const sweets = [
-    {
-        key: 0,
-        value: "달콤",
-        label: "달콤"
-    },
-    {
-        key: 1,
-        value: "안달콤",
-        label: "안달콤"
-    }
-];
-const sours = [
-    {
-        key: 0,
-        value: "있는",
-        label: "있는"
-    },
-    {
-        key: 1,
-        value: "없는",
-        label: "없는"
-    }
-];
-const Selector = ()=>{
-    const [food, setFood] = (0,external_react_.useState)();
-    const onFood = (e)=>{
-        setFood(e.target.value);
-    };
-    const [body, setBody] = (0,external_react_.useState)();
-    const onBody = (e)=>{
-        setBody(e.target.value);
-    };
-    const [sweet, setSweet] = (0,external_react_.useState)();
-    const onSweet = (e)=>{
-        setSweet(e.target.value);
-    };
-    const [sour, setSour] = (0,external_react_.useState)();
-    const onSour = (e)=>{
-        setSour(e.target.value);
-    };
-    const router = (0,router_.useRouter)();
-    const btnSearch = ()=>{
-        // const list = [food, body, sweet, sour];
-        router.push({
-            pathname: "/product",
-            query: {
-                food,
-                body,
-                sweet,
-                sour
-            }
-        });
-    };
-    return /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
-        children: [
-            /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
-                className: (Selector_module_default()).selector_wrap,
-                children: [
-                    /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
-                        children: [
-                            /*#__PURE__*/ jsx_runtime_.jsx("span", {
-                                className: (Selector_module_default()).text,
-                                children: "나는"
-                            }),
-                            /*#__PURE__*/ (0,jsx_runtime_.jsxs)("select", {
-                                onChange: onFood,
-                                className: (Selector_module_default()).select,
-                                children: [
-                                    /*#__PURE__*/ jsx_runtime_.jsx("option", {
-                                        value: "default",
-                                        children: "안주선택"
-                                    }),
-                                    foods.map((food)=>{
-                                        return /*#__PURE__*/ jsx_runtime_.jsx("option", {
-                                            value: food.value,
-                                            children: food.label
-                                        }, food.key);
-                                    })
-                                ]
-                            }),
-                            /*#__PURE__*/ jsx_runtime_.jsx("span", {
-                                className: (Selector_module_default()).text,
-                                children: "에 어울리는"
-                            })
-                        ]
-                    }),
-                    /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
-                        children: [
-                            /*#__PURE__*/ (0,jsx_runtime_.jsxs)("select", {
-                                onChange: onBody,
-                                className: (Selector_module_default()).select,
-                                children: [
-                                    /*#__PURE__*/ jsx_runtime_.jsx("option", {
-                                        value: "default",
-                                        children: "선택"
-                                    }),
-                                    bodys.map((body)=>{
-                                        return /*#__PURE__*/ jsx_runtime_.jsx("option", {
-                                            value: body.value,
-                                            children: body.label
-                                        }, body.key);
-                                    })
-                                ]
-                            }),
-                            /*#__PURE__*/ jsx_runtime_.jsx("span", {
-                                className: (Selector_module_default()).text,
-                                children: "하고"
-                            }),
-                            /*#__PURE__*/ (0,jsx_runtime_.jsxs)("select", {
-                                onChange: onSweet,
-                                className: (Selector_module_default()).select,
-                                children: [
-                                    /*#__PURE__*/ jsx_runtime_.jsx("option", {
-                                        value: "default",
-                                        children: "선택"
-                                    }),
-                                    sweets.map((sweet)=>{
-                                        return /*#__PURE__*/ jsx_runtime_.jsx("option", {
-                                            value: sweet.value,
-                                            children: sweet.label
-                                        }, sweet.key);
-                                    })
-                                ]
-                            }),
-                            /*#__PURE__*/ jsx_runtime_.jsx("span", {
-                                className: (Selector_module_default()).text,
-                                children: "하고 산미"
-                            }),
-                            /*#__PURE__*/ (0,jsx_runtime_.jsxs)("select", {
-                                onChange: onSour,
-                                className: (Selector_module_default()).select,
-                                children: [
-                                    /*#__PURE__*/ jsx_runtime_.jsx("option", {
-                                        value: "default",
-                                        children: "선택"
-                                    }),
-                                    sours.map((sour)=>{
-                                        return /*#__PURE__*/ jsx_runtime_.jsx("option", {
-                                            value: sour.value,
-                                            children: sour.label
-                                        }, sour.key);
-                                    })
-                                ]
-                            })
-                        ]
-                    }),
-                    /*#__PURE__*/ jsx_runtime_.jsx("div", {
-                        children: /*#__PURE__*/ jsx_runtime_.jsx("span", {
-                            className: (Selector_module_default()).text,
-                            children: "와인이 필요해요"
-                        })
-                    })
-                ]
-            }),
-            /*#__PURE__*/ jsx_runtime_.jsx("div", {
-                className: (Selector_module_default()).btn_area,
-                children: /*#__PURE__*/ jsx_runtime_.jsx(Button/* default */.Z, {
-                    buttontext: "보러가기",
-                    buttonColor: "main",
-                    onClick: btnSearch
-                })
-            })
-        ]
-    });
-};
-/* harmony default export */ const home_Selector = (Selector);
-
-;// CONCATENATED MODULE: ./src/components/home/SelectorSlider.js
-
-
-
-const SelectorSlider = ()=>{
-    const settings = {
-        infinite: true,
-        slidesToShow: 1,
-        slidesToScroll: 1,
-        variableWidth: true,
-        pauseOnFocus: false,
-        pauseOnHover: false,
-        centerMode: true,
-        touchRatio: 0,
-        autoplay: true,
-        autoplaySpeed: 1000,
-        swipeToSlide: false,
-        draggable: false,
-        arrows: false,
-        cssEase: "linear"
-    };
-    const flowImgs = [];
-    for(let idx = 0; idx <= 14; idx++){
-        flowImgs.push(`/images/main_flow${idx}.png`);
-    }
-    return /*#__PURE__*/ jsx_runtime_.jsx("div", {
-        className: (Selector_module_default()).h25,
-        children: /*#__PURE__*/ jsx_runtime_.jsx((external_react_slick_default()), {
-            ...settings,
-            children: flowImgs.map((flowImgs, idx)=>/*#__PURE__*/ jsx_runtime_.jsx("img", {
-                    src: flowImgs,
-                    alt: `flowimg${idx}`,
-                    className: (Selector_module_default()).h25
-                }, `flowimg${idx}`))
-        })
-    });
-};
-/* harmony default export */ const home_SelectorSlider = (SelectorSlider);
-
-;// CONCATENATED MODULE: ./src/components/home/SelectorArea.js
-
-
-
-const SelectorArea = ()=>{
-    return /*#__PURE__*/ (0,jsx_runtime_.jsxs)("section", {
-        children: [
-            /*#__PURE__*/ jsx_runtime_.jsx("div", {
-                className: "maxframe",
-                children: /*#__PURE__*/ jsx_runtime_.jsx(home_Selector, {})
-            }),
-            /*#__PURE__*/ jsx_runtime_.jsx(home_SelectorSlider, {})
-        ]
-    });
-};
-/* harmony default export */ const home_SelectorArea = (SelectorArea);
-
+// EXTERNAL MODULE: external "react/jsx-runtime"
+var jsx_runtime_ = __webpack_require__(997);
+// EXTERNAL MODULE: external "react"
+var external_react_ = __webpack_require__(6689);
 // EXTERNAL MODULE: ./src/components/home/RankProd.module.css
 var RankProd_module = __webpack_require__(9864);
 var RankProd_module_default = /*#__PURE__*/__webpack_require__.n(RankProd_module);
@@ -718,6 +395,9 @@ var RankProd_module_default = /*#__PURE__*/__webpack_require__.n(RankProd_module
 const io5_namespaceObject = require("react-icons/io5");
 ;// CONCATENATED MODULE: ./src/components/dummydata/rank_list_dummy.json
 const rank_list_dummy_namespaceObject = [];
+// EXTERNAL MODULE: ./node_modules/next/image.js
+var next_image = __webpack_require__(5675);
+var image_default = /*#__PURE__*/__webpack_require__.n(next_image);
 // EXTERNAL MODULE: ./src/components/util/util.ts
 var util = __webpack_require__(72);
 // EXTERNAL MODULE: ./node_modules/next/link.js
@@ -950,45 +630,422 @@ const RankProd = (props)=>{
  //    );
  // };
 
-;// CONCATENATED MODULE: ./src/pages/index.js
+
+/***/ }),
+
+/***/ 7710:
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+
+// EXPORTS
+__webpack_require__.d(__webpack_exports__, {
+  "Z": () => (/* binding */ home_SelectorArea)
+});
+
+// EXTERNAL MODULE: external "react/jsx-runtime"
+var jsx_runtime_ = __webpack_require__(997);
+// EXTERNAL MODULE: external "react"
+var external_react_ = __webpack_require__(6689);
+// EXTERNAL MODULE: external "next/router"
+var router_ = __webpack_require__(1853);
+// EXTERNAL MODULE: ./src/components/home/Selector.module.css
+var Selector_module = __webpack_require__(3108);
+var Selector_module_default = /*#__PURE__*/__webpack_require__.n(Selector_module);
+// EXTERNAL MODULE: ./src/components/ui/Button.tsx
+var Button = __webpack_require__(1936);
+;// CONCATENATED MODULE: ./src/components/home/Selector.js
 
 
 
 
 
-
-
-const Home = ({ rank  })=>{
+const foods = [
+    {
+        key: 0,
+        value: "육류",
+        label: "육류"
+    },
+    {
+        key: 1,
+        value: "해산물",
+        label: "해산물"
+    },
+    {
+        key: 2,
+        value: "치즈",
+        label: "치즈"
+    }
+];
+const bodys = [
+    {
+        key: 0,
+        value: "산뜻",
+        label: "산뜻"
+    },
+    {
+        key: 1,
+        value: "묵직",
+        label: "묵직"
+    }
+];
+const sweets = [
+    {
+        key: 0,
+        value: "달콤",
+        label: "달콤"
+    },
+    {
+        key: 1,
+        value: "안달콤",
+        label: "안달콤"
+    }
+];
+const sours = [
+    {
+        key: 0,
+        value: "있는",
+        label: "있는"
+    },
+    {
+        key: 1,
+        value: "없는",
+        label: "없는"
+    }
+];
+const meat = [
+    "Beef",
+    "Pork",
+    "Lamb",
+    "Deer",
+    "CuredMeat",
+    "Poultry"
+];
+const seaFood = [
+    "Shellfish",
+    "Leanfish",
+    "Richfish"
+];
+const Selector = ()=>{
+    const [food, setFood] = (0,external_react_.useState)();
+    const [body, setBody] = (0,external_react_.useState)();
+    const [sweet, setSweet] = (0,external_react_.useState)();
+    const [sour, setSour] = (0,external_react_.useState)();
+    const router = (0,router_.useRouter)();
+    const btnSearch = ()=>{
+        // const list = [food, body, sweet, sour];
+        router.push({
+            pathname: "/product",
+            query: {
+                page: 1,
+                snack: food === "육류" ? meat : food === "해산물" ? seaFood : "Cheese",
+                body: body === "산뜻" ? [
+                    1,
+                    2
+                ] : [
+                    3,
+                    4,
+                    5
+                ],
+                sweet: sweet === "달콤" ? [
+                    4,
+                    5
+                ] : [
+                    1,
+                    2,
+                    3
+                ],
+                acidity: sour === "있는" ? [
+                    4,
+                    5
+                ] : [
+                    1,
+                    2,
+                    3
+                ]
+            }
+        });
+    };
     return /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
         children: [
-            /*#__PURE__*/ jsx_runtime_.jsx(Seo/* default */.Z, {
+            /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
+                className: (Selector_module_default()).selector_wrap,
+                children: [
+                    /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
+                        children: [
+                            /*#__PURE__*/ jsx_runtime_.jsx("span", {
+                                className: (Selector_module_default()).text,
+                                children: "나는"
+                            }),
+                            /*#__PURE__*/ (0,jsx_runtime_.jsxs)("select", {
+                                onChange: (e)=>setFood(e.target.value),
+                                className: (Selector_module_default()).select,
+                                children: [
+                                    /*#__PURE__*/ jsx_runtime_.jsx("option", {
+                                        value: "default",
+                                        children: "안주선택"
+                                    }),
+                                    foods.map((food)=>{
+                                        return /*#__PURE__*/ jsx_runtime_.jsx("option", {
+                                            value: food.value,
+                                            children: food.label
+                                        }, food.key);
+                                    })
+                                ]
+                            }),
+                            /*#__PURE__*/ jsx_runtime_.jsx("span", {
+                                className: (Selector_module_default()).text,
+                                children: "에 어울리는"
+                            })
+                        ]
+                    }),
+                    /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
+                        children: [
+                            /*#__PURE__*/ (0,jsx_runtime_.jsxs)("select", {
+                                onChange: (e)=>setBody(e.target.value),
+                                className: (Selector_module_default()).select,
+                                children: [
+                                    /*#__PURE__*/ jsx_runtime_.jsx("option", {
+                                        value: "default",
+                                        children: "선택"
+                                    }),
+                                    bodys.map((body)=>{
+                                        return /*#__PURE__*/ jsx_runtime_.jsx("option", {
+                                            value: body.value,
+                                            children: body.label
+                                        }, body.key);
+                                    })
+                                ]
+                            }),
+                            /*#__PURE__*/ jsx_runtime_.jsx("span", {
+                                className: (Selector_module_default()).text,
+                                children: "하고"
+                            }),
+                            /*#__PURE__*/ (0,jsx_runtime_.jsxs)("select", {
+                                onChange: (e)=>setSweet(e.target.value),
+                                className: (Selector_module_default()).select,
+                                children: [
+                                    /*#__PURE__*/ jsx_runtime_.jsx("option", {
+                                        value: "default",
+                                        children: "선택"
+                                    }),
+                                    sweets.map((sweet)=>{
+                                        return /*#__PURE__*/ jsx_runtime_.jsx("option", {
+                                            value: sweet.value,
+                                            children: sweet.label
+                                        }, sweet.key);
+                                    })
+                                ]
+                            }),
+                            /*#__PURE__*/ jsx_runtime_.jsx("span", {
+                                className: (Selector_module_default()).text,
+                                children: "하고 산미"
+                            }),
+                            /*#__PURE__*/ (0,jsx_runtime_.jsxs)("select", {
+                                onChange: (e)=>setSour(e.target.value),
+                                className: (Selector_module_default()).select,
+                                children: [
+                                    /*#__PURE__*/ jsx_runtime_.jsx("option", {
+                                        value: "default",
+                                        children: "선택"
+                                    }),
+                                    sours.map((sour)=>{
+                                        return /*#__PURE__*/ jsx_runtime_.jsx("option", {
+                                            value: sour.value,
+                                            children: sour.label
+                                        }, sour.key);
+                                    })
+                                ]
+                            })
+                        ]
+                    }),
+                    /*#__PURE__*/ jsx_runtime_.jsx("div", {
+                        children: /*#__PURE__*/ jsx_runtime_.jsx("span", {
+                            className: (Selector_module_default()).text,
+                            children: "와인이 필요해요"
+                        })
+                    })
+                ]
+            }),
+            /*#__PURE__*/ jsx_runtime_.jsx("div", {
+                className: (Selector_module_default()).btn_area,
+                children: /*#__PURE__*/ jsx_runtime_.jsx(Button/* default */.Z, {
+                    buttontext: "보러가기",
+                    buttonColor: "main",
+                    onClick: btnSearch
+                })
+            })
+        ]
+    });
+};
+/* harmony default export */ const home_Selector = (Selector);
+
+// EXTERNAL MODULE: external "react-slick"
+var external_react_slick_ = __webpack_require__(8096);
+var external_react_slick_default = /*#__PURE__*/__webpack_require__.n(external_react_slick_);
+;// CONCATENATED MODULE: ./src/components/home/SelectorSlider.js
+
+
+
+const SelectorSlider = ()=>{
+    const settings = {
+        infinite: true,
+        slidesToShow: 1,
+        slidesToScroll: 1,
+        variableWidth: true,
+        pauseOnFocus: false,
+        pauseOnHover: false,
+        centerMode: true,
+        touchRatio: 0,
+        autoplay: true,
+        autoplaySpeed: 1000,
+        swipeToSlide: false,
+        draggable: false,
+        arrows: false,
+        cssEase: "linear"
+    };
+    const flowImgs = [];
+    for(let idx = 0; idx <= 14; idx++){
+        flowImgs.push(`/images/main_flow${idx}.png`);
+    }
+    return /*#__PURE__*/ jsx_runtime_.jsx("div", {
+        className: (Selector_module_default()).h25,
+        children: /*#__PURE__*/ jsx_runtime_.jsx((external_react_slick_default()), {
+            ...settings,
+            children: flowImgs.map((flowImgs, idx)=>/*#__PURE__*/ jsx_runtime_.jsx("img", {
+                    src: flowImgs,
+                    alt: `flowimg${idx}`,
+                    className: (Selector_module_default()).h25
+                }, `flowimg${idx}`))
+        })
+    });
+};
+/* harmony default export */ const home_SelectorSlider = (SelectorSlider);
+
+;// CONCATENATED MODULE: ./src/components/home/SelectorArea.js
+
+
+
+const SelectorArea = ()=>{
+    return /*#__PURE__*/ (0,jsx_runtime_.jsxs)("section", {
+        children: [
+            /*#__PURE__*/ jsx_runtime_.jsx("div", {
+                className: "maxframe",
+                children: /*#__PURE__*/ jsx_runtime_.jsx(home_Selector, {})
+            }),
+            /*#__PURE__*/ jsx_runtime_.jsx(home_SelectorSlider, {})
+        ]
+    });
+};
+/* harmony default export */ const home_SelectorArea = (SelectorArea);
+
+
+/***/ }),
+
+/***/ 72:
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "_3": () => (/* binding */ getDate),
+/* harmony export */   "qJ": () => (/* binding */ drawStar)
+/* harmony export */ });
+/* unused harmony export GetReviewid */
+const drawStar = (score, fill, emtpy)=>{
+    let i = 0;
+    let star = [];
+    let num = Math.round(score);
+    for(i = 0; i < num; i++){
+        star.push(fill);
+    }
+    for(i = 0; i < 5 - num; i++){
+        star.push(emtpy);
+    }
+    return star;
+};
+const getDate = ()=>{
+    let year = new Date().getFullYear();
+    let month = new Date().getMonth() + 1;
+    let day = new Date().getDate();
+    if (month < 10) {
+        month = `0${month}`;
+    }
+    if (day < 10) {
+        day = `0${day}`;
+    }
+    return `${year}.${month}.${day}`;
+};
+const GetReviewid = ()=>{
+    let id = Math.random() * 1000000;
+    return id;
+};
+
+
+/***/ }),
+
+/***/ 8287:
+/***/ ((module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.a(module, async (__webpack_handle_async_dependencies__, __webpack_async_result__) => { try {
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__),
+/* harmony export */   "getServerSideProps": () => (/* binding */ getServerSideProps)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(997);
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _util_Seo__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(8606);
+/* harmony import */ var _components_home_Banner__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(728);
+/* harmony import */ var _components_home_BestReview__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(4946);
+/* harmony import */ var _components_home_SelectorArea__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(7710);
+/* harmony import */ var _components_home_RankProd__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(6195);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(6689);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(9648);
+var __webpack_async_dependencies__ = __webpack_handle_async_dependencies__([axios__WEBPACK_IMPORTED_MODULE_7__]);
+axios__WEBPACK_IMPORTED_MODULE_7__ = (__webpack_async_dependencies__.then ? (await __webpack_async_dependencies__)() : __webpack_async_dependencies__)[0];
+
+
+
+
+
+
+
+
+const Home = ({ rank , best_review  })=>{
+    return /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
+        children: [
+            /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_util_Seo__WEBPACK_IMPORTED_MODULE_1__/* ["default"] */ .Z, {
                 title: "Home"
             }),
-            /*#__PURE__*/ jsx_runtime_.jsx(home_Banner, {}),
-            /*#__PURE__*/ jsx_runtime_.jsx(home_SelectorArea, {}),
-            /*#__PURE__*/ jsx_runtime_.jsx(home_BestReview, {}),
-            /*#__PURE__*/ jsx_runtime_.jsx(home_RankProd, {
+            /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_components_home_Banner__WEBPACK_IMPORTED_MODULE_2__/* ["default"] */ .Z, {}),
+            /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_components_home_SelectorArea__WEBPACK_IMPORTED_MODULE_4__/* ["default"] */ .Z, {}),
+            /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_components_home_BestReview__WEBPACK_IMPORTED_MODULE_3__/* ["default"] */ .Z, {
+                list: best_review
+            }),
+            /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_components_home_RankProd__WEBPACK_IMPORTED_MODULE_5__/* ["default"] */ .Z, {
                 ...rank
             })
         ]
     });
 };
-/* harmony default export */ const pages = (Home);
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Home);
 async function getServerSideProps() {
-    const Rank = await fetch("http://ec2-3-35-233-57.ap-northeast-2.compute.amazonaws.com:8080/api/product/rank", {
-        method: "GET",
-        headers: {
-            "Content-Type": "application/json;charset=UTF-8"
-        }
-    });
-    const data = await Rank.json();
+    let Rank = {};
+    let bestReview = {};
+    await axios__WEBPACK_IMPORTED_MODULE_7__["default"].get("http://ec2-3-35-233-57.ap-northeast-2.compute.amazonaws.com:8080/api/product/rank").then((res)=>Rank = res.data.data);
+    await axios__WEBPACK_IMPORTED_MODULE_7__["default"].get("http://ec2-3-35-233-57.ap-northeast-2.compute.amazonaws.com:8080/api/community/best-review").then((res)=>bestReview = res.data.data);
     return {
         props: {
-            rank: data.data
+            rank: Rank,
+            best_review: bestReview
         }
     };
 }
 
+__webpack_async_result__();
+} catch(e) { __webpack_async_result__(e); } });
 
 /***/ }),
 
@@ -1329,6 +1386,14 @@ module.exports = require("react-slick");
 "use strict";
 module.exports = require("react/jsx-runtime");
 
+/***/ }),
+
+/***/ 9648:
+/***/ ((module) => {
+
+"use strict";
+module.exports = import("axios");;
+
 /***/ })
 
 };
@@ -1338,7 +1403,7 @@ module.exports = require("react/jsx-runtime");
 var __webpack_require__ = require("../webpack-runtime.js");
 __webpack_require__.C(exports);
 var __webpack_exec__ = (moduleId) => (__webpack_require__(__webpack_require__.s = moduleId))
-var __webpack_exports__ = __webpack_require__.X(0, [210,121,676,664,675,631], () => (__webpack_exec__(6479)));
+var __webpack_exports__ = __webpack_require__.X(0, [210,121,676,664,675,631], () => (__webpack_exec__(8287)));
 module.exports = __webpack_exports__;
 
 })();
