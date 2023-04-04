@@ -27,9 +27,8 @@ export const NextGetReview = createAsyncThunk(
   "review/Addlist",
   async (curpage: number) => {
     let newlist: reviewState[] = [];
-    console.log(curpage);
     await axios
-      .get(`/api/community/review?page=${curpage + 1}`)
+      .get(`/api/community/review?page=${curpage}`)
       .then((res) => {
         res.data.data.map((data: reviewState) => newlist.push(data));
       })

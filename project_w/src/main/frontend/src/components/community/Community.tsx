@@ -22,17 +22,17 @@ const Community: React.FC<{ list: reviewState[] }> = () => {
   const target = useRef<HTMLDivElement>(null);
   const curpage = useRef(0);
   const modalref = useRef<HTMLDialogElement>(null);
-  const [isStart, setisStart] = useState(true);
-  const [targetrender, setTargetRender] = useState(true);
+  //const [isStart, setisStart] = useState(true);
+  //const [targetrender, setTargetRender] = useState(true);
   const [showModal, setShowModal] = useState(false);
   const router = useRouter();
 
   const loadData = () => {
     if (curpage.current >= 0) {
-      setisStart(false);
+      //setisStart(false);
 
       dispatch(NextGetReview(curpage.current));
-      setTargetRender(false);
+      //setTargetRender(false);
     }
   };
 
@@ -45,7 +45,7 @@ const Community: React.FC<{ list: reviewState[] }> = () => {
     const endtarget = entries[0];
     if (
       !review.isloadding &&
-      curpage.current <= review.TotalpageNum &&
+      curpage.current < review.TotalpageNum &&
       endtarget.isIntersecting
     ) {
       curpage.current++;
@@ -58,13 +58,13 @@ const Community: React.FC<{ list: reviewState[] }> = () => {
     const input = target.current;
     let timer: number;
 
-    if (!review.isloadding) {
-      timer = window.setTimeout(() => {
-        if (curpage.current < review.TotalpageNum - 1) {
-          setTargetRender(true);
-        }
-      }, 450);
-    }
+    // if (!review.isloadding) {
+    //   timer = window.setTimeout(() => {
+    //     if (curpage.current < review.TotalpageNum - 1) {
+    //       setTargetRender(true);
+    //     }
+    //   }, 450);
+    // }
     if (input) {
       observer.observe(input);
     }
@@ -72,7 +72,7 @@ const Community: React.FC<{ list: reviewState[] }> = () => {
       observer.disconnect();
       clearTimeout(timer);
     };
-  }, [review.isloadding, targetrender]);
+  }, [review.isloadding, review.TotalpageNum]);
 
   const OnClickWritePost = () => {
     if (user.isLoggedIn === true) {
@@ -112,12 +112,13 @@ const Community: React.FC<{ list: reviewState[] }> = () => {
             <CommunityCard key={`reviewCard_${index}`} {...data} />
           ))}
         </div>
-        {review.isloadding && !isStart ? <Loading height={300} /> : null}
-        {targetrender ? (
+        {review.isloadding ? <Loading height={300} /> : null}
+        <div ref={target} className={styled.Community_SrollChecker}></div>
+        {/* {targetrender ? (
           <div ref={target} className={styled.Community_SrollChecker}></div>
         ) : (
           <span style={{ display: "inline-block", height: "250px" }}></span>
-        )}
+        )} */}
       </div>
       <dialog
         style={!showModal ? { display: "none" } : { display: "flex" }}
