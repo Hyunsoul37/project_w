@@ -24,7 +24,7 @@
 ##  :pencil2:프로젝트 소개
 
 
-- 와구는 와인 입문자들을 위한 정보제공 사이트로, 와인의 가격이나 추천안주, 세계적인 와인 전문 사이트인 VIVINO에서 제공하는 와인별점과 회원들의 입맛에 따른 와인별점을 볼 수 있다.
+와구는 와인 입문자들을 위한 정보제공 사이트로, 와인의 가격이나 추천안주, 세계적인 와인 전문 사이트인 VIVINO에서 제공하는 와인별점과 회원들의 입맛에 따른 와인별점을 볼 수 있다.
 
   회원들의 실제 맛 평가와 같이 먹은 와인의 안주를 공유 할 수 있는 커뮤니티가 있어 입문자가 와인과 곁들여 먹을 안주 선택에 도움을 줍니다.
 
@@ -47,3 +47,12 @@
 
 ### ✔️Deployment
 <img src="https://img.shields.io/badge/Amazon EC2-FF9900?style=for-the-badge&logo=Amazon EC2&logoColor=white"> <img src="https://img.shields.io/badge/Amazon s3-569A31?style=for-the-badge&logo=Amazon s3&logoColor=white"> <img src="https://img.shields.io/badge/Route53-7F4BDE?style=for-the-badge&logo=Route53&logoColor=white">
+
+## 프로젝트 기능
+
+#### 회원가입 및 로그인
+[00.login.webm](https://user-images.githubusercontent.com/100817586/229828384-756a5fa9-3f5a-4b5f-b722-1c4a2f85b0c5.webm)
+
+#### 와인 상품 페이지
+
+#### 커뮤니티 페이지
