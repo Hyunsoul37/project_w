@@ -5,6 +5,7 @@ import java.util.Date;
 public class BestReviewDto {
 	private int reviewId;
 	private String reviewTitle;
+	private String wineName;
 	private String desc;
 	private int writerId;
 	private Date regiDate;
@@ -26,6 +27,14 @@ public class BestReviewDto {
 
 	public void setReviewTitle(String reviewTitle) {
 		this.reviewTitle = reviewTitle;
+	}
+
+	public String getWineName() {
+		return wineName;
+	}
+
+	public void setWineName(String wineName) {
+		this.wineName = wineName;
 	}
 
 	public String getDesc() {
@@ -78,8 +87,8 @@ public class BestReviewDto {
 
 	@Override
 	public String toString() {
-		return "BestReviewDto [reviewId=" + reviewId + ", reviewTitle=" + reviewTitle + ", desc=" + desc + ", writerId="
-				+ writerId + ", regiDate=" + regiDate + ", starPoint=" + starPoint + ", reviewImg1=" + reviewImg1
-				+ ", writerNick=" + writerNick + "]";
+		return "BestReviewDto [reviewId=" + reviewId + ", reviewTitle=" + reviewTitle + ", wineName=" + wineName
+				+ ", desc=" + desc + ", writerId=" + writerId + ", regiDate=" + regiDate + ", starPoint=" + starPoint
+				+ ", reviewImg1=" + reviewImg1 + ", writerNick=" + writerNick + "]";
 	}
 }
