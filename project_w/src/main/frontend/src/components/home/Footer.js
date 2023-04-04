@@ -14,7 +14,9 @@ const Footer = () => {
               <span style={{ marginRight: "10px" }}>E-MAIL</span>{" "}
               soulhyun37@gmail.com
             </p>
-            <AiFillGithub />
+            <a href="https://github.com/Hyunsoul37" target="blank">
+              <AiFillGithub />
+            </a>
           </div>
           <div>
             <h1>FrontEnd</h1>
@@ -23,7 +25,9 @@ const Footer = () => {
               <span style={{ marginRight: "10px" }}>E-MAIL</span>{" "}
               dlatjsals123@naver.com
             </p>
-            <AiFillGithub />
+            <a href="https://github.com/SSSunmin" target="blank">
+              <AiFillGithub />
+            </a>
           </div>
           <div>
             <h1>Designer</h1>
@@ -32,7 +36,9 @@ const Footer = () => {
               <span style={{ marginRight: "10px" }}>E-MAIL</span>{" "}
               tlsgywls1107@naver.com
             </p>
-            <AiFillGithub />
+            <a href="https://github.com/hyooo11" target="blank">
+              <AiFillGithub />
+            </a>
           </div>
         </div>
       </div>
