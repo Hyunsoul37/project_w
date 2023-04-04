@@ -50,6 +50,9 @@
 
 ## 프로젝트 기능
 
+#### 홈화면
+[01.home.webm](https://user-images.githubusercontent.com/100817586/229831326-017bb5e0-eb70-4391-aa71-72232f0bb2f6.webm)
+
 #### 회원가입 및 로그인
 [00.login.webm](https://user-images.githubusercontent.com/100817586/229828384-756a5fa9-3f5a-4b5f-b722-1c4a2f85b0c5.webm)
 
