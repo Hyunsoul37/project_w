@@ -5,14 +5,20 @@ const Footer = () => {
   return (
     <footer className={styled.Footer}>
       <div className={styled.Footer_Info}>
-        <div className={styled.logo}>WAGU</div>
+        <div className={styled.logo}>
+          <p>WAGU</p>
+          <a href="https://github.com/Hyunsoul37/project_w" target="blank">
+            <AiFillGithub />
+          </a>
+        </div>
+
         <div className={styled.devInfo}>
           <div>
             <h1>BackEnd</h1>
             <h3>Lee ho hyun</h3>
             <p>
-              <span style={{ marginRight: "10px" }}>E-MAIL</span>{" "}
-              soulhyun37@gmail.com
+              <span style={{ marginRight: "3px" }}>E-MAIL</span> soulhyun37
+              <span>@gmail.com</span>
             </p>
             <a href="https://github.com/Hyunsoul37" target="blank">
               <AiFillGithub />
@@ -22,19 +28,19 @@ const Footer = () => {
             <h1>FrontEnd</h1>
             <h3>Lim sun min</h3>
             <p>
-              <span style={{ marginRight: "10px" }}>E-MAIL</span>{" "}
-              dlatjsals123@naver.com
+              <span style={{ marginRight: "3px" }}>E-MAIL</span> dlatjsals123
+              <span>@naver.com</span>
             </p>
             <a href="https://github.com/SSSunmin" target="blank">
               <AiFillGithub />
             </a>
           </div>
           <div>
-            <h1>Designer</h1>
+            <h1>FrontEnd</h1>
             <h3>Shin hyo jin</h3>
             <p>
-              <span style={{ marginRight: "10px" }}>E-MAIL</span>{" "}
-              tlsgywls1107@naver.com
+              <span style={{ marginRight: "3px" }}>E-MAIL</span> tlsgywls1107
+              <span>@naver.com</span>
             </p>
             <a href="https://github.com/hyooo11" target="blank">
               <AiFillGithub />
