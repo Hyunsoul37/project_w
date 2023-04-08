@@ -219,4 +219,54 @@
     width: 200px;
     height: 200px;
   }
+
+  .tablist ul li {
+    width: 70px;
+    padding: 10px 0;
+    margin: 0 5px;
+    font-size: 13px;
+  }
+  .rank_wrap a:first-child .rankcard:first-child .txt_area {
+    top: 3em;
+    left: 1.5em;
+  }
+  .rank_wrap a:first-child .rankcard:first-child .txt_area .rank_txt {
+    color: var(--primary);
+    font-size: 14px;
+    font-family: "campton";
+  }
+
+  .rank_wrap a:first-child .rankcard:first-child .txt_area .rank_txt p {
+    font-size: 30px;
+    font-weight: 700;
+    font-family: "campton";
+  }
+
+  .rank_wrap a:first-child .rankcard:first-child .txt_area .winename {
+    padding: 5px 0;
+    font-size: 0.8em;
+    color: #333;
+    width: 250px;
+  }
+
+  .rank_wrap a:first-child .rankcard:first-child .txt_area .price {
+    color: var(--secondary);
+    font-size: 1.2em;
+  }
+
+  .rank_wrap a:first-child .rankcard:first-child .tasty_area {
+    position: absolute;
+    left: 1.5em;
+    bottom: 2em;
+  }
+
+  .rank_wrap a:first-child .rankcard:first-child .tasty_area .inner p {
+    font-size: 12px;
+    padding-right: 0.5em;
+  }
+
+  .rank_wrap a:first-child .rankcard:first-child .tasty_area .inner > div svg {
+    height: 1em;
+    width: 1em;
+  }
 }

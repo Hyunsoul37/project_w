@@ -118,6 +118,7 @@ const Selector = () => {
           buttontext={"보러가기"}
           buttonColor={"main"}
           onClick={btnSearch}
+          buttonSize="l"
         />
       </div>
     </div>

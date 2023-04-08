@@ -105,8 +105,9 @@
     width: 90%;
     height: 100%;
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
+    overflow-x: scroll;
   }
   .card {
     width: 250px;
