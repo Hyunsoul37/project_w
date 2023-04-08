@@ -18,6 +18,7 @@ const Settings = {
   autoplaySpeed: 5000,
   slidesToShow: 1,
   arrows: false,
+  touchMove: false,
   //   slidesToScroll: 1,
 };
 const Banner = () => {
