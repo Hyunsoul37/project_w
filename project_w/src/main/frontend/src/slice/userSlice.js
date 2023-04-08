@@ -104,8 +104,12 @@ export const userSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
+      .addCase(LogIn.pending, (state, action) => {
+        state.isLoggingIn = true;
+      })
       .addCase(LogIn.fulfilled, (state, action) => {
         state.isLoggedIn = true;
+        state.isLoggingIn = false;
         state.isSuccess = true;
         state.userData = action.payload;
         saveToken(
@@ -116,6 +120,7 @@ export const userSlice = createSlice({
       })
       .addCase(LogIn.rejected, (state, action) => {
         state.isLoginError = action.error;
+        state.isLoggingIn = false;
         state.isSuccess = false;
         state.isLoggedIn = false;
       });
