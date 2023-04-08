@@ -137,7 +137,7 @@ const CommentList: React.FC<firstCommentState & CommentPropsType> = (props) => {
         <div className={styled.firstComment_Info}>
           <img
             src={
-              props.writerProfile !== ("null" || null)
+              props.writerProfile !== ("null" && null)
                 ? props.writerProfile
                 : defaultimg
             }
@@ -179,7 +179,7 @@ const CommentList: React.FC<firstCommentState & CommentPropsType> = (props) => {
                 <div className={styled.SecondComment_Info}>
                   <img
                     src={
-                      c.writerProfile !== ("null" || null)
+                      c.writerProfile !== ("null" && null)
                         ? c.writerProfile
                         : defaultimg
                     }
