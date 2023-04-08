@@ -56,30 +56,32 @@ const BestReview = (props: propsState) => {
         </div>
       </div>
       <div className={["maxframe", styled.BestReview].join(" ")}>
-        {bestreviewArr.map((data, idx) => (
-          <Card
-            id={idx}
-            key={`review_${idx}`}
-            onClick={OnModal(idx)}
-            className={styled.card}
-          >
-            <img
-              id={idx.toString()}
-              className={styled.reviewimg}
-              alt={`${data.wineName}_review_img`}
-              src={data.reviewImg1}
-            />
-            <h1 id={idx.toString()}>{data.reviewTitle}</h1>
-            <div id={"contents"}>{data.desc}</div>
-            <div id={"text"}>{data.writerNick}</div>
-            <div id={"text"}>{data.regiDate.split("T")[0]}</div>
-            <div id={"star"}>
-              {drawStar(data.starPoint).map((star, idx) => (
-                <span key={`star_${idx}`}>{star}</span>
-              ))}
-            </div>
-          </Card>
-        ))}
+        <div className={styled.bestReviewCardWrapper}>
+          {bestreviewArr.map((data, idx) => (
+            <Card
+              id={idx}
+              key={`review_${idx}`}
+              onClick={OnModal(idx)}
+              className={styled.card}
+            >
+              <img
+                id={idx.toString()}
+                className={styled.reviewimg}
+                alt={`${data.wineName}_review_img`}
+                src={data.reviewImg1}
+              />
+              <h1 id={idx.toString()}>{data.reviewTitle}</h1>
+              <div id={"contents"}>{data.desc}</div>
+              <div id={"text"}>{data.writerNick}</div>
+              <div id={"text"}>{data.regiDate.split("T")[0]}</div>
+              <div id={"star"}>
+                {drawStar(data.starPoint).map((star, idx) => (
+                  <span key={`star_${idx}`}>{star}</span>
+                ))}
+              </div>
+            </Card>
+          ))}
+        </div>
       </div>
       {ShowModal && (
         <Modal offModal={OffModal}>

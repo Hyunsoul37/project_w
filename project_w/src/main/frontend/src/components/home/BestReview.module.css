@@ -6,10 +6,14 @@
 .BestReview {
   height: 100%;
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
+  overflow-x: auto;
 }
-
+.bestReviewCardWrapper {
+  display: flex;
+  /* justify-content: flex-start; */
+}
 .card {
   width: 360px;
   height: 494px;
@@ -90,4 +94,40 @@
   color: #cccc;
   font-size: 12px;
   margin-right: 10px;
+}
+
+@media screen and (max-device-width: 586px) {
+  .BestReviewwrapper {
+    background-color: var(--secondary);
+    height: 100vh;
+  }
+  .BestReview {
+    width: 90%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .card {
+    width: 250px;
+    height: 400px;
+    margin-right: 10px;
+  }
+  .card div {
+    padding: 0px 17px;
+  }
+  .reviewimg {
+    width: 250px;
+    height: 250px;
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
+    margin-bottom: 17px;
+  }
+  .reviewimg_Modal {
+    width: 350px;
+    height: 350px;
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
+    margin-bottom: 17px;
+  }
 }
