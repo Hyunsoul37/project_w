@@ -125,6 +125,7 @@ const Product_SM = () => {
           <div className={styled.pagebtnWrapper}>
             {curpage > 9 ? (
               <Link
+                className={styled.BtnLink}
                 href={{
                   pathname: `/product`,
                   query: { page: Math.ceil((curpage - 9) / 10) * 10 },
@@ -147,6 +148,7 @@ const Product_SM = () => {
               ""
             ) : (
               <Link
+                className={styled.BtnLink}
                 href={{
                   pathname: `/product`,
                   query: { page: Math.ceil((curpage + 1) / 10) * 10 + 1 },

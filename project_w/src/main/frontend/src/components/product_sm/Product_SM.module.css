@@ -96,3 +96,57 @@
   /* color: var(--secondary-txt); */
   margin: 30px;
 }
+
+@media screen and (max-device-width: 586px) {
+  .ProductWrapper {
+    padding-top: 150px;
+  }
+  .title {
+    padding: 0px 10px;
+  }
+  .ProductCardWrapper {
+    display: grid;
+    grid-template-columns: 180px 180px;
+  }
+
+  .pagebtn {
+    position: relative;
+    width: 21px;
+    height: 20px;
+    line-height: 15px;
+    display: flex;
+    justify-content: center;
+    margin: 0px 4px;
+  }
+
+  .pagebtn span {
+    font-family: "Noto Sans KR", sans-serif;
+    font-style: normal;
+    display: block;
+    text-align: center;
+    width: 21px;
+    height: 20px;
+    padding: 0px;
+    line-height: 13px;
+    font-size: 13px;
+    padding: 2px;
+  }
+  .pagebtn a {
+    display: block;
+    width: 21px;
+  }
+  .prevNextBtn {
+    font-size: 13px;
+    margin: 0px;
+  }
+  .prevNextBtn span {
+    width: 33px;
+    line-height: 35px;
+  }
+  .BtnLink {
+    width: 50px;
+  }
+  .prevNextBtn svg {
+    font-size: 30px;
+  }
+}

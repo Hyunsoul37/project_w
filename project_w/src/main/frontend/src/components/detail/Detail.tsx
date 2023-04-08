@@ -4,12 +4,14 @@ import { FaCircle, FaRegCircle } from "react-icons/fa";
 import { drawStar } from "../util/util";
 import StarRatings from "react-star-ratings";
 import Image from "next/image";
+import { useMediaQuery } from "@mui/material";
 
 const Detail: React.FC<wineState> = (props) => {
   const snack = props?.recommendedSnack?.split("/");
   const newarr = snack?.map((data) => data.replaceAll(" ", ""));
   const arrUnique = [...new Set(newarr)];
   const snackList = arrUnique.filter((data) => data !== "null");
+  const isMobile = useMediaQuery("(max-width: 586px)");
 
   if (!props?.imageUrl) {
     return <></>;
@@ -48,8 +50,8 @@ const Detail: React.FC<wineState> = (props) => {
                       rating={props.starPoint}
                       starRatedColor="#61002E"
                       numberOfStars={5}
-                      starDimension="20px"
-                      starSpacing="2px"
+                      starDimension={isMobile ? "13px" : "20px"}
+                      starSpacing={isMobile ? "1px" : "2px"}
                       name="rating"
                     />
                   </td>
@@ -95,20 +97,22 @@ const Detail: React.FC<wineState> = (props) => {
           </div>
           <div className={styled.wineFood}>
             <p>음식매칭</p>
-            <div>
-              {snackList.map((food) => (
-                <Image
-                  alt="food"
-                  width={100}
-                  height={100}
-                  src={`/images/icon/${food}.PNG`}
-                />
-              ))}
-            </div>
-            <div className={styled.wineFoodTextWrapper}>
+            <div className={styled.recommendSnack}>
               {snackList.length > 0
-                ? snackList.map((food) => <div key={`${food}_txt`}>{food}</div>)
-                : "없음"}
+                ? snackList.map((food) => (
+                    <div>
+                      <Image
+                        alt="food"
+                        width={100}
+                        height={100}
+                        src={`/images/icon/${food}.PNG`}
+                      />
+                      <p key={`${food}_txt`} className={styled.foodText}>
+                        {food}
+                      </p>
+                    </div>
+                  ))
+                : "추천 안주 정보가 없습니다."}
             </div>
           </div>
         </div>

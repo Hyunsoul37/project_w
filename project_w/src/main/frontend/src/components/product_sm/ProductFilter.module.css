@@ -71,3 +71,18 @@
 .PriceRange {
   color: var(--primary);
 }
+
+@media screen and (max-device-width: 586px) {
+  .filter {
+    padding: 60px 25px;
+  }
+  .inputbox p {
+    font-size: 15px;
+    font-weight: 600;
+    margin-bottom: 15px;
+  }
+  .inputbox label {
+    font-size: 13px;
+    margin-right: 23px;
+  }
+}

@@ -100,3 +100,41 @@
   background-color: black;
   opacity: 0.5;
 }
+
+@media screen and (max-device-width: 586px) {
+  .ProductCard {
+    height: 350px;
+    width: 180px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .imageWrapper {
+    height: 180px;
+    width: 180px;
+    background-color: #f3ecf4;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    position: relative;
+  }
+  .ProductCard img {
+    height: 150px;
+    width: 150px;
+  }
+  .ProductCard a p[id="name_ko"] {
+    width: 175px;
+  }
+  .wineInfoBox span {
+    max-width: 60px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+
+    font-size: 5px;
+    padding: 5px;
+    border-radius: 15px;
+    margin-right: 5px;
+  }
+}

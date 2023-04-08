@@ -51,3 +51,18 @@
   color: #555;
   font-weight: 600;
 }
+
+@media screen and (max-device-width: 586px) {
+  .Wineterms h4 {
+    font-size: 15px;
+  }
+  .winetermsTab div {
+    font-size: 13px;
+  }
+  .winetermsDesc p {
+    font-size: 11px;
+  }
+  .Wineterms {
+    margin-bottom: 75px;
+  }
+}
