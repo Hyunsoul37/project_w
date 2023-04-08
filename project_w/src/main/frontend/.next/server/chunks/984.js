@@ -46,6 +46,7 @@ const header = {
 const movepath = "/login";
 const emailReg = /^[A-Za-z0-9]([-_.]?[A-Za-z0-9])*@[A-Za-z0-9]([-_.]?[A-Za-z0-9])*\.[A-Za-z]{2,3}$/;
 const passwordreg = /^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,20}$/;
+const specialsymbols = /[\{\}\[\]\/?.,;:|\)*~`!^\-_+<>@\#$%&\\\=\(\'\"]/g;
 const join = ()=>{
     const EmailRef = (0,react__WEBPACK_IMPORTED_MODULE_1__.useRef)(null);
     const passwordRef = (0,react__WEBPACK_IMPORTED_MODULE_1__.useRef)(null);
@@ -59,12 +60,17 @@ const join = ()=>{
     const [phone, setPhone] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)("");
     const [isduplicate, setDuplicate] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(false);
     const [iseditedId, setIseditedId] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(false);
+    const [iseditedname, setIseditedname] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(false);
+    const [isNameNotValid, setisNameNotValid] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(false);
     const [isNickNameduplicate, setNickNameDuplicate] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(false);
     const [iseditedNickName, setIseditedNickName] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(false);
+    const [nickNameErrmsg, setnickNameErrmsg] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)("");
+    const [idErrmsg, setIdErrmsg] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)("");
+    const [NameErrmsg, setNameErrmsg] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)("");
     const submitHandler = (e)=>{
         e.preventDefault();
-        if (isduplicate || isNickNameduplicate) {
-            alert("아이디 또는 닉네임이 중복입니다.");
+        if (isduplicate || isNickNameduplicate || isNameNotValid) {
+            alert("아이디 또는 닉네임이 중복이거나 이름, 아이디, 닉네임에 특수문자가 들어가 있습니다.");
             return;
         }
         if (!passwordreg.test(password)) {
@@ -101,7 +107,14 @@ const join = ()=>{
         setPhone("");
     };
     const IDDuplicateResponseMessage = (data)=>{
+        if (specialsymbols.test(id)) {
+            setIdErrmsg("아이디에는 특수문자를 사용할 수 없습니다.");
+            setDuplicate(true);
+            setIseditedId(true);
+            return;
+        }
         if (data.data.duplicate === true) {
+            setIdErrmsg("아이디 중복입니다.");
             setDuplicate(true);
         } else {
             setDuplicate(false);
@@ -109,12 +122,28 @@ const join = ()=>{
         setIseditedId(true);
     };
     const NickNameDuplicateResponseMessage = (data)=>{
+        if (specialsymbols.test(nickName)) {
+            setnickNameErrmsg("닉네임에는 특수문자를 사용할 수 없습니다.");
+            setNickNameDuplicate(true);
+            setIseditedNickName(true);
+            return;
+        }
         if (data.data.duplicate === true) {
+            setnickNameErrmsg("닉네임 중복입니다.");
             setNickNameDuplicate(true);
         } else {
             setNickNameDuplicate(false);
         }
         setIseditedNickName(true);
+    };
+    const NameValidCheck = ()=>{
+        if (specialsymbols.test(name)) {
+            setNameErrmsg("이름에는 특수문자를 사용할 수 없습니다.");
+            setisNameNotValid(true);
+        } else {
+            setisNameNotValid(false);
+        }
+        setIseditedname(true);
     };
     const OnCheckduplicateID = async ()=>{
         await postData({
@@ -186,8 +215,13 @@ const join = ()=>{
                                 type: "text",
                                 value: name ? name : "",
                                 onChange: ChangeNameHandler,
+                                onBlur: NameValidCheck,
                                 placeholder: "사용자 이름"
-                            })
+                            }),
+                            name !== "" && iseditedname && isNameNotValid ? /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("p", {
+                                className: (_Signupform_module_css__WEBPACK_IMPORTED_MODULE_5___default().errormsg),
+                                children: NameErrmsg
+                            }) : null
                         ]
                     }),
                     /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("label", {
@@ -204,7 +238,7 @@ const join = ()=>{
                             }),
                             id !== "" && iseditedId ? isduplicate ? /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("p", {
                                 className: (_Signupform_module_css__WEBPACK_IMPORTED_MODULE_5___default().errormsg),
-                                children: "아이디 중복입니다."
+                                children: idErrmsg
                             }) : /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("p", {
                                 children: "사용가능한 아이디입니다."
                             }) : null
@@ -224,7 +258,7 @@ const join = ()=>{
                             }),
                             nickName !== "" && iseditedNickName ? isNickNameduplicate ? /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("p", {
                                 className: (_Signupform_module_css__WEBPACK_IMPORTED_MODULE_5___default().errormsg),
-                                children: "닉네임 중복입니다."
+                                children: nickNameErrmsg
                             }) : /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("p", {
                                 children: "사용가능한 닉네임입니다."
                             }) : null
