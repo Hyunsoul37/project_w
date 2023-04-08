@@ -116,13 +116,17 @@ const userSlice = (0,_reduxjs_toolkit__WEBPACK_IMPORTED_MODULE_0__.createSlice)(
         }
     },
     extraReducers: (builder)=>{
-        builder.addCase(LogIn.fulfilled, (state, action)=>{
+        builder.addCase(LogIn.pending, (state, action)=>{
+            state.isLoggingIn = true;
+        }).addCase(LogIn.fulfilled, (state, action)=>{
             state.isLoggedIn = true;
+            state.isLoggingIn = false;
             state.isSuccess = true;
             state.userData = action.payload;
             saveToken(action.payload.data.token, action.payload.data.refreshToken, action.payload.data.memberInfo.pid);
         }).addCase(LogIn.rejected, (state, action)=>{
             state.isLoginError = action.error;
+            state.isLoggingIn = false;
             state.isSuccess = false;
             state.isLoggedIn = false;
         });

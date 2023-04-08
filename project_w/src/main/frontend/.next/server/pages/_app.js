@@ -26,11 +26,14 @@ module.exports = {
 	"headerWrapper": "Header_headerWrapper__4kIUC",
 	"activebg": "Header_activebg__Jxhi9",
 	"Header": "Header_Header__KKFxn",
+	"menuBtn": "Header_menuBtn__7Z7jQ",
 	"moblie": "Header_moblie__8i4BQ",
 	"mobile_headerWrapper": "Header_mobile_headerWrapper__wRXCk",
 	"mobile_activebg": "Header_mobile_activebg__NQX_s",
 	"btnWrapper": "Header_btnWrapper__Zp_w4",
-	"logo": "Header_logo__cYU9G"
+	"logo": "Header_logo__cYU9G",
+	"mobile_backdrop": "Header_mobile_backdrop__wXAsD",
+	"mobile_backdrop_none": "Header_mobile_backdrop_none__4AVCR"
 };
 
 
@@ -60,9 +63,18 @@ const Footer = ()=>{
             /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
                 className: (_Footer_module_css__WEBPACK_IMPORTED_MODULE_2___default().Footer_Info),
                 children: [
-                    /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
+                    /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
                         className: (_Footer_module_css__WEBPACK_IMPORTED_MODULE_2___default().logo),
-                        children: "WAGU"
+                        children: [
+                            /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("p", {
+                                children: "WAGU"
+                            }),
+                            /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("a", {
+                                href: "https://github.com/Hyunsoul37/project_w",
+                                target: "blank",
+                                children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_icons_ai__WEBPACK_IMPORTED_MODULE_1__.AiFillGithub, {})
+                            })
+                        ]
                     }),
                     /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
                         className: (_Footer_module_css__WEBPACK_IMPORTED_MODULE_2___default().devInfo),
@@ -79,12 +91,14 @@ const Footer = ()=>{
                                         children: [
                                             /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("span", {
                                                 style: {
-                                                    marginRight: "10px"
+                                                    marginRight: "3px"
                                                 },
                                                 children: "E-MAIL"
                                             }),
-                                            " ",
-                                            "soulhyun37@gmail.com"
+                                            " soulhyun37",
+                                            /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("span", {
+                                                children: "@gmail.com"
+                                            })
                                         ]
                                     }),
                                     /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("a", {
@@ -106,12 +120,14 @@ const Footer = ()=>{
                                         children: [
                                             /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("span", {
                                                 style: {
-                                                    marginRight: "10px"
+                                                    marginRight: "3px"
                                                 },
                                                 children: "E-MAIL"
                                             }),
-                                            " ",
-                                            "dlatjsals123@naver.com"
+                                            " dlatjsals123",
+                                            /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("span", {
+                                                children: "@naver.com"
+                                            })
                                         ]
                                     }),
                                     /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("a", {
@@ -124,7 +140,7 @@ const Footer = ()=>{
                             /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
                                 children: [
                                     /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("h1", {
-                                        children: "Designer"
+                                        children: "FrontEnd"
                                     }),
                                     /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("h3", {
                                         children: "Shin hyo jin"
@@ -133,12 +149,14 @@ const Footer = ()=>{
                                         children: [
                                             /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("span", {
                                                 style: {
-                                                    marginRight: "10px"
+                                                    marginRight: "3px"
                                                 },
                                                 children: "E-MAIL"
                                             }),
-                                            " ",
-                                            "tlsgywls1107@naver.com"
+                                            " tlsgywls1107",
+                                            /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("span", {
+                                                children: "@naver.com"
+                                            })
                                         ]
                                     }),
                                     /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("a", {
@@ -206,16 +224,19 @@ const Header = ()=>{
     const user = (0,react_redux__WEBPACK_IMPORTED_MODULE_2__.useSelector)((state)=>state.user);
     const userData = user.userData ? user.userData.data : null;
     const [headerBG, setHeaderBg] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(false);
+    const [mobileheaderBG, setmobileheaderBG] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(false);
     const { sendRequestData: getAccessToken  } = (0,_customHooks_useFetch__WEBPACK_IMPORTED_MODULE_3__/* ["default"] */ .Z)();
     const [showmoblieMenu, setShowMobileMenu] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(false);
     const LoginBtnHandler = ()=>{
         router.push({
             pathname: "/login"
         });
+        setmobileheaderBG(false);
     //router.push("/login");
     };
     const LogOutHandler = ()=>{
         dispatch((0,_slice_userSlice__WEBPACK_IMPORTED_MODULE_5__/* .logout */ .kS)());
+        setmobileheaderBG(false);
     };
     const HeaderFadeHandler = ()=>{
         if (window.scrollY === 0) {
@@ -295,7 +316,8 @@ const Header = ()=>{
                                 className: (_Header_module_css__WEBPACK_IMPORTED_MODULE_9___default().btnWrapper),
                                 children: user.isLoggedIn && user.userData.data.memberInfo ? /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.Fragment, {
                                     children: [
-                                        /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_icons_ri__WEBPACK_IMPORTED_MODULE_6__.RiUser5Line, {
+                                        /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("img", {
+                                            src: user.userData.data.memberInfo.profileImg,
                                             onClick: ()=>router.push({
                                                     pathname: "/mypage"
                                                 })
@@ -322,68 +344,93 @@ const Header = ()=>{
                     })
                 })
             }),
-            /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("header", {
-                className: [
-                    (_Header_module_css__WEBPACK_IMPORTED_MODULE_9___default().mobile_headerWrapper),
-                    headerBG ? (_Header_module_css__WEBPACK_IMPORTED_MODULE_9___default().mobile_activebg) : ""
-                ].join(" "),
+            /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.Fragment, {
                 children: [
-                    /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_icons_ai__WEBPACK_IMPORTED_MODULE_7__.AiOutlineMenu, {}),
-                    /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("nav", {
-                        children: [
-                            /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("span", {
-                                className: (_Header_module_css__WEBPACK_IMPORTED_MODULE_9___default().logo),
-                                onClick: ()=>router.push("/"),
-                                children: "WAGU"
-                            }),
-                            /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
-                                className: (_Header_module_css__WEBPACK_IMPORTED_MODULE_9___default().btnWrapper),
-                                children: [
-                                    /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("span", {
-                                        onClick: ()=>router.push({
-                                                pathname: "/product",
-                                                query: {
-                                                    page: 1
+                    /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_icons_ai__WEBPACK_IMPORTED_MODULE_7__.AiOutlineMenu, {
+                        className: (_Header_module_css__WEBPACK_IMPORTED_MODULE_9___default().menuBtn),
+                        onClick: ()=>setmobileheaderBG(!mobileheaderBG)
+                    }),
+                    /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
+                        className: mobileheaderBG ? (_Header_module_css__WEBPACK_IMPORTED_MODULE_9___default().mobile_backdrop) : (_Header_module_css__WEBPACK_IMPORTED_MODULE_9___default().mobile_backdrop_none),
+                        onClick: ()=>setmobileheaderBG(false)
+                    }),
+                    /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("header", {
+                        className: [
+                            (_Header_module_css__WEBPACK_IMPORTED_MODULE_9___default().mobile_headerWrapper),
+                            mobileheaderBG ? (_Header_module_css__WEBPACK_IMPORTED_MODULE_9___default().mobile_activebg) : ""
+                        ].join(" "),
+                        children: /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("nav", {
+                            children: [
+                                /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("span", {
+                                    className: (_Header_module_css__WEBPACK_IMPORTED_MODULE_9___default().logo),
+                                    onClick: ()=>{
+                                        router.push("/");
+                                        setmobileheaderBG(false);
+                                    },
+                                    children: "WAGU"
+                                }),
+                                /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
+                                    className: (_Header_module_css__WEBPACK_IMPORTED_MODULE_9___default().btnWrapper),
+                                    children: user.isLoggedIn && user.userData.data.memberInfo ? /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.Fragment, {
+                                        children: [
+                                            /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("img", {
+                                                src: user.userData.data.memberInfo.profileImg,
+                                                onClick: ()=>{
+                                                    router.push({
+                                                        pathname: "/mypage"
+                                                    });
+                                                    setmobileheaderBG(false);
                                                 }
                                             }),
-                                        children: "PRODUCT"
-                                    }),
-                                    /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("span", {
-                                        onClick: ()=>router.push({
-                                                pathname: "/community"
+                                            /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("span", {
+                                                onClick: LogOutHandler,
+                                                children: "LOGOUT"
+                                            })
+                                        ]
+                                    }) : /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.Fragment, {
+                                        children: [
+                                            /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("span", {
+                                                onClick: ()=>{
+                                                    router.push("/login/join");
+                                                    setmobileheaderBG(false);
+                                                },
+                                                children: "SIGN IN"
                                             }),
-                                        children: "COMMUNITY"
+                                            /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("span", {
+                                                onClick: LoginBtnHandler,
+                                                children: "LOGIN"
+                                            })
+                                        ]
                                     })
-                                ]
-                            }),
-                            /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
-                                className: (_Header_module_css__WEBPACK_IMPORTED_MODULE_9___default().btnWrapper),
-                                children: user.isLoggedIn && user.userData.data.memberInfo ? /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.Fragment, {
-                                    children: [
-                                        /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_icons_ri__WEBPACK_IMPORTED_MODULE_6__.RiUser5Line, {
-                                            onClick: ()=>router.push({
-                                                    pathname: "/mypage"
-                                                })
-                                        }),
-                                        /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("span", {
-                                            onClick: LogOutHandler,
-                                            children: "LOGOUT"
-                                        })
-                                    ]
-                                }) : /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.Fragment, {
+                                }),
+                                /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
+                                    className: (_Header_module_css__WEBPACK_IMPORTED_MODULE_9___default().btnWrapper),
                                     children: [
                                         /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("span", {
-                                            onClick: ()=>router.push("/login/join"),
-                                            children: "SIGN IN"
+                                            onClick: ()=>{
+                                                router.push({
+                                                    pathname: "/product",
+                                                    query: {
+                                                        page: 1
+                                                    }
+                                                });
+                                                setmobileheaderBG(false);
+                                            },
+                                            children: "PRODUCT"
                                         }),
                                         /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("span", {
-                                            onClick: LoginBtnHandler,
-                                            children: "LOGIN"
+                                            onClick: ()=>{
+                                                router.push({
+                                                    pathname: "/community"
+                                                });
+                                                setmobileheaderBG(false);
+                                            },
+                                            children: "COMMUNITY"
                                         })
                                     ]
                                 })
-                            })
-                        ]
+                            ]
+                        })
                     })
                 ]
             })

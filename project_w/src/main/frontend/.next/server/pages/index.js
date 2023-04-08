@@ -22,6 +22,7 @@ module.exports = {
 module.exports = {
 	"BestReviewwrapper": "BestReview_BestReviewwrapper__EjeOY",
 	"BestReview": "BestReview_BestReview___54NT",
+	"bestReviewCardWrapper": "BestReview_bestReviewCardWrapper__TNEMF",
 	"card": "BestReview_card__mQNVA",
 	"reviewimg": "BestReview_reviewimg__Hc1AQ",
 	"reviewimg_Modal": "BestReview_reviewimg_Modal__qHlPV",
@@ -283,41 +284,44 @@ const BestReview = (props)=>{
                     "maxframe",
                     (BestReview_module_default()).BestReview
                 ].join(" "),
-                children: bestreviewArr.map((data, idx)=>/*#__PURE__*/ (0,jsx_runtime_.jsxs)(ui_Card, {
-                        id: idx,
-                        onClick: OnModal(idx),
-                        className: (BestReview_module_default()).card,
-                        children: [
-                            /*#__PURE__*/ jsx_runtime_.jsx("img", {
-                                id: idx.toString(),
-                                className: (BestReview_module_default()).reviewimg,
-                                alt: `${data.wineName}_review_img`,
-                                src: data.reviewImg1
-                            }),
-                            /*#__PURE__*/ jsx_runtime_.jsx("h1", {
-                                id: idx.toString(),
-                                children: data.reviewTitle
-                            }),
-                            /*#__PURE__*/ jsx_runtime_.jsx("div", {
-                                id: "contents",
-                                children: data.desc
-                            }),
-                            /*#__PURE__*/ jsx_runtime_.jsx("div", {
-                                id: "text",
-                                children: data.writerNick
-                            }),
-                            /*#__PURE__*/ jsx_runtime_.jsx("div", {
-                                id: "text",
-                                children: data.regiDate.split("T")[0]
-                            }),
-                            /*#__PURE__*/ jsx_runtime_.jsx("div", {
-                                id: "star",
-                                children: drawStar(data.starPoint).map((star, idx)=>/*#__PURE__*/ jsx_runtime_.jsx("span", {
-                                        children: star
-                                    }, `star_${idx}`))
-                            })
-                        ]
-                    }, `review_${idx}`))
+                children: /*#__PURE__*/ jsx_runtime_.jsx("div", {
+                    className: (BestReview_module_default()).bestReviewCardWrapper,
+                    children: bestreviewArr.map((data, idx)=>/*#__PURE__*/ (0,jsx_runtime_.jsxs)(ui_Card, {
+                            id: idx,
+                            onClick: OnModal(idx),
+                            className: (BestReview_module_default()).card,
+                            children: [
+                                /*#__PURE__*/ jsx_runtime_.jsx("img", {
+                                    id: idx.toString(),
+                                    className: (BestReview_module_default()).reviewimg,
+                                    alt: `${data.wineName}_review_img`,
+                                    src: data.reviewImg1
+                                }),
+                                /*#__PURE__*/ jsx_runtime_.jsx("h1", {
+                                    id: idx.toString(),
+                                    children: data.reviewTitle
+                                }),
+                                /*#__PURE__*/ jsx_runtime_.jsx("div", {
+                                    id: "contents",
+                                    children: data.desc
+                                }),
+                                /*#__PURE__*/ jsx_runtime_.jsx("div", {
+                                    id: "text",
+                                    children: data.writerNick
+                                }),
+                                /*#__PURE__*/ jsx_runtime_.jsx("div", {
+                                    id: "text",
+                                    children: data.regiDate.split("T")[0]
+                                }),
+                                /*#__PURE__*/ jsx_runtime_.jsx("div", {
+                                    id: "star",
+                                    children: drawStar(data.starPoint).map((star, idx)=>/*#__PURE__*/ jsx_runtime_.jsx("span", {
+                                            children: star
+                                        }, `star_${idx}`))
+                                })
+                            ]
+                        }, `review_${idx}`))
+                })
             }),
             ShowModal && /*#__PURE__*/ (0,jsx_runtime_.jsxs)(ui_Modal, {
                 offModal: OffModal,
@@ -872,7 +876,8 @@ const Selector = ()=>{
                 children: /*#__PURE__*/ jsx_runtime_.jsx(Button/* default */.Z, {
                     buttontext: "보러가기",
                     buttonColor: "main",
-                    onClick: btnSearch
+                    onClick: btnSearch,
+                    buttonSize: "l"
                 })
             })
         ]

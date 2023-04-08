@@ -52,7 +52,8 @@ module.exports = {
 	"pagebtn": "Product_SM_pagebtn__nIe5b",
 	"activebtn": "Product_SM_activebtn__S0MFv",
 	"prevNextBtn": "Product_SM_prevNextBtn__unTZY",
-	"noWine": "Product_SM_noWine__gQLRa"
+	"noWine": "Product_SM_noWine__gQLRa",
+	"BtnLink": "Product_SM_BtnLink__LsVUK"
 };
 
 
@@ -689,6 +690,7 @@ const Product_SM = ()=>{
                         className: (Product_SM_module_default()).pagebtnWrapper,
                         children: [
                             curpage > 9 ? /*#__PURE__*/ jsx_runtime_.jsx((link_default()), {
+                                className: (Product_SM_module_default()).BtnLink,
                                 href: {
                                     pathname: `/product`,
                                     query: {
@@ -710,6 +712,7 @@ const Product_SM = ()=>{
                                     children: c
                                 }, `btn_${idx}`)),
                             PageBtn().length < 10 ? "" : /*#__PURE__*/ jsx_runtime_.jsx((link_default()), {
+                                className: (Product_SM_module_default()).BtnLink,
                                 href: {
                                     pathname: `/product`,
                                     query: {
@@ -865,7 +868,7 @@ const product = ({ query  })=>{
         const counturl = queryarr.length > 0 ? `?${queryarr.join("&")}` : "";
         const id = localStorage.getItem("id");
         dispatch((0,wineSlice/* GetList */.GJ)({
-            userId: id ? id : -1,
+            userId: id !== "null" ? id : -1,
             queryurl: queryurl
         }));
         dispatch((0,wineSlice/* GetCount */.qb)({

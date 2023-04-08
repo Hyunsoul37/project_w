@@ -323,7 +323,7 @@ const CommentList = (props)=>{
                         className: (_CommentList_module_css__WEBPACK_IMPORTED_MODULE_7___default().firstComment_Info),
                         children: [
                             /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("img", {
-                                src: props.writerProfile !== ("null" || 0) ? props.writerProfile : _CommunityComment__WEBPACK_IMPORTED_MODULE_5__/* .defaultimg */ .c
+                                src: props.writerProfile !== ( true && null) ? props.writerProfile : _CommunityComment__WEBPACK_IMPORTED_MODULE_5__/* .defaultimg */ .c
                             }),
                             /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
                                 children: props.writerNick
@@ -373,7 +373,7 @@ const CommentList = (props)=>{
                                         className: (_CommentList_module_css__WEBPACK_IMPORTED_MODULE_7___default().SecondComment_Info),
                                         children: [
                                             /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("img", {
-                                                src: c.writerProfile !== ("null" || 0) ? c.writerProfile : _CommunityComment__WEBPACK_IMPORTED_MODULE_5__/* .defaultimg */ .c
+                                                src: c.writerProfile !== ( true && null) ? c.writerProfile : _CommunityComment__WEBPACK_IMPORTED_MODULE_5__/* .defaultimg */ .c
                                             }),
                                             /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
                                                 children: c.writerNick

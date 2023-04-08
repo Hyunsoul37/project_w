@@ -47,7 +47,8 @@ module.exports = {
 	"wineInfo": "Detail_wineInfo__nMY3G",
 	"wineTasty": "Detail_wineTasty__SvSoX",
 	"wineFood": "Detail_wineFood__qB20K",
-	"wineFoodTextWrapper": "Detail_wineFoodTextWrapper__uofYM",
+	"recommendSnack": "Detail_recommendSnack___jSch",
+	"foodText": "Detail_foodText__izWHh",
 	"Desc": "Detail_Desc__eLTl7",
 	"Desctitle": "Detail_Desctitle___U_eG",
 	"desctext": "Detail_desctext__zzKaE"
@@ -71,24 +72,35 @@ module.exports = {
 
 /***/ }),
 
-/***/ 8932:
+/***/ 5157:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "Z": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(997);
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _Detail_module_css__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(9683);
-/* harmony import */ var _Detail_module_css__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_Detail_module_css__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var react_icons_fa__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(6290);
-/* harmony import */ var react_icons_fa__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_icons_fa__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _util_util__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(72);
-/* harmony import */ var react_star_ratings__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(9883);
-/* harmony import */ var react_star_ratings__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react_star_ratings__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var next_image__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(5675);
-/* harmony import */ var next_image__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(next_image__WEBPACK_IMPORTED_MODULE_3__);
+
+// EXPORTS
+__webpack_require__.d(__webpack_exports__, {
+  "Z": () => (/* binding */ detail_Detail)
+});
+
+// EXTERNAL MODULE: external "react/jsx-runtime"
+var jsx_runtime_ = __webpack_require__(997);
+// EXTERNAL MODULE: ./src/components/detail/Detail.module.css
+var Detail_module = __webpack_require__(9683);
+var Detail_module_default = /*#__PURE__*/__webpack_require__.n(Detail_module);
+// EXTERNAL MODULE: external "react-icons/fa"
+var fa_ = __webpack_require__(6290);
+// EXTERNAL MODULE: ./src/components/util/util.ts
+var util = __webpack_require__(72);
+// EXTERNAL MODULE: external "react-star-ratings"
+var external_react_star_ratings_ = __webpack_require__(9883);
+var external_react_star_ratings_default = /*#__PURE__*/__webpack_require__.n(external_react_star_ratings_);
+// EXTERNAL MODULE: ./node_modules/next/image.js
+var next_image = __webpack_require__(5675);
+var image_default = /*#__PURE__*/__webpack_require__.n(next_image);
+;// CONCATENATED MODULE: external "@mui/material"
+const material_namespaceObject = require("@mui/material");
+;// CONCATENATED MODULE: ./src/components/detail/Detail.tsx
+
 
 
 
@@ -102,55 +114,56 @@ const Detail = (props)=>{
         ...new Set(newarr)
     ];
     const snackList = arrUnique.filter((data)=>data !== "null");
+    const isMobile = (0,material_namespaceObject.useMediaQuery)("(max-width: 586px)");
     if (!props?.imageUrl) {
-        return /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.Fragment, {});
+        return /*#__PURE__*/ jsx_runtime_.jsx(jsx_runtime_.Fragment, {});
     }
-    return /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
+    return /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
         className: "maxframe",
         children: [
-            /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
-                className: (_Detail_module_css__WEBPACK_IMPORTED_MODULE_4___default().Detail),
+            /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
+                className: (Detail_module_default()).Detail,
                 children: [
-                    /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
-                        className: (_Detail_module_css__WEBPACK_IMPORTED_MODULE_4___default().imageWrapper),
-                        children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx((next_image__WEBPACK_IMPORTED_MODULE_3___default()), {
+                    /*#__PURE__*/ jsx_runtime_.jsx("div", {
+                        className: (Detail_module_default()).imageWrapper,
+                        children: /*#__PURE__*/ jsx_runtime_.jsx((image_default()), {
                             alt: "wineimg",
                             width: 318,
                             height: 318,
                             src: props.imageUrl ? props.imageUrl : ""
                         })
                     }),
-                    /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
-                        className: (_Detail_module_css__WEBPACK_IMPORTED_MODULE_4___default().wineInfoWrapper),
+                    /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
+                        className: (Detail_module_default()).wineInfoWrapper,
                         children: [
-                            /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
-                                className: (_Detail_module_css__WEBPACK_IMPORTED_MODULE_4___default().wineName),
+                            /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
+                                className: (Detail_module_default()).wineName,
                                 children: [
-                                    /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("h4", {
+                                    /*#__PURE__*/ jsx_runtime_.jsx("h4", {
                                         children: props.korName
                                     }),
-                                    /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("p", {
+                                    /*#__PURE__*/ jsx_runtime_.jsx("p", {
                                         children: props.engName
                                     })
                                 ]
                             }),
-                            /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
-                                className: (_Detail_module_css__WEBPACK_IMPORTED_MODULE_4___default().wineInfo),
-                                children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("table", {
-                                    children: /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("tbody", {
+                            /*#__PURE__*/ jsx_runtime_.jsx("div", {
+                                className: (Detail_module_default()).wineInfo,
+                                children: /*#__PURE__*/ jsx_runtime_.jsx("table", {
+                                    children: /*#__PURE__*/ (0,jsx_runtime_.jsxs)("tbody", {
                                         children: [
-                                            /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("tr", {
+                                            /*#__PURE__*/ (0,jsx_runtime_.jsxs)("tr", {
                                                 children: [
-                                                    /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("th", {
+                                                    /*#__PURE__*/ jsx_runtime_.jsx("th", {
                                                         children: "소비자가"
                                                     }),
-                                                    /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("td", {
+                                                    /*#__PURE__*/ jsx_runtime_.jsx("td", {
                                                         children: props.price
                                                     }),
-                                                    /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("th", {
+                                                    /*#__PURE__*/ jsx_runtime_.jsx("th", {
                                                         children: "생산국가 / 지역"
                                                     }),
-                                                    /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("td", {
+                                                    /*#__PURE__*/ (0,jsx_runtime_.jsxs)("td", {
                                                         children: [
                                                             props.country,
                                                             " / ",
@@ -159,29 +172,29 @@ const Detail = (props)=>{
                                                     })
                                                 ]
                                             }),
-                                            /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("tr", {
+                                            /*#__PURE__*/ (0,jsx_runtime_.jsxs)("tr", {
                                                 children: [
-                                                    /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("th", {
+                                                    /*#__PURE__*/ (0,jsx_runtime_.jsxs)("th", {
                                                         children: [
                                                             "평점(",
                                                             props.starPoint,
                                                             "점)"
                                                         ]
                                                     }),
-                                                    /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("td", {
-                                                        children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx((react_star_ratings__WEBPACK_IMPORTED_MODULE_2___default()), {
+                                                    /*#__PURE__*/ jsx_runtime_.jsx("td", {
+                                                        children: /*#__PURE__*/ jsx_runtime_.jsx((external_react_star_ratings_default()), {
                                                             rating: props.starPoint,
                                                             starRatedColor: "#61002E",
                                                             numberOfStars: 5,
-                                                            starDimension: "20px",
-                                                            starSpacing: "2px",
+                                                            starDimension: isMobile ? "13px" : "20px",
+                                                            starSpacing: isMobile ? "1px" : "2px",
                                                             name: "rating"
                                                         })
                                                     }),
-                                                    /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("th", {
+                                                    /*#__PURE__*/ jsx_runtime_.jsx("th", {
                                                         children: "알콜도수"
                                                     }),
-                                                    /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("td", {
+                                                    /*#__PURE__*/ jsx_runtime_.jsx("td", {
                                                         children: props.alcohol !== "null" ? props.alcohol : "없음"
                                                     })
                                                 ]
@@ -190,40 +203,40 @@ const Detail = (props)=>{
                                     })
                                 })
                             }),
-                            /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
-                                className: (_Detail_module_css__WEBPACK_IMPORTED_MODULE_4___default().wineTasty),
-                                children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("table", {
-                                    children: /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("tbody", {
+                            /*#__PURE__*/ jsx_runtime_.jsx("div", {
+                                className: (Detail_module_default()).wineTasty,
+                                children: /*#__PURE__*/ jsx_runtime_.jsx("table", {
+                                    children: /*#__PURE__*/ (0,jsx_runtime_.jsxs)("tbody", {
                                         children: [
-                                            /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("tr", {
+                                            /*#__PURE__*/ (0,jsx_runtime_.jsxs)("tr", {
                                                 children: [
-                                                    /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("th", {
+                                                    /*#__PURE__*/ jsx_runtime_.jsx("th", {
                                                         children: "당도"
                                                     }),
-                                                    /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("td", {
-                                                        children: props.sweet ? (0,_util_util__WEBPACK_IMPORTED_MODULE_5__/* .drawStar */ .qJ)(props.sweet, /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_icons_fa__WEBPACK_IMPORTED_MODULE_1__.FaCircle, {}), /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_icons_fa__WEBPACK_IMPORTED_MODULE_1__.FaRegCircle, {})) : "없음"
+                                                    /*#__PURE__*/ jsx_runtime_.jsx("td", {
+                                                        children: props.sweet ? (0,util/* drawStar */.qJ)(props.sweet, /*#__PURE__*/ jsx_runtime_.jsx(fa_.FaCircle, {}), /*#__PURE__*/ jsx_runtime_.jsx(fa_.FaRegCircle, {})) : "없음"
                                                     }),
-                                                    /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("th", {
+                                                    /*#__PURE__*/ jsx_runtime_.jsx("th", {
                                                         children: "바디"
                                                     }),
-                                                    /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("td", {
-                                                        children: props.body ? (0,_util_util__WEBPACK_IMPORTED_MODULE_5__/* .drawStar */ .qJ)(props.body, /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_icons_fa__WEBPACK_IMPORTED_MODULE_1__.FaCircle, {}), /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_icons_fa__WEBPACK_IMPORTED_MODULE_1__.FaRegCircle, {})) : "없음"
+                                                    /*#__PURE__*/ jsx_runtime_.jsx("td", {
+                                                        children: props.body ? (0,util/* drawStar */.qJ)(props.body, /*#__PURE__*/ jsx_runtime_.jsx(fa_.FaCircle, {}), /*#__PURE__*/ jsx_runtime_.jsx(fa_.FaRegCircle, {})) : "없음"
                                                     })
                                                 ]
                                             }),
-                                            /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("tr", {
+                                            /*#__PURE__*/ (0,jsx_runtime_.jsxs)("tr", {
                                                 children: [
-                                                    /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("th", {
+                                                    /*#__PURE__*/ jsx_runtime_.jsx("th", {
                                                         children: "산도"
                                                     }),
-                                                    /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("td", {
-                                                        children: props.acidity ? (0,_util_util__WEBPACK_IMPORTED_MODULE_5__/* .drawStar */ .qJ)(props.acidity, /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_icons_fa__WEBPACK_IMPORTED_MODULE_1__.FaCircle, {}), /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_icons_fa__WEBPACK_IMPORTED_MODULE_1__.FaRegCircle, {})) : "없음"
+                                                    /*#__PURE__*/ jsx_runtime_.jsx("td", {
+                                                        children: props.acidity ? (0,util/* drawStar */.qJ)(props.acidity, /*#__PURE__*/ jsx_runtime_.jsx(fa_.FaCircle, {}), /*#__PURE__*/ jsx_runtime_.jsx(fa_.FaRegCircle, {})) : "없음"
                                                     }),
-                                                    /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("th", {
+                                                    /*#__PURE__*/ jsx_runtime_.jsx("th", {
                                                         children: "타닌"
                                                     }),
-                                                    /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("td", {
-                                                        children: props.tannin ? (0,_util_util__WEBPACK_IMPORTED_MODULE_5__/* .drawStar */ .qJ)(props.tannin, /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_icons_fa__WEBPACK_IMPORTED_MODULE_1__.FaCircle, {}), /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_icons_fa__WEBPACK_IMPORTED_MODULE_1__.FaRegCircle, {})) : "없음"
+                                                    /*#__PURE__*/ jsx_runtime_.jsx("td", {
+                                                        children: props.tannin ? (0,util/* drawStar */.qJ)(props.tannin, /*#__PURE__*/ jsx_runtime_.jsx(fa_.FaCircle, {}), /*#__PURE__*/ jsx_runtime_.jsx(fa_.FaRegCircle, {})) : "없음"
                                                     })
                                                 ]
                                             })
@@ -231,25 +244,28 @@ const Detail = (props)=>{
                                     })
                                 })
                             }),
-                            /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
-                                className: (_Detail_module_css__WEBPACK_IMPORTED_MODULE_4___default().wineFood),
+                            /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
+                                className: (Detail_module_default()).wineFood,
                                 children: [
-                                    /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("p", {
+                                    /*#__PURE__*/ jsx_runtime_.jsx("p", {
                                         children: "음식매칭"
                                     }),
-                                    /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
-                                        children: snackList.map((food)=>/*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx((next_image__WEBPACK_IMPORTED_MODULE_3___default()), {
-                                                alt: "food",
-                                                width: 100,
-                                                height: 100,
-                                                src: `/images/icon/${food}.PNG`
-                                            }))
-                                    }),
-                                    /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
-                                        className: (_Detail_module_css__WEBPACK_IMPORTED_MODULE_4___default().wineFoodTextWrapper),
-                                        children: snackList.length > 0 ? snackList.map((food)=>/*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
-                                                children: food
-                                            }, `${food}_txt`)) : "없음"
+                                    /*#__PURE__*/ jsx_runtime_.jsx("div", {
+                                        className: (Detail_module_default()).recommendSnack,
+                                        children: snackList.length > 0 ? snackList.map((food)=>/*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
+                                                children: [
+                                                    /*#__PURE__*/ jsx_runtime_.jsx((image_default()), {
+                                                        alt: "food",
+                                                        width: 100,
+                                                        height: 100,
+                                                        src: `/images/icon/${food}.PNG`
+                                                    }),
+                                                    /*#__PURE__*/ jsx_runtime_.jsx("p", {
+                                                        className: (Detail_module_default()).foodText,
+                                                        children: food
+                                                    }, `${food}_txt`)
+                                                ]
+                                            })) : "추천 안주 정보가 없습니다."
                                     })
                                 ]
                             })
@@ -257,18 +273,18 @@ const Detail = (props)=>{
                     })
                 ]
             }),
-            /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
-                className: (_Detail_module_css__WEBPACK_IMPORTED_MODULE_4___default().Desc),
+            /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
+                className: (Detail_module_default()).Desc,
                 children: [
-                    /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("img", {
+                    /*#__PURE__*/ jsx_runtime_.jsx("img", {
                         src: "/images/wineBg.png"
                     }),
-                    /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("p", {
-                        className: (_Detail_module_css__WEBPACK_IMPORTED_MODULE_4___default().Desctitle),
+                    /*#__PURE__*/ jsx_runtime_.jsx("p", {
+                        className: (Detail_module_default()).Desctitle,
                         children: props.korName
                     }),
-                    /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("p", {
-                        className: (_Detail_module_css__WEBPACK_IMPORTED_MODULE_4___default().desctext),
+                    /*#__PURE__*/ jsx_runtime_.jsx("p", {
+                        className: (Detail_module_default()).desctext,
                         children: props.desc
                     })
                 ]
@@ -276,7 +292,7 @@ const Detail = (props)=>{
         ]
     });
 };
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Detail);
+/* harmony default export */ const detail_Detail = (Detail);
 
 
 /***/ }),
@@ -428,7 +444,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(997);
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(9648);
-/* harmony import */ var _components_detail_Detail_tsx__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(8932);
+/* harmony import */ var _components_detail_Detail_tsx__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(5157);
 /* harmony import */ var _components_detail_Wineterms__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(7416);
 /* harmony import */ var _util_Seo__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(8606);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(6689);
