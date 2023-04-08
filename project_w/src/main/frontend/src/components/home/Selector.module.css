@@ -1,7 +1,14 @@
-.h25 {
+.sliderwrapper {
+  display: flex;
+  justify-content: center;
+}
+.slider {
+  width: 1750px;
   height: 250px;
 }
-
+.slider img {
+  height: 250px;
+}
 .text {
   font-size: 30px;
   font-weight: 700;
@@ -36,11 +43,15 @@
   margin: 0 10px;
 }
 
-@media screen and (max-device-width: 586px) {
+@media screen and (max-width: 586px) {
   .text {
     font-size: 25px;
   }
   .select {
     font-size: 25px;
+  }
+  .slider {
+    width: 250px;
+    height: 250px;
   }
 }

@@ -1,10 +1,11 @@
 import Slider from "react-slick";
 import styled from "./Selector.module.css";
+import Image from "next/image";
 
 const SelectorSlider = () => {
   const settings = {
     infinite: true,
-    slidesToShow: 1,
+    slidesToShow: 8,
     slidesToScroll: 1,
     // variableWidth: true,
     pauseOnFocus: false,
@@ -12,14 +13,13 @@ const SelectorSlider = () => {
     // centerMode: true,
     // touchRatio: 0,
     autoplay: true,
-    autoplaySpeed: 1000,
+    autoplaySpeed: 3000,
     swipeToSlide: false,
     draggable: false,
     arrows: false,
     cssEase: "linear",
     touchMove: false,
-    //  easing: 'linear',
-    //  cssEase: 'cubic-bezier(0.250, 0.250, 0.750, 0.750)',
+    responsive: [{ breakpoint: 586, settings: { slidesToShow: 1 } }],
   };
   const flowImgs = [];
   for (let idx = 0; idx <= 14; idx++) {
@@ -27,16 +27,20 @@ const SelectorSlider = () => {
   }
 
   return (
-    <Slider {...settings}>
-      {flowImgs.map((flowImgs, idx) => (
-        <img
-          key={`flowimg${idx}`}
-          src={flowImgs}
-          alt={`flowimg${idx}`}
-          className={styled.h25}
-        />
-      ))}
-    </Slider>
+    <div className={styled.sliderwrapper}>
+      <Slider {...settings} className={styled.slider}>
+        {flowImgs.map((flowImgs, idx) => (
+          <Image
+            key={`flowimg${idx}`}
+            src={flowImgs}
+            alt={`flowimg${idx}`}
+            width={250}
+            height={250}
+            //className={styled.h25}
+          />
+        ))}
+      </Slider>
+    </div>
   );
 };
 
