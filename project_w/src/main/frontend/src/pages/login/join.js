@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { use, useEffect, useRef, useState } from "react";
 import useFetch from "../../customHooks/useFetch";
 import Form from "../../components/ui/Form";
 import styled from "./Signupform.module.css";
@@ -8,11 +8,14 @@ const url = "/api/auth/join";
 const type = "POST";
 const header = { "Content-Type": "application/json;charset=UTF-8" };
 const movepath = "/login";
+
 const emailReg =
   /^[A-Za-z0-9]([-_.]?[A-Za-z0-9])*@[A-Za-z0-9]([-_.]?[A-Za-z0-9])*\.[A-Za-z]{2,3}$/;
 
 export const passwordreg =
   /^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,20}$/;
+
+const specialsymbols = /[\{\}\[\]\/?.,;:|\)*~`!^\-_+<>@\#$%&\\\=\(\'\"]/g;
 
 const join = () => {
   const EmailRef = useRef(null);
@@ -27,13 +30,21 @@ const join = () => {
   const [phone, setPhone] = useState("");
   const [isduplicate, setDuplicate] = useState(false);
   const [iseditedId, setIseditedId] = useState(false);
+  const [iseditedname, setIseditedname] = useState(false);
+  const [isNameNotValid, setisNameNotValid] = useState(false);
   const [isNickNameduplicate, setNickNameDuplicate] = useState(false);
   const [iseditedNickName, setIseditedNickName] = useState(false);
+  const [nickNameErrmsg, setnickNameErrmsg] = useState("");
+  const [idErrmsg, setIdErrmsg] = useState("");
+  const [NameErrmsg, setNameErrmsg] = useState("");
 
   const submitHandler = (e) => {
     e.preventDefault();
-    if (isduplicate || isNickNameduplicate) {
-      alert("아이디 또는 닉네임이 중복입니다.");
+
+    if (isduplicate || isNickNameduplicate || isNameNotValid) {
+      alert(
+        "아이디 또는 닉네임이 중복이거나 이름, 아이디, 닉네임에 특수문자가 들어가 있습니다."
+      );
       return;
     }
     if (!passwordreg.test(password)) {
@@ -72,7 +83,14 @@ const join = () => {
     setPhone("");
   };
   const IDDuplicateResponseMessage = (data) => {
+    if (specialsymbols.test(id)) {
+      setIdErrmsg("아이디에는 특수문자를 사용할 수 없습니다.");
+      setDuplicate(true);
+      setIseditedId(true);
+      return;
+    }
     if (data.data.duplicate === true) {
+      setIdErrmsg("아이디 중복입니다.");
       setDuplicate(true);
     } else {
       setDuplicate(false);
@@ -80,14 +98,30 @@ const join = () => {
     setIseditedId(true);
   };
   const NickNameDuplicateResponseMessage = (data) => {
+    if (specialsymbols.test(nickName)) {
+      setnickNameErrmsg("닉네임에는 특수문자를 사용할 수 없습니다.");
+      setNickNameDuplicate(true);
+      setIseditedNickName(true);
+      return;
+    }
     if (data.data.duplicate === true) {
+      setnickNameErrmsg("닉네임 중복입니다.");
       setNickNameDuplicate(true);
     } else {
       setNickNameDuplicate(false);
     }
     setIseditedNickName(true);
   };
+  const NameValidCheck = () => {
+    if (specialsymbols.test(name)) {
+      setNameErrmsg("이름에는 특수문자를 사용할 수 없습니다.");
+      setisNameNotValid(true);
+    } else {
+      setisNameNotValid(false);
+    }
 
+    setIseditedname(true);
+  };
   const OnCheckduplicateID = async () => {
     await postData({
       url: `api/auth/id-check?id=${id}`,
@@ -145,8 +179,12 @@ const join = () => {
             type="text"
             value={name ? name : ""}
             onChange={ChangeNameHandler}
+            onBlur={NameValidCheck}
             placeholder="사용자 이름"
           />
+          {name !== "" && iseditedname && isNameNotValid ? (
+            <p className={styled.errormsg}>{NameErrmsg}</p>
+          ) : null}
         </label>
         <label htmlFor="id">
           아이디
@@ -160,7 +198,7 @@ const join = () => {
           />
           {id !== "" && iseditedId ? (
             isduplicate ? (
-              <p className={styled.errormsg}>아이디 중복입니다.</p>
+              <p className={styled.errormsg}>{idErrmsg}</p>
             ) : (
               <p>사용가능한 아이디입니다.</p>
             )
@@ -179,7 +217,7 @@ const join = () => {
           />
           {nickName !== "" && iseditedNickName ? (
             isNickNameduplicate ? (
-              <p className={styled.errormsg}>닉네임 중복입니다.</p>
+              <p className={styled.errormsg}>{nickNameErrmsg}</p>
             ) : (
               <p>사용가능한 닉네임입니다.</p>
             )

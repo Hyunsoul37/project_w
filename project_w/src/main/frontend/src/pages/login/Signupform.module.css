@@ -59,4 +59,8 @@
     margin-top: 30px;
     margin-bottom: 100px;
   }
+  .errormsg {
+    font-size: 13px;
+    margin: 5px 0px;
+  }
 }
