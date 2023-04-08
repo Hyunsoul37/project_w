@@ -20,7 +20,7 @@ const product = ({ query }) => {
     const id = localStorage.getItem("id");
     dispatch(
       GetList({
-        userId: id ? id : -1,
+        userId: id !== "null" ? id : -1,
         queryurl: queryurl,
       })
     );
