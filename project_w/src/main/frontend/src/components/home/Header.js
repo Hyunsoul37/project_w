@@ -19,15 +19,18 @@ const Header = () => {
   const user = useSelector((state) => state.user);
   const userData = user.userData ? user.userData.data : null;
   const [headerBG, setHeaderBg] = useState(false);
+  const [mobileheaderBG, setmobileheaderBG] = useState(false);
   const { sendRequestData: getAccessToken } = useFetch();
   const [showmoblieMenu, setShowMobileMenu] = useState(false);
 
   const LoginBtnHandler = () => {
     router.push({ pathname: "/login" });
+    setmobileheaderBG(false);
     //router.push("/login");
   };
   const LogOutHandler = () => {
     dispatch(logout());
+    setmobileheaderBG(false);
   };
 
   const HeaderFadeHandler = () => {
@@ -93,7 +96,8 @@ const Header = () => {
             <div className={styled.btnWrapper}>
               {user.isLoggedIn && user.userData.data.memberInfo ? (
                 <>
-                  <RiUser5Line
+                  <img
+                    src={user.userData.data.memberInfo.profileImg}
                     onClick={() => router.push({ pathname: "/mypage" })}
                   />
                   <span onClick={LogOutHandler}>LOGOUT</span>
@@ -110,46 +114,82 @@ const Header = () => {
           </nav>
         </div>
       </header>
-      <header
-        className={[
-          styled.mobile_headerWrapper,
-          headerBG ? styled.mobile_activebg : "",
-        ].join(" ")}
-      >
-        <AiOutlineMenu />
-        <nav>
-          <span className={styled.logo} onClick={() => router.push("/")}>
-            WAGU
-          </span>
-          <div className={styled.btnWrapper}>
+      <>
+        <AiOutlineMenu
+          className={styled.menuBtn}
+          onClick={() => setmobileheaderBG(!mobileheaderBG)}
+        />
+        <div
+          className={
+            mobileheaderBG
+              ? styled.mobile_backdrop
+              : styled.mobile_backdrop_none
+          }
+          onClick={() => setmobileheaderBG(false)}
+        ></div>
+        <header
+          className={[
+            styled.mobile_headerWrapper,
+            mobileheaderBG ? styled.mobile_activebg : "",
+          ].join(" ")}
+        >
+          <nav>
             <span
-              onClick={() =>
-                router.push({ pathname: "/product", query: { page: 1 } })
-              }
+              className={styled.logo}
+              onClick={() => {
+                router.push("/");
+                setmobileheaderBG(false);
+              }}
             >
-              PRODUCT
+              WAGU
             </span>
-            <span onClick={() => router.push({ pathname: "/community" })}>
-              COMMUNITY
-            </span>
-          </div>
-          <div className={styled.btnWrapper}>
-            {user.isLoggedIn && user.userData.data.memberInfo ? (
-              <>
-                <RiUser5Line
-                  onClick={() => router.push({ pathname: "/mypage" })}
-                />
-                <span onClick={LogOutHandler}>LOGOUT</span>
-              </>
-            ) : (
-              <>
-                <span onClick={() => router.push("/login/join")}>SIGN IN</span>
-                <span onClick={LoginBtnHandler}>LOGIN</span>
-              </>
-            )}
-          </div>
-        </nav>
-      </header>
+            <div className={styled.btnWrapper}>
+              {user.isLoggedIn && user.userData.data.memberInfo ? (
+                <>
+                  <img
+                    src={user.userData.data.memberInfo.profileImg}
+                    onClick={() => {
+                      router.push({ pathname: "/mypage" });
+                      setmobileheaderBG(false);
+                    }}
+                  />
+                  <span onClick={LogOutHandler}>LOGOUT</span>
+                </>
+              ) : (
+                <>
+                  <span
+                    onClick={() => {
+                      router.push("/login/join");
+                      setmobileheaderBG(false);
+                    }}
+                  >
+                    SIGN IN
+                  </span>
+                  <span onClick={LoginBtnHandler}>LOGIN</span>
+                </>
+              )}
+            </div>
+            <div className={styled.btnWrapper}>
+              <span
+                onClick={() => {
+                  router.push({ pathname: "/product", query: { page: 1 } });
+                  setmobileheaderBG(false);
+                }}
+              >
+                PRODUCT
+              </span>
+              <span
+                onClick={() => {
+                  router.push({ pathname: "/community" });
+                  setmobileheaderBG(false);
+                }}
+              >
+                COMMUNITY
+              </span>
+            </div>
+          </nav>
+        </header>
+      </>
     </>
   );
 };

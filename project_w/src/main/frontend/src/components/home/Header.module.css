@@ -18,6 +18,9 @@
   position: fixed;
   z-index: 10;
 }
+.menuBtn {
+  display: none;
+}
 .moblie {
   display: none;
 }
@@ -26,6 +29,10 @@
 }
 .mobile_activebg {
   display: none;
+}
+.btnWrapper {
+  display: flex;
+  align-items: center;
 }
 .btnWrapper:last-child {
   flex-grow: 1;
@@ -41,6 +48,12 @@
   padding: 0px 10px;
   line-height: 20px;
   /* padding-bottom: 5px; */
+}
+.btnWrapper img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  cursor: pointer;
 }
 .btnWrapper svg {
   font-size: 20px;
@@ -64,6 +77,10 @@
   .Header {
     display: none;
   }
+  .logo {
+    margin: 40px 0px;
+  }
+
   .moblie {
     width: 50vw;
     height: 100vh;
@@ -81,23 +98,63 @@
     display: none;
   }
   .mobile_headerWrapper {
+    display: block;
     width: 50vw;
     height: 100%;
     position: fixed;
+    opacity: 0;
     right: 0px;
-    z-index: 10;
-    background-color: white;
-    border-bottom: 2px solid lightgray;
-    transform: translateX(550px);
+    z-index: 40;
+    background-color: rgba(255, 255, 255);
+    transform: translateX(255px);
+    transition: all 0.5s;
   }
   .mobile_activebg {
+    display: block;
     width: 50vw;
     height: 100%;
     position: fixed;
+    opacity: 1;
     right: 0px;
-    z-index: 10;
-    background-color: white;
-    border-bottom: 2px solid lightgray;
-    transform: translateX(550px);
+    z-index: 40;
+    background-color: rgba(255, 255, 255);
+    transform: translateX(0px);
+    transition: all 0.5s;
+  }
+
+  .menuBtn {
+    display: block;
+    color: white;
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 30;
+    font-size: 30px;
+    filter: drop-shadow(2px 2px 2px gray);
+  }
+
+  .mobile_headerWrapper nav {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .btnWrapper span {
+    font-size: 18px;
+  }
+  .btnWrapper:last-child {
+    flex-direction: column;
+  }
+  .btnWrapper:last-child span {
+    margin-top: 20px;
+  }
+  .mobile_backdrop {
+    width: 50vw;
+    height: 100%;
+    position: fixed;
+    left: 0px;
+    z-index: 40;
+  }
+  .mobile_backdrop_none {
+    display: none;
   }
 }
