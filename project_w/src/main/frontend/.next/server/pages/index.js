@@ -132,7 +132,8 @@ const Settings = {
     speed: 3000,
     autoplaySpeed: 5000,
     slidesToShow: 1,
-    arrows: false
+    arrows: false,
+    touchMove: false
 };
 const Banner = ()=>{
     return /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
@@ -907,22 +908,20 @@ const SelectorSlider = ()=>{
         swipeToSlide: false,
         draggable: false,
         arrows: false,
-        cssEase: "linear"
+        cssEase: "linear",
+        touchMove: false
     };
     const flowImgs = [];
     for(let idx = 0; idx <= 14; idx++){
         flowImgs.push(`/images/main_flow${idx}.png`);
     }
-    return /*#__PURE__*/ jsx_runtime_.jsx("div", {
-        className: (Selector_module_default()).h25,
-        children: /*#__PURE__*/ jsx_runtime_.jsx((external_react_slick_default()), {
-            ...settings,
-            children: flowImgs.map((flowImgs, idx)=>/*#__PURE__*/ jsx_runtime_.jsx("img", {
-                    src: flowImgs,
-                    alt: `flowimg${idx}`,
-                    className: (Selector_module_default()).h25
-                }, `flowimg${idx}`))
-        })
+    return /*#__PURE__*/ jsx_runtime_.jsx((external_react_slick_default()), {
+        ...settings,
+        children: flowImgs.map((flowImgs, idx)=>/*#__PURE__*/ jsx_runtime_.jsx("img", {
+                src: flowImgs,
+                alt: `flowimg${idx}`,
+                className: (Selector_module_default()).h25
+            }, `flowimg${idx}`))
     });
 };
 /* harmony default export */ const home_SelectorSlider = (SelectorSlider);
