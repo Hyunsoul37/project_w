@@ -8,12 +8,12 @@
   flex-direction: column;
 }
 
-.formWrapper h4{
+.formWrapper h4 {
   font-size: 20px;
   text-align: start;
   width: 400px;
   margin-bottom: 20px;
-  font-family: 'campton';
+  font-family: "campton";
   font-weight: 800;
 }
 
@@ -23,7 +23,26 @@
   margin-bottom: 10px;
   background-color: var(--primary-txt);
   color: white;
-  font-family: 'campton';
+  font-family: "campton";
   font-weight: 400;
   font-size: 15px;
+}
+
+@media screen and (max-device-width: 586px) {
+  .formWrapper {
+    width: 100%;
+    padding-top: 0px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  .formWrapper h4 {
+    width: 90%;
+    font-size: 18px;
+  }
+  .formWrapper button {
+    width: 100%;
+    font-size: 13px;
+  }
 }

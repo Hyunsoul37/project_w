@@ -1,74 +1,63 @@
-/* .formWrapper{
-    background-color: lightgray;
-    border-radius: 1.5rem;
-    padding: 1.5rem;
-} */
-.form{
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-    justify-content: center;
-
+.form {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: center;
 }
 
-.form input:not([type ='checkbox']){
-    height: 35px;
-    width: 400px; 
-    margin-bottom: 5px;
-    background-color: var(--secondary-txt);
-    border: none;
+.form input:not([type="checkbox"]) {
+  height: 35px;
+  width: 400px;
+  margin-bottom: 5px;
+  background-color: var(--secondary-txt);
+  border: none;
 }
 
-
-.form input::placeholder{
-    padding-left: 5px;
-    color: var(--primary-txt);
+.form input::placeholder {
+  padding-left: 5px;
+  color: var(--primary-txt);
 }
 
-.form div{
-    width: 100%;
-    display: flex;
-    justify-content: center;
+.form div {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.formWrapper span {
+  font-family: "campton";
+  font-weight: 400;
+  font-size: 15px;
+  cursor: pointer;
+}
+.formWrapper label {
+  margin-right: 50px;
+  font-size: 15px;
+}
+
+@media screen and (max-device-width: 586px) {
+  .form {
+    width: 90vw;
     align-items: center;
-    flex-direction: column;
-}
+    justify-content: center;
+  }
 
-.formWrapper span{
-    font-family: 'campton';
-    font-weight: 400;
-    font-size: 15px;
-    cursor: pointer;
+  .form input:not([type="checkbox"]) {
+    width: 100%;
+  }
+  .formWrapper label {
+    width: 95%;
+    margin-right: 0px;
+    margin-bottom: 5px;
+    font-size: 13px;
+  }
+  .form input::placeholder {
+    font-size: 13px;
+  }
+  .formWrapper span {
+    font-size: 13px;
+    margin-right: 15px;
+  }
 }
-.formWrapper label{
-    margin-right: 50px;
-    font-size: 15px;
-}
-/* .formWrapper input[type="checkbox"]{
-    display: none;
-}
-.formWrapper input[type="checkbox"] + label{
-    cursor:pointer;
-    position: relative;
-}
-.formWrapper input[type="checkbox"] + label > span{
-    vertical-align:bottom;
-    margin-left: 5px;
-}
-.formWrapper input[type="checkbox"] + label:before{
-    content:"";
-    display:inline-block;
-    width:15px;
-    height:15px;
-    border:2px solid var(--primary-txt);
-    vertical-align:middle;
-}
-.formWrapper input[type="checkbox"]:checked + label:before{
-    content:'✔';  
-    display:inline-block;
-    font-size: 15px;
-    border:2px solid var(--primary-txt);
-    text-align: center;
-    position: absolute;
-    left: 0;
-    top:0;
-} */
