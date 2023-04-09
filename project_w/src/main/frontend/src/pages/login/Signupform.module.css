@@ -40,7 +40,7 @@
 .formWrapper input {
   margin-left: 10px;
 }
-@media screen and (max-device-width: 586px) {
+@media screen and (max-width: 768px) {
   .formWrapper h1 {
     width: 90%;
     font-size: 18px;

@@ -52,7 +52,7 @@
   font-weight: 600;
 }
 
-@media screen and (max-device-width: 586px) {
+@media screen and (max-width: 768px) {
   .Wineterms h4 {
     font-size: 15px;
   }

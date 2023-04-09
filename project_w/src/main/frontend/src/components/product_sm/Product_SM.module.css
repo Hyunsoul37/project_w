@@ -97,7 +97,7 @@
   margin: 30px;
 }
 
-@media screen and (max-device-width: 586px) {
+@media screen and (max-width: 768px) {
   .ProductWrapper {
     padding-top: 150px;
   }

@@ -156,10 +156,10 @@
   word-break: keep-all;
 }
 
-@media screen and (max-device-width: 586px) {
+@media screen and (max-width: 768px) {
   .Detail {
     width: 100%;
-    padding-top: 150px;
+    padding-top: 80px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -176,7 +176,7 @@
     margin-right: 0px;
   }
   .imageWrapper img {
-    width: 90%;
+    width: 318px;
     height: 318px;
     position: absolute;
   }

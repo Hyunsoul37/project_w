@@ -39,7 +39,7 @@
     transform: translateY(0);
   }
 }
-@media screen and (max-device-width: 586px) {
+@media screen and (max-width: 768px) {
   .Modal {
     width: 350px;
     height: 480px;

@@ -11,7 +11,7 @@ const Detail: React.FC<wineState> = (props) => {
   const newarr = snack?.map((data) => data.replaceAll(" ", ""));
   const arrUnique = [...new Set(newarr)];
   const snackList = arrUnique.filter((data) => data !== "null");
-  const isMobile = useMediaQuery("(max-width: 586px)");
+  const isMobile = useMediaQuery("(max-width: 768px)");
 
   if (!props?.imageUrl) {
     return <></>;

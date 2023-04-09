@@ -5,10 +5,6 @@ import Seo from "../../../util/Seo";
 import axios from "axios";
 
 const CommunityDetail = ({ data }) => {
-  // const review = useSelector((state) => state.review);
-  // const filterlist = review.post.filter((d) => d.reviewId === Number(id));
-  // console.log(filterlist);
-  console.log(data);
   return (
     <>
       <Seo title={`${data.writerNickName}님의 포스팅`} />
@@ -19,7 +15,6 @@ const CommunityDetail = ({ data }) => {
 export default CommunityDetail;
 
 export async function getServerSideProps({ query }) {
-  //여기에 서버에서 받는 코드 작성
   const { id } = query;
   let data;
   await axios

@@ -101,7 +101,7 @@
   opacity: 0.5;
 }
 
-@media screen and (max-device-width: 586px) {
+@media screen and (max-width: 768px) {
   .ProductCard {
     height: 350px;
     width: 180px;
