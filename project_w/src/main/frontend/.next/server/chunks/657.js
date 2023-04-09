@@ -30,7 +30,7 @@ const initialState = {
 };
 const NextGetReview = (0,_reduxjs_toolkit__WEBPACK_IMPORTED_MODULE_0__.createAsyncThunk)("review/Addlist", async (curpage)=>{
     let newlist = [];
-    await axios__WEBPACK_IMPORTED_MODULE_1__["default"].get(`/api/community/review?page=${curpage}`).then((res)=>{
+    await axios__WEBPACK_IMPORTED_MODULE_1__["default"].get(`/api/community/review?page=${curpage + 1}`).then((res)=>{
         res.data.data.map((data)=>newlist.push(data));
     }).catch((err)=>console.log(err));
     return newlist;
