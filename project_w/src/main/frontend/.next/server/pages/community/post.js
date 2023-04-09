@@ -711,7 +711,7 @@ async function getServerSideProps({ query  }) {
     let data = {};
     console.log(edit);
     if (reviewId !== -1) {
-        await axios__WEBPACK_IMPORTED_MODULE_1__["default"].get(`http://ec2-3-35-233-57.ap-northeast-2.compute.amazonaws.com:8080/api/community/review/detail?reviewId=${reviewId}`).then((res)=>{
+        await axios__WEBPACK_IMPORTED_MODULE_1__["default"].get(`http://ec2-15-164-230-113.ap-northeast-2.compute.amazonaws.com:8080/api/community/review/detail?reviewId=${reviewId}`).then((res)=>{
             data = {
                 ...res.data.data
             };

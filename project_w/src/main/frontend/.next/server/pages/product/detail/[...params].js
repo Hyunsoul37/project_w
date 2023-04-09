@@ -4,6 +4,37 @@ exports.id = 134;
 exports.ids = [134];
 exports.modules = {
 
+/***/ 7273:
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+var __webpack_unused_export__;
+
+__webpack_unused_export__ = ({
+    value: true
+});
+Object.defineProperty(exports, "Z", ({
+    enumerable: true,
+    get: function() {
+        return _objectWithoutPropertiesLoose;
+    }
+}));
+function _objectWithoutPropertiesLoose(source, excluded) {
+    if (source == null) return {};
+    var target = {};
+    var sourceKeys = Object.keys(source);
+    var key, i;
+    for(i = 0; i < sourceKeys.length; i++){
+        key = sourceKeys[i];
+        if (excluded.indexOf(key) >= 0) continue;
+        target[key] = source[key];
+    }
+    return target;
+}
+
+
+/***/ }),
+
 /***/ 9683:
 /***/ ((module) => {
 
@@ -440,7 +471,7 @@ const detailPage = ({ data  })=>{
 async function getServerSideProps({ query  }) {
     const { id  } = query;
     let data = {};
-    await axios__WEBPACK_IMPORTED_MODULE_1__["default"].get(`http://ec2-3-35-233-57.ap-northeast-2.compute.amazonaws.com:8080/api/product/wine/detail?pid=${id}`).then((res)=>data = res.data.data);
+    await axios__WEBPACK_IMPORTED_MODULE_1__["default"].get(`http://ec2-15-164-230-113.ap-northeast-2.compute.amazonaws.com:8080/api/product/wine/detail?pid=${id}`).then((res)=>data = res.data.data);
     // const GetDetailInfo = async () => {
     //   const response = await fetch(`/api/product/wine/detail?pid=${id}`, {
     //     method: "GET",
