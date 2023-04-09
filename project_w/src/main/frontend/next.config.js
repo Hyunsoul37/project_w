@@ -19,12 +19,12 @@ const nextConfig = {
       {
         source: "/api/:path*",
         //destination: `http://winetoy.shop/api/:path*`,
-        destination: `http://ec2-3-35-233-57.ap-northeast-2.compute.amazonaws.com:8080/api/:path*`,
+        destination: `http://ec2-15-164-230-113.ap-northeast-2.compute.amazonaws.com:8080/api/:path*`,
       },
       {
         source: "/:first/api/:path*",
         //destination: `http://winetoy.shop/api/:path*`,
-        destination: `http://ec2-3-35-233-57.ap-northeast-2.compute.amazonaws.com:8080/api/:path*`,
+        destination: `http://ec2-15-164-230-113.ap-northeast-2.compute.amazonaws.com:8080/api/:path*`,
       },
     ];
   },

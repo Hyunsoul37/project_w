@@ -19,7 +19,7 @@ export async function getServerSideProps({ query }) {
   let data;
   await axios
     .get(
-      `http://ec2-3-35-233-57.ap-northeast-2.compute.amazonaws.com:8080/api/community/review/detail?reviewId=${id}`
+      `http://ec2-15-164-230-113.ap-northeast-2.compute.amazonaws.com:8080/api/community/review/detail?reviewId=${id}`
     )
     .then((res) => (data = { ...res.data.data }))
     .catch((err) => console.log(err));

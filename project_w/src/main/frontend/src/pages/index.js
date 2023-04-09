@@ -24,12 +24,12 @@ export async function getServerSideProps() {
   let bestReview = {};
   await axios
     .get(
-      "http://ec2-3-35-233-57.ap-northeast-2.compute.amazonaws.com:8080/api/product/rank"
+      "http://ec2-15-164-230-113.ap-northeast-2.compute.amazonaws.com:8080/api/product/rank"
     )
     .then((res) => (Rank = res.data.data));
   await axios
     .get(
-      "http://ec2-3-35-233-57.ap-northeast-2.compute.amazonaws.com:8080/api/community/best-review"
+      "http://ec2-15-164-230-113.ap-northeast-2.compute.amazonaws.com:8080/api/community/best-review"
     )
     .then((res) => (bestReview = res.data.data));
 

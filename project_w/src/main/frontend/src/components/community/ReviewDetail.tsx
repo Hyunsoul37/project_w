@@ -12,7 +12,6 @@ import { useSelector } from "react-redux";
 import { RootState } from "../../store";
 import { useRouter } from "next/router";
 import { useMediaQuery } from "@mui/material";
-import Image from "next/image";
 
 const ReviewDetail: React.FC<reviewState> = (props) => {
   const [heart, setHeart] = useState(false);
@@ -135,12 +134,7 @@ const ReviewDetail: React.FC<reviewState> = (props) => {
         <h1>COMMUNITY</h1>
         <h3>와구 회원들과의 즐거운 와인 이야기</h3>
         <div className={styled.HeaderImage}>
-          <Image
-            src={props.reviewImgs[0]}
-            alt="HeaderImage"
-            width={1200}
-            height={1200}
-          />
+          <img src={props.reviewImgs[0]} alt="HeaderImage" />
           <div>
             <p>{props.reviewTitle}</p>
           </div>
@@ -168,15 +162,13 @@ const ReviewDetail: React.FC<reviewState> = (props) => {
           </table>
         </div>
         <div className={styled.writerInfo}>
-          <Image
+          <img
             src={
               props.profileimg === undefined
                 ? `/images/default_profile.png`
                 : props.profileimg
             }
             alt="profileImg"
-            width={40}
-            height={40}
           />
 
           <div>
@@ -220,12 +212,10 @@ const ReviewDetail: React.FC<reviewState> = (props) => {
             // dotsClass={styled.dots}
           >
             {image.map((img, idx) => (
-              <Image
+              <img
                 key={`reviewimg_${idx}`}
                 alt={img}
                 src={img}
-                width={500}
-                height={500}
                 className={idx === curCard ? "" : styled.notcenter}
               />
             ))}
