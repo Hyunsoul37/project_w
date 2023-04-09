@@ -48,8 +48,8 @@ __webpack_require__.a(module, async (__webpack_handle_async_dependencies__, __we
 /* harmony import */ var slick_carousel_slick_slick_theme_css__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(slick_carousel_slick_slick_theme_css__WEBPACK_IMPORTED_MODULE_4__);
 /* harmony import */ var react_icons_fa__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(6290);
 /* harmony import */ var react_icons_fa__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(react_icons_fa__WEBPACK_IMPORTED_MODULE_5__);
-/* harmony import */ var _ReviewDetail_module_css__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(544);
-/* harmony import */ var _ReviewDetail_module_css__WEBPACK_IMPORTED_MODULE_11___default = /*#__PURE__*/__webpack_require__.n(_ReviewDetail_module_css__WEBPACK_IMPORTED_MODULE_11__);
+/* harmony import */ var _ReviewDetail_module_css__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(544);
+/* harmony import */ var _ReviewDetail_module_css__WEBPACK_IMPORTED_MODULE_12___default = /*#__PURE__*/__webpack_require__.n(_ReviewDetail_module_css__WEBPACK_IMPORTED_MODULE_12__);
 /* harmony import */ var react_icons_ai__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(9847);
 /* harmony import */ var react_icons_ai__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(react_icons_ai__WEBPACK_IMPORTED_MODULE_6__);
 /* harmony import */ var _CommunityComment__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(3233);
@@ -59,8 +59,11 @@ __webpack_require__.a(module, async (__webpack_handle_async_dependencies__, __we
 /* harmony import */ var next_router__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(next_router__WEBPACK_IMPORTED_MODULE_9__);
 /* harmony import */ var _mui_material__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(5692);
 /* harmony import */ var _mui_material__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(_mui_material__WEBPACK_IMPORTED_MODULE_10__);
+/* harmony import */ var next_image__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(5675);
+/* harmony import */ var next_image__WEBPACK_IMPORTED_MODULE_11___default = /*#__PURE__*/__webpack_require__.n(next_image__WEBPACK_IMPORTED_MODULE_11__);
 var __webpack_async_dependencies__ = __webpack_handle_async_dependencies__([_CommunityComment__WEBPACK_IMPORTED_MODULE_7__]);
 _CommunityComment__WEBPACK_IMPORTED_MODULE_7__ = (__webpack_async_dependencies__.then ? (await __webpack_async_dependencies__)() : __webpack_async_dependencies__)[0];
+
 
 
 
@@ -156,10 +159,10 @@ const ReviewDetail = (props)=>{
         speed: 500,
         arrows: true,
         nextArrow: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(NextArrow, {
-            cssclassName: (_ReviewDetail_module_css__WEBPACK_IMPORTED_MODULE_11___default().nextbtn)
+            cssclassName: (_ReviewDetail_module_css__WEBPACK_IMPORTED_MODULE_12___default().nextbtn)
         }),
         prevArrow: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(PrevArrow, {
-            cssclassName: (_ReviewDetail_module_css__WEBPACK_IMPORTED_MODULE_11___default().prevbtn)
+            cssclassName: (_ReviewDetail_module_css__WEBPACK_IMPORTED_MODULE_12___default().prevbtn)
         }),
         beforeChange: (currentSlide, nextSlide)=>{
             setCurCard(nextSlide);
@@ -175,10 +178,10 @@ const ReviewDetail = (props)=>{
         dots: true,
         touchMove: false,
         nextArrow: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(NextArrow, {
-            cssclassName: (_ReviewDetail_module_css__WEBPACK_IMPORTED_MODULE_11___default().nextbtn)
+            cssclassName: (_ReviewDetail_module_css__WEBPACK_IMPORTED_MODULE_12___default().nextbtn)
         }),
         prevArrow: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(PrevArrow, {
-            cssclassName: (_ReviewDetail_module_css__WEBPACK_IMPORTED_MODULE_11___default().prevbtn)
+            cssclassName: (_ReviewDetail_module_css__WEBPACK_IMPORTED_MODULE_12___default().prevbtn)
         }),
         beforeChange: (currentSlide, nextSlide)=>{
             setCurCard(nextSlide);
@@ -204,7 +207,7 @@ const ReviewDetail = (props)=>{
     return /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
         className: "maxframe",
         children: /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
-            className: (_ReviewDetail_module_css__WEBPACK_IMPORTED_MODULE_11___default().ReviewDetail),
+            className: (_ReviewDetail_module_css__WEBPACK_IMPORTED_MODULE_12___default().ReviewDetail),
             children: [
                 /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("h1", {
                     children: "COMMUNITY"
@@ -213,10 +216,13 @@ const ReviewDetail = (props)=>{
                     children: "와구 회원들과의 즐거운 와인 이야기"
                 }),
                 /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
-                    className: (_ReviewDetail_module_css__WEBPACK_IMPORTED_MODULE_11___default().HeaderImage),
+                    className: (_ReviewDetail_module_css__WEBPACK_IMPORTED_MODULE_12___default().HeaderImage),
                     children: [
-                        /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("img", {
-                            src: props.reviewImgs[0]
+                        /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx((next_image__WEBPACK_IMPORTED_MODULE_11___default()), {
+                            src: props.reviewImgs[0],
+                            alt: "HeaderImage",
+                            width: 1200,
+                            height: 1200
                         }),
                         /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
                             children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("p", {
@@ -226,7 +232,7 @@ const ReviewDetail = (props)=>{
                     ]
                 }),
                 /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
-                    className: (_ReviewDetail_module_css__WEBPACK_IMPORTED_MODULE_11___default().ReviewInfo),
+                    className: (_ReviewDetail_module_css__WEBPACK_IMPORTED_MODULE_12___default().ReviewInfo),
                     children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("table", {
                         children: /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("tbody", {
                             children: [
@@ -271,10 +277,13 @@ const ReviewDetail = (props)=>{
                     })
                 }),
                 /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
-                    className: (_ReviewDetail_module_css__WEBPACK_IMPORTED_MODULE_11___default().writerInfo),
+                    className: (_ReviewDetail_module_css__WEBPACK_IMPORTED_MODULE_12___default().writerInfo),
                     children: [
-                        /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("img", {
-                            src: props.profileimg === undefined ? `/images/default_profile.png` : undefined
+                        /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx((next_image__WEBPACK_IMPORTED_MODULE_11___default()), {
+                            src: props.profileimg === undefined ? `/images/default_profile.png` : props.profileimg,
+                            alt: "profileImg",
+                            width: 40,
+                            height: 40
                         }),
                         /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
                             children: [
@@ -287,7 +296,7 @@ const ReviewDetail = (props)=>{
                             ]
                         }),
                         user.isLoggedIn && props.writerId === user.userData.data.memberInfo.pid ? /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
-                            className: (_ReviewDetail_module_css__WEBPACK_IMPORTED_MODULE_11___default().ReviewEditBtn),
+                            className: (_ReviewDetail_module_css__WEBPACK_IMPORTED_MODULE_12___default().ReviewEditBtn),
                             onClick: ()=>router.push({
                                     pathname: "/community/post",
                                     query: {
@@ -300,8 +309,8 @@ const ReviewDetail = (props)=>{
                             })
                         }) : /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
                             className: [
-                                (_ReviewDetail_module_css__WEBPACK_IMPORTED_MODULE_11___default().ReviewLikeBtn),
-                                heart ? (_ReviewDetail_module_css__WEBPACK_IMPORTED_MODULE_11___default().active) : ""
+                                (_ReviewDetail_module_css__WEBPACK_IMPORTED_MODULE_12___default().ReviewLikeBtn),
+                                heart ? (_ReviewDetail_module_css__WEBPACK_IMPORTED_MODULE_12___default().active) : ""
                             ].join(" "),
                             onClick: ()=>setHeart(!heart),
                             children: [
@@ -314,19 +323,21 @@ const ReviewDetail = (props)=>{
                     ]
                 }),
                 /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
-                    className: (_ReviewDetail_module_css__WEBPACK_IMPORTED_MODULE_11___default().ReviewSliderWrapper),
+                    className: (_ReviewDetail_module_css__WEBPACK_IMPORTED_MODULE_12___default().ReviewSliderWrapper),
                     children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx((react_slick__WEBPACK_IMPORTED_MODULE_2___default()), {
                         ...setting,
-                        className: image.length >= 3 ? (_ReviewDetail_module_css__WEBPACK_IMPORTED_MODULE_11___default().ReviewSlider_three) : (_ReviewDetail_module_css__WEBPACK_IMPORTED_MODULE_11___default().ReviewSlider),
-                        children: image.map((img, idx)=>/*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("img", {
+                        className: image.length >= 3 ? (_ReviewDetail_module_css__WEBPACK_IMPORTED_MODULE_12___default().ReviewSlider_three) : (_ReviewDetail_module_css__WEBPACK_IMPORTED_MODULE_12___default().ReviewSlider),
+                        children: image.map((img, idx)=>/*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx((next_image__WEBPACK_IMPORTED_MODULE_11___default()), {
                                 alt: img,
                                 src: img,
-                                className: idx === curCard ? "" : (_ReviewDetail_module_css__WEBPACK_IMPORTED_MODULE_11___default().notcenter)
+                                width: 500,
+                                height: 500,
+                                className: idx === curCard ? "" : (_ReviewDetail_module_css__WEBPACK_IMPORTED_MODULE_12___default().notcenter)
                             }, `reviewimg_${idx}`))
                     })
                 }),
                 /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
-                    className: (_ReviewDetail_module_css__WEBPACK_IMPORTED_MODULE_11___default().ReviewContents),
+                    className: (_ReviewDetail_module_css__WEBPACK_IMPORTED_MODULE_12___default().ReviewContents),
                     children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("p", {
                         children: props.desc
                     })
@@ -452,6 +463,78 @@ module.exports = require("@mui/material");
 
 /***/ }),
 
+/***/ 3918:
+/***/ ((module) => {
+
+"use strict";
+module.exports = require("next/dist/shared/lib/amp-context.js");
+
+/***/ }),
+
+/***/ 5732:
+/***/ ((module) => {
+
+"use strict";
+module.exports = require("next/dist/shared/lib/amp-mode.js");
+
+/***/ }),
+
+/***/ 2796:
+/***/ ((module) => {
+
+"use strict";
+module.exports = require("next/dist/shared/lib/head-manager-context.js");
+
+/***/ }),
+
+/***/ 4486:
+/***/ ((module) => {
+
+"use strict";
+module.exports = require("next/dist/shared/lib/image-blur-svg.js");
+
+/***/ }),
+
+/***/ 744:
+/***/ ((module) => {
+
+"use strict";
+module.exports = require("next/dist/shared/lib/image-config-context.js");
+
+/***/ }),
+
+/***/ 5843:
+/***/ ((module) => {
+
+"use strict";
+module.exports = require("next/dist/shared/lib/image-config.js");
+
+/***/ }),
+
+/***/ 9552:
+/***/ ((module) => {
+
+"use strict";
+module.exports = require("next/dist/shared/lib/image-loader");
+
+/***/ }),
+
+/***/ 2470:
+/***/ ((module) => {
+
+"use strict";
+module.exports = require("next/dist/shared/lib/side-effect.js");
+
+/***/ }),
+
+/***/ 618:
+/***/ ((module) => {
+
+"use strict";
+module.exports = require("next/dist/shared/lib/utils/warn-once.js");
+
+/***/ }),
+
 /***/ 968:
 /***/ ((module) => {
 
@@ -539,7 +622,7 @@ module.exports = import("axios");;
 var __webpack_require__ = require("../../../webpack-runtime.js");
 __webpack_require__.C(exports);
 var __webpack_exec__ = (moduleId) => (__webpack_require__(__webpack_require__.s = moduleId))
-var __webpack_exports__ = __webpack_require__.X(0, [878,827], () => (__webpack_exec__(2271)));
+var __webpack_exports__ = __webpack_require__.X(0, [210,121,675,878,827], () => (__webpack_exec__(2271)));
 module.exports = __webpack_exports__;
 
 })();
