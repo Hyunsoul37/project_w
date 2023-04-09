@@ -30,7 +30,7 @@ const Community: React.FC<{ list: reviewState[] }> = () => {
   const loadData = () => {
     if (curpage.current >= 0) {
       //setisStart(false);
-
+      console.log(curpage.current);
       dispatch(NextGetReview(curpage.current));
       //setTargetRender(false);
     }
