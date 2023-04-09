@@ -110,3 +110,30 @@
   color: var(--primary) !important;
   font-weight: 800;
 }
+
+@media screen and (max-width: 768px) {
+  .firstComment_Info {
+    font-size: 14px;
+  }
+  .CommentList img {
+    width: 30px;
+    height: 30px;
+    margin-right: 10px;
+  }
+  .commentText p {
+    font-size: 13px;
+  }
+  .SecondComment_contents p {
+    font-size: 13px;
+  }
+  .SecondComment_Info div {
+    font-size: 14px;
+  }
+  .commentText {
+    padding-left: 40px;
+    margin-bottom: 10px;
+  }
+  .SecondComment_commentText {
+    padding-left: 40px;
+  }
+}

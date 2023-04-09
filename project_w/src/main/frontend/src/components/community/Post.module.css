@@ -217,3 +217,152 @@
   background-color: black;
   opacity: 0.5;
 }
+
+@media screen and (max-width: 768px) {
+  .Post {
+    padding: 100px 0px;
+  }
+
+  .title {
+    display: flex;
+    align-items: flex-end;
+    padding: 20px 25px;
+    border-top: 1px solid var(--secondary);
+    border-bottom: 1px solid var(--secondary);
+  }
+  .title h3 {
+    font-size: 13px;
+    font-weight: 800;
+    word-break: keep-all;
+  }
+  .title p {
+    font-size: 12px;
+    color: #cccccc;
+    margin-left: 30px;
+  }
+  .postRole {
+    background-color: white;
+    margin-bottom: 30px;
+    padding: 25px 25px;
+  }
+  .postRole p {
+    margin-bottom: 15px;
+    font-size: 12px;
+    word-break: keep-all;
+  }
+
+  .postContents {
+    padding: 50px 25px;
+  }
+  .imageBtn {
+    width: 200px;
+    height: 200px;
+    margin-bottom: 20px;
+  }
+  .imagePlusBtn {
+    width: 200px;
+    height: 200px;
+    flex-direction: column;
+  }
+
+  .postContents h3 {
+    width: 120px;
+    font-size: 13px;
+  }
+
+  .postContents input[type="text"] {
+    min-width: 85vw;
+    height: 30px;
+    padding-left: 10px;
+    margin-right: 0px;
+  }
+  .postContents form > div {
+    margin-bottom: 40px;
+    display: block;
+  }
+  .postContents form > div h3 {
+    margin-bottom: 5px;
+  }
+  .postContents form > div:nth-child(5) h3:nth-child(3) {
+    margin-top: 40px;
+  }
+
+  .postContents input[type="number"] {
+    width: 85vw;
+    height: 30px;
+    padding-left: 10px;
+  }
+
+  .postContents input::placeholder {
+    color: #cccccc;
+    font-size: 13px;
+  }
+  .postContents textarea {
+    border: 1px solid #d9d9d9;
+    width: 85vw;
+    height: 400px;
+    padding: 10px 15px;
+    font-family: "Noto Sans";
+  }
+
+  .postContents textarea::placeholder {
+    color: #cccccc;
+    font-family: "Noto Sans";
+  }
+  .btnWrapper {
+    display: flex;
+    justify-content: flex-end;
+  }
+  .btnWrapper button {
+    background-color: var(--primary);
+    color: white;
+    padding: 5px 15px;
+    border-radius: 3px;
+  }
+  .winetype_Selector {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 85vw;
+    height: 30px;
+    padding: 0px 10px;
+    margin-bottom: 40px;
+    border: 1px solid #d9d9d9;
+    font-size: 14px;
+  }
+  .winetype_Selector span {
+    color: #cccccc;
+  }
+  .colorBlack {
+    color: black !important;
+  }
+
+  .winetype_Selector_list {
+    width: 50vw;
+    border: 1px solid #d9d9d9;
+    transform-origin: top;
+    transition: transform 0.3s;
+  }
+  .winetype_Selector_list li {
+    font-size: 13px;
+    padding: 10px;
+    border-bottom: 1px solid #d9d9d9;
+  }
+
+  .modal {
+    border: none;
+    border-radius: 10px;
+    padding: 55px 80px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  .modal button {
+    background-color: var(--primary);
+    color: white;
+    padding: 5px 20px;
+    border-radius: 5px;
+    margin-top: 30px;
+  }
+}

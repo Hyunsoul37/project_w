@@ -46,7 +46,7 @@ const Post = ({ reviewId, edit, ...rest }: PostProps) => {
     if (edit === "true" && rest.reviewImgs) {
       setstarPoint(rest.starPoint);
       setPreviewTitle(rest.reviewImgs[0]);
-      //setTitleimgUrl(rest.reviewImgs[0]);
+      setTitleimgUrl(rest.reviewImgs[0]);
       setPreviewImg(
         rest.reviewImgs.filter((c, index) => c !== null && index !== 0)
       );
@@ -89,28 +89,30 @@ const Post = ({ reviewId, edit, ...rest }: PostProps) => {
     }
   };
 
-  const PreviewImage = (e: React.ChangeEvent<HTMLInputElement>, id: number) => {
+  const PreviewAddImage = (
+    e: React.ChangeEvent<HTMLInputElement>,
+    id: number
+  ) => {
     if (e.target.files !== null) {
       const imageFile = e.target.files[0];
       const imgarr = [...addImg];
-      if (imgarr.length > id + 1) {
+      if (imgarr!.length > id + 1) {
         const updateimg = imgarr.map((img, index) =>
           index === id ? imageFile : img
         );
-        if (edit) {
-          setRemoveImgUrl([...removeImgUrl, previewImg![id]]);
-          if (addimgUrl) {
-            let tmp = [...addimgUrl];
-            let filterarr = tmp.filter((data, index) => id !== index);
-            setAddImgUrl([...filterarr]);
-          }
-        }
         setAddImg(updateimg);
       } else {
         imgarr.push(imageFile);
         setAddImg(imgarr);
       }
-
+      if (edit === "true") {
+        setRemoveImgUrl([...removeImgUrl, addimgUrl![id]]);
+        if (addimgUrl) {
+          let tmp = [...addimgUrl];
+          let filterarr = tmp.filter((data, index) => id !== index);
+          setAddImgUrl([...filterarr]);
+        }
+      }
       if (imageFile && imageFile.type.substring(0, 5) === "image") {
         const reader = new FileReader();
         reader.onload = () => {
@@ -141,8 +143,10 @@ const Post = ({ reviewId, edit, ...rest }: PostProps) => {
     setRemoveImgUrl([...removeImgUrl, previewImg![removenum]]);
     const filterarr = previewImg!.filter((c, index) => index !== removenum);
     setPreviewImg(filterarr);
+    setAddImgUrl(filterarr);
     setFilenum(filterarr.length);
   };
+
   const ImageUploadFile = () => {
     let filearr = [];
     for (let i = 0; i < filenum; i++) {
@@ -168,7 +172,7 @@ const Post = ({ reviewId, edit, ...rest }: PostProps) => {
             id="image"
             type="file"
             accept="image/*"
-            onChange={(e) => PreviewImage(e, i)}
+            onChange={(e) => PreviewAddImage(e, i)}
           />
         </>
       );
@@ -466,7 +470,7 @@ const Post = ({ reviewId, edit, ...rest }: PostProps) => {
                   />
                 </div>
                 <div className={styled.btnWrapper}>
-                  {edit ? (
+                  {edit === "true" ? (
                     <button disabled={btndisable} onClick={OnClickSubmitBtn}>
                       수정
                     </button>

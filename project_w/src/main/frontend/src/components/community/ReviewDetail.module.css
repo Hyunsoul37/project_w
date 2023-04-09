@@ -186,3 +186,129 @@
 .prevbtn:hover {
   color: var(--primary) !important;
 }
+
+@media screen and (max-width: 768px) {
+  .ReviewDetail {
+    padding: 100px 0px;
+  }
+  .ReviewDetail h1 {
+    padding-left: 20px;
+    font-size: 20px;
+    margin-bottom: 10px;
+  }
+  .ReviewDetail h3 {
+    padding-left: 20px;
+    margin-bottom: 80px;
+    font-size: 15px;
+    color: #bcbcbc;
+  }
+  .HeaderImage {
+    height: 200px;
+  }
+
+  .HeaderImage div p {
+    font-size: 18px;
+  }
+  .HeaderImage img {
+    top: -30%;
+    left: 0;
+  }
+
+  .ReviewInfo {
+    height: 120px;
+  }
+  .ReviewInfo th {
+    font-size: 13px;
+  }
+  .ReviewInfo td {
+    font-size: 13px;
+  }
+
+  .ReviewInfo td span {
+    font-size: 13px;
+    padding: 5px 10px;
+    border-radius: 13px;
+  }
+
+  .writerInfo {
+    margin-top: 70px;
+    padding: 0px 20px;
+  }
+  .writerInfo img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 15px;
+  }
+
+  .writerInfo div:nth-child(2) {
+    display: flex;
+    flex-direction: column;
+  }
+  .writerInfo div:nth-child(2) span {
+    font-size: 13px;
+    margin-bottom: 5px;
+  }
+
+  .ReviewEditBtn {
+    width: 65px;
+    padding: 5px 8px;
+  }
+  .ReviewEditBtn p {
+    font-size: 10px;
+    font-weight: 800;
+  }
+  .ReviewLikeBtn {
+    width: 65px;
+    padding: 5px 5px;
+    font-size: 10px;
+  }
+  .ReviewLikeBtn p {
+    font-size: 10px;
+    margin-left: 5px;
+    font-weight: 800;
+  }
+
+  .ReviewSliderWrapper {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 100px;
+  }
+
+  .ReviewSlider {
+    width: 300px;
+    height: 300px;
+  }
+  .ReviewSlider_three {
+    width: 300px;
+    height: 300px;
+  }
+
+  .ReviewSlider img {
+    width: 300px;
+    height: 300px;
+    transition: all 0.3s;
+  }
+  .ReviewSlider_three img {
+    width: 300px !important;
+    height: 300px;
+    transition: all 0.3s;
+  }
+
+  .notcenter {
+    scale: 0.8;
+    opacity: 0.5;
+  }
+
+  .ReviewContents {
+    margin-bottom: 100px;
+  }
+
+  .ReviewContents p {
+    width: 90%;
+    line-height: 25px;
+    color: #939393;
+    font-size: 13px;
+  }
+}

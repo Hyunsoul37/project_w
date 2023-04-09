@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import Slider from "react-slick";
+import Slider, { Settings } from "react-slick";
 import { CustomArrowProps } from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -11,6 +11,7 @@ import CommunityComment from "./CommunityComment";
 import { useSelector } from "react-redux";
 import { RootState } from "../../store";
 import { useRouter } from "next/router";
+import { useMediaQuery } from "@mui/material";
 
 const ReviewDetail: React.FC<reviewState> = (props) => {
   const [heart, setHeart] = useState(false);
@@ -18,7 +19,7 @@ const ReviewDetail: React.FC<reviewState> = (props) => {
   const [changeFinish, setChangeFinish] = useState(true);
   const [image, setImage] = useState<string[]>([]);
   const router = useRouter();
-
+  const ismobile = useMediaQuery("(max-width:768px)");
   const user = useSelector((state: RootState) => state.user);
 
   const NextArrow = (props: CustomArrowProps & { cssclassName: string }) => {
@@ -79,7 +80,7 @@ const ReviewDetail: React.FC<reviewState> = (props) => {
     );
   };
 
-  const Settings_three = {
+  const Settings_three: Settings = {
     initialSlide: 0,
     dots: true,
     centerMode: true,
@@ -88,6 +89,7 @@ const ReviewDetail: React.FC<reviewState> = (props) => {
     slidesToShow: 2.3,
     slidesToScroll: 1,
     draggable: false,
+    touchMove: false,
     speed: 500,
     arrows: true,
     nextArrow: <NextArrow cssclassName={styled.nextbtn} />,
@@ -99,11 +101,12 @@ const ReviewDetail: React.FC<reviewState> = (props) => {
       setChangeFinish(true);
     },
   };
-  const Settings_one = {
+  const Settings_one: Settings = {
     slidesToShow: 1,
     slidesToScroll: 1,
     speed: 500,
     dots: true,
+    touchMove: false,
     nextArrow: <NextArrow cssclassName={styled.nextbtn} />,
     prevArrow: <PrevArrow cssclassName={styled.prevbtn} />,
     beforeChange: (currentSlide: number, nextSlide: number) => {
@@ -111,9 +114,13 @@ const ReviewDetail: React.FC<reviewState> = (props) => {
     },
   };
 
-  let setting;
+  let setting: Settings;
   if (image.length >= 3) {
-    setting = Settings_three;
+    if (ismobile) {
+      setting = { ...Settings_three, slidesToShow: 1 };
+    } else {
+      setting = Settings_three;
+    }
   } else {
     setting = Settings_one;
   }
@@ -141,7 +148,7 @@ const ReviewDetail: React.FC<reviewState> = (props) => {
                 <th>와인명</th>
                 <td id="winename">{props.wineName}</td>
                 <th>구매가격</th>
-                <td>{props.winePrice}</td>
+                <td>{props.winePrice === 0 ? "-" : props.winePrice}</td>
               </tr>
               <tr>
                 <th>해시태그</th>

@@ -9,28 +9,45 @@ import {
 } from "./ReviewTypes";
 import axios from "axios";
 import { getCookie, setCookie } from "../../util/cookiesController";
+import { useSelector } from "react-redux";
+import { RootState } from "../../store";
 export const defaultimg = `/images/default_profile.png`;
 
 const CommunityComment: React.FC<{ reviewId: number }> = ({ reviewId }) => {
   const [commmentData, setCommentData] = useState<commentState>();
   const [activeCommentNum, setActiveCommentNum] = useState(-1);
   const [activeSubCommentNum, setactiveSubCommentNum] = useState(-1);
+  const user = useSelector((state: RootState) => state.user);
 
   useEffect(() => {
     getCommentList();
   }, []);
 
   const getCommentList = useCallback(async () => {
-    let commentList: firstCommentState[] = [];
-    await axios
-      .get(`/api/comment?reviewId=${reviewId}`)
-      .then((res) => {
-        let tmp: firstCommentState[] = res.data.data;
-        commentList = tmp.map((c) => (c.child ? c : { ...c, child: [] }));
-      })
-      .catch((err) => console.log(err));
-
-    setCommentData({ parent: commentList });
+    if (localStorage.getItem("refresh")) {
+      let token = await getToken().then((res) => res);
+      await axios
+        .get(`/api/comment?reviewId=${reviewId}`, {
+          headers: { Authorization: `bearer ${token}` },
+        })
+        .then((res) => {
+          let tmp: firstCommentState[] = res.data.data;
+          let commentList: firstCommentState[] = [];
+          commentList = tmp.map((c) => (c.child ? c : { ...c, child: [] }));
+          setCommentData({ parent: commentList });
+        })
+        .catch((err) => console.log(err));
+    } else {
+      await axios
+        .get(`/api/comment?reviewId=${reviewId}`)
+        .then((res) => {
+          let tmp: firstCommentState[] = res.data.data;
+          let commentList: firstCommentState[] = [];
+          commentList = tmp.map((c) => (c.child ? c : { ...c, child: [] }));
+          setCommentData({ parent: commentList });
+        })
+        .catch((err) => console.log(err));
+    }
   }, [reviewId]);
 
   const ChangeComment = (index: number) => {
@@ -114,36 +131,64 @@ const CommunityComment: React.FC<{ reviewId: number }> = ({ reviewId }) => {
       .catch((err) => console.log(err));
   };
 
-  const firstCommentLikeHandler = (id: number) => {
-    const editdata = commmentData?.parent.map((data) =>
-      data.commentId === id
-        ? { ...data, commentLike: data.like ? false : true }
-        : data
-    );
-    if (editdata) {
-      setCommentData({ parent: editdata });
-    }
-  };
-
-  const SecondCommentLikeHandler = (secondCommentid: number) => {
-    let tmp: firstCommentState = { ...commmentData?.parent[0]! };
-    commmentData?.parent.map((data) =>
-      data.child.map((secdata) => {
-        if (secdata.commentId === secondCommentid) {
-          secdata.like = !secdata.like;
-          tmp = {
-            ...data,
-            child: [...data.child],
-          };
+  const firstCommentLikeHandler = async (id: number) => {
+    let token = await getToken().then((res) => res);
+    await axios
+      .post(
+        "/api/comment/like",
+        {
+          commentId: id,
+        },
+        {
+          headers: { Authorization: `bearer ${token}` },
+        }
+      )
+      .then(() => {
+        const editdata = commmentData?.parent.map((data) =>
+          data.commentId === id
+            ? { ...data, like: data.like ? false : true }
+            : data
+        );
+        if (editdata) {
+          setCommentData({ parent: editdata });
         }
       })
-    );
-    const editdata = commmentData?.parent.map((data) =>
-      data.commentId === tmp.commentId ? { ...tmp } : data
-    );
-    if (editdata) {
-      setCommentData({ parent: editdata });
-    }
+      .catch((err) => console.log(err));
+  };
+
+  const SecondCommentLikeHandler = async (secondCommentid: number) => {
+    let token = await getToken().then((res) => res);
+    await axios
+      .post(
+        "/api/comment/like",
+        {
+          commentId: secondCommentid,
+        },
+        {
+          headers: { Authorization: `bearer ${token}` },
+        }
+      )
+      .then(() => {
+        let tmp: firstCommentState = { ...commmentData?.parent[0]! };
+        commmentData?.parent.map((data) =>
+          data.child.map((secdata) => {
+            if (secdata.commentId === secondCommentid) {
+              secdata.like = !secdata.like;
+              tmp = {
+                ...data,
+                child: [...data.child],
+              };
+            }
+          })
+        );
+        const editdata = commmentData?.parent.map((data) =>
+          data.commentId === tmp.commentId ? { ...tmp } : data
+        );
+        if (editdata) {
+          setCommentData({ parent: editdata });
+        }
+      })
+      .catch((err) => console.log(err));
   };
 
   return (
