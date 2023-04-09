@@ -101,7 +101,7 @@ const Post = ({ reviewId , edit , ...rest })=>{
         if (edit === "true" && rest.reviewImgs) {
             setstarPoint(rest.starPoint);
             setPreviewTitle(rest.reviewImgs[0]);
-            //setTitleimgUrl(rest.reviewImgs[0]);
+            setTitleimgUrl(rest.reviewImgs[0]);
             setPreviewImg(rest.reviewImgs.filter((c, index)=>c !== null && index !== 0));
             setAddImgUrl(rest.reviewImgs.filter((c, index)=>c !== null && index !== 0));
             setFilenum(rest.reviewImgs.filter((c, index)=>c !== null && index !== 0).length);
@@ -139,7 +139,7 @@ const Post = ({ reviewId , edit , ...rest })=>{
             }
         }
     };
-    const PreviewImage = (e, id)=>{
+    const PreviewAddImage = (e, id)=>{
         if (e.target.files !== null) {
             const imageFile = e.target.files[0];
             const imgarr = [
@@ -147,25 +147,25 @@ const Post = ({ reviewId , edit , ...rest })=>{
             ];
             if (imgarr.length > id + 1) {
                 const updateimg = imgarr.map((img, index)=>index === id ? imageFile : img);
-                if (edit) {
-                    setRemoveImgUrl([
-                        ...removeImgUrl,
-                        previewImg[id]
-                    ]);
-                    if (addimgUrl) {
-                        let tmp = [
-                            ...addimgUrl
-                        ];
-                        let filterarr = tmp.filter((data, index)=>id !== index);
-                        setAddImgUrl([
-                            ...filterarr
-                        ]);
-                    }
-                }
                 setAddImg(updateimg);
             } else {
                 imgarr.push(imageFile);
                 setAddImg(imgarr);
+            }
+            if (edit === "true") {
+                setRemoveImgUrl([
+                    ...removeImgUrl,
+                    addimgUrl[id]
+                ]);
+                if (addimgUrl) {
+                    let tmp = [
+                        ...addimgUrl
+                    ];
+                    let filterarr = tmp.filter((data, index)=>id !== index);
+                    setAddImgUrl([
+                        ...filterarr
+                    ]);
+                }
             }
             if (imageFile && imageFile.type.substring(0, 5) === "image") {
                 const reader = new FileReader();
@@ -194,6 +194,7 @@ const Post = ({ reviewId , edit , ...rest })=>{
         ]);
         const filterarr = previewImg.filter((c, index)=>index !== removenum);
         setPreviewImg(filterarr);
+        setAddImgUrl(filterarr);
         setFilenum(filterarr.length);
     };
     const ImageUploadFile = ()=>{
@@ -229,7 +230,7 @@ const Post = ({ reviewId , edit , ...rest })=>{
                         id: "image",
                         type: "file",
                         accept: "image/*",
-                        onChange: (e)=>PreviewImage(e, i)
+                        onChange: (e)=>PreviewAddImage(e, i)
                     })
                 ]
             }));
@@ -621,7 +622,7 @@ const Post = ({ reviewId , edit , ...rest })=>{
                                         }),
                                         /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
                                             className: (_Post_module_css__WEBPACK_IMPORTED_MODULE_7___default().btnWrapper),
-                                            children: edit ? /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("button", {
+                                            children: edit === "true" ? /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("button", {
                                                 disabled: btndisable,
                                                 onClick: OnClickSubmitBtn,
                                                 children: "수정"

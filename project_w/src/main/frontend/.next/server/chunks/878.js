@@ -467,14 +467,17 @@ __webpack_require__.a(module, async (__webpack_handle_async_dependencies__, __we
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _CommentList__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(8446);
 /* harmony import */ var _CommentInput__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(3092);
-/* harmony import */ var _CommunityComment_module_css__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(2551);
-/* harmony import */ var _CommunityComment_module_css__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(_CommunityComment_module_css__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var _CommunityComment_module_css__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(2551);
+/* harmony import */ var _CommunityComment_module_css__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(_CommunityComment_module_css__WEBPACK_IMPORTED_MODULE_7__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(6689);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_3__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(9648);
 /* harmony import */ var _util_cookiesController__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(5067);
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(6022);
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(react_redux__WEBPACK_IMPORTED_MODULE_6__);
 var __webpack_async_dependencies__ = __webpack_handle_async_dependencies__([_CommentList__WEBPACK_IMPORTED_MODULE_1__, _CommentInput__WEBPACK_IMPORTED_MODULE_2__, axios__WEBPACK_IMPORTED_MODULE_4__]);
 ([_CommentList__WEBPACK_IMPORTED_MODULE_1__, _CommentInput__WEBPACK_IMPORTED_MODULE_2__, axios__WEBPACK_IMPORTED_MODULE_4__] = __webpack_async_dependencies__.then ? (await __webpack_async_dependencies__)() : __webpack_async_dependencies__);
+
 
 
 
@@ -487,21 +490,41 @@ const CommunityComment = ({ reviewId  })=>{
     const [commmentData, setCommentData] = (0,react__WEBPACK_IMPORTED_MODULE_3__.useState)();
     const [activeCommentNum, setActiveCommentNum] = (0,react__WEBPACK_IMPORTED_MODULE_3__.useState)(-1);
     const [activeSubCommentNum, setactiveSubCommentNum] = (0,react__WEBPACK_IMPORTED_MODULE_3__.useState)(-1);
+    const user = (0,react_redux__WEBPACK_IMPORTED_MODULE_6__.useSelector)((state)=>state.user);
     (0,react__WEBPACK_IMPORTED_MODULE_3__.useEffect)(()=>{
         getCommentList();
     }, []);
     const getCommentList = (0,react__WEBPACK_IMPORTED_MODULE_3__.useCallback)(async ()=>{
-        let commentList = [];
-        await axios__WEBPACK_IMPORTED_MODULE_4__["default"].get(`/api/comment?reviewId=${reviewId}`).then((res)=>{
-            let tmp = res.data.data;
-            commentList = tmp.map((c)=>c.child ? c : {
-                    ...c,
-                    child: []
+        if (localStorage.getItem("refresh")) {
+            let token = await getToken().then((res)=>res);
+            await axios__WEBPACK_IMPORTED_MODULE_4__["default"].get(`/api/comment?reviewId=${reviewId}`, {
+                headers: {
+                    Authorization: `bearer ${token}`
+                }
+            }).then((res)=>{
+                let tmp = res.data.data;
+                let commentList = [];
+                commentList = tmp.map((c)=>c.child ? c : {
+                        ...c,
+                        child: []
+                    });
+                setCommentData({
+                    parent: commentList
                 });
-        }).catch((err)=>console.log(err));
-        setCommentData({
-            parent: commentList
-        });
+            }).catch((err)=>console.log(err));
+        } else {
+            await axios__WEBPACK_IMPORTED_MODULE_4__["default"].get(`/api/comment?reviewId=${reviewId}`).then((res)=>{
+                let tmp = res.data.data;
+                let commentList = [];
+                commentList = tmp.map((c)=>c.child ? c : {
+                        ...c,
+                        child: []
+                    });
+                setCommentData({
+                    parent: commentList
+                });
+            }).catch((err)=>console.log(err));
+        }
     }, [
         reviewId
     ]);
@@ -578,46 +601,64 @@ const CommunityComment = ({ reviewId  })=>{
             setCommentData(commentlist);
         }).catch((err)=>console.log(err));
     };
-    const firstCommentLikeHandler = (id)=>{
-        const editdata = commmentData?.parent.map((data)=>data.commentId === id ? {
-                ...data,
-                commentLike: data.like ? false : true
-            } : data);
-        if (editdata) {
-            setCommentData({
-                parent: editdata
-            });
-        }
+    const firstCommentLikeHandler = async (id)=>{
+        let token = await getToken().then((res)=>res);
+        await axios__WEBPACK_IMPORTED_MODULE_4__["default"].post("/api/comment/like", {
+            commentId: id
+        }, {
+            headers: {
+                Authorization: `bearer ${token}`
+            }
+        }).then(()=>{
+            const editdata = commmentData?.parent.map((data)=>data.commentId === id ? {
+                    ...data,
+                    like: data.like ? false : true
+                } : data);
+            if (editdata) {
+                setCommentData({
+                    parent: editdata
+                });
+            }
+        }).catch((err)=>console.log(err));
     };
-    const SecondCommentLikeHandler = (secondCommentid)=>{
-        let tmp = {
-            ...commmentData?.parent[0]
-        };
-        commmentData?.parent.map((data)=>data.child.map((secdata)=>{
-                if (secdata.commentId === secondCommentid) {
-                    secdata.like = !secdata.like;
-                    tmp = {
-                        ...data,
-                        child: [
-                            ...data.child
-                        ]
-                    };
-                }
-            }));
-        const editdata = commmentData?.parent.map((data)=>data.commentId === tmp.commentId ? {
-                ...tmp
-            } : data);
-        if (editdata) {
-            setCommentData({
-                parent: editdata
-            });
-        }
+    const SecondCommentLikeHandler = async (secondCommentid)=>{
+        let token = await getToken().then((res)=>res);
+        await axios__WEBPACK_IMPORTED_MODULE_4__["default"].post("/api/comment/like", {
+            commentId: secondCommentid
+        }, {
+            headers: {
+                Authorization: `bearer ${token}`
+            }
+        }).then(()=>{
+            let tmp = {
+                ...commmentData?.parent[0]
+            };
+            commmentData?.parent.map((data)=>data.child.map((secdata)=>{
+                    if (secdata.commentId === secondCommentid) {
+                        secdata.like = !secdata.like;
+                        tmp = {
+                            ...data,
+                            child: [
+                                ...data.child
+                            ]
+                        };
+                    }
+                }));
+            const editdata = commmentData?.parent.map((data)=>data.commentId === tmp.commentId ? {
+                    ...tmp
+                } : data);
+            if (editdata) {
+                setCommentData({
+                    parent: editdata
+                });
+            }
+        }).catch((err)=>console.log(err));
     };
     return /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
-        className: (_CommunityComment_module_css__WEBPACK_IMPORTED_MODULE_6___default().CommunityComment),
+        className: (_CommunityComment_module_css__WEBPACK_IMPORTED_MODULE_7___default().CommunityComment),
         children: [
             /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
-                className: (_CommunityComment_module_css__WEBPACK_IMPORTED_MODULE_6___default().InputWrapper),
+                className: (_CommunityComment_module_css__WEBPACK_IMPORTED_MODULE_7___default().InputWrapper),
                 children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_CommentInput__WEBPACK_IMPORTED_MODULE_2__/* ["default"] */ .Z, {
                     isMainInput: true,
                     reviewId: commmentData?.parent[0]?.reviewId ?? reviewId,
@@ -625,7 +666,7 @@ const CommunityComment = ({ reviewId  })=>{
                 })
             }),
             /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
-                className: (_CommunityComment_module_css__WEBPACK_IMPORTED_MODULE_6___default().CommentList),
+                className: (_CommunityComment_module_css__WEBPACK_IMPORTED_MODULE_7___default().CommentList),
                 children: commmentData?.parent?.map((data, index)=>/*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_CommentList__WEBPACK_IMPORTED_MODULE_1__/* ["default"] */ .Z, {
                         curCommentnumber: activeCommentNum,
                         cursubCommentnumber: activeSubCommentNum,

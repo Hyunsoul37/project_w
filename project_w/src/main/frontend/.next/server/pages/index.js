@@ -917,7 +917,7 @@ const SelectorSlider = ()=>{
         touchMove: false,
         responsive: [
             {
-                breakpoint: 586,
+                breakpoint: 768,
                 settings: {
                     slidesToShow: 1
                 }
