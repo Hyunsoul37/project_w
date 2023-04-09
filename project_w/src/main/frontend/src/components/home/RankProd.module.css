@@ -188,7 +188,7 @@
   word-break: keep-all;
 }
 
-@media screen and (max-device-width: 586px) {
+@media screen and (max-width: 768px) {
   .rank_wrap {
     display: flex;
     flex-direction: column;

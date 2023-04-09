@@ -19,7 +19,7 @@ const SelectorSlider = () => {
     arrows: false,
     cssEase: "linear",
     touchMove: false,
-    responsive: [{ breakpoint: 586, settings: { slidesToShow: 1 } }],
+    responsive: [{ breakpoint: 768, settings: { slidesToShow: 1 } }],
   };
   const flowImgs = [];
   for (let idx = 0; idx <= 14; idx++) {

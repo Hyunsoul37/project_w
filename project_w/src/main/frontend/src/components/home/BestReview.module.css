@@ -96,7 +96,7 @@
   margin-right: 10px;
 }
 
-@media screen and (max-device-width: 586px) {
+@media screen and (max-width: 768px) {
   .BestReviewwrapper {
     background-color: var(--secondary);
     height: 100vh;
