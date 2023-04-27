@@ -28,8 +28,8 @@ const Footer = () => {
             <h1>FrontEnd</h1>
             <h3>Lim sun min</h3>
             <p>
-              <span style={{ marginRight: "3px" }}>E-MAIL</span> dlatjsals123
-              <span>@naver.com</span>
+              <span style={{ marginRight: "3px" }}>E-MAIL</span> sunmin159753
+              <span>@gmail.com</span>
             </p>
             <a href="https://github.com/SSSunmin" target="blank">
               <AiFillGithub />
