@@ -124,9 +124,9 @@ const Footer = ()=>{
                                                 },
                                                 children: "E-MAIL"
                                             }),
-                                            " dlatjsals123",
+                                            " sunmin159753",
                                             /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("span", {
-                                                children: "@naver.com"
+                                                children: "@gmail.com"
                                             })
                                         ]
                                     }),
