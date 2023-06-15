@@ -28,12 +28,10 @@ const initialState = {
 };
 
 export const LogIn = createAsyncThunk("user/logIn", async (data) => {
-  return await axios({
-    method: "post",
-    url: "/api/auth/login",
-    data: data ? JSON.stringify(data) : null,
-    headers: { "Content-Type": "application/json;charset=UTF-8" },
-  })
+  return await axios
+    .post("/api/auth/login", data ? JSON.stringify(data) : null, {
+      headers: { "Content-Type": "application/json;charset=UTF-8" },
+    })
     .then((res) => res.data)
     .catch((err) => console.log(err));
 });
