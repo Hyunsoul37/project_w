@@ -10,9 +10,9 @@ const Login = () => {
   const router = useRouter();
   const [id, setId] = useState("");
   const [password, setPassword] = useState("");
-  const [BtnDisable, setBtnDisable] = useState(false);
   const user = useSelector((state) => state.user);
   const dispatch = useDispatch();
+
   useEffect(() => {
     const prevPath = sessionStorage.getItem("prevPath");
     const prevPrevPath = sessionStorage.getItem("prevPrevPath");
@@ -38,7 +38,6 @@ const Login = () => {
 
   const submitHandler = (e) => {
     e.preventDefault();
-    setBtnDisable(true);
     dispatch(
       LogIn({
         id: id,
@@ -69,7 +68,7 @@ const Login = () => {
           placeholder="비밀번호"
         />
         <div>
-          <button disabled={BtnDisable}>Login</button>
+          <button disabled={user.isLoggingIn}>Login</button>
         </div>
       </Form>
     </div>
