@@ -1,9 +1,4 @@
-import {
-  createAsyncThunk,
-  createSlice,
-  isRejected,
-  isRejectedWithValue,
-} from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { removeCookie, setCookie } from "../util/cookiesController";
 import axios from "axios";
 
@@ -33,43 +28,27 @@ const initialState = {
 };
 
 export const LogIn = createAsyncThunk("user/logIn", async (data) => {
-  try {
-    const response = await fetch("/api/auth/login", {
-      method: "POST",
-      body: data ? JSON.stringify(data) : null,
-      headers: { "Content-Type": "application/json;charset=UTF-8" },
-    });
-    const responseData = await response.json();
-
-    return responseData;
-  } catch (error) {
-    console.log(error);
-  }
+  return await axios({
+    method: "post",
+    url: "/api/auth/login",
+    data: data ? JSON.stringify(data) : null,
+    headers: { "Content-Type": "application/json;charset=UTF-8" },
+  })
+    .then((res) => res.data)
+    .catch((err) => console.log(err));
 });
 
 export const LogInmaintain = createAsyncThunk("user/maintain", async (data) => {
-  try {
-    const response = await fetch(`/api/auth/login-check`, {
-      method: "GET",
-      body: null,
+  return await axios
+    .get("/api/auth/login-check", {
       headers: {
         "Content-Type": "application/json;charset=UTF-8",
         authorization: `bearer ${data.token}`,
       },
-    });
-    const responseData = await response.json();
-    return responseData;
-  } catch (error) {
-    console.log(error);
-  }
-});
-
-export const DataClear = createAsyncThunk("user/Clear", async (data) => {
-  const response = await fetch("/api/member", {
-    method: "DELETE",
-  });
-  const responseStatus = await response.status;
-  console.log(responseStatus);
+      body: null,
+    })
+    .then((res) => res.data)
+    .catch((err) => console.log(err));
 });
 
 export const saveToken = (token, refreshToken, id) => {
@@ -108,15 +87,23 @@ export const userSlice = createSlice({
         state.isLoggingIn = true;
       })
       .addCase(LogIn.fulfilled, (state, action) => {
-        state.isLoggedIn = true;
-        state.isLoggingIn = false;
-        state.isSuccess = true;
-        state.userData = action.payload;
-        saveToken(
-          action.payload.data.token,
-          action.payload.data.refreshToken,
-          action.payload.data.memberInfo.pid
-        );
+        if (action.payload.data.message === "success") {
+          state.isLoggedIn = true;
+          state.isLoggingIn = false;
+          state.isSuccess = true;
+          state.userData = action.payload;
+          saveToken(
+            action.payload.data.token,
+            action.payload.data.refreshToken,
+            action.payload.data.memberInfo.pid
+          );
+        } else {
+          alert("id 또는 password가 틀렸습니다.");
+          state.isLoggedIn = false;
+          state.isLoggingIn = false;
+          state.isSuccess = false;
+          state.userData = null;
+        }
       })
       .addCase(LogIn.rejected, (state, action) => {
         state.isLoginError = action.error;
@@ -138,18 +125,6 @@ export const userSlice = createSlice({
         state.isLoginError = action.error;
         state.isSuccess = false;
         state.isLoggedIn = false;
-      });
-
-    builder
-      .addCase(DataClear.fulfilled, (state, action) => {
-        state.isLoggedIn = false;
-        state.isSuccess = false;
-        state.isLoggingIn = false;
-        state.isError = "";
-        state.userData = null;
-      })
-      .addCase(DataClear.rejected, (state, action) => {
-        state.isClearError = action.error;
       });
 
     builder
