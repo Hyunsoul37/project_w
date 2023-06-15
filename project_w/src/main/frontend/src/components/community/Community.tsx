@@ -4,7 +4,6 @@ import { useEffect, useRef, useState } from "react";
 
 import CommunityCard from "./CommunityCard";
 import Button from "../ui/Button";
-import ReviewFilter from "./ReviewFilter";
 import { AppDispatch, RootState } from "../../store";
 import { reviewState } from "./ReviewTypes";
 import { NextGetReview } from "../../slice/reviewSlice";
@@ -22,17 +21,12 @@ const Community: React.FC<{ list: reviewState[] }> = () => {
   const target = useRef<HTMLDivElement>(null);
   const curpage = useRef(0);
   const modalref = useRef<HTMLDialogElement>(null);
-  //const [isStart, setisStart] = useState(true);
-  //const [targetrender, setTargetRender] = useState(true);
   const [showModal, setShowModal] = useState(false);
   const router = useRouter();
 
   const loadData = () => {
     if (curpage.current >= 0) {
-      //setisStart(false);
-      console.log(curpage.current);
       dispatch(NextGetReview(curpage.current));
-      //setTargetRender(false);
     }
   };
 
@@ -58,13 +52,6 @@ const Community: React.FC<{ list: reviewState[] }> = () => {
     const input = target.current;
     let timer: number;
 
-    // if (!review.isloadding) {
-    //   timer = window.setTimeout(() => {
-    //     if (curpage.current < review.TotalpageNum - 1) {
-    //       setTargetRender(true);
-    //     }
-    //   }, 450);
-    // }
     if (input) {
       observer.observe(input);
     }
@@ -98,7 +85,6 @@ const Community: React.FC<{ list: reviewState[] }> = () => {
       <div className={styled.Community}>
         <h1>COMMUNITY</h1>
         <h3>와구 회원들과의 즐거운 와인 이야기</h3>
-        {/* <ReviewFilter /> */}
         <div className={styled.btnWrapper}>
           <Button
             buttontext="새글작성"
@@ -114,11 +100,6 @@ const Community: React.FC<{ list: reviewState[] }> = () => {
         </div>
         {review.isloadding ? <Loading height={300} /> : null}
         <div ref={target} className={styled.Community_SrollChecker}></div>
-        {/* {targetrender ? (
-          <div ref={target} className={styled.Community_SrollChecker}></div>
-        ) : (
-          <span style={{ display: "inline-block", height: "250px" }}></span>
-        )} */}
       </div>
       <dialog
         style={!showModal ? { display: "none" } : { display: "flex" }}
