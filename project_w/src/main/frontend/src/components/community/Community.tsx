@@ -50,14 +50,12 @@ const Community: React.FC<{ list: reviewState[] }> = () => {
   useEffect(() => {
     const observer = new IntersectionObserver(observerHandler, options);
     const input = target.current;
-    let timer: number;
 
     if (input) {
       observer.observe(input);
     }
     return () => {
       observer.disconnect();
-      clearTimeout(timer);
     };
   }, [review.isloadding, review.TotalpageNum]);
 
